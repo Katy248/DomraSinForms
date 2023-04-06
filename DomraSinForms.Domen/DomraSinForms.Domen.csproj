@@ -6,4 +6,9 @@
     <Nullable>enable</Nullable>
   </PropertyGroup>
 
+  <ItemGroup>
+    <Folder Include="Models\Answers\" />
+    <Folder Include="Models\Questions\" />
+  </ItemGroup>
+
 </Project>

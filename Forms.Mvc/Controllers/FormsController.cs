@@ -3,6 +3,7 @@ using Microsoft.EntityFrameworkCore;
 using DomraSinForms.Domen.Models;
 using Forms.Mvc.Data;
 using Microsoft.AspNetCore.Authorization;
+using Forms.Mvc.Models;
 
 namespace Forms.Mvc.Controllers;
 
@@ -33,8 +34,8 @@ public class FormsController : Controller
             return NotFound();
         }
 
-        var form = await _context.Forms
-            .FirstOrDefaultAsync(m => m.Id == id);
+        var form = await _context.Forms.Include(f => f.Questions).FirstOrDefaultAsync(f => f.Id == id);
+
         if (form == null)
         {
             return NotFound();
@@ -73,7 +74,7 @@ public class FormsController : Controller
             return NotFound();
         }
 
-        var form = await _context.Forms.FindAsync(id);
+        var form = await _context.Forms.Include(f => f.Questions).FirstAsync(f => f.Id == id);
         if (form == null)
         {
             return NotFound();
@@ -115,37 +116,26 @@ public class FormsController : Controller
         }
         return View(form);
     }
-
-    [HttpPost]
-    public async Task<IActionResult> AddBlock(string id, [FromForm] Form form)
+    // GET: Forms/CreateQuestion/5
+    public async Task<IActionResult> CreateQuestion(string id)
     {
-        if (id != form.Id)
+        return View(new CreateQuestionViewModel { FormId = id, Question = new() });
+    }
+    // POST: Forms/CreateQuestion/
+    [HttpPost]
+    public async Task<IActionResult> CreateQuestion([FromForm] CreateQuestionViewModel questionViewModel)
+    {
+        if (!ModelState.IsValid)
+            return View(questionViewModel);
+        var form = await _context.Forms.Include(f => f.Questions).FirstAsync(f => f.Id == questionViewModel.FormId);
+        if (form is not null)
         {
-            return NotFound();
+            form.Questions.Add(questionViewModel.Question);
+            _context.Update(form);
+            await _context.SaveChangesAsync();
+            return RedirectToAction(nameof(Edit), routeValues: questionViewModel.FormId);
         }
-
-        if (ModelState.IsValid)
-        {
-            form.Blocks.Add(new FormBlock());
-            try
-            {
-                _context.Update(form);
-                await _context.SaveChangesAsync();
-            }
-            catch (DbUpdateConcurrencyException)
-            {
-                if (!FormExists(form.Id))
-                {
-                    return NotFound();
-                }
-                else
-                {
-                    throw;
-                }
-            }
-            return RedirectToAction(nameof(Edit), routeValues: id);
-        }
-        return RedirectToAction(nameof(Index));
+        return View(questionViewModel);
     }
 
     // GET: Forms/Delete/5

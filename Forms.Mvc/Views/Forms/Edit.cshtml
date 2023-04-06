@@ -25,32 +25,45 @@
             </div>
             <input type="hidden" asp-for="Id" />
 
-            <div class="form-group">
-                
-            </div>
-            <button onclick="AddBLock" class="btn btn-outline-info">
-                Add new
-            </button>
+         
 
             <div class="form-group">
-                <input type="submit" value="Save" class="btn btn-primary" />
+                <label class="control-label"></label>
+                <input type="submit" value="Save" class="form-control btn btn-primary" />
             </div>
-        </form>
-        @foreach (var block in Model.Blocks)
-        {
-            <div class="d-block">
-                <div class="btn-group" role="group">
-                    <div class="btn btn-primary">Edit</div>
-                    <div class="btn btn-danger">Delete</div>
-                </div>
-            </div>
-            
-        }
-        <form asp-action="AddBlock" asp-route-id="@Model.Id" method="post">
-            <input type="submit" class="btn" value="Add block"/>
         </form>
     </div>
 </div>
+
+<h4>Questions</h4>
+
+<div class="row g-2">
+        @foreach (var question in Model.Questions)
+        {
+            <div class="col-md-8">
+                <div class="d-block border rounded-3 p-3">
+                    <div class="row">
+                        <label class="text-secondary">@question.Text</label>
+                    </div>
+                    <div class="row">
+                        <div class="btn-group col-md-4" role="group">
+                            <div class="btn btn-secondary">Edit</div>
+                            <div class="btn btn-danger">Delete</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        }
+        <form asp-action="CreateQuestion" asp-route-id="@Model.Id" method="get">
+            <div class="form-group">
+                <input type="submit" class="btn btn-primary" value="Add question" />
+            </div>
+        </form>
+</div>
+        
+
+    
+
 
 <div>
     <a asp-action="Index">Back to List</a>
