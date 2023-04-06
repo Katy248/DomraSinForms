@@ -9,5 +9,6 @@ namespace DomraSinForms.Domen.Models;
 [Table("FormAnswers")]
 public class FormAnswers : DbEntity
 {
-    public List<Answer> Answers { get; set; }
+    public Form? Form { get; set; } = new();
+    public List<Answer> Answers { get; set; } = new();
 }

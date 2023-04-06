@@ -1,35 +1,45 @@
 ﻿@using DomraSinForms.Domen.Models;
-@model Form
+@model FillFormViewModel
 @{
-    ViewData["Title"] = Model.Title;
+    ViewData["Title"] = Model.FormTitle;
+    int i = 0;
 }
 
-<h1>@Model.Title</h1>
-<h5>@Model.Description</h5>
-
-<div class="row g-3">
-    @foreach (var question in Model.Questions)
-    {
-        <div class="col-md-8">
-            <div class="d-block border rounded-3 p-3">
-                <div class="row">
-                    <label class="text">@question.Text
-                    @if(question.IsRequired)
-                    {
-                        <label class="text-danger">*</label>
+<form asp-action="Fill" method="post">
+    <label class="display-1" asp-for="FormTitle"></label>
+    <label class="display-5" asp-for="FormDescription"></label>
+    <input asp-for="FormId" hidden/>
+    <div class="row g-3">
+        @foreach (var answer in Model.Answers)
+        {
+            <div class="col-md-8">
+                <div class="d-block border rounded-3 p-3">
+                    <div class="row">
+                        <label class="text">@answer.Question.Text
+                        @if(answer.Question.IsRequired)
+                        {
+                            <label class="text-danger">*</label>
                     
-                    }</label>
-                </div>
-                <div class="row">
-                    <form>
-                        <input class="form-control" type="text"/>
-                    </form>
+                        }</label>
+                    </div>
+                    <div class="row">
+                    
+                            <input asp-for="Answers[i].Value" class="form-control" type="text"/>
+                            <input asp-for="Answers[i].QuestionText" class="form-control" hidden/>
+                            <input asp-for="Answers[i].Question.Id" class="form-control" hidden/>
+                            <input asp-for="Answers[i].Question.Text" class="form-control" hidden/>
+                            <input asp-for="Answers[i].Question.IsRequired" class="form-control" hidden/>
+                    
+                    </div>
                 </div>
             </div>
-        </div>
-    }
-</div>
-        
+            i++;
+        }
+    </div>
+    <div class="form-group">
+        <input type="submit" class="btn btn-primary"/>
+    </div>
+</form>
 
     
 

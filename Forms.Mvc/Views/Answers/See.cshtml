@@ -1,0 +1,33 @@
+﻿@using DomraSinForms.Domen.Models;
+@model IEnumerable<FormAnswers>
+
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Id)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Answers)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var ansver in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => ansver.Id)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => ansver.Answers)
+                </td>
+                <td>
+                    <a asp-action="Details" asp-route-id="@ansver.Id">Details</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
