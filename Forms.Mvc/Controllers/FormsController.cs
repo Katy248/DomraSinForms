@@ -22,7 +22,7 @@ public class FormsController : Controller
     public async Task<IActionResult> Index()
     {
         return _context.Forms != null ?
-                    View(await _context.Forms.ToListAsync()) :
+                    View(await _context.Forms.Where(f => !f.IsDeleted).ToListAsync()) :
                     Problem("Entity set 'ApplicationDbContext.Forms'  is null.");
     }
 
@@ -148,7 +148,8 @@ public class FormsController : Controller
         var form = await _context.Forms.FindAsync(id);
         if (form != null)
         {
-            _context.Forms.Remove(form);
+            form.IsDeleted = true;
+            _context.Forms.Update(form);
         }
 
         await _context.SaveChangesAsync();

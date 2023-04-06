@@ -4,15 +4,15 @@
     ViewData["Title"] = Model.FormTitle;
     int i = 0;
 }
-
+<div class="row justify-content-center">
+<div class="col-md-6 ">
 <form asp-action="Fill" method="post">
-    <label class="display-1" asp-for="FormTitle"></label>
-    <label class="display-5" asp-for="FormDescription"></label>
+    <h1><label asp-for="FormTitle"></label></h1>
+    <h5><label  asp-for="FormDescription"></label></h5>
     <input asp-for="FormId" hidden/>
-    <div class="row g-3">
         @foreach (var answer in Model.Answers)
         {
-            <div class="col-md-8">
+            <div class="form-group mb-3">
                 <div class="d-block border rounded-3 p-3">
                     <div class="row">
                         <label class="text">@answer.Question.Text
@@ -35,7 +35,6 @@
             </div>
             i++;
         }
-    </div>
     <div class="form-group">
         <input type="submit" class="btn btn-primary"/>
     </div>
@@ -47,7 +46,8 @@
 <div>
     <a asp-action="Index">Back to List</a>
 </div>
-
+</div>
+</div>
 
 @section Scripts {
     @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}

@@ -2,6 +2,7 @@
 using Forms.Mvc.Data;
 using Forms.Mvc.Managers;
 using Forms.Mvc.Models;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.CodeAnalysis.CSharp;
 using Microsoft.EntityFrameworkCore;
@@ -62,6 +63,7 @@ public class AnswersController : Controller
         await _context.SaveChangesAsync();
         return RedirectToAction(nameof(Index));
     }
+    [Authorize]
     public async Task<IActionResult> See(string id)
     {
         var form = await _context.Forms.Include(f => f.FormAnswers).FirstOrDefaultAsync(f => f.Id == id);
@@ -70,6 +72,7 @@ public class AnswersController : Controller
 
         return View(form.FormAnswers);
     }
+    [Authorize]
     public async Task<IActionResult> Details(string id)
     {
         var answer = await _context.FormAnswers.Include(f => f.Form).Include(f => f.Answers).FirstOrDefaultAsync(f => f.Id == id);
