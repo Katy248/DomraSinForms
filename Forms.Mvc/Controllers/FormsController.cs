@@ -7,7 +7,7 @@ using Forms.Mvc.Models;
 
 namespace Forms.Mvc.Controllers;
 
-[Authorize]
+[Authorize, Route("{controller}/{action=Index}")]
 public class FormsController : Controller
 {
     private readonly ApplicationDbContext _context;
@@ -21,9 +21,9 @@ public class FormsController : Controller
     [AllowAnonymous]
     public async Task<IActionResult> Index()
     {
-          return _context.Forms != null ? 
-                      View(await _context.Forms.ToListAsync()) :
-                      Problem("Entity set 'ApplicationDbContext.Forms'  is null.");
+        return _context.Forms != null ?
+                    View(await _context.Forms.ToListAsync()) :
+                    Problem("Entity set 'ApplicationDbContext.Forms'  is null.");
     }
 
     // GET: Forms/Details/5
@@ -116,27 +116,7 @@ public class FormsController : Controller
         }
         return View(form);
     }
-    // GET: Forms/CreateQuestion/5
-    public async Task<IActionResult> CreateQuestion(string id)
-    {
-        return View(new CreateQuestionViewModel { FormId = id, Question = new() });
-    }
-    // POST: Forms/CreateQuestion/
-    [HttpPost]
-    public async Task<IActionResult> CreateQuestion([FromForm] CreateQuestionViewModel questionViewModel)
-    {
-        if (!ModelState.IsValid)
-            return View(questionViewModel);
-        var form = await _context.Forms.Include(f => f.Questions).FirstAsync(f => f.Id == questionViewModel.FormId);
-        if (form is not null)
-        {
-            form.Questions.Add(questionViewModel.Question);
-            _context.Update(form);
-            await _context.SaveChangesAsync();
-            return RedirectToAction(nameof(Edit), routeValues: questionViewModel.FormId);
-        }
-        return View(questionViewModel);
-    }
+
 
     // GET: Forms/Delete/5
     public async Task<IActionResult> Delete(string id)
@@ -170,13 +150,73 @@ public class FormsController : Controller
         {
             _context.Forms.Remove(form);
         }
-        
+
         await _context.SaveChangesAsync();
         return RedirectToAction(nameof(Index));
     }
 
     private bool FormExists(string id)
     {
-      return (_context.Forms?.Any(e => e.Id == id)).GetValueOrDefault();
+        return (_context.Forms?.Any(e => e.Id == id)).GetValueOrDefault();
     }
+    #region Questions
+    // GET: Forms/CreateQuestion/5
+    [HttpGet("{id}")]
+    public IActionResult CreateQuestion(string id)
+    {
+        return View(new CreateQuestionViewModel { FormId = id, Question = new() });
+    }
+    // POST: Forms/CreateQuestion/
+    [HttpPost]
+    public async Task<IActionResult> CreateQuestion([FromForm] CreateQuestionViewModel questionViewModel)
+    {
+        if (!ModelState.IsValid)
+            return View(questionViewModel);
+        var form = await _context.Forms.Include(f => f.Questions).FirstAsync(f => f.Id == questionViewModel.FormId);
+        if (form is not null)
+        {
+            form.Questions.Add(questionViewModel.Question);
+            _context.Update(form);
+            await _context.SaveChangesAsync();
+            return RedirectToAction(nameof(Edit), routeValues: new { id = questionViewModel.FormId });
+        }
+        return View(questionViewModel);
+    }
+    [HttpGet("{id}/{formId}")]
+    public async Task<IActionResult> EditQuestion(string id, string formId)
+    {
+        var question = await _context.Questions.FindAsync(id);
+        if (question is not null)
+            return View(new EditQuestionViewModel { FormId = formId, Question = question });
+
+        return RedirectToAction(nameof(Edit), routeValues: new { id = formId });
+    }
+    [HttpPost]
+    public async Task<IActionResult> EditQuestion([FromForm] EditQuestionViewModel questionViewModel)
+    {
+        if (!ModelState.IsValid)
+            return View(questionViewModel);
+        var question = await _context.Questions.FindAsync(questionViewModel.Question.Id);
+        if (question is not null)
+        {
+            question.IsRequired = questionViewModel.Question.IsRequired;
+            question.Text = questionViewModel.Question.Text;
+            _context.Questions.Update(question);
+            await _context.SaveChangesAsync();
+        }
+        return RedirectToAction(nameof(Edit), routeValues: new { id = questionViewModel.FormId });
+    }
+    [HttpPost("{id}/{formId}")]
+    public async Task<IActionResult> DeleteQuestion(string id, string formId)
+    {
+        var question = await _context.Questions.FindAsync(id);
+        if (question is not null)
+        {
+            _context.Remove(question);
+            await _context.SaveChangesAsync();
+        }
+        return RedirectToAction(nameof(Edit), routeValues: new { id = formId });
+    }
+   
+    #endregion
 }

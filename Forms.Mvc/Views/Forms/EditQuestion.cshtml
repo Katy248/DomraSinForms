@@ -1,0 +1,18 @@
+﻿@model EditQuestionViewModel
+
+<form asp-action="EditQuestion" asp-route-id="" method="post">
+    <input asp-for="FormId" hidden />
+    <input asp-for="Question.Id" hidden />
+    <div class="form-group">
+        <label asp-for="Question.Text">Text</label>
+        <input asp-for="Question.Text" />
+    </div>
+    <div class="form-group">
+        <label asp-for="Question.IsRequired">Required</label>
+        <input type="checkbox" asp-for="Question.IsRequired" />
+    </div>
+    <div class="form-group">
+        <input type="submit" class="btn btn-primary" />
+    </div>
+
+</form>

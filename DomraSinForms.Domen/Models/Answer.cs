@@ -7,4 +7,5 @@ namespace DomraSinForms.Domen.Models;
 public class Answer : DbEntity
 {
     public string Value { get; set; }
+    public Question Question { get; set; }
 }

@@ -10,5 +10,5 @@ public class Form : DbEntity
     [Required]
     public string CreatorId { get; set; }
     public List<Question> Questions { get; set; }
-    public List<Answer> Answers { get; set; }
+    public List<FormAnswers> FormAnswers { get; set; }
 }
