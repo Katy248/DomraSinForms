@@ -18,7 +18,6 @@ public class FormsController : Controller
     }
 
     // GET: Forms
-    [AllowAnonymous]
     public async Task<IActionResult> Index()
     {
         return _context.Forms != null ?
