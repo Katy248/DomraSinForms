@@ -1,25 +1,25 @@
 ﻿@using Forms.Mvc.Services;
 @model DomraSinForms.Domen.Models.Form
 @{
-    ViewData["Title"] = "Edit";
+    ViewData["Title"] = "Редактирование";
 }
 
-<h1>Edit</h1>
+<h1>Редактирование</h1>
 <div class="row">
 
 <div class="row col-md-8 border rounded p-3">
-    <h4>Form</h4>
+    <h4>Форма</h4>
     <div class="col-md-4">
         <form asp-action="Edit">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <input asp-for="CreatorId" class="form-control" hidden/>
             <div class="form-group">
-                <label asp-for="Title" class="control-label"></label>
+                <label asp-for="Title" class="control-label">Название</label>
                 <input asp-for="Title" class="form-control" />
                 <span asp-validation-for="Title" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="Description" class="control-label"></label>
+                <label asp-for="Description" class="control-label">Описание</label>
                 <input asp-for="Description" class="form-control" />
                 <span asp-validation-for="Description" class="text-danger"></span>
             </div>
@@ -29,7 +29,7 @@
 
             <div class="form-group">
                 <label class="control-label"></label>
-                <input type="submit" value="Save" class="form-control btn btn-primary" />
+                <input type="submit" value="Сохранить" class="form-control btn btn-primary" />
             </div>
         </form>
     </div>
@@ -37,7 +37,7 @@
 
 
 <div class="row col-md-8 border rounded p-3">
-    <h4>Questions</h4>
+    <h4>Вопросы</h4>
     @foreach (var question in Model.Questions)
     {
         
@@ -48,10 +48,10 @@
                 </div>
                 <div class="card-footer">
                     <form class="d-inline col-6" asp-action="EditQuestion" asp-route-formid="@Model.Id" asp-route-id="@question.Id" method="get">
-                        <input type="submit" class="btn btn-secondary" value="Edit" />
+                        <input type="submit" class="btn btn-secondary" value="Изменить" />
                     </form>
                     <form class="d-inline col-6" asp-action="DeleteQuestion" asp-route-formid="@Model.Id" asp-route-id="@question.Id" method="post">
-                        <input type="submit" class="btn btn-danger" value="Delete" />
+                        <input type="submit" class="btn btn-danger" value="Удалить" />
                     </form>
                 </div>
             </div>
@@ -59,7 +59,7 @@
     }
     <form asp-action="CreateQuestion" asp-route-id="@Model.Id" method="get">
         <div class="form-group">
-            <input type="submit" class="btn btn-primary" value="Add question" />
+            <input type="submit" class="btn btn-primary" value="Добавить вопрос" />
         </div>
     </form>
 </div>
@@ -69,7 +69,7 @@
 
 
 <div>
-    <a asp-action="Index">Back to List</a>
+    <a asp-action="Index">Назад к списку</a>
 </div>
 
 </div>

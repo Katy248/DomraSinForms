@@ -6,10 +6,10 @@
     <thead>
         <tr>
             <th>
-                @Html.DisplayNameFor(model => model.Id)
+                Идентификатор
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Answers)
+               Ответы
             </th>
             <th></th>
         </tr>
@@ -25,7 +25,7 @@
                     @Html.DisplayFor(modelItem => ansver.Answers)
                 </td>
                 <td>
-                    <a asp-action="Details" asp-route-id="@ansver.Id">Details</a>
+                    <a asp-action="Details" asp-route-id="@ansver.Id">Подробнее</a>
                 </td>
             </tr>
         }

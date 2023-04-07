@@ -3,12 +3,12 @@
 @inject SignInManager<IdentityUser> SignInManager
 
 @{
-    ViewData["Title"] = "Create";
+    ViewData["Title"] = "Новая форма";
 }
 
-<h1>Create</h1>
+<h1>Новая форма</h1>
 
-<h4>Form</h4>
+<h4>Форма</h4>
 <hr />
 <div class="row">
     <div class="col-md-4">
@@ -17,24 +17,24 @@
             <input asp-for="CreatorId" class="form-control" value="@SignInManager.UserManager.GetUserId(User)" hidden/>
             <input asp-for="Id" class="form-control" value="@Guid.NewGuid().ToString()" hidden/>
             <div class="form-group">
-                <label asp-for="Title" class="control-label"></label>
+                <label asp-for="Title" class="control-label">Название</label>
                 <input asp-for="Title" class="form-control" />
                 <span asp-validation-for="Title" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="Description" class="control-label"></label>
+                <label asp-for="Description" class="control-label">Описание</label>
                 <input asp-for="Description" class="form-control" />
                 <span asp-validation-for="Description" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <input type="submit" value="Create" class="btn btn-primary" />
+                <input type="submit" value="Создать" class="btn btn-primary" />
             </div>
         </form>
     </div>
 </div>
 
 <div>
-    <a asp-action="Index">Back to List</a>
+    <a asp-action="Index">Назад к списку</a>
 </div>
 
 @section Scripts {
