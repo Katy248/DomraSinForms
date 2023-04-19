@@ -23,7 +23,7 @@ public class CreateFormCommandHandler : IRequestHandler<CreateFormCommand, Form>
     {
         var form = _mapper.Map<Form>(request);
 
-        await _context.AddAsync(form, cancellationToken);
+        await _context.Forms.AddAsync(form, cancellationToken);
         await _context.SaveChangesAsync(cancellationToken);
 
         return form;

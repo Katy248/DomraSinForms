@@ -1,3 +1,4 @@
+using DomraSinForms.Application;
 using Forms.Mvc.Data;
 using Forms.Mvc.Managers;
 using Microsoft.AspNetCore.Identity;
@@ -16,7 +17,8 @@ builder.Services.AddDefaultIdentity<IdentityUser>(options => options.SignIn.Requ
 builder.Services.AddControllersWithViews();
 
 builder.Services
-    .AddTransient<AnswerManager>();
+    .AddTransient<AnswerManager>()
+    .AddApplication();
 
 var app = builder.Build();
 

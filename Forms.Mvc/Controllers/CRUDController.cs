@@ -4,67 +4,47 @@ using DomraSinForms.Application.Mapper;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
 
-namespace GewelleWorks.MVC.Controllers;
+namespace Forms.Mvc.Controllers;
 
 public class CRUDController<TEntity, TCreateCommand, TRetrieveSingleQuery, TRetrieveListQuery, TUpdateCommand, TDeleteCommand> : Controller
-    where TCreateCommand : IRequest<TEntity>, new()
-    where TRetrieveSingleQuery : IGetSingleRequest<TEntity>, new()
-    where TRetrieveListQuery : IRequest<IEnumerable<IMapWith<TEntity>>>, new()
-    where TUpdateCommand : IUpdateRequest<TEntity>, new()
-    where TDeleteCommand : IDeleteRequest, new()
+    where TCreateCommand : IRequest<TEntity>, new ()
+    where TRetrieveSingleQuery : IGetSingleRequest<TEntity>, new ()
+    where TRetrieveListQuery : IRequest<IEnumerable<IMapWith<TEntity>>>, new ()
+    where TUpdateCommand : IUpdateRequest<TEntity>, new ()
+    where TDeleteCommand : IDeleteRequest, new ()
 {
     protected readonly IMediator _mediator;
-    private readonly IMapper _mapper;
 
-    public CRUDController(IMediator mediator, IMapper mapper)
+    public CRUDController(IMediator mediator)
     {
         _mediator = mediator;
-        _mapper = mapper;
     }
-    public virtual async Task<IActionResult> Index() =>
-        View(await _mediator.Send(new TRetrieveListQuery()));
-    public virtual async Task<IActionResult> Create(string id)
+    public virtual async Task<IActionResult> GetList([FromBody] TRetrieveListQuery query) =>
+        Ok(await _mediator.Send(query));
+    public virtual async Task<IActionResult> Get([FromBody] TRetrieveSingleQuery query) =>
+        Ok(await _mediator.Send(query));
+    [HttpPost]
+    public virtual async Task<IActionResult> CreateEntity([FromBody] TCreateCommand command)
     {
-        return View(new TCreateCommand());
+        if (!ModelState.IsValid)
+            return Problem(ModelState.ValidationState.ToString());
+
+        return Ok(await _mediator.Send(command));
     }
     [HttpPost]
-    public virtual async Task<IActionResult> Create([Bind] TCreateCommand command)
+    public virtual async Task<IActionResult> UpdateEntity([FromBody] TUpdateCommand command)
     {
         if (!ModelState.IsValid)
             return View(command);
 
-        await _mediator.Send(command);
-
-        return RedirectToAction(nameof(Index));
-    }
-    public virtual async Task<IActionResult> Edit(string id)
-    {
-        var updateCommand = _mapper.Map<TUpdateCommand>(await _mediator.Send(new TRetrieveSingleQuery { Id = id }));
-        return View(updateCommand);
+        return Ok(await _mediator.Send(command));
     }
     [HttpPost]
-    public virtual async Task<IActionResult> Edit([Bind] TUpdateCommand command)
+    public virtual async Task<IActionResult> DeleteEntity([FromBody] TDeleteCommand command)
     {
         if (!ModelState.IsValid)
             return View(command);
 
-        await _mediator.Send(command);
-
-        return RedirectToAction(nameof(Index));
+        return Ok(await _mediator.Send(command));
     }
-    public virtual async Task<IActionResult> Delete(string id)
-    {
-        return View(new TDeleteCommand { Id = id });
-    }
-    [HttpPost]
-    public virtual async Task<IActionResult> Delete([Bind] TDeleteCommand command)
-    {
-        if (!ModelState.IsValid)
-            return View(command);
-
-        await _mediator.Send(command);
-
-        return RedirectToAction(nameof(Index));
-    }
-
 }
