@@ -32,7 +32,7 @@ public class AnswersController : Controller
             var vm = new FillFormViewModel
             {
                 FormId = form.Id,
-                Answers = new (await _manager.GenerateAnswers(form.Id)),
+                //Answers = new (await _manager.GenerateAnswers(form.Id)),
                 FormTitle = form.Title,
                 FormDescription = form.Description,
             };
@@ -56,7 +56,7 @@ public class AnswersController : Controller
 
         var fa = new FormAnswers 
         { 
-            Answers = formViewModel.Answers,
+            //Answers = formViewModel.Answers,
             Form = form,
         };
         await _context.AddAsync(fa);

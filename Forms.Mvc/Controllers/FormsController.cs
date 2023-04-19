@@ -18,7 +18,7 @@ public class FormsController : Controller
     }
 
     // GET: Forms
-    public async Task<IActionResult> Index()
+   /* public async Task<IActionResult> Index()
     {
         return _context.Forms != null ?
                     View(await _context.Forms.Where(f => !f.IsDeleted).ToListAsync()) :
@@ -218,5 +218,5 @@ public class FormsController : Controller
         return RedirectToAction(nameof(Edit), routeValues: new { id = formId });
     }
    
-    #endregion
+    #endregion*/
 }
