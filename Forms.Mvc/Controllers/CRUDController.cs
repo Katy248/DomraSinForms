@@ -1,5 +1,6 @@
 ﻿using AutoMapper;
 using DomraSinForms.Application.Interfaces;
+using DomraSinForms.Application.Mapper;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
 
