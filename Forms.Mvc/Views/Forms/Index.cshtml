@@ -1,26 +1,25 @@
 ﻿@model IEnumerable<DomraSinForms.Domen.Models.Form>
 
 @{
-    ViewData["Title"] = "Index";
+    ViewData["Title"] = "Все формы";
 }
 
-<h1>Index</h1>
+<h1>Все формы</h1>
 
 <p>
-    <a asp-action="Create">Create New</a>
+    <a asp-action="Create">Создать форму</a>
 </p>
 <table class="table">
     <thead>
         <tr>
             <th>
-                @Html.DisplayNameFor(model => model.Title)
+                Название
+            <th>
+                Описание
             </th>
             @*<th>
-                @Html.DisplayNameFor(model => model.Description)
-            </th>*@
-            <th>
                 @Html.DisplayNameFor(model => model.CreatorId)
-            </th>
+            </th>*@
             <th></th>
         </tr>
     </thead>
@@ -37,9 +36,9 @@
                 @Html.DisplayFor(modelItem => item.CreatorId)
             </td>*@
             <td>
-                <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
-                <a asp-action="Details" asp-route-id="@item.Id">Details</a> |
-                <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
+                <a asp-action="Edit" asp-route-id="@item.Id">Изменить</a> |
+                <a asp-action="Details" asp-route-id="@item.Id">Подробнее</a> |
+                <a asp-action="Delete" asp-route-id="@item.Id">Удалить</a>
             </td>
         </tr>
 }

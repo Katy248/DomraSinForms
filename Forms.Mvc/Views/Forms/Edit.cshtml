@@ -44,13 +44,13 @@
         <div class="col-md-4">
             <div class="card m-1">
                 <div class="card-body">
-                    @question.Text
+                    question.Text
                 </div>
                 <div class="card-footer">
-                    <form class="d-inline col-6" asp-action="EditQuestion" asp-route-formid="@Model.Id" asp-route-id="@question.Id" method="get">
+                    <form class="d-inline col-6" asp-action="EditQuestion" asp-route-formid="@Model.Id" asp-route-id="question.Id" method="get">
                         <input type="submit" class="btn btn-secondary" value="Edit" />
                     </form>
-                    <form class="d-inline col-6" asp-action="DeleteQuestion" asp-route-formid="@Model.Id" asp-route-id="@question.Id" method="post">
+                    <form class="d-inline col-6" asp-action="DeleteQuestion" asp-route-formid="@Model.Id" asp-route-id="question.Id" method="post">
                         <input type="submit" class="btn btn-danger" value="Delete" />
                     </form>
                 </div>
