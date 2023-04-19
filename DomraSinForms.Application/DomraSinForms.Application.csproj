@@ -12,4 +12,15 @@
     <PackageReference Include="MediatR" Version="12.0.1" />
     <PackageReference Include="MediatR.Extensions.FluentValidation.AspNetCore" Version="4.0.0" />
   </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Forms\Commands\Delete\" />
+    <Folder Include="Forms\Commands\Update\" />
+    <Folder Include="Forms\Queries\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\DomraSinForms.Domen\DomraSinForms.Domen.csproj" />
+    <ProjectReference Include="..\Forms.Mvc\Forms.Mvc.csproj" />
+  </ItemGroup>
 </Project>
