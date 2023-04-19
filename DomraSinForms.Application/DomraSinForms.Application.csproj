@@ -15,6 +15,6 @@
 
   <ItemGroup>
     <ProjectReference Include="..\DomraSinForms.Domen\DomraSinForms.Domen.csproj" />
-    <ProjectReference Include="..\Forms.Mvc\Forms.Mvc.csproj" />
+    <ProjectReference Include="..\DomraSinForms.Persistence\DomraSinForms.Persistence.csproj" />
   </ItemGroup>
 </Project>

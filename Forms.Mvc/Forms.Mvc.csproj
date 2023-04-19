@@ -20,7 +20,13 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\DomraSinForms.Application\DomraSinForms.Application.csproj" />
     <ProjectReference Include="..\DomraSinForms.Domen\DomraSinForms.Domen.csproj" />
+    <ProjectReference Include="..\DomraSinForms.Persistence\DomraSinForms.Persistence.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Data\" />
   </ItemGroup>
 
 </Project>
