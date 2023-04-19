@@ -14,12 +14,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Forms\Commands\Delete\" />
-    <Folder Include="Forms\Commands\Update\" />
-    <Folder Include="Forms\Queries\" />
-  </ItemGroup>
-
-  <ItemGroup>
     <ProjectReference Include="..\DomraSinForms.Domen\DomraSinForms.Domen.csproj" />
     <ProjectReference Include="..\Forms.Mvc\Forms.Mvc.csproj" />
   </ItemGroup>
