@@ -9,7 +9,7 @@ namespace GewelleWorks.MVC.Controllers;
 public class MvcCRUDController<TEntity, TCreateCommand, TRetrieveSingleQuery, TRetrieveListQuery, TUpdateCommand, TDeleteCommand> : Controller
     where TCreateCommand : IRequest<TEntity>, new()
     where TRetrieveSingleQuery : IGetSingleRequest<TEntity>, new()
-    where TRetrieveListQuery : IRequest<IEnumerable<IMapWith<TEntity>>>, new()
+    where TRetrieveListQuery : IGetListRequest<TEntity>, new()
     where TUpdateCommand : IUpdateRequest<TEntity>, new()
     where TDeleteCommand : IDeleteRequest, new()
 {
@@ -21,8 +21,18 @@ public class MvcCRUDController<TEntity, TCreateCommand, TRetrieveSingleQuery, TR
         _mediator = mediator;
         _mapper = mapper;
     }
-    public virtual async Task<IActionResult> Index() =>
-        View(await _mediator.Send(new TRetrieveListQuery()));
+    [HttpGet("{page?}/{count?}/{searchText?}")]
+    public virtual async Task<IActionResult> Index(int page = 0, int count = 10, string searchText = "")
+    {
+        var retrieveQuery = new TRetrieveListQuery 
+        { 
+            Page = page,
+            Count = count,
+            SearchText = searchText
+        };
+        return View(await _mediator.Send(retrieveQuery));
+    }
+
     public virtual async Task<IActionResult> Create(string id)
     {
         return View(new TCreateCommand());
@@ -43,7 +53,7 @@ public class MvcCRUDController<TEntity, TCreateCommand, TRetrieveSingleQuery, TR
         return View(updateCommand);
     }
     [HttpPost]
-    public virtual async Task<IActionResult> Edit([Bind] TUpdateCommand command)
+    public virtual async Task<IActionResult> Edit([Bind("Id,Description,Questions,Title")] TUpdateCommand command)
     {
         if (!ModelState.IsValid)
             return View(command);

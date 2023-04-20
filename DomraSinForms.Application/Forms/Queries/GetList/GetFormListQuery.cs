@@ -1,8 +1,10 @@
-﻿using MediatR;
+﻿using DomraSinForms.Application.Interfaces;
+using DomraSinForms.Domen.Models;
+using MediatR;
 
 namespace DomraSinForms.Application.Forms.Queries.GetList;
 
-public class GetFormListQuery: IRequest<IEnumerable<FormDto>>
+public class GetFormListQuery: IGetListRequest<Form>
 {
     public int Page { get; set; } = 0;
     public int Count { get; set; } = 10;

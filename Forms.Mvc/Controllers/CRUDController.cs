@@ -19,32 +19,24 @@ public class CRUDController<TEntity, TCreateCommand, TRetrieveSingleQuery, TRetr
     {
         _mediator = mediator;
     }
-    public virtual async Task<IActionResult> GetList([FromBody] TRetrieveListQuery query) =>
-        Ok(await _mediator.Send(query));
-    public virtual async Task<IActionResult> Get([FromBody] TRetrieveSingleQuery query) =>
-        Ok(await _mediator.Send(query));
-    [HttpPost]
-    public virtual async Task<IActionResult> CreateEntity([FromBody] TCreateCommand command)
+    public virtual async Task<IEnumerable<IMapWith<TEntity>>> GetEntityList(TRetrieveListQuery query)
     {
-        if (!ModelState.IsValid)
-            return Problem(ModelState.ValidationState.ToString());
-
-        return Ok(await _mediator.Send(command));
+        return await _mediator.Send(query);
     }
-    [HttpPost]
-    public virtual async Task<IActionResult> UpdateEntity([FromBody] TUpdateCommand command)
+    public virtual async Task<TEntity> GetEntity(TRetrieveSingleQuery query)
     {
-        if (!ModelState.IsValid)
-            return View(command);
-
-        return Ok(await _mediator.Send(command));
+        return await _mediator.Send(query);
     }
-    [HttpPost]
-    public virtual async Task<IActionResult> DeleteEntity([FromBody] TDeleteCommand command)
+    public virtual async Task<TEntity> CreateEntity(TCreateCommand command)
     {
-        if (!ModelState.IsValid)
-            return View(command);
-
-        return Ok(await _mediator.Send(command));
+        return await _mediator.Send(command);
+    }
+    public virtual async Task<TEntity> UpdateEntity(TUpdateCommand command)
+    {
+        return await _mediator.Send(command);
+    }
+    public virtual async Task<bool> DeleteEntity(TDeleteCommand command)
+    {
+        return await _mediator.Send(command);
     }
 }

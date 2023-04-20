@@ -17,8 +17,4 @@
     <ProjectReference Include="..\DomraSinForms.Domen\DomraSinForms.Domen.csproj" />
     <ProjectReference Include="..\DomraSinForms.Persistence\DomraSinForms.Persistence.csproj" />
   </ItemGroup>
-
-  <ItemGroup>
-    <Folder Include="Forms\Commands\Create\Новая папка\" />
-  </ItemGroup>
 </Project>
