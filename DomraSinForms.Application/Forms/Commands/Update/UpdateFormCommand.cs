@@ -16,7 +16,7 @@ namespace DomraSinForms.Application.Forms.Commands.Update
         public string Id { get; set; }
         public string Title { get; set; }
         public string Description { get; set; }
-        public List<QuestionBlock> Questions { get; set; } = new();
+        public List<QuestionBase> Questions { get; set; } = new();
         public void Mapping(Profile profile)
         {
             profile.CreateMap<Form, UpdateFormCommand>()

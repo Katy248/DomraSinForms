@@ -6,6 +6,9 @@ using System.Threading.Tasks;
 using DomraSinForms.Domen.Models.Questions;
 
 namespace DomraSinForms.Domen.Models.Answers;
-public class TextAnswer : AnswerBase<TextQuestion>
+
+public abstract class Answer : DbEntity
 {
+    public QuestionBase Question { get; set; }
+    public virtual string Value { get; set; }
 }

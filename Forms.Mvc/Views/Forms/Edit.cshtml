@@ -4,70 +4,70 @@
 @model UpdateFormCommand
 @{
     ViewData["Title"] = "Редактирование";
-    void AddNewQuestion([FromForm] QuestionBlock question)
-    {
-        Model.Questions.Add(question);
-    }
 }
 
 <h1>Редактирование</h1>
-<div class="row">
+<div class="row g-2">
 
-<div class="row col-md-8 border rounded p-3">
-    <h4>Форма</h4>
-    <div class="col-md-4">
-        <form asp-action="Edit">
-            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-            <div class="form-group">
-                <label asp-for="Title" class="control-label">Название</label>
-                    <input asp-for="Title" class="rounded bg-transparent h1 border-start-0 border-top-0 border-end-0 border-bottom" />
-                <span asp-validation-for="Title" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="Description" class="control-label">Описание</label>
-                <input asp-for="Description" class="form-control" />
-                <span asp-validation-for="Description" class="text-danger"></span>
-            </div>
-            <input type="hidden" asp-for="Id" />
+<div class="col-md-8 border rounded p-3">
+        <div class="row">
+            <div class="col-md-4">
+                <form asp-action="Edit">
+                    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                    <div class="form-group">
+                        <input asp-for="Title" class="bg-transparent h1 border-start-0 border-top-0 border-end-0 border-bottom" />
+                        <span asp-validation-for="Title" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="Description" class="control-label">Описание</label>
+                        <input asp-for="Description" class="bg-transparent border-start-0 border-top-0 border-end-0 border-bottom" />
+                        <span asp-validation-for="Description" class="text-danger"></span>
+                    </div>
+                    <input type="hidden" asp-for="Id" />
 
-         
-
-            <div class="form-group">
-                <label class="control-label"></label>
-                <input type="submit" value="Сохранить" class="form-control btn btn-primary" />
+                    <div class="form-group">
+                        <label class="control-label"></label>
+                        <input type="submit" value="Сохранить" class="form-control btn btn-primary" />
+                    </div>
+                </form>
             </div>
-        </form>
     </div>
+    
 </div>
 
 
-<div class="row col-md-8 border rounded p-3">
-    <h4>Вопросы</h4>
-    @foreach (var question in Model.Questions)
-    {
-        
-        <div class="col-md-4">
-            <div class="card m-1">
-                <div class="card-body">
-                    question.Text
+<div class="col-md-8 border rounded p-3">
+    <div class="row">
+            <h4>Вопросы</h4>
+            @foreach (var question in Model.Questions)
+            {
+                <div class="col-md-4">
+                    <div class="card m-1">
+                        <div class="card-body">
+                            question.Text
+                        </div>
+                        <div class="card-footer">
+                            <form class="d-inline col-6" asp-action="EditQuestion" asp-route-formid="@Model.Id" asp-route-id="question.Id" method="get">
+                                <input type="submit" class="btn btn-secondary" value="Edit" />
+                            </form>
+                            <form class="d-inline col-6" asp-action="DeleteQuestion" asp-route-formid="@Model.Id" asp-route-id="question.Id" method="post">
+                                <input type="submit" class="btn btn-danger" value="Delete" />
+                            </form>
+                        </div>
+                    </div>
                 </div>
-                <div class="card-footer">
-                    <form class="d-inline col-6" asp-action="EditQuestion" asp-route-formid="@Model.Id" asp-route-id="question.Id" method="get">
-                        <input type="submit" class="btn btn-secondary" value="Edit" />
-                    </form>
-                    <form class="d-inline col-6" asp-action="DeleteQuestion" asp-route-formid="@Model.Id" asp-route-id="question.Id" method="post">
-                        <input type="submit" class="btn btn-danger" value="Delete" />
-                    </form>
+            }
+            <form asp-action="CreateQuestion" asp-route-id="@Model.Id" method="get">
+                
+                <div class="form-group">
+                    <div class="btn-group" role="group">
+                        <input type="submit" class="btn btn-primary" value="Добавить вопрос" />
+                    </div>
                 </div>
-            </div>
-        </div>
-    }
-    <form asp-action="CreateQuestion" asp-route-id="@Model.Id" method="get">
-        <div class="form-group">
-            <input type="submit" class="btn btn-primary" value="Добавить вопрос" />
-        </div>
-    </form>
-        <input id="addQuestionInput" data-bs-toggle="modal" data-bs-target="#addQuestionModal" type="button" class="btn btn-primary" value="Добавить вопрос" />
+                
+
+            </form>
+    </div>
 </div>
 
 
@@ -79,28 +79,6 @@
     <a asp-action="Index">Назад к списку</a>
 </div>
 
-</div>
-
-<div id="addQuestionModal" data-bs-backdrop="static" class="modal" tabindex="-1">
-    <div class="modal-dialog">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title">Новый вопрос</h5>
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-            </div>
-            <div class="modal-body">
-                <form >
-
-                </form>
-
-                <p>Modal body text goes here.</p>
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Закрыть</button>
-                <button type="button" class="btn btn-primary">Добавить</button>
-            </div>
-        </div>
-    </div>
 </div>
 
 @section Scripts {

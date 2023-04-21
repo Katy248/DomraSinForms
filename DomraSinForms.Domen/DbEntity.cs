@@ -1,6 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations;
 
-namespace DomraSinForms.Domen.Models;
+namespace DomraSinForms.Domen;
 
 public class DbEntity
 {
