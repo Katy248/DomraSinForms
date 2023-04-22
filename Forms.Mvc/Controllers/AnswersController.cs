@@ -1,4 +1,4 @@
-﻿using DomraSinForms.Domen.Models;
+﻿/*using DomraSinForms.Domen.Models;
 using Forms.Mvc.Data;
 using Forms.Mvc.Managers;
 using Forms.Mvc.Models;
@@ -82,3 +82,4 @@ public class AnswersController : Controller
     }
 
 }
+*/

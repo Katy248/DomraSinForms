@@ -1,6 +1,5 @@
 ﻿using AutoMapper;
 using DomraSinForms.Application.Interfaces;
-using DomraSinForms.Application.Mapper;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
 
@@ -24,8 +23,8 @@ public class MvcCRUDController<TEntity, TCreateCommand, TRetrieveSingleQuery, TR
     [HttpGet("{page?}/{count?}/{searchText?}")]
     public virtual async Task<IActionResult> Index(int page = 0, int count = 10, string searchText = "")
     {
-        var retrieveQuery = new TRetrieveListQuery 
-        { 
+        var retrieveQuery = new TRetrieveListQuery
+        {
             Page = page,
             Count = count,
             SearchText = searchText

@@ -1,5 +1,4 @@
-﻿using AutoMapper;
-using DomraSinForms.Application.Interfaces;
+﻿using DomraSinForms.Application.Interfaces;
 using DomraSinForms.Application.Mapper;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
@@ -7,11 +6,11 @@ using Microsoft.AspNetCore.Mvc;
 namespace Forms.Mvc.Controllers;
 
 public class CRUDController<TEntity, TCreateCommand, TRetrieveSingleQuery, TRetrieveListQuery, TUpdateCommand, TDeleteCommand> : Controller
-    where TCreateCommand : IRequest<TEntity>, new ()
-    where TRetrieveSingleQuery : IGetSingleRequest<TEntity>, new ()
-    where TRetrieveListQuery : IRequest<IEnumerable<IMapWith<TEntity>>>, new ()
-    where TUpdateCommand : IUpdateRequest<TEntity>, new ()
-    where TDeleteCommand : IDeleteRequest, new ()
+    where TCreateCommand : IRequest<TEntity>, new()
+    where TRetrieveSingleQuery : IGetSingleRequest<TEntity>, new()
+    where TRetrieveListQuery : IRequest<IEnumerable<IMapWith<TEntity>>>, new()
+    where TUpdateCommand : IUpdateRequest<TEntity>, new()
+    where TDeleteCommand : IDeleteRequest, new()
 {
     protected readonly IMediator _mediator;
 

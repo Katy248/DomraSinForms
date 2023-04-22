@@ -1,5 +1,4 @@
 ﻿using System.Diagnostics;
-using DomraSinForms.Domen.Models;
 using Forms.Mvc.Data;
 using Forms.Mvc.Models;
 using Microsoft.AspNetCore.Mvc;

@@ -1,6 +1,4 @@
-﻿using DomraSinForms.Domen.Models;
-using Forms.Mvc.Data;
-using Microsoft.EntityFrameworkCore;
+﻿using Forms.Mvc.Data;
 
 namespace Forms.Mvc.Managers;
 
@@ -13,14 +11,14 @@ public class AnswerManager
         _context = context;
     }
 
-   /* public async Task<IEnumerable<Answer>> GenerateAnswers(string formId)
-    {
-        var form = await _context.Forms.Include(f => f.Questions).FirstAsync(f => f.Id == formId);
-        var result = new FormAnswers { Answers = new(), Form = form };
-        foreach (var question in form.Questions)
-        {
-            //result.Answers.Add(new Answer { Question = question, QuestionText = question.Text });
-        }
-        return result.Answers;
-    }*/
+    /* public async Task<IEnumerable<Answer>> GenerateAnswers(string formId)
+     {
+         var form = await _context.Forms.Include(f => f.Questions).FirstAsync(f => f.Id == formId);
+         var result = new FormAnswers { Answers = new(), Form = form };
+         foreach (var question in form.Questions)
+         {
+             //result.Answers.Add(new Answer { Question = question, QuestionText = question.Text });
+         }
+         return result.Answers;
+     }*/
 }

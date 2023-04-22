@@ -1,5 +1,4 @@
-﻿using AutoMapper;
-using DomraSinForms.Domen.Models;
+﻿using DomraSinForms.Domen.Models;
 using Forms.Mvc.Data;
 using MediatR;
 

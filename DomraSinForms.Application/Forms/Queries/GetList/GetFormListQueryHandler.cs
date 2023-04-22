@@ -11,14 +11,15 @@ namespace DomraSinForms.Application.Forms.Queries.GetList
         private readonly ApplicationDbContext _context;
         private readonly IMapper _mapper;
 
-        public GetFormListQueryHandler(ApplicationDbContext context, IMapper mapper) {
+        public GetFormListQueryHandler(ApplicationDbContext context, IMapper mapper)
+        {
             _context = context;
             _mapper = mapper;
         }
         public async Task<IEnumerable<IMapWith<Form>>> Handle(GetFormListQuery request, CancellationToken cancellationToken)
         {
             var forms = _context.Forms
-                .Where(f => f.Title.Contains(request.SearchText)|f.Description.Contains(request.SearchText))
+                .Where(f => f.Title.Contains(request.SearchText) | f.Description.Contains(request.SearchText))
                 .Skip(request.Page * request.Count)
                 .Take(request.Count);
             return _mapper.ProjectTo<FormDto>(forms).ToArray();

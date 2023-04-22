@@ -1,17 +1,15 @@
-﻿using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
-using DomraSinForms.Domen.Models;
-using Forms.Mvc.Data;
-using Microsoft.AspNetCore.Authorization;
-using Forms.Mvc.Models;
-using MediatR;
-using DomraSinForms.Application.Forms.Queries.GetList;
-using GewelleWorks.MVC.Controllers;
+﻿using AutoMapper;
 using DomraSinForms.Application.Forms.Commands.Create;
 using DomraSinForms.Application.Forms.Commands.Delete;
 using DomraSinForms.Application.Forms.Commands.Update;
 using DomraSinForms.Application.Forms.Queries.Get;
-using AutoMapper;
+using DomraSinForms.Application.Forms.Queries.GetList;
+using DomraSinForms.Domen.Models;
+using Forms.Mvc.Data;
+using GewelleWorks.MVC.Controllers;
+using MediatR;
+using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 
 namespace Forms.Mvc.Controllers;
 
@@ -24,11 +22,11 @@ public class FormsController : MvcCRUDController<Form, CreateFormCommand, GetFor
     {
     }
 
-   /* [HttpGet("{page}&{count}")]
-    public async Task<IActionResult> Index(int page = 0, int count = 10)
-    {
-        return View(await GetEntityList(new GetFormListQuery { Page = page, Count = count }));
-    }*/
+    /* [HttpGet("{page}&{count}")]
+     public async Task<IActionResult> Index(int page = 0, int count = 10)
+     {
+         return View(await GetEntityList(new GetFormListQuery { Page = page, Count = count }));
+     }*/
 
 
     /* public async Task<IActionResult> Index()
