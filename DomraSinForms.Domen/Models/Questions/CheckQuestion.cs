@@ -1,4 +1,4 @@
-﻿namespace DomraSinForms.Domen.Models.Questions;
+﻿namespace DomraSinForms.Domain.Models.Questions;
 public class CheckQuestion : QuestionBase
 {
 }

@@ -1,6 +1,6 @@
-﻿using DomraSinForms.Domen.Models.Questions;
+﻿using DomraSinForms.Domain.Models.Questions;
 
-namespace DomraSinForms.Domen.Models.Answers;
+namespace DomraSinForms.Domain.Models.Answers;
 
 public class Answer : DbEntity
 {

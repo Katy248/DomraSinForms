@@ -1,4 +1,4 @@
-﻿using DomraSinForms.Domen.Models;
+﻿using DomraSinForms.Domain.Models;
 using Forms.Mvc.Data;
 using MediatR;
 

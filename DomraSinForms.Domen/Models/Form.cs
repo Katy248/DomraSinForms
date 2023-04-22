@@ -1,8 +1,8 @@
 ﻿using System.ComponentModel.DataAnnotations;
-using DomraSinForms.Domen.Models.Answers;
-using DomraSinForms.Domen.Models.Questions;
+using DomraSinForms.Domain.Models.Answers;
+using DomraSinForms.Domain.Models.Questions;
 
-namespace DomraSinForms.Domen.Models;
+namespace DomraSinForms.Domain.Models;
 
 public class Form : DbEntity
 {

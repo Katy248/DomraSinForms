@@ -1,5 +1,5 @@
 ﻿using DomraSinForms.Application.Interfaces;
-using DomraSinForms.Domen.Models;
+using DomraSinForms.Domain.Models;
 
 namespace DomraSinForms.Application.Forms.Queries.GetList;
 

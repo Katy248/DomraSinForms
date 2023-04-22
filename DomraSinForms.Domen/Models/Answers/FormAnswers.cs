@@ -1,4 +1,4 @@
-﻿namespace DomraSinForms.Domen.Models.Answers;
+﻿namespace DomraSinForms.Domain.Models.Answers;
 public class FormAnswers : DbEntity
 {
     public Form Form { get; set; } = new();

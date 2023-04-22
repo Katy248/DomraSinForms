@@ -12,7 +12,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\DomraSinForms.Domen\DomraSinForms.Domen.csproj" />
+    <ProjectReference Include="..\DomraSinForms.Domen\DomraSinForms.Domain.csproj" />
   </ItemGroup>
 
 </Project>

@@ -4,7 +4,7 @@ using DomraSinForms.Application.Forms.Commands.Delete;
 using DomraSinForms.Application.Forms.Commands.Update;
 using DomraSinForms.Application.Forms.Queries.Get;
 using DomraSinForms.Application.Forms.Queries.GetList;
-using DomraSinForms.Domen.Models;
+using DomraSinForms.Domain.Models;
 using Forms.Mvc.Data;
 using GewelleWorks.MVC.Controllers;
 using MediatR;

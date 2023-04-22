@@ -1,8 +1,8 @@
 ﻿using AutoMapper;
 using DomraSinForms.Application.Interfaces;
 using DomraSinForms.Application.Mapper;
-using DomraSinForms.Domen.Models;
-using DomraSinForms.Domen.Models.Questions;
+using DomraSinForms.Domain.Models;
+using DomraSinForms.Domain.Models.Questions;
 
 namespace DomraSinForms.Application.Forms.Commands.Update
 {

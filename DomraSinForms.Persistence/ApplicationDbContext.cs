@@ -1,6 +1,6 @@
-﻿using DomraSinForms.Domen.Models;
-using DomraSinForms.Domen.Models.Answers;
-using DomraSinForms.Domen.Models.Questions;
+﻿using DomraSinForms.Domain.Models;
+using DomraSinForms.Domain.Models.Answers;
+using DomraSinForms.Domain.Models.Questions;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 
