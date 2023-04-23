@@ -20,7 +20,6 @@ public class ApplicationDbContext : IdentityDbContext
     public DbSet<Answer> AnswerBlocks { get; set; }
     public DbSet<TextQuestion> TextQuestions { get; set; }
     public DbSet<NumberQuestion> NumberQuestions { get; set; }
-    public DbSet<RadioQuestion> RadioQuestions { get; set; }
-    public DbSet<CheckQuestion> CheckQuestions { get; set; }
+    public DbSet<OptionsQuestion> OptionsQuestions { get; set; }
 }
 

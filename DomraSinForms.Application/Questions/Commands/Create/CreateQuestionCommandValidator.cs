@@ -13,7 +13,7 @@ public class CreateQuestionCommandValidator : AbstractValidator<CreateQuestionCo
     {
         RuleFor(c => c.Question)
             .Must(q => 
-                (new[] { typeof(TextQuestion), typeof(NumberQuestion), typeof(RadioQuestion), typeof(CheckQuestion) })
+                (new[] { typeof(TextQuestion), typeof(NumberQuestion), typeof(OptionsQuestion) })
                 .Contains(q.GetType()));
     }
 }
