@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 using DomraSinForms.Domain.Models.Questions;
 using Forms.Mvc.Data;
 using MediatR;
+using Microsoft.EntityFrameworkCore;
 
 namespace DomraSinForms.Application.Questions.Commands.Create;
 public class CreateQuestionCommandHandler : IRequestHandler<CreateQuestionCommand, QuestionBase>
@@ -19,7 +20,7 @@ public class CreateQuestionCommandHandler : IRequestHandler<CreateQuestionComman
     }
     public async Task<QuestionBase> Handle(CreateQuestionCommand request, CancellationToken cancellationToken)
     {
-        var form = await _context.Forms.FindAsync(request.FormId, cancellationToken);
+        var form = await _context.Forms.FirstOrDefaultAsync(f => f.Id == request.FormId, cancellationToken);
         if (form == null) 
             return QuestionNone.Instance;
 
