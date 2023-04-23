@@ -20,10 +20,13 @@ public class CreateQuestionCommandHandler : IRequestHandler<CreateQuestionComman
     }
     public async Task<QuestionBase> Handle(CreateQuestionCommand request, CancellationToken cancellationToken)
     {
-        var form = await _context.Forms.FirstOrDefaultAsync(f => f.Id == request.FormId, cancellationToken);
+        var form = await _context.Forms
+            .Include(f => f.Questions)
+            .FirstOrDefaultAsync(f => f.Id == request.FormId, cancellationToken);
         if (form == null) 
             return QuestionNone.Instance;
 
+        request.Question.Index = form.Questions.Count;
         form.Questions.Add(request.Question);
 
         _context.Update(form);
