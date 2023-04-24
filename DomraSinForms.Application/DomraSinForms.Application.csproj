@@ -20,5 +20,7 @@
 
   <ItemGroup>
     <Folder Include="Forms\Commands\Create\Новая папка\" />
+    <Folder Include="Questrions\" />
+    <Folder Include="Новая папка\" />
   </ItemGroup>
 </Project>

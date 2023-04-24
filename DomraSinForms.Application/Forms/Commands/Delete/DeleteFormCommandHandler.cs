@@ -1,4 +1,4 @@
-﻿using Forms.Mvc.Data;
+﻿using DomraSinForms.Persistence;
 using MediatR;
 
 namespace DomraSinForms.Application.Forms.Commands.Delete;

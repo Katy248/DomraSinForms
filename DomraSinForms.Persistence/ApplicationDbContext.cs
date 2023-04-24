@@ -3,7 +3,7 @@ using DomraSinForms.Domen.Models.Answers;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 
-namespace Forms.Mvc.Data;
+namespace DomraSinForms.Persistence;
 public class ApplicationDbContext : IdentityDbContext
 {
     public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options)

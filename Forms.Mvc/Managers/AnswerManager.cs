@@ -1,6 +1,6 @@
 ﻿using DomraSinForms.Domen.Models;
-using Forms.Mvc.Data;
-using Microsoft.EntityFrameworkCore;
+using DomraSinForms.Persistence;
+
 
 namespace Forms.Mvc.Managers;
 

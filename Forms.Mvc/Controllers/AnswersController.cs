@@ -1,5 +1,5 @@
 ﻿using DomraSinForms.Domen.Models;
-using Forms.Mvc.Data;
+using DomraSinForms.Persistence;
 using Forms.Mvc.Managers;
 using Forms.Mvc.Models;
 using Microsoft.AspNetCore.Authorization;

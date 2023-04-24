@@ -1,11 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using AutoMapper;
+﻿using AutoMapper;
 using DomraSinForms.Domen.Models;
-using Forms.Mvc.Data;
+using DomraSinForms.Persistence;
+
 using MediatR;
 
 namespace DomraSinForms.Application.Forms.Commands.Create;
