@@ -28,6 +28,6 @@ public class GetQuestionListQueryHandler : IRequestHandler<GetQuestionListQuery,
         if (form is null) return Array.Empty<IMapWith<QuestionBase>>();
 
         return _mapper.ProjectTo<QuestionBaseDto>(
-            _context.Questions.Where(q => q.Form.Id == request.FormId));
+            _context.Questions.Where(q => q.FormId == request.FormId).OrderBy(q => q.Index));
     }
 }

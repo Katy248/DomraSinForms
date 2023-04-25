@@ -26,8 +26,6 @@ public class GetQuestionQueryHandler : IRequestHandler<GetQuestionQuery, Questio
                 return await _context.TextQuestions.FirstOrDefaultAsync(q => q.Id == request.Id);
             case OptionsQuestion:
                 return await _context.OptionsQuestions.Include(q => q.Options).FirstOrDefaultAsync(q => q.Id == request.Id);
-            case NumberQuestion:
-                return await _context.TextQuestions.FirstOrDefaultAsync(q => q.Id == request.Id);
         }
 
         return null;
