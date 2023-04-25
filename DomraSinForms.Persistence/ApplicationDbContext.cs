@@ -19,7 +19,6 @@ public class ApplicationDbContext : IdentityDbContext
     public DbSet<FormAnswers> FormAnswers { get; set; }
     public DbSet<Answer> AnswerBlocks { get; set; }
     public DbSet<TextQuestion> TextQuestions { get; set; }
-    public DbSet<NumberQuestion> NumberQuestions { get; set; }
     public DbSet<OptionsQuestion> OptionsQuestions { get; set; }
 }
 
