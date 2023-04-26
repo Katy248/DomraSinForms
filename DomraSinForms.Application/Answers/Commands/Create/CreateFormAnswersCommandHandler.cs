@@ -7,7 +7,7 @@ using DomraSinForms.Domain.Models.Answers;
 using Forms.Mvc.Data;
 using MediatR;
 
-namespace DomraSinForms.Application.Answers.Create;
+namespace DomraSinForms.Application.Answers.Commands.Create;
 public class CreateFormAnswersCommandHandler : IRequestHandler<CreateFormAnswersCommand, FormAnswers>
 {
     private readonly ApplicationDbContext _context;

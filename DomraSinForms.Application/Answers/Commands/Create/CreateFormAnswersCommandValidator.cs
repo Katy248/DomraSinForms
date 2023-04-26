@@ -5,7 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using FluentValidation;
 
-namespace DomraSinForms.Application.Answers.Create;
+namespace DomraSinForms.Application.Answers.Commands.Create;
 public class CreateFormAnswersCommandValidator : AbstractValidator<CreateFormAnswersCommand>
 {
     public CreateFormAnswersCommandValidator()
