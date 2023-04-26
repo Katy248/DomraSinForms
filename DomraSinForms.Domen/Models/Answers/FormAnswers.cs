@@ -1,6 +1,6 @@
 ﻿namespace DomraSinForms.Domain.Models.Answers;
 public class FormAnswers : DbEntity
 {
-    public Form Form { get; set; } = new();
+    public string FormId { get; set; }
     public List<Answer> Answers { get; set; } = new();
 }
