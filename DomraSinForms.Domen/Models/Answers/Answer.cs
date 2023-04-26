@@ -4,6 +4,6 @@ namespace DomraSinForms.Domain.Models.Answers;
 
 public class Answer : DbEntity
 {
-    public QuestionBase Question { get; set; }
+    public string QuestionId { get; set; }
     public virtual string Value { get; set; }
 }

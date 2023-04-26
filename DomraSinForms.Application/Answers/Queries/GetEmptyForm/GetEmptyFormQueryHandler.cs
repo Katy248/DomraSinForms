@@ -36,7 +36,7 @@ public class GetEmptyFormQueryHandler : IRequestHandler<GetEmptyFormQuery, Creat
 
         foreach (var question in form.Questions)
         {
-            answers.Add(new Answer { Question = question });
+            answers.Add(new Answer { QuestionId = question.Id });
         }
 
         command.Answers = answers;

@@ -1,7 +1,10 @@
 ﻿using DomraSinForms.Application.Answers.Commands.Create;
+using DomraSinForms.Application.Answers.Queries.GetEmptyForm;
+using DomraSinForms.Application.Answers.Queries.GetFormAnswers;
 using DomraSinForms.Domain.Models.Answers;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
+using static Microsoft.EntityFrameworkCore.DbLoggerCategory;
 
 namespace Forms.Api.Controllers;
 
@@ -16,18 +19,23 @@ public class AnswersController : Controller
     }
 
     [HttpPost]
-    public async Task<FormAnswers> Get()
+    public async Task<FormAnswers> Get([FromBody] GetFormAnswersQuery query)
     {
-        return null;
+        return await _mediator.Send(query);
     }
     [HttpPost]
     public async Task<IEnumerable<FormAnswers>> GetList()
     {
-        return null;
+        return /*await _mediator.Send(query);*/ null;
     }
     [HttpPost]
-    public async Task<CreateFormAnswersCommand> GetEmptyForm()
+    public async Task<CreateFormAnswersCommand> GetEmptyForm([FromBody] GetEmptyFormQuery query)
     {
-        return null;
+        return await _mediator.Send(query);
+    }
+    [HttpPost]
+    public async Task<FormAnswers> Create([FromBody] CreateFormAnswersCommand command)
+    {
+        return await _mediator.Send(command);
     }
 }
