@@ -31,4 +31,8 @@
     <ProjectReference Include="..\DomraSinForms.Persistence\DomraSinForms.Persistence.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Views\Answers\" />
+  </ItemGroup>
+
 </Project>
