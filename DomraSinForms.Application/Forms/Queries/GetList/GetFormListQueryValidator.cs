@@ -2,7 +2,7 @@
 
 namespace DomraSinForms.Application.Forms.Queries.GetList
 {
-    public class GetFormListQueryValidator: AbstractValidator<GetFormListQuery>
+    public class GetFormListQueryValidator : AbstractValidator<GetFormListQuery>
     {
         public GetFormListQueryValidator()
         {

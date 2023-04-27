@@ -9,18 +9,14 @@
   <ItemGroup>
     <PackageReference Include="AutoMapper" Version="12.0.1" />
     <PackageReference Include="AutoMapper.Extensions.Microsoft.DependencyInjection" Version="12.0.1" />
+    <PackageReference Include="FluentValidation" Version="11.5.2" />
+    <PackageReference Include="FluentValidation.DependencyInjectionExtensions" Version="11.5.2" />
     <PackageReference Include="MediatR" Version="12.0.1" />
     <PackageReference Include="MediatR.Extensions.FluentValidation.AspNetCore" Version="4.0.0" />
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\DomraSinForms.Domen\DomraSinForms.Domen.csproj" />
+    <ProjectReference Include="..\DomraSinForms.Domen\DomraSinForms.Domain.csproj" />
     <ProjectReference Include="..\DomraSinForms.Persistence\DomraSinForms.Persistence.csproj" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <Folder Include="Forms\Commands\Create\Новая папка\" />
-    <Folder Include="Questrions\" />
-    <Folder Include="Новая папка\" />
   </ItemGroup>
 </Project>

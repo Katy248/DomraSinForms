@@ -1,4 +1,4 @@
-﻿using DomraSinForms.Domen.Models;
+﻿using DomraSinForms.Domain.Models;
 using DomraSinForms.Persistence;
 using MediatR;
 using Microsoft.EntityFrameworkCore;

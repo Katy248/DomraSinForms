@@ -1,10 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using AutoMapper;
-using DomraSinForms.Application.Mapper;
+﻿using DomraSinForms.Application.Behaviors;
+using FluentValidation;
+using MediatR;
 using Microsoft.Extensions.DependencyInjection;
 
 namespace DomraSinForms.Application;
@@ -18,6 +14,8 @@ public static class ApplicationExtensions
                 config.Lifetime = ServiceLifetime.Scoped;
                 config.RegisterServicesFromAssembly(typeof(ApplicationExtensions).Assembly);
             })
+            .AddValidatorsFromAssembly(typeof(ApplicationExtensions).Assembly)
+            .AddTransient(typeof(IPipelineBehavior<,>), typeof(ValidationBehavior<,>))
             .AddAutoMapper(typeof(ApplicationExtensions).Assembly);
 
     }

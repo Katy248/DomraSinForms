@@ -1,7 +1,8 @@
 ﻿using System.ComponentModel.DataAnnotations;
-using DomraSinForms.Domen.Models.Questions;
+using DomraSinForms.Domain.Models.Answers;
+using DomraSinForms.Domain.Models.Questions;
 
-namespace DomraSinForms.Domen.Models;
+namespace DomraSinForms.Domain.Models;
 
 public class Form : DbEntity
 {
@@ -10,7 +11,7 @@ public class Form : DbEntity
     public string Description { get; set; }
     [Required]
     public string CreatorId { get; set; }
-    public List<QuestionBlock> Questions { get; set; } = new();
+    public List<QuestionBase> Questions { get; set; } = new();
     public List<FormAnswers> FormAnswers { get; set; } = new();
-    
+
 }

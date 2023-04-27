@@ -1,10 +1,13 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace DomraSinForms.Domen.Models.Questions;
+﻿namespace DomraSinForms.Domain.Models.Questions;
 public class TextQuestion : QuestionBase
 {
+    public TextQuestionType Type { get; set; }
+}
+public enum TextQuestionType
+{
+    Text = 0,
+    Number = 1,
+    Date = 2,
+    Time = 3,
+    DateTime = 4,
 }
