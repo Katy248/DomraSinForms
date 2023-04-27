@@ -17,7 +17,7 @@ public class FormsController : Controller
     private readonly ApplicationDbContext _context;
     private readonly SignInManager<IdentityUser> _signIn;
 
-    public FormsController(IMediator mediator, ApplicationDbContext context, SignInManager <IdentityUser> signIn)
+    public FormsController(IMediator mediator, ApplicationDbContext context, SignInManager<IdentityUser> signIn)
     {
         _mediator = mediator;
         _context = context;
@@ -38,7 +38,7 @@ public class FormsController : Controller
     [HttpPost]
     public async Task<IActionResult> Create([Bind("CreatorId, Title, Description")] CreateFormCommand command)
     {
-        if(!ModelState.IsValid)
+        if (!ModelState.IsValid)
         {
             return View(command);
         }
@@ -46,19 +46,19 @@ public class FormsController : Controller
         return RedirectToAction("Index");
     }
     [HttpGet]
-    public async Task<IActionResult> Edit(string id) 
+    public async Task<IActionResult> Edit(string id)
     {
         var result = await _mediator.Send(new GetFormQuery { Id = id });
-        return View(new EditFormViewModel {Form = result, UpdateFormCommand = new UpdateFormCommand { Id = result.Id, Description = result.Description, Title = result.Title} }); 
+        return View(new EditFormViewModel { Form = result, UpdateFormCommand = new UpdateFormCommand { Id = result.Id, Description = result.Description, Title = result.Title } });
     }
     [HttpPost]
-    public IActionResult Edit([Bind] EditFormViewModel command) 
+    public async Task<IActionResult> Edit([Bind] EditFormViewModel command)
     {
-    if (!ModelState.IsValid)
+        if (!ModelState.IsValid)
         {
             return RedirectToAction("Edit", routeValues: new { Id = command.UpdateFormCommand.Id });
         }
-        _mediator.Send(command.UpdateFormCommand);
-        return RedirectToAction("Edit", routeValues: new {Id = command.UpdateFormCommand.Id});
+        var form = await _mediator.Send(command.UpdateFormCommand);
+        return RedirectToAction("Edit", routeValues: new { Id = command.UpdateFormCommand.Id });
     }
 }

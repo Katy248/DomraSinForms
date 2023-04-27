@@ -15,6 +15,9 @@ public class GetFormQueryHandler : IRequestHandler<GetFormQuery, Form>
     }
     public async Task<Form> Handle(GetFormQuery request, CancellationToken cancellationToken)
     {
-        return await _context.Forms.Include(f => f.Questions).FirstOrDefaultAsync(f => f.Id == request.Id, cancellationToken);
+        return await _context.Forms
+            .AsNoTracking()
+            .Include(f => f.Questions)
+            .FirstOrDefaultAsync(f => f.Id == request.Id, cancellationToken);
     }
 }

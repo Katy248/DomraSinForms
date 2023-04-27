@@ -16,6 +16,7 @@ public class HomeController : Controller
 
     public IActionResult Index()
     {
+        _logger.LogError("Open home page");
         return View();
     }
 

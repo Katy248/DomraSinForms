@@ -1,5 +1,5 @@
 using DomraSinForms.Application;
-using Forms.Mvc.Data;
+using DomraSinForms.Persistence;
 using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
