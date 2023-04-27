@@ -2,19 +2,14 @@
 using Forms.Mvc.Data;
 using MediatR;
 using Microsoft.EntityFrameworkCore;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
-namespace DomraSinForms.Application.Answers.Queries.GetFormAnswers
+namespace DomraSinForms.Application.Answers.Queries.Get
 {
-    public class GetFormAnswersQueryHandler:IRequestHandler<GetFormAnswersQuery, FormAnswers>
+    public class GetFormAnswersQueryHandler : IRequestHandler<GetFormAnswersQuery, FormAnswers>
     {
         private readonly ApplicationDbContext _context;
 
-        public GetFormAnswersQueryHandler(ApplicationDbContext context) 
+        public GetFormAnswersQueryHandler(ApplicationDbContext context)
         {
             _context = context;
         }

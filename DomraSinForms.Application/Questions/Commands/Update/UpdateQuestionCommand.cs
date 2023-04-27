@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using DomraSinForms.Application.Interfaces;
+﻿using DomraSinForms.Application.Interfaces;
 using DomraSinForms.Application.Mapper;
 using DomraSinForms.Domain.Models.Questions;
 

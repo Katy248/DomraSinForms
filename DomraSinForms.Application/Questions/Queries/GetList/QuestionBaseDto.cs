@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using AutoMapper;
+﻿using AutoMapper;
 using DomraSinForms.Application.Mapper;
 using DomraSinForms.Domain.Models.Questions;
 
@@ -16,7 +11,7 @@ public class QuestionBaseDto : IMapWith<QuestionBase>
     public string Type { get; set; }
     public void Mapping(Profile profile)
     {
-        profile.CreateMap<QuestionBase,  QuestionBaseDto>()
+        profile.CreateMap<QuestionBase, QuestionBaseDto>()
             .ForMember(dto => dto.Type, opt => opt.MapFrom(q => q.GetType().ToString()));
     }
 }

@@ -5,9 +5,9 @@ public class TextQuestion : QuestionBase
 }
 public enum TextQuestionType
 {
-    Text = 0, 
-    Number = 1, 
-    Date = 2, 
-    Time = 3, 
+    Text = 0,
+    Number = 1,
+    Date = 2,
+    Time = 3,
     DateTime = 4,
 }

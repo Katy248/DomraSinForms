@@ -1,5 +1,4 @@
-﻿using DomraSinForms.Application.Questions.Commands;
-using DomraSinForms.Application.Questions.Commands.CreateOptionsQuestion;
+﻿using DomraSinForms.Application.Questions.Commands.CreateOptionsQuestion;
 using DomraSinForms.Application.Questions.Commands.CreateTextQuestion;
 using DomraSinForms.Application.Questions.Commands.Delete;
 using DomraSinForms.Application.Questions.Commands.Update;

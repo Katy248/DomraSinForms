@@ -5,7 +5,6 @@ using DomraSinForms.Application.Forms.Queries.Get;
 using DomraSinForms.Application.Forms.Queries.GetList;
 using DomraSinForms.Domain.Models;
 using MediatR;
-using Microsoft.AspNetCore.Mvc;
 
 namespace Forms.Api.Controllers;
 

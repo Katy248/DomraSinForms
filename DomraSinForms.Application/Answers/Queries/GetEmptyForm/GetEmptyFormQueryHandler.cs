@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using DomraSinForms.Application.Answers.Commands.Create;
+﻿using DomraSinForms.Application.Answers.Commands.Create;
 using DomraSinForms.Domain.Models.Answers;
 using Forms.Mvc.Data;
 using MediatR;
@@ -27,8 +22,8 @@ public class GetEmptyFormQueryHandler : IRequestHandler<GetEmptyFormQuery, Creat
         if (form is null)
             return null;
 
-        var command = new CreateFormAnswersCommand 
-        { 
+        var command = new CreateFormAnswersCommand
+        {
             FormId = form.Id,
             UserId = request.UserId,
         };

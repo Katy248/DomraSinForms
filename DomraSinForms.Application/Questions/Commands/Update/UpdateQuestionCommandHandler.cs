@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using DomraSinForms.Domain.Models.Questions;
+﻿using DomraSinForms.Domain.Models.Questions;
 using Forms.Mvc.Data;
 using MediatR;
 
@@ -20,7 +15,7 @@ public class UpdateQuestionCommandHandler : IRequestHandler<UpdateQuestionComman
     {
         var question = await _context.Questions.FindAsync(request.Id, cancellationToken);
 
-        if (question is null) 
+        if (question is null)
             return QuestionNone.Instance;
 
         question.QuestionText = request.QuestionText;

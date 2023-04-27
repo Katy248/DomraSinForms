@@ -1,10 +1,9 @@
 ﻿using DomraSinForms.Application.Answers.Commands.Create;
+using DomraSinForms.Application.Answers.Queries.Get;
 using DomraSinForms.Application.Answers.Queries.GetEmptyForm;
-using DomraSinForms.Application.Answers.Queries.GetFormAnswers;
 using DomraSinForms.Domain.Models.Answers;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
-using static Microsoft.EntityFrameworkCore.DbLoggerCategory;
 
 namespace Forms.Api.Controllers;
 

@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using DomraSinForms.Domain.Models.Questions;
+﻿using DomraSinForms.Domain.Models.Questions;
 using MediatR;
 
 namespace DomraSinForms.Application.Questions.Commands;

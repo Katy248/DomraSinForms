@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using AutoMapper;
+﻿using AutoMapper;
 using DomraSinForms.Application.Mapper;
 using DomraSinForms.Domain.Models.Questions;
 using Forms.Mvc.Data;
@@ -25,7 +20,8 @@ public class GetQuestionListQueryHandler : IRequestHandler<GetQuestionListQuery,
     {
         var form = await _context.Forms
             .FirstOrDefaultAsync(f => f.Id == request.FormId);
-        if (form is null) return Array.Empty<IMapWith<QuestionBase>>();
+        if (form is null)
+            return Array.Empty<IMapWith<QuestionBase>>();
 
         return _mapper.ProjectTo<QuestionBaseDto>(
             _context.Questions.Where(q => q.FormId == request.FormId).OrderBy(q => q.Index));

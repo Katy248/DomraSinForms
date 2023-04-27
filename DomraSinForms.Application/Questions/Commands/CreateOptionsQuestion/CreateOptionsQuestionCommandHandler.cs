@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using DomraSinForms.Domain.Models.Questions;
+﻿using DomraSinForms.Domain.Models.Questions;
 using Forms.Mvc.Data;
 using MediatR;
 using Microsoft.EntityFrameworkCore;
@@ -23,7 +18,7 @@ public class CreateOptionsQuestionCommandHandler : IRequestHandler<CreateOptions
             .Include(x => x.Questions)
             .FirstOrDefaultAsync(f => f.Id == request.FormId, cancellationToken);
 
-        if (form == null) 
+        if (form == null)
             return null;
 
         var question = new OptionsQuestion
