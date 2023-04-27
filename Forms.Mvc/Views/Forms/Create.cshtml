@@ -1,5 +1,5 @@
 ﻿@using Microsoft.AspNetCore.Identity;
-@model DomraSinForms.Domain.Models.Form
+@model DomraSinForms.Application.Forms.Commands.Create.CreateFormCommand
 @inject SignInManager<IdentityUser> SignInManager
 
 @{
@@ -12,8 +12,7 @@
     <div class="col-md-4">
         <form asp-action="Create" method="post">
             @*<div asp-validation-summary="ModelOnly" class="text-danger"></div>*@
-            <input asp-for="CreatorId" class="form-control" value="@SignInManager.UserManager.GetUserId(User)" hidden/>
-            <input asp-for="Id" class="form-control" value="@Guid.NewGuid().ToString()" hidden/>
+            <input asp-for="CreatorId" class="form-control"  hidden/>
             <div class="form-group">
                 <label asp-for="Title" class="control-label">Название</label>
                 <input asp-for="Title" class="form-control" />

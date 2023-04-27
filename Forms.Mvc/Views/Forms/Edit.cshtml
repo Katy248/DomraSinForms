@@ -1,7 +1,9 @@
 ﻿@using DomraSinForms.Application.Forms.Commands.Update;
+@using DomraSinForms.Application.Forms.Queries.GetList;
 @using DomraSinForms.Domain.Models.Questions;
+@using DomraSinForms.Domain.Models;
 @using Forms.Mvc.Services;
-@model UpdateFormCommand
+@model EditFormViewModel
 @{
     ViewData["Title"] = "Редактирование";
 }
@@ -12,18 +14,18 @@
 <div class="col-md-8 border rounded p-3">
         <div class="row">
             <div class="col-md-4">
-                <form asp-action="Edit">
+                <form asp-action="Edit" method="post">
                     <div asp-validation-summary="ModelOnly" class="text-danger"></div>
                     <div class="form-group">
-                        <input asp-for="Title" class="bg-transparent h1 border-start-0 border-top-0 border-end-0 border-bottom" />
-                        <span asp-validation-for="Title" class="text-danger"></span>
+                        <input asp-for="UpdateFormCommand.Title" class="bg-transparent h1 border-start-0 border-top-0 border-end-0 border-bottom" />
+                        <span asp-validation-for="UpdateFormCommand.Title" class="text-danger"></span>
                     </div>
                     <div class="form-group">
-                        <label asp-for="Description" class="control-label">Описание</label>
-                        <input asp-for="Description" class="bg-transparent border-start-0 border-top-0 border-end-0 border-bottom" />
-                        <span asp-validation-for="Description" class="text-danger"></span>
+                        <label asp-for="UpdateFormCommand.Description" class="control-label">Описание</label>
+                        <input asp-for="UpdateFormCommand.Description" class="bg-transparent border-start-0 border-top-0 border-end-0 border-bottom" />
+                        <span asp-validation-for="UpdateFormCommand.Description" class="text-danger"></span>
                     </div>
-                    <input type="hidden" asp-for="Id" />
+                    <input type="hidden" asp-for="UpdateFormCommand.Id" />
 
                     <div class="form-group">
                         <label class="control-label"></label>
@@ -39,7 +41,7 @@
 <div class="col-md-8 border rounded p-3">
     <div class="row">
             <h4>Вопросы</h4>
-            @foreach (var question in Model.Questions)
+            @foreach (var question in Model.Form.Questions)
             {
                 <div class="col-md-4">
                     <div class="card m-1">
@@ -47,25 +49,23 @@
                             question.Text
                         </div>
                         <div class="card-footer">
-                            <form class="d-inline col-6" asp-action="EditQuestion" asp-route-formid="@Model.Id" asp-route-id="question.Id" method="get">
+                            <form class="d-inline col-6" asp-action="EditQuestion" asp-route-formid="@Model.Form.Id" asp-route-id="question.Id" method="get">
                                 <input type="submit" class="btn btn-secondary" value="Edit" />
                             </form>
-                            <form class="d-inline col-6" asp-action="DeleteQuestion" asp-route-formid="@Model.Id" asp-route-id="question.Id" method="post">
+                            <form class="d-inline col-6" asp-action="DeleteQuestion" asp-route-formid="@Model.Form.Id" asp-route-id="question.Id" method="post">
                                 <input type="submit" class="btn btn-danger" value="Delete" />
                             </form>
                         </div>
                     </div>
                 </div>
             }
-            <form asp-action="CreateQuestion" asp-route-id="@Model.Id" method="get">
+            <form asp-action="CreateQuestion" asp-route-id="@Model.Form.Id" method="get">
                 
                 <div class="form-group">
                     <div class="btn-group" role="group">
                         <input type="submit" class="btn btn-primary" value="Добавить вопрос" />
                     </div>
                 </div>
-                
-
             </form>
     </div>
 </div>
