@@ -1,6 +1,8 @@
 ﻿using DomraSinForms.Application.Answers.Commands.Create;
 using DomraSinForms.Application.Answers.Queries.Get;
 using DomraSinForms.Application.Answers.Queries.GetEmptyForm;
+using DomraSinForms.Application.Answers.Queries.GetList;
+using DomraSinForms.Application.Mapper;
 using DomraSinForms.Domain.Models.Answers;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
@@ -23,9 +25,9 @@ public class AnswersController : Controller
         return await _mediator.Send(query);
     }
     [HttpPost]
-    public async Task<IEnumerable<FormAnswers>> GetList()
+    public async Task<IEnumerable<IMapWith<FormAnswers>>> GetList([FromBody] GetFormAnswersListQuery query)
     {
-        return /*await _mediator.Send(query);*/ null;
+        return await _mediator.Send(query);
     }
     [HttpPost]
     public async Task<CreateFormAnswersCommand> GetEmptyForm([FromBody] GetEmptyFormQuery query)

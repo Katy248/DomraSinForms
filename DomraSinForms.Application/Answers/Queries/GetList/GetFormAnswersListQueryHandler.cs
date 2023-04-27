@@ -22,13 +22,8 @@ public class GetFormAnswersListQueryHandler : IRequestHandler<GetFormAnswersList
     }
     public async Task<IEnumerable<IMapWith<FormAnswers>>> Handle(GetFormAnswersListQuery request, CancellationToken cancellationToken)
     {
-        var form = await _context.Forms.FindAsync(request.FormId, cancellationToken);
-
-        if (form is null)
-            return Array.Empty<IMapWith<FormAnswers>>();
-
         return _mapper.ProjectTo<FormAnswersDto>(
             _context.FormAnswers
-            .Where(fa => fa.FormId == form.Id));
+            .Where(fa => fa.FormId == request.FormId));
     }
 }
