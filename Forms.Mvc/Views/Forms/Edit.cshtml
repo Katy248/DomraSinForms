@@ -43,7 +43,9 @@
                     <div class="card">
                         <div class="card-body">
                             @question.QuestionText
-
+                            <div>
+                                Обязательный вопрос: <input type="checkbox" checked="@question.IsRequired" disabled />
+                            </div>
                             @switch (question)
                             {
                                 case OptionsQuestion oq:

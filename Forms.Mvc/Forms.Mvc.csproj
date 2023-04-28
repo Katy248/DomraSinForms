@@ -9,9 +9,14 @@
 
   <ItemGroup>
     <Compile Remove="Data\**" />
+    <Compile Remove="wwwroot\ts\**" />
     <Content Remove="Data\**" />
+    <Content Remove="wwwroot\ts\**" />
     <EmbeddedResource Remove="Data\**" />
+    <EmbeddedResource Remove="wwwroot\ts\**" />
     <None Remove="Data\**" />
+    <None Remove="wwwroot\ts\**" />
+    <TypeScriptCompile Remove="wwwroot\ts\**" />
   </ItemGroup>
 
   <ItemGroup>
@@ -37,7 +42,6 @@
 
   <ItemGroup>
     <Folder Include="Views\Answers\" />
-    <Folder Include="wwwroot\ts\" />
   </ItemGroup>
   
 

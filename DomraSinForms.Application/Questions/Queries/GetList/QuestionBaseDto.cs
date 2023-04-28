@@ -9,6 +9,7 @@ public class QuestionBaseDto : IMapWith<QuestionBase>
     public string QuestionText { get; set; }
     public int Index { get; set; }
     public string Type { get; set; }
+    public bool IsRequired { get; set; }
     public void Mapping(Profile profile)
     {
         profile.CreateMap<QuestionBase, QuestionBaseDto>()

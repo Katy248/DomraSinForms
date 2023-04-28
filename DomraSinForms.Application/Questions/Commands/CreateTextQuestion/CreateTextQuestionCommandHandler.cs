@@ -26,9 +26,16 @@ public class CreateTextQuestionCommandHandler : IRequestHandler<CreateTextQuesti
             QuestionText = request.QuestionText,
             Type = request.Type,
             Index = form.Questions.Count + 1,
+            IsRequired = request.IsRequired,
         };
 
         form.Questions.Add(question);
+
+        form.Questions.OrderBy(q => q.Index).Select((question, i) =>
+        {
+            question.Index = i;
+            return question;
+        });
 
         _context.Update(form);
         await _context.SaveChangesAsync(cancellationToken);
