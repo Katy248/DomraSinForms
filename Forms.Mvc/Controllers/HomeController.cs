@@ -2,6 +2,7 @@
 using DomraSinForms.Persistence;
 
 using Forms.Mvc.Models;
+using Microsoft.AspNetCore.Localization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Forms.Mvc.Controllers;
@@ -16,8 +17,19 @@ public class HomeController : Controller
 
     public IActionResult Index()
     {
-        _logger.LogError("Open home page");
         return View();
+    }
+
+    [HttpPost]
+    public IActionResult SetLanguage(string language, string returnUrl)
+    {
+        Response.Cookies.Append(
+            CookieRequestCultureProvider.DefaultCookieName,
+            CookieRequestCultureProvider.MakeCookieValue(new RequestCulture(language)),
+            new CookieOptions { Expires = DateTimeOffset.UtcNow.AddYears(1) }
+        );
+
+        return LocalRedirect(returnUrl);
     }
 
     [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]

@@ -1,7 +1,9 @@
+using System.Globalization;
 using DomraSinForms.Application;
 using DomraSinForms.Persistence;
 using Forms.Mvc.Managers;
 using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Localization;
 using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -18,20 +20,13 @@ builder.Services.AddDatabaseDeveloperPageExceptionFilter();
 
 builder.Services.AddDefaultIdentity<IdentityUser>(options => options.SignIn.RequireConfirmedAccount = true)
     .AddEntityFrameworkStores<ApplicationDbContext>();
-builder.Services.AddControllersWithViews();
+builder.Services
+    .AddControllersWithViews()
+    .AddViewLocalization(Microsoft.AspNetCore.Mvc.Razor.LanguageViewLocationExpanderFormat.SubFolder);
 
 builder.Services
-    .AddTransient<AnswerManager>()
+    .AddLocalization(options => options.ResourcesPath = "Resources")
     .AddApplication();
-
-/*builder.Logging
-    .ClearProviders()
-    .AddConsole(c =>
-    {
-        c.IncludeScopes = true;
-    })
-    .AddConfiguration(builder.Configuration;*/
-
 
 var app = builder.Build();
 
@@ -47,6 +42,8 @@ else
     app.UseHsts();
 }
 
+ConfigLocalization(app);
+
 app.UseHttpsRedirection();
 app.UseStaticFiles();
 
@@ -60,3 +57,17 @@ app.MapControllerRoute(
 app.MapRazorPages();
 
 app.Run();
+
+
+
+
+void ConfigLocalization(WebApplication application)
+{
+    var supportedCultures = new[] { "en", "ru" };
+    var options = new RequestLocalizationOptions()
+        .AddSupportedCultures(supportedCultures)
+        .AddSupportedUICultures(supportedCultures)
+        .SetDefaultCulture(supportedCultures[0]);
+
+    application.UseRequestLocalization(options);
+}
