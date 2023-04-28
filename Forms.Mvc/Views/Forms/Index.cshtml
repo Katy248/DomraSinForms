@@ -56,23 +56,21 @@
     <div class="modal-dialog modal-dialog-centered">
         <div class="modal-content p-1 text-center">
 
-            @*<div class="modal-header"></div>*@
-
             <div class="modal-body justify-content-center">
                 
                 <div class="h2 mb-5">Удалить форму <q></q>?</div>
 
-                <form asp-action="Delete" asp-route-id="" method="post">
+                <form asp-action="Delete" method="post">
                     <input class="btn btn-danger" type="submit" />
                 </form>
+
             </div>
-            @*<div class="modal-footer">
-                
-            </div>*@
+
         </div>
     </div>
 </div>
-@section scripts {
+@section Scripts 
+{
     <script>
         const deleteModal = document.getElementById('deleteModal')
         if (deleteModal) {

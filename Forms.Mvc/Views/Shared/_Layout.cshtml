@@ -1,20 +1,18 @@
-﻿@{
-    ViewData["Theme"] = "dark";
-}
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>@ViewData["Title"] - Forms.Mvc</title>
     <link rel="stylesheet" href="~/lib/bootstrap/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css">
     <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
     <link rel="stylesheet" href="~/Forms.Mvc.styles.css" asp-append-version="true" />
 </head>
-<body data-bs-theme="@ViewData["Theme"]">
+<body data-bs-theme="">
     <header>
         <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light border-bottom box-shadow mb-3">
-            <div class="container-fluid">
+            <div class="container">
                 <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index">DomraSinForms</a>
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target=".navbar-collapse" aria-controls="navbarSupportedContent"
                         aria-expanded="false" aria-label="Toggle navigation">
@@ -23,10 +21,13 @@
                 <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
                     <ul class="navbar-nav flex-grow-1">
                         <li class="nav-item">
-                            <a class="nav-link text-light" asp-area="" asp-controller="Forms" asp-route-count="20" asp-action="Index">Формы</a>
+                            <a class="nav-link" asp-area="" asp-controller="Forms" asp-route-count="20" asp-action="Index">Формы</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link text-light" asp-area="" asp-controller="Answers" asp-action="Index">Ответы</a>
+                            <a class="nav-link" asp-area="" asp-controller="Answers" asp-action="Index">Ответы</a>
+                        </li>
+                        <li class="nav-item">
+                            
                         </li>
                     </ul>
                     <partial name="_LoginPartial" />
@@ -34,20 +35,36 @@
             </div>
         </nav>
     </header>
-    <div class="container">
-        <main role="main" class="pb-3">
-            @RenderBody()
-        </main>
-    </div>
 
-    <footer class="border-top footer text-muted">
+    <main role="main" class="pb-3">
         <div class="container">
-            2023 
+            @RenderBody()
         </div>
+    </main>
+
+    <footer class="border-top footer">
+        <partial name="_FooterPartial"/>
     </footer>
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
-    <script src="~/lib/bootstrap/js/bootstrap.min.js"></script>
+    <script src="~/lib/bootstrap/js/bootstrap.bundle.min.js"></script>
     <script src="~/js/site.js" asp-append-version="true"></script>
+    @*<script>
+        const setTheme = (schemeMatches) => {
+            const theme = schemeMatches
+                ? "dark"
+                : "light";
+            document.body.setAttribute("data-bs-theme", theme);
+            
+        }
+        const scheme = window.matchMedia('(prefers-color-scheme: dark)');
+        setTheme(scheme.matches);
+
+
+        scheme.addEventListener('change', event => {
+            setTheme(event.matches);
+        });
+        
+    </script>*@
     @await RenderSectionAsync("Scripts", required: false)
 </body>
 </html>
