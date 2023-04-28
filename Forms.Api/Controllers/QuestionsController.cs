@@ -1,7 +1,7 @@
 ﻿using DomraSinForms.Application.Questions.Commands.CreateOptionsQuestion;
 using DomraSinForms.Application.Questions.Commands.CreateTextQuestion;
 using DomraSinForms.Application.Questions.Commands.Delete;
-using DomraSinForms.Application.Questions.Commands.Update;
+using DomraSinForms.Application.Questions.Commands.UpdateTextQuestion;
 using DomraSinForms.Application.Questions.Queries.Get;
 using DomraSinForms.Application.Questions.Queries.GetList;
 using DomraSinForms.Domain.Models.Questions;
@@ -10,7 +10,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace Forms.Api.Controllers;
 
-public class QuestionsController : CRUDController<QuestionBase, CreateTextQuestionCommand, GetQuestionQuery, GetQuestionListQuery, UpdateQuestionCommand, DeleteQuestionCommand>
+public class QuestionsController : CRUDController<QuestionBase, CreateTextQuestionCommand, GetQuestionQuery, GetQuestionListQuery, UpdateTextQuestionCommand, DeleteQuestionCommand>
 {
     public QuestionsController(IMediator mediator) : base(mediator)
     {
@@ -21,7 +21,7 @@ public class QuestionsController : CRUDController<QuestionBase, CreateTextQuesti
         throw new NotImplementedException();
     }
     [NonAction]
-    public override Task<QuestionBase> Update([FromBody] UpdateQuestionCommand command)
+    public override Task<QuestionBase> Update([FromBody] UpdateTextQuestionCommand command)
     {
         throw new NotImplementedException();
     }

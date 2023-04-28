@@ -3,8 +3,8 @@ using DomraSinForms.Persistence;
 using MediatR;
 using Microsoft.EntityFrameworkCore;
 
-namespace DomraSinForms.Application.Questions.Commands.Update;
-internal class UpdateOptionsCommandHandler : IRequestHandler<UpdateOptionsCommand, OptionsQuestion>
+namespace DomraSinForms.Application.Questions.Commands.UpdateOptionsQuestion;
+internal class UpdateOptionsCommandHandler : IRequestHandler<UpdateOptionsQuestionCommand, OptionsQuestion>
 {
     private readonly ApplicationDbContext _context;
 
@@ -12,7 +12,7 @@ internal class UpdateOptionsCommandHandler : IRequestHandler<UpdateOptionsComman
     {
         _context = context;
     }
-    public async Task<OptionsQuestion> Handle(UpdateOptionsCommand request, CancellationToken cancellationToken)
+    public async Task<OptionsQuestion> Handle(UpdateOptionsQuestionCommand request, CancellationToken cancellationToken)
     {
         var question = await _context.OptionsQuestions
             .Include(q => q.Options)
@@ -21,7 +21,11 @@ internal class UpdateOptionsCommandHandler : IRequestHandler<UpdateOptionsComman
         if (question is null)
             return null;
 
+        question.QuestionText = request.QuestionText;
+        question.IsRequired = request.IsRequired;
+        question.AllowMultipleChoice = request.AllowMultipleChoice;
         question.Options = request.Options;
+        question.Index = request.Index;
 
         _context.Update(question);
         await _context.SaveChangesAsync(cancellationToken);
