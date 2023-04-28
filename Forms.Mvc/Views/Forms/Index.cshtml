@@ -18,30 +18,80 @@
             <th>
                 Описание
             </th>
-            @*<th>
-                @Html.DisplayNameFor(model => model.CreatorId)
+                @*<th>
+            @Html.DisplayNameFor(model => model.CreatorId)
             </th>*@
             <th></th>
         </tr>
     </thead>
     <tbody>
-@foreach (var item in Model) {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.Title)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Description)
-            </td>
-            @*<td>
-                @Html.DisplayFor(modelItem => item.CreatorId)
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Title)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Description)
+                </td>
+                @*<td>
+            @Html.DisplayFor(modelItem => item.CreatorId)
             </td>*@
-            <td>
-                <a asp-action="Edit" asp-route-id="@item.Id">Изменить</a> |
-                <a asp-action="Details" asp-route-id="@item.Id">Подробнее</a> |
-                <a asp-action="Delete" asp-route-id="@item.Id">Удалить</a>
-            </td>
-        </tr>
-}
+                <td>
+                    <a asp-action="Edit" asp-route-id="@item.Id">Изменить</a> |
+                    <a asp-action="Details" asp-route-id="@item.Id">Подробнее</a> |
+                    <a asp-action="Delete" asp-route-id="@item.Id">Удалить</a>
+                    <button 
+                        data-bs-toggle="modal" 
+                        data-bs-target="#deleteModal" 
+                        data-bs-id="@item.Id"
+                        data-bs-title="@item.Title"> Удалить</button>
+                </td>
+            </tr>
+        }
     </tbody>
 </table>
+
+
+<div class="modal" id="deleteModal">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content p-1 text-center">
+
+            @*<div class="modal-header"></div>*@
+
+            <div class="modal-body justify-content-center">
+                
+                <div class="h2 mb-5">Удалить форму <q></q>?</div>
+
+                <form asp-action="Delete" asp-route-id="" method="post">
+                    <input class="btn btn-danger" type="submit" />
+                </form>
+            </div>
+            @*<div class="modal-footer">
+                
+            </div>*@
+        </div>
+    </div>
+</div>
+@section scripts {
+    <script>
+        const deleteModal = document.getElementById('deleteModal')
+        if (deleteModal) {
+            deleteModal.addEventListener('show.bs.modal', event => {
+                // Button that triggered the modal
+                const button = event.relatedTarget
+                // Extract info from data-bs-* attributes
+                const id = button.getAttribute('data-bs-id')
+                const title = button.getAttribute('data-bs-title')
+                // If necessary, you could initiate an Ajax request here
+                // and then do the updating in a callback.
+
+                // Update the modal's content.
+                const modalTitle = deleteModal.querySelector('.modal-title')
+                deleteModal.querySelector('.modal-body form').attributes.getNamedItem("action").value += `/${id}`;
+                const titleElement = document.createTextNode(title);
+                deleteModal.querySelector('.modal-body div q').appendChild(titleElement); //parentNode.appendChild(`<div>${title}</div>`);
+            })
+        }
+    </script>
+}
