@@ -40,12 +40,11 @@
                 <td>
                     <a asp-action="Edit" asp-route-id="@item.Id">Изменить</a> |
                     <a asp-action="Details" asp-route-id="@item.Id">Подробнее</a> |
-                    <a asp-action="Delete" asp-route-id="@item.Id">Удалить</a>
-                    <button 
+                    <a class="link-danger"
                         data-bs-toggle="modal" 
                         data-bs-target="#deleteModal" 
                         data-bs-id="@item.Id"
-                        data-bs-title="@item.Title"> Удалить</button>
+                        data-bs-title="@item.Title"> Удалить</a>
                 </td>
             </tr>
         }
@@ -78,16 +77,13 @@
         const deleteModal = document.getElementById('deleteModal')
         if (deleteModal) {
             deleteModal.addEventListener('show.bs.modal', event => {
-                // Button that triggered the modal
+                // event sender
                 const button = event.relatedTarget
-                // Extract info from data-bs-* attributes
+                // attribute extractions
                 const id = button.getAttribute('data-bs-id')
                 const title = button.getAttribute('data-bs-title')
-                // If necessary, you could initiate an Ajax request here
-                // and then do the updating in a callback.
 
                 // Update the modal's content.
-                const modalTitle = deleteModal.querySelector('.modal-title')
                 deleteModal.querySelector('.modal-body form').attributes.getNamedItem("action").value += `/${id}`;
                 const titleElement = document.createTextNode(title);
                 deleteModal.querySelector('.modal-body div q').appendChild(titleElement); //parentNode.appendChild(`<div>${title}</div>`);
