@@ -10,7 +10,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace Forms.Api.Controllers;
 
-public class QuestionsController : CRUDController<QuestionBase, CreateTextQuestionCommand, GetQuestionQuery, GetQuestionListQuery, UpdateTextQuestionCommand, DeleteQuestionCommand>
+/*public class QuestionsController : CRUDController<QuestionBase, CreateTextQuestionCommand, GetQuestionQuery, GetQuestionListQuery, UpdateTextQuestionCommand, DeleteQuestionCommand>
 {
     public QuestionsController(IMediator mediator) : base(mediator)
     {
@@ -35,4 +35,4 @@ public class QuestionsController : CRUDController<QuestionBase, CreateTextQuesti
     {
         return await _mediator.Send(command);
     }
-}
+}*/

@@ -1,4 +1,5 @@
-﻿using DomraSinForms.Domain.Models.Questions;
+﻿using DomraSinForms.Application.Questions.Notifications;
+using DomraSinForms.Domain.Models.Questions;
 using DomraSinForms.Persistence;
 using MediatR;
 using Microsoft.EntityFrameworkCore;
@@ -7,10 +8,12 @@ namespace DomraSinForms.Application.Questions.Commands.CreateOptionsQuestion;
 public class CreateOptionsQuestionCommandHandler : IRequestHandler<CreateOptionsQuestionCommand, OptionsQuestion>
 {
     private readonly ApplicationDbContext _context;
+    private readonly IMediator _mediator;
 
-    public CreateOptionsQuestionCommandHandler(ApplicationDbContext context)
+    public CreateOptionsQuestionCommandHandler(ApplicationDbContext context, IMediator mediator)
     {
         _context = context;
+        _mediator = mediator;
     }
     public async Task<OptionsQuestion> Handle(CreateOptionsQuestionCommand request, CancellationToken cancellationToken)
     {
@@ -31,15 +34,11 @@ public class CreateOptionsQuestionCommandHandler : IRequestHandler<CreateOptions
         };
 
         form.Questions.Add(question);
-        form.Questions.OrderBy(q => q.Index).Select((question, i) =>
-        {
-            question.Index = i;
-            return question;
-        });
-
 
         _context.Update(form);
         await _context.SaveChangesAsync(cancellationToken);
+
+        await _mediator.Publish(new QuestionsUpdateNotification { FormId = form.Id }, cancellationToken);
 
         return question;
     }

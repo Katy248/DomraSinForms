@@ -1,4 +1,6 @@
-﻿using DomraSinForms.Domain.Models.Questions;
+﻿using DomraSinForms.Application.Questions.Notifications;
+using DomraSinForms.Domain.Models;
+using DomraSinForms.Domain.Models.Questions;
 using DomraSinForms.Persistence;
 using MediatR;
 using Microsoft.EntityFrameworkCore;
@@ -7,10 +9,12 @@ namespace DomraSinForms.Application.Questions.Commands.UpdateOptionsQuestion;
 internal class UpdateOptionsCommandHandler : IRequestHandler<UpdateOptionsQuestionCommand, OptionsQuestion>
 {
     private readonly ApplicationDbContext _context;
+    private readonly IMediator _mediator;
 
-    public UpdateOptionsCommandHandler(ApplicationDbContext context)
+    public UpdateOptionsCommandHandler(ApplicationDbContext context, IMediator mediator)
     {
         _context = context;
+        _mediator = mediator;
     }
     public async Task<OptionsQuestion> Handle(UpdateOptionsQuestionCommand request, CancellationToken cancellationToken)
     {
@@ -29,6 +33,8 @@ internal class UpdateOptionsCommandHandler : IRequestHandler<UpdateOptionsQuesti
 
         _context.Update(question);
         await _context.SaveChangesAsync(cancellationToken);
+
+        await _mediator.Publish(new QuestionsUpdateNotification { FormId = question.FormId }, cancellationToken);
 
         return question;
     }

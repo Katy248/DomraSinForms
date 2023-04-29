@@ -26,7 +26,7 @@
                 </div>
                 <input type="hidden" asp-for="UpdateFormCommand.Id" />
 
-                <div class="form-group mb-2">
+                <div class="form-group">
                     <input type="submit" value="Сохранить" class="form-control btn btn-primary" />
                 </div>
             </form>
@@ -40,41 +40,7 @@
             @foreach (var question in Model.Form?.Questions.OrderBy(q => q.Index))
             {
                 <div class="col-12">
-                    <div class="card">
-                        <div class="card-body">
-                            @question.QuestionText
-                            <div>
-                                Обязательный вопрос: <input type="checkbox" checked="@question.IsRequired" disabled />
-                            </div>
-                            @switch (question)
-                            {
-                                case OptionsQuestion oq:
-                                    {
-                                        <div>
-                                            Несколько вариантов: <input type="checkbox" checked="@oq.AllowMultipleChoice" disabled />
-                                        </div>
-                                    }
-                                    break;
-                                case TextQuestion tq:
-                                    {
-                                        <div>@tq.Type</div>
-                                        <partial name="_UpdateTextQuestionModalPartial" model="(UpdateTextQuestionViewModel)tq"/>
-                                    }
-                                    break;
-                            }
-
-                        </div>
-                        <div class="card-footer">
-                            <form class="d-inline col-6" asp-action="EditQuestion" asp-route-formid="@Model.Form.Id" asp-route-id="question.Id" method="get">
-                                <input type="submit" class="btn btn-secondary" value="Edit" />
-                            </form>
-                            <button data-bs-toggle="modal"
-                                    data-bs-target="#deleteModal"
-                                    data-bs-id="@question.Id" type="submit" class="btn btn-danger" value="Delete">
-                                Delete
-                            </button>
-                        </div>
-                    </div>
+                   <partial name="_QuestionCardPartial" model="question" />
                 </div>
             }
             <div class="col-12 ms-1">
@@ -102,24 +68,6 @@
 
 
 @*Modals*@
-@*Delete modal*@
-<div class="modal" id="deleteModal">
-    <div class="modal-dialog modal-dialog-centered">
-        <div class="modal-content p-1 text-center">
-
-            <div class="modal-body justify-content-center">
-
-                <div class="h2 mb-5">Delete question?</div>
-
-                <form asp-controller="Questions" asp-action="Delete" asp-route-formId="@Model.Form.Id" method="post">
-                    <input class="btn btn-danger" type="submit" />
-                </form>
-
-            </div>
-
-        </div>
-    </div>
-</div>
 @*Create text question modal*@
 <div class="modal" id="createTextQuestionModal">
     <div class="modal-dialog modal-dialog-centered">

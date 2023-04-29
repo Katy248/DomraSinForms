@@ -1,14 +1,18 @@
-﻿using DomraSinForms.Persistence;
+﻿using DomraSinForms.Application.Questions.Notifications;
+using DomraSinForms.Domain.Models;
+using DomraSinForms.Persistence;
 using MediatR;
 
 namespace DomraSinForms.Application.Questions.Commands.Delete;
 public class DeleteQuestionCommandHandler : IRequestHandler<DeleteQuestionCommand, bool>
 {
     private readonly ApplicationDbContext _context;
+    private readonly IMediator _mediator;
 
-    public DeleteQuestionCommandHandler(ApplicationDbContext context)
+    public DeleteQuestionCommandHandler(ApplicationDbContext context, IMediator mediator)
     {
         _context = context;
+        _mediator = mediator;
     }
     public async Task<bool> Handle(DeleteQuestionCommand request, CancellationToken cancellationToken)
     {
@@ -19,6 +23,9 @@ public class DeleteQuestionCommandHandler : IRequestHandler<DeleteQuestionComman
 
         _context.Questions.Remove(question);
         await _context.SaveChangesAsync(cancellationToken);
+
+        await _mediator.Publish(new QuestionsUpdateNotification { FormId = question.FormId }, cancellationToken);
+
         return true;
     }
 }

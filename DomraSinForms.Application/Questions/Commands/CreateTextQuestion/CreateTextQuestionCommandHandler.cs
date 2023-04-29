@@ -1,4 +1,5 @@
-﻿using DomraSinForms.Domain.Models.Questions;
+﻿using DomraSinForms.Application.Questions.Notifications;
+using DomraSinForms.Domain.Models.Questions;
 using DomraSinForms.Persistence;
 using MediatR;
 using Microsoft.EntityFrameworkCore;
@@ -7,10 +8,12 @@ namespace DomraSinForms.Application.Questions.Commands.CreateTextQuestion;
 public class CreateTextQuestionCommandHandler : IRequestHandler<CreateTextQuestionCommand, TextQuestion>
 {
     private readonly ApplicationDbContext _context;
+    private readonly IMediator _mediator;
 
-    public CreateTextQuestionCommandHandler(ApplicationDbContext context)
+    public CreateTextQuestionCommandHandler(ApplicationDbContext context, IMediator mediator)
     {
         _context = context;
+        _mediator = mediator;
     }
     public async Task<TextQuestion> Handle(CreateTextQuestionCommand request, CancellationToken cancellationToken)
     {
@@ -31,14 +34,10 @@ public class CreateTextQuestionCommandHandler : IRequestHandler<CreateTextQuesti
 
         form.Questions.Add(question);
 
-        form.Questions.OrderBy(q => q.Index).Select((question, i) =>
-        {
-            question.Index = i;
-            return question;
-        });
-
         _context.Update(form);
         await _context.SaveChangesAsync(cancellationToken);
+
+        await _mediator.Publish(new QuestionsUpdateNotification { FormId = question.FormId }, cancellationToken);
 
         return question;
     }
