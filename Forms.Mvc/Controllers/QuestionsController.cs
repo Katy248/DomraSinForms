@@ -29,19 +29,19 @@ public class QuestionsController : Controller
             routeValues: new { id = viewModel.CreateTextQuestionCommand.FormId });
     }
     [HttpPost]
-    public async Task<IActionResult> CreateOptionsQuestion([Bind] CreateOptionsQuestionCommand command)
+    public async Task<IActionResult> CreateOptionsQuestion([Bind] EditFormViewModel viewModel)
     {
-        await _mediator.Send(command);
+        await _mediator.Send(viewModel.CreateOptionsQuestionCommand);
 
         return RedirectToAction(
             controllerName: "Forms",
             actionName: nameof(FormsController.Edit),
-            routeValues: new { id = command.FormId });
+            routeValues: new { id = viewModel.Form?.Id });
     }
     [HttpPost]
-    public async Task<IActionResult> UpdateTextQuestion([Bind] UpdateTextQuestionCommand command)
+    public async Task<IActionResult> UpdateTextQuestion([Bind] UpdateTextQuestionViewModel viewModel)
     {
-        var q = await _mediator.Send(command);
+        var q = await _mediator.Send(viewModel.Command);
 
         return RedirectToAction(
             controllerName: "Forms",
@@ -49,9 +49,9 @@ public class QuestionsController : Controller
             routeValues: new { id = q.FormId });
     }
     [HttpPost]
-    public async Task<IActionResult> UpdateOptionsQuestion([Bind] UpdateOptionsQuestionCommand command)
+    public async Task<IActionResult> UpdateOptionsQuestion([Bind] EditFormViewModel viewModel)
     {
-        var q = await _mediator.Send(command);
+        var q = await _mediator.Send(viewModel.UpdateOptionsQuestionCommand);
 
         return RedirectToAction(
             controllerName: "Forms",

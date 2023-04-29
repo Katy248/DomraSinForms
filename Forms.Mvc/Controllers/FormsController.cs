@@ -55,6 +55,9 @@ public class FormsController : Controller
     {
         var form = await _mediator.Send(new GetFormQuery { Id = id });
 
+        if (form is null)
+            return RedirectToIndex();
+
         return View(new EditFormViewModel { Form = form, UpdateFormCommand = new UpdateFormCommand { Id = form.Id, Description = form.Description, Title = form.Title } });
     }
     [HttpPost]
