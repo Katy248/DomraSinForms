@@ -123,31 +123,10 @@
   <data name="Disable dark theme" xml:space="preserve">
     <value>Отключить тёмную тему</value>
   </data>
-  <data name="Discord" xml:space="preserve">
-    <value>Discord</value>
+  <data name="DomraSinForms" xml:space="preserve">
+    <value>DomraSinForms</value>
   </data>
   <data name="Enable dark theme" xml:space="preserve">
     <value>Включить тёмную тему</value>
-  </data>
-  <data name="FAQ" xml:space="preserve">
-    <value>Часто задаваемые вопросы</value>
-  </data>
-  <data name="GitHub" xml:space="preserve">
-    <value>GitHub</value>
-  </data>
-  <data name="Guides" xml:space="preserve">
-    <value>Руководства</value>
-  </data>
-  <data name="Links" xml:space="preserve">
-    <value>Ссылки</value>
-  </data>
-  <data name="Preferences" xml:space="preserve">
-    <value>Настройки</value>
-  </data>
-  <data name="Social media" xml:space="preserve">
-    <value>Социальные сети</value>
-  </data>
-  <data name="Telegram" xml:space="preserve">
-    <value>Telegram</value>
   </data>
 </root>

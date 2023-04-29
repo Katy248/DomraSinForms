@@ -1,62 +1,44 @@
 ﻿@using Microsoft.AspNetCore.Mvc.Localization;
 @inject IViewLocalizer Localizer
-<div class="border-top mt-5 ">
-    <div class="container">
+<footer class="pt-3">
 
-        <div class="row pt-2 text-center pb-2 g-3 justify-content-end">
+    <div class="row justify-content-between text-center">
 
-            <div class="col-6 col-md-4">
-                <h5 class="mb-2">@Localizer["Links"]</h5>
-                <ul class="nav flex-column">
-                    <li class="nav-item p-0">
-                        <a class="nav-link text-body-secondary"><i class="bi-info-circle me-2"></i>@Localizer["About us"]</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link text-body-secondary"><i class="bi-question-circle me-2"></i>@Localizer["FAQ"]</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link text-body-secondary"><i class="bi-list-task me-2"></i>@Localizer["Guides"]</a>
-                    </li>
-                </ul>
-            </div>
-            <div class="col-6 col-md-4">
-                <h5 class="mb-2">@Localizer["Social media"]</h5>
-                <ul class="nav flex-column">
-                    <li class="nav-item p-0">
-                        <a class="nav-link text-body-secondary"><i class="bi-discord me-2"></i>@Localizer["Discord"]</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link text-body-secondary"><i class="bi-github me-2"></i>@Localizer["GitHub"]</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link text-body-secondary"><i class="bi-telegram me-2"></i>@Localizer["Telegram"]</a>
-                    </li>
-                </ul>
-            </div>
-
-            <div class="col-6 col-md-4">
-                <h5 class="mb-2">@Localizer["Preferences"]</h5>
-                <ul class="nav flex-column">
-                    <li class="nav-item mb-3 mt-2">
-                        <input class="btn-check btn-outline-primary" type="checkbox" role="switch" id="themeSwitcher">
-                        <label class="btn-outline-secondary" for="themeSwitcher" id="onDarkThemeSwitchLabel"><i class="bi-sun-fill me-2"></i>@Localizer["Disable dark theme"]</label>
-                        <label class="btn-outline-secondary" for="themeSwitcher" id="onLightThemeSwitchLabel"><i class="bi-moon-fill me-2"></i>@Localizer["Enable dark theme"]</label>
-                    </li>
-                    <li class="nav-item mb-4">
-                        <partial name="_LanguagePartial" />
-                    </li>
-                </ul>
-
-            </div>
+        <div class="col-6 col-md-3">
+            <h5><a class="h5 text-decoration-none" asp-controller="Home" asp-action="Index">@Localizer["DomraSinForms"]</a></h5>
+            
         </div>
-        <div class="row text-center g-3 justify-content-end">
-            <div class="col border-top">
-                <div class="h6 text-muted mt-3">
-                    2023 &copy; - IS2-19
-                </div>
+        <div class="col-6 col-md-3">
+            <h5><a class="h5 text-decoration-none" asp-controller="Home" asp-action="Index">@Localizer["About us"]</a></h5>
+            
+        </div>
+        <div class="col-6 col-md-3">
+            <input class="btn-check btn-outline-primary" type="checkbox" role="switch" id="themeSwitcher">
+            <label class="h5" for="themeSwitcher" id="onDarkThemeSwitchLabel"><i class="bi-sun-fill me-2"></i>@Localizer["Disable dark theme"]</label>
+            <label class="h5" for="themeSwitcher" id="onLightThemeSwitchLabel"><i class="bi-moon-fill me-2"></i>@Localizer["Enable dark theme"]</label>
 
-            </div>
+        </div>
+
+        <div class="col-6 col-md-3">
+            <partial name="_LanguagePartial" />
         </div>
 
     </div>
-</div>
+
+
+    <div class="flex-column d-flex flex-sm-row justify-content-center my-4 py-4 border-top">
+        <p>&copy; 2023 IS2-19</p>
+        <ul class="list-unstyled d-flex h4">
+            <li class="ms-3">
+                <a class="link-body-emphasis"><i class="bi-discord me-2"></i></a>
+            </li>
+            <li class="ms-3">
+                <a class="link-body-emphasis"><i class="bi-github me-2"></i></a>
+            </li>
+            <li class="ms-3">
+                <a class="link-body-emphasis"><i class="bi-telegram me-2"></i></a>
+            </li>
+        </ul>
+    </div>
+
+</footer>

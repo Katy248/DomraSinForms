@@ -9,8 +9,8 @@
 
 <div class="card">
     <div class="card-body">
-        <div class="h4">
-            @Model.Index)
+        <div class=" h5">
+            @Model.Index.
             @Model.QuestionText
         </div>
         <div>
@@ -46,7 +46,7 @@
                     break;
                 case TextQuestion tq:
                     {
-                        <partial name="_UpdateTextQuestionModalPartial" model="(UpdateTextQuestionViewModel)tq" />
+                        @await Html.PartialAsync("/Views/Questions/_UpdateTextQuestionModalPartial.cshtml", (UpdateTextQuestionViewModel)tq)
                     }
                     break;
             }
@@ -54,7 +54,7 @@
                 class="btn btn-danger"
                 data-bs-toggle="modal"
                 data-bs-target="#@deleteModalId">
-                Delete
+                @Localizer["Delete"]
             </button>
         </div>
         
@@ -67,10 +67,10 @@
 
             <div class="modal-body justify-content-center">
 
-                <div class="h2 mb-5">Delete question?</div>
+                <div class="h2 mb-5">@Localizer["Delete question?"]</div>
 
                 <form asp-controller="Questions" asp-action="Delete" asp-route-id="@Model.Id" asp-route-formId="@Model.FormId" method="post">
-                    <input class="btn btn-danger" type="submit" />
+                    <input class="btn btn-danger" type="submit" value="@Localizer["Delete"]" />
                 </form>
 
             </div>
