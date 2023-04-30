@@ -1,9 +1,6 @@
-using System.Globalization;
 using DomraSinForms.Application;
 using DomraSinForms.Persistence;
-using Forms.Mvc.Managers;
 using Microsoft.AspNetCore.Identity;
-using Microsoft.AspNetCore.Localization;
 using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);

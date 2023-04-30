@@ -117,16 +117,10 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="About us" xml:space="preserve">
-    <value>About us</value>
+  <data name="Form description" xml:space="preserve">
+    <value>Описание формы</value>
   </data>
-  <data name="Disable dark theme" xml:space="preserve">
-    <value>Disable dark theme</value>
-  </data>
-  <data name="DomraSinForms" xml:space="preserve">
-    <value>DomraSinForms</value>
-  </data>
-  <data name="Enable dark theme" xml:space="preserve">
-    <value>Enable dark theme</value>
+  <data name="Form title" xml:space="preserve">
+    <value>Заголовок формы</value>
   </data>
 </root>

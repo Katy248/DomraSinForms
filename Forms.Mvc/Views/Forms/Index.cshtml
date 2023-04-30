@@ -1,55 +1,83 @@
 ﻿@using DomraSinForms.Application.Forms.Queries.GetList;
-@model IEnumerable<FormDto>
+@using Microsoft.AspNetCore.Mvc.Localization;
+@model FormsDto
+@inject IViewLocalizer Localizer
 
 @{
-    ViewData["Title"] = "Все формы";
+    ViewData["Title"] = Localizer["Forms"];
+    ViewData["PageCount"] = 6;
+    var searchText = Model.SearchText;
 }
+<div class="row g-5 justify-content-between">
 
-<h1>Все формы</h1>
+    <div class="col-12 text-center display-5">@Localizer["Forms"]</div>
 
-<div>
-    <a class="btn btn-primary" asp-action="Create"><i class="bi-plus-circle me-2"></i> Создать форму</a>
-</div>
-<table class="table">
-    <thead>
-        <tr>
-            <th>
-                Название
-            <th>
-                Описание
-            </th>
-                @*<th>
-            @Html.DisplayNameFor(model => model.CreatorId)
-            </th>*@
-            <th></th>
-        </tr>
-    </thead>
-    <tbody>
-        @foreach (var item in Model)
-        {
+
+    <div class="col-4 text-start">
+        <a class="btn btn-primary" asp-action="Create"><i class="bi-plus-circle me-2"></i> @Localizer["New form"]</a>
+    </div>
+
+    <div class="col-4 justify-content-center btn-toolbar" role="toolbar" aria-label="Toolbar with button groups">
+        <div class="btn-group me-2" role="group" aria-label="First group">
+            @for (int i = 0; i < Model.PageCount; i++)
+            {
+                <a asp-controller="Forms"
+               asp-action="Index"
+               asp-route-page="@i"
+                   class="btn @((i) == Model.Page ? "btn-secondary" : "btn-outline-secondary")"
+                   type="button"> @(i + 1)</a>
+            }
+        </div>
+    </div>
+
+    <div class="col-4">
+        <form asp-controller="Forms" asp-action="Index" asp-route-page="@searchText">
+            <div class="input-group">
+                <input asp-for="@searchText" type="text" class="form-control" placeholder="@Localizer["Search ..."]" aria-label="Input group example" aria-describedby="btnGroupAddon">
+                <button class="btn btn-outline-secondary input-group-text" id="btnGroupAddon" type="submit"><i class="bi-search"></i></button>
+            </div>
+        </form>
+    </div>
+
+    <table class="col-11 table">
+        <thead>
             <tr>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Title)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Description)
-                </td>
-                @*<td>
-            @Html.DisplayFor(modelItem => item.CreatorId)
-            </td>*@
-                <td>
-                    <a asp-action="Edit" asp-route-id="@item.Id">Изменить</a> |
-                    <a asp-action="Details" asp-route-id="@item.Id">Подробнее</a> |
-                    <a class="link-danger"
-                        data-bs-toggle="modal" 
-                        data-bs-target="#deleteModal" 
-                        data-bs-id="@item.Id"
-                        data-bs-title="@item.Title"> Удалить</a>
-                </td>
+                <th>
+                    @Localizer["Title"]
+                <th>
+                        @Localizer["Description"]
+                </th>
+                <th></th>
             </tr>
-        }
-    </tbody>
-</table>
+        </thead>
+        <tbody>
+            @foreach (var item in Model.Forms)
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Title)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Description)
+                    </td>
+                    <td>
+                        <a asp-action="Edit" asp-route-id="@item.Id">@Localizer["Edit"]</a> |
+                        <a asp-action="Details" asp-route-id="@item.Id">@Localizer["Fill"]</a> |
+                        <a class="link-danger"
+                           data-bs-toggle="modal"
+                           data-bs-target="#deleteModal"
+                           data-bs-id="@item.Id"
+                           data-bs-title="@item.Title">@Localizer["Delete"]</a>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+
+
+
+</div>
+
 
 
 <div class="modal" id="deleteModal">
@@ -57,11 +85,11 @@
         <div class="modal-content p-1 text-center">
 
             <div class="modal-body justify-content-center">
-                
-                <div class="h2 mb-5">Удалить форму <q></q>?</div>
+
+                <div class="h2 mb-5">@Localizer["Delete form <q></q>?"]</div>
 
                 <form asp-action="Delete" method="post">
-                    <input class="btn btn-danger" type="submit" />
+                    <input class="btn btn-danger" type="submit" value="@Localizer["Delete"]" />
                 </form>
 
             </div>
@@ -69,8 +97,12 @@
         </div>
     </div>
 </div>
-@section Scripts 
-{
+
+
+
+
+@section Scripts
+    {
     <script>
         const deleteModal = document.getElementById('deleteModal')
         if (deleteModal) {

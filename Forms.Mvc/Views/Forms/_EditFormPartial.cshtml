@@ -1,21 +1,19 @@
 ﻿@using DomraSinForms.Application.Forms.Commands.Update;
+@using Microsoft.AspNetCore.Mvc.Localization;
 @model UpdateFormCommand
+@inject IViewLocalizer Localizer
 <form id="autosaveForm" asp-action="Edit" method="post" data-dsf-form>
 
     <input type="hidden" asp-for="Id" />
 
     <div class="form-group mb-2">
-        <input asp-for="Title" class="form-control form-control-lg" placeholder="Заголовок формы" data-dsf-formInput id="forminput1" />
+        <input asp-for="Title" class="form-control form-control-lg" placeholder="@Localizer["Form title"]" data-dsf-formInput id="forminput1" />
         <span asp-validation-for="Title" class="text-danger"></span>
     </div>
 
     <div class="form-group">
-        <input asp-for="Description" class="form-control" placeholder="Описание формы" data-dsf-formInput id="forminput2" />
+        <input asp-for="Description" class="form-control" placeholder="@Localizer["Form description"]" data-dsf-formInput id="forminput2" />
         <span asp-validation-for="Description" class="text-danger"></span>
     </div>
-
-@*    <div class="form-group">
-        <input type="submit" value="Сохранить" class="form-control btn btn-primary" />
-    </div>*@
 
 </form>
