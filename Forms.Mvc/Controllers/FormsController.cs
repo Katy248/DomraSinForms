@@ -61,14 +61,12 @@ public class FormsController : Controller
         return View(new EditFormViewModel { Form = form, UpdateFormCommand = new UpdateFormCommand { Id = form.Id, Description = form.Description, Title = form.Title } });
     }
     [HttpPost]
-    public async Task<IActionResult> Edit([Bind] EditFormViewModel viewModel)
+    public async Task<IActionResult> Edit([Bind] UpdateFormCommand command)
     {
-        if (!ModelState.IsValid)
-            return RedirectToAction(nameof(Edit), routeValues: new { Id = viewModel.UpdateFormCommand.Id });
+        if (ModelState.IsValid)
+            await _mediator.Send(command);
 
-        await _mediator.Send(viewModel.UpdateFormCommand);
-
-        return RedirectToAction(nameof(Edit), routeValues: new { Id = viewModel.UpdateFormCommand.Id });
+        return RedirectToAction(nameof(Edit), routeValues: new { Id = command.Id });
     }
     [HttpPost]
     public async Task<IActionResult> Delete(string id)

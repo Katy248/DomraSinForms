@@ -11,10 +11,8 @@
         Type = Model.Question.Type,
         Index = Model.Question.Index,
     };
-    var modalId = $"updateModal{Model.Question.Id}";
+    var modalId = ViewData["ModalId"] as string ?? $"updateModal{Model.Question.Id}";// ;
 }
-<button class="btn btn-secondary" data-bs-toggle="modal" data-bs-target="#@modalId">Edit</button>
-
 
 <div class="modal" id="@modalId">
     <div class="modal-dialog modal-dialog-centered">

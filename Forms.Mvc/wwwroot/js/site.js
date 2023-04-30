@@ -40,5 +40,27 @@ var ThemeSwitch = (function () {
     }
     return ThemeSwitch;
 }());
+var AutoSaveForm = (function () {
+    function AutoSaveForm() {
+        var _this = this;
+        this.onSubmitOrBlurEventListener = function (event) {
+            console.log("[data-dsf-forminput] lost focus.");
+            _this.sendForm();
+        };
+        this.sendForm = function () {
+            console.log("Start sending form ".concat(_this.form.id));
+            if (_this.form.checkValidity)
+                document.forms.namedItem(_this.form.id).submit();
+        };
+        this.form = document.querySelector("[data-dsf-form]");
+        this.formInputs = document.querySelectorAll("[data-dsf-forminput]");
+        this.formInputs.forEach(function (input) {
+            input.addEventListener("blur", _this.onSubmitOrBlurEventListener, true);
+            input.addEventListener("submit", _this.onSubmitOrBlurEventListener, true);
+        });
+    }
+    return AutoSaveForm;
+}());
 var themeSwitch = new ThemeSwitch();
+var autoSaveForm = new AutoSaveForm();
 //# sourceMappingURL=site.js.map

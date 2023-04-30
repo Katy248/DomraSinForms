@@ -1,0 +1,33 @@
+﻿@using DomraSinForms.Domain.Models.Questions;
+@using Forms.Mvc.Services;
+@using Microsoft.AspNetCore.Mvc.Localization;
+@model QuestionOption
+@inject IViewLocalizer Localizer
+
+@{
+    Model.Text ??= "New option";
+    var deleteButtonId = $"delete-option-button-{Model.Id}";
+    var optionId = $"option-{Model.Id}";
+}
+<div id="@optionId">
+    @using (Html.BeginCollectionItem("Options"))
+    {
+        <div class="input-group mb-2"  data-dsf-option>
+
+            <input class="form-control" asp-for="Text" aria-describedby="@deleteButtonId" />
+            <button class="btn btn-outline-danger" id="@deleteButtonId" type="button" onclick="deleteOption('@optionId')">Delete</button>
+
+        </div>
+    }
+</div>
+
+
+<script>
+
+
+</script>@*onload = () => {
+        document.getElementById("@deleteButtonId")
+            .addEventListener('click'() => {
+
+            });
+    };*@

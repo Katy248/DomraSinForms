@@ -5,6 +5,7 @@
 
 @{
     var deleteModalId = $"deleteModal{Model.Id}";
+    var editModalId = $"editModal{Model.Id}";
 }
 
 <div class="card">
@@ -46,18 +47,26 @@
                     break;
                 case TextQuestion tq:
                     {
-                        @await Html.PartialAsync("/Views/Questions/_UpdateTextQuestionModalPartial.cshtml", (UpdateTextQuestionViewModel)tq)
+                        <button class="btn btn-outline-secondary btn-sm" data-bs-toggle="modal" data-bs-target="#@editModalId">Edit</button>
+                        @(
+                            await Html.PartialAsync("/Views/Questions/_UpdateTextQuestionModalPartial.cshtml", 
+                                (UpdateTextQuestionViewModel)tq, 
+                                new ViewDataDictionary(ViewData)
+                                {
+                                    { "FormId", Model.FormId },
+                                    { "ModalId", editModalId }
+                                })
+                         )
                     }
                     break;
             }
-            <button 
-                class="btn btn-danger"
-                data-bs-toggle="modal"
-                data-bs-target="#@deleteModalId">
+            <button class="btn btn-danger btn-sm"
+                    data-bs-toggle="modal"
+                    data-bs-target="#@deleteModalId">
                 @Localizer["Delete"]
             </button>
         </div>
-        
+
     </div>
 </div>
 

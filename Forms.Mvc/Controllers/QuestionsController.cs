@@ -3,6 +3,7 @@ using DomraSinForms.Application.Questions.Commands.CreateTextQuestion;
 using DomraSinForms.Application.Questions.Commands.Delete;
 using DomraSinForms.Application.Questions.Commands.UpdateOptionsQuestion;
 using DomraSinForms.Application.Questions.Commands.UpdateTextQuestion;
+using DomraSinForms.Domain.Models.Questions;
 using Forms.Mvc.Models;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
@@ -29,14 +30,14 @@ public class QuestionsController : Controller
             routeValues: new { id = viewModel.CreateTextQuestionCommand.FormId });
     }
     [HttpPost]
-    public async Task<IActionResult> CreateOptionsQuestion([Bind] EditFormViewModel viewModel)
+    public async Task<IActionResult> CreateOptionsQuestion([Bind] CreateOptionsQuestionCommand command)
     {
-        await _mediator.Send(viewModel.CreateOptionsQuestionCommand);
+        await _mediator.Send(command);
 
         return RedirectToAction(
             controllerName: "Forms",
             actionName: nameof(FormsController.Edit),
-            routeValues: new { id = viewModel.Form?.Id });
+            routeValues: new { id = command.FormId });
     }
     [HttpPost]
     public async Task<IActionResult> UpdateTextQuestion([Bind] UpdateTextQuestionViewModel viewModel)
@@ -67,5 +68,10 @@ public class QuestionsController : Controller
             controllerName: "Forms",
             actionName: nameof(FormsController.Edit),
             routeValues: new { id = formId });
+    }
+    [HttpPost]
+    public IActionResult AddNewOption()
+    {
+        return PartialView("/Views/Questions/_OptionPartial.cshtml", new QuestionOption());
     }
 }

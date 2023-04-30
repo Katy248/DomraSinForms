@@ -1,5 +1,4 @@
-class ThemeSwitch {
-    constructor() {
+class ThemeSwitch {    constructor() {
         this.themeSwitcher.addEventListener("click", (event) => {
             localStorage.setItem(
                 "theme",
@@ -69,4 +68,30 @@ class ThemeSwitch {
     };
 }
 
+class AutoSaveForm {
+    form: HTMLFormElement;
+    formInputs: NodeListOf<Element>;
+    constructor() {
+        this.form = document.querySelector(
+            "[data-dsf-form]"
+        ) as HTMLFormElement;
+        this.formInputs = document.querySelectorAll("[data-dsf-forminput]");
+        this.formInputs.forEach((input) => {
+            input.addEventListener("blur", this.onSubmitOrBlurEventListener, true);
+            input.addEventListener("submit", this.onSubmitOrBlurEventListener, true);
+        });
+    }
+    onSubmitOrBlurEventListener = (event: Event) => {
+        console.log(`[data-dsf-forminput] lost focus.`);
+     
+        this.sendForm();
+    };
+    sendForm = () => {
+        console.log(`Start sending form ${this.form.id}`)
+        if (this.form.checkValidity)
+            document.forms.namedItem(this.form.id).submit();
+    }
+}
+
 let themeSwitch = new ThemeSwitch();
+let autoSaveForm = new AutoSaveForm();

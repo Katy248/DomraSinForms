@@ -3,6 +3,6 @@
 namespace DomraSinForms.Application.Questions.Commands.CreateOptionsQuestion;
 public class CreateOptionsQuestionCommand : CreateQuestionBaseCommand<OptionsQuestion>
 {
-    public ICollection<QuestionOption> Options { get; set; }
+    public List<QuestionOption> Options { get; set; } = new();
     public bool AllowMultipleChoice { get; set; }
 }
