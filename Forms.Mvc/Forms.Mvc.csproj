@@ -42,6 +42,7 @@
 
   <ItemGroup>
     <Folder Include="Views\Answers\" />
+    <Folder Include="wwwroot\js\" />
   </ItemGroup>
   
 
