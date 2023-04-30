@@ -1,4 +1,5 @@
-﻿@using DomraSinForms.Domain.Models.Questions;
+﻿@using DomraSinForms.Application.Questions.Commands.UpdateOptionsQuestion;
+@using DomraSinForms.Domain.Models.Questions;
 @using Microsoft.AspNetCore.Mvc.Localization;
 @model QuestionBase
 @inject IViewLocalizer Localizer
@@ -24,6 +25,10 @@
                     <div>
                         Несколько вариантов: <input type="checkbox" checked="@oq.AllowMultipleChoice" disabled />
                     </div>
+                    @foreach (var option in oq.Options)
+                    {
+                        <input class="form-control mt-2" value="@option.Text" readonly/>
+                    }
                 }
                 break;
             case TextQuestion tq:
@@ -42,7 +47,23 @@
             {
                 case OptionsQuestion oq:
                     {
-
+                        <button class="btn btn-outline-secondary btn-sm" data-bs-toggle="modal" data-bs-target="#@editModalId">Edit</button>
+                        @(
+                            await Html.PartialAsync("/Views/Questions/_UpdateOptionsQuestionModalPartial.cshtml",
+                            new UpdateOptionsQuestionCommand 
+                            {
+                                Id = oq.Id,
+                                AllowMultipleChoice = oq.AllowMultipleChoice,
+                                Index = oq.Index,
+                                IsRequired = oq.IsRequired,
+                                Options = oq.Options,
+                                QuestionText = oq.QuestionText,
+                            },
+                            new ViewDataDictionary(ViewData)
+                            {
+                                { "ModalId", editModalId }
+                            })
+                            )
                     }
                     break;
                 case TextQuestion tq:

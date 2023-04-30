@@ -1,0 +1,128 @@
+﻿@using DomraSinForms.Application.Questions.Commands.CreateOptionsQuestion;
+@using DomraSinForms.Application.Questions.Commands.UpdateOptionsQuestion;
+@using DomraSinForms.Domain.Models.Questions;
+@model UpdateOptionsQuestionCommand
+@{
+    var modalId = ViewData["ModalId"] as string ?? "updateOptionsQuestionModal";
+}
+<div class="modal" id="@modalId">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content p-1">
+
+            <div class="modal-body justify-content-center">
+
+                <div class="h2 mb-5 text-center">New question</div>
+
+                <form asp-controller="Questions" asp-action="UpdateOptionsQuestion" method="post">
+
+                    <div class="form-group mb-2">
+                        <input class="form-control" type="text" placeholder="Question text" asp-for="QuestionText" />
+                        <span asp-validation-for="QuestionText" class="text-danger"></span>
+                    </div>
+                    <div class="form-group mb-2">
+                        <label class="form-label">Index</label>
+                        <input class="form-control" type="number" placeholder="Index" asp-for="Index" />
+                        <span asp-validation-for="Index" class="text-danger"></span>
+                    </div>
+
+                    <div class="form-check mb-2">
+                        <label class="form-check-label">Required</label>
+                        <input class="form-check-input" type="checkbox" asp-for="IsRequired" />
+                    </div>
+                    <div class="form-check mb-2">
+                        <label class="form-check-label">Allow multiple choice</label>
+                        <input class="form-check-input" type="checkbox" asp-for="AllowMultipleChoice" />
+                    </div>
+                    <div class="form-group mb-2">
+                        <label class="form-label">Options</label>
+                        <div id="options">
+                            @foreach (var option in Model.Options)
+                            {
+                                @await Html.PartialAsync("/Views/Questions/_OptionPartial.cshtml", option);
+                            }
+                        </div>
+
+                        <input class="form-control btn" type="button" id="addoption" name="addoption" value="Add new option" />
+                    </div>
+
+                    <div class="form-group mb-2">
+                        <input class="btn btn-primary" type="submit" />
+                    </div>
+                </form>
+
+            </div>
+
+        </div>
+    </div>
+</div>
+<script type="text/javascript">
+
+    
+    const actionUrl = "@(Url.Action("AddNewOption", "Questions"))";
+
+    function createElementFromHTML(htmlString) {
+        let div = document.createElement('div');
+        div.innerHTML = htmlString.trim();
+        console.log(div);
+        // Change this to div.childNodes to support multiple top-level nodes.
+        return div;
+    }
+
+    function getPartialView(method, url) {
+        return new Promise( (resolve, reject) => {
+            const xhr = new XMLHttpRequest();
+            
+            xhr.open(method, url);
+            
+            xhr.onload = () => {
+                if (xhr.status == 200) {
+                    console.log("response Ok");
+                    resolve(xhr.response);
+                }
+                else reject("");
+            };
+            
+            xhr.onerror = () => {
+                console.log(xhr.response);
+                reject("");
+            };
+            
+            xhr.send();
+        })
+    }
+    onload = () => {
+        document.getElementById("addoption")?.addEventListener("click", () => {
+            let view = getPartialView("POST", actionUrl)
+                .then(data => {
+                    console.log(data);
+                    document.getElementById("options").appendChild(createElementFromHTML(data));
+                })
+                .catch(err => console.error(err));
+        }); 
+    };
+    let deleteOption = (optionId) => {
+        console.log("start removing option");
+        document.getElementById(optionId).remove();
+    }
+    /*$(document).ready(() =>{
+        console.log("fuck");
+        $('#addoption')
+            .click(() => {
+                console.log("start");
+                $.ajax({
+                    type: "POST",
+                    url: "",
+                    success: (partialView, status) => {
+                        $('#options').append(partialView);
+                        console.log("success");
+                    }
+                });
+                console.log("end");
+            });
+    })*/
+
+</script>
+@section Scripts
+{
+    
+}

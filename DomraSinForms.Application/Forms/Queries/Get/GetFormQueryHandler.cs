@@ -1,4 +1,6 @@
-﻿using DomraSinForms.Domain.Models;
+﻿using DomraSinForms.Application.Questions.Queries.GetList;
+using DomraSinForms.Domain.Models;
+using DomraSinForms.Domain.Models.Questions;
 using DomraSinForms.Persistence;
 using MediatR;
 using Microsoft.EntityFrameworkCore;
@@ -8,16 +10,24 @@ namespace DomraSinForms.Application.Forms.Queries.Get;
 public class GetFormQueryHandler : IRequestHandler<GetFormQuery, Form>
 {
     private readonly ApplicationDbContext _context;
+    private readonly IMediator _mediator;
 
-    public GetFormQueryHandler(ApplicationDbContext context)
+    public GetFormQueryHandler(ApplicationDbContext context, IMediator mediator)
     {
         _context = context;
+        _mediator = mediator;
     }
     public async Task<Form> Handle(GetFormQuery request, CancellationToken cancellationToken)
     {
-        return await _context.Forms
+        var form =  await _context.Forms
             .AsNoTracking()
-            .Include(f => f.Questions)
             .FirstOrDefaultAsync(f => f.Id == request.Id, cancellationToken);
+
+        if (form is null)
+            return null;
+
+        form.Questions = new List<QuestionBase>(await _mediator.Send(new GetQuestionListQuery{ FormId = form.Id, }));
+
+        return form;
     }
 }
