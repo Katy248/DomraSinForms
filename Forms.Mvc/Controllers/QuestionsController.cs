@@ -19,15 +19,15 @@ public class QuestionsController : Controller
         _mediator = mediator;
     }
     [HttpPost]
-    public async Task<IActionResult> CreateTextQuestion([Bind] EditFormViewModel viewModel)
+    public async Task<IActionResult> CreateTextQuestion([Bind] CreateTextQuestionCommand command)
     {
         //if (!string.IsNullOrWhiteSpace(viewModel.CreateTextQuestionCommand.QuestionText))
-            await _mediator.Send(viewModel.CreateTextQuestionCommand);
+            await _mediator.Send(command);
 
         return RedirectToAction(
             controllerName: "Forms",
             actionName: nameof(FormsController.Edit),
-            routeValues: new { id = viewModel.CreateTextQuestionCommand.FormId });
+            routeValues: new { id = command.FormId });
     }
     [HttpPost]
     public async Task<IActionResult> CreateOptionsQuestion([Bind] CreateOptionsQuestionCommand command)

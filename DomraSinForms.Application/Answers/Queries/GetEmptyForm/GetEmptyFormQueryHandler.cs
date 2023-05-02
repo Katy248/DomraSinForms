@@ -1,40 +1,95 @@
-﻿using DomraSinForms.Application.Answers.Commands.Create;
+﻿using System.Security;
+using System.Threading;
+using AutoMapper;
+using DomraSinForms.Application.Answers.Commands.Create;
+using DomraSinForms.Application.Answers.Queries.GetList;
 using DomraSinForms.Domain.Models.Answers;
 using DomraSinForms.Persistence;
 using MediatR;
 using Microsoft.EntityFrameworkCore;
 
 namespace DomraSinForms.Application.Answers.Queries.GetEmptyForm;
-public class GetEmptyFormQueryHandler : IRequestHandler<GetEmptyFormQuery, CreateFormAnswersCommand>
+public class GetEmptyFormQueryHandler : IRequestHandler<GetEmptyFormQuery, FormAnswersDto>
 {
     private readonly ApplicationDbContext _context;
+    private readonly IMapper _mapper;
 
-    public GetEmptyFormQueryHandler(ApplicationDbContext context)
+    public GetEmptyFormQueryHandler(ApplicationDbContext context, IMapper mapper)
     {
         _context = context;
+        _mapper = mapper;
     }
-    public async Task<CreateFormAnswersCommand> Handle(GetEmptyFormQuery request, CancellationToken cancellationToken)
+    public async Task<FormAnswersDto> Handle(GetEmptyFormQuery request, CancellationToken cancellationToken)
+    {
+        var currentAnswer = await _context.FormAnswers
+            .Include(fa => fa.Answers)
+            .FirstOrDefaultAsync(fa => fa.FormId == request.FormId && fa.UserId == request.UserId && !fa.IsCompleted, cancellationToken);
+
+        if (currentAnswer is null)
+            return await CreateNewCommand(request.FormId, request.UserId, cancellationToken);
+        else
+            return await UpdateCommand(currentAnswer, cancellationToken);
+    }
+
+    private async Task<FormAnswersDto> CreateNewCommand(string formId, string userId, CancellationToken cancellationToken = default)
     {
         var form = await _context.Forms
             .Include(f => f.Questions)
-            .FirstOrDefaultAsync(f => f.Id == request.FormId, cancellationToken);
+            .FirstOrDefaultAsync(f => f.Id == formId, cancellationToken);
 
+        
         if (form is null)
             return null;
-
-        var command = new CreateFormAnswersCommand
+        var formAnswers = new FormAnswers
         {
+            FormId = formId,
+            UserId = userId,
+            IsCompleted = false
+        };
+
+        await _context.FormAnswers.AddAsync(formAnswers, cancellationToken);
+        await _context.SaveChangesAsync(cancellationToken);
+
+
+        var command = new FormAnswersDto
+        {
+            Id = formAnswers.Id,
             FormId = form.Id,
-            UserId = request.UserId,
+            UserId = userId,
         };
         var answers = new List<Answer>(form.Questions.Count);
 
         foreach (var question in form.Questions)
         {
-            answers.Add(new Answer { QuestionId = question.Id });
+            answers.Add(new Answer { QuestionId = question.Id, Question = question });
         }
 
         command.Answers = answers;
+
+        return command;
+    }
+    private async Task<FormAnswersDto> UpdateCommand(FormAnswers currentFormAnswers, CancellationToken cancellationToken = default)
+    {
+        var form = await _context.Forms
+            .Include(f => f.Questions)
+            .FirstOrDefaultAsync(f => f.Id == currentFormAnswers.FormId, cancellationToken);
+
+        if (form is null)
+            return null;
+
+        var command = new FormAnswersDto
+        {
+            Id = currentFormAnswers.Id,
+            FormId = currentFormAnswers.FormId,
+            UserId = currentFormAnswers.UserId,
+            Answers = currentFormAnswers.Answers
+        };
+
+        foreach (var question in form.Questions)
+        {
+            if (command.Answers.FirstOrDefault(a => a.QuestionId == question.Id) is null)
+                command.Answers.Add(new Answer { QuestionId = question.Id, Question = question });
+        }
 
         return command;
     }

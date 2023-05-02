@@ -1,0 +1,39 @@
+﻿@using DomraSinForms.Domain.Models.Answers;
+@using DomraSinForms.Domain.Models.Questions;
+@using Forms.Mvc.Models.Answers;
+@using Forms.Mvc.Models.Answers.AnswersModels;
+@using Forms.Mvc.Services;
+@model IAnswerViewModel
+@{
+    var radioName = $"radioGroup{Model.Index}";
+}
+
+@switch (Model)
+{
+    case (CheckAnswer checkAnswer):
+        {
+            <div>check</div>
+        }
+        break;
+    case (RadioAnswer radioAnswer):
+        {
+            <div>radio</div>
+
+        }
+        break;
+    case (StringAnswer stringAnswer):
+        {
+            @await Html.PartialAsync("/Views/Answers/AnswerTypes/_StringAnswerPartial.cshtml", stringAnswer);
+
+        }
+        break;
+    case (DecimalAnswer decimalAnswer):
+        {
+            <div>decimal</div>
+
+        }
+        break;
+
+}
+
+

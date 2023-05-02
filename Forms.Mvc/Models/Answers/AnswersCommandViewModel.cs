@@ -1,0 +1,21 @@
+﻿using System.Collections.Immutable;
+using DomraSinForms.Application.Answers.Commands.Create;
+using DomraSinForms.Application.Answers.Queries.GetList;
+using DomraSinForms.Domain.Models.Answers;
+using Forms.Mvc.Models.Answers.AnswersModels;
+
+namespace Forms.Mvc.Models.Answers;
+
+public class AnswersCommandViewModel
+{
+    private readonly FormAnswersDto? _dto;
+
+    public AnswersCommandViewModel() { }
+    public AnswersCommandViewModel(FormAnswersDto command)
+    {
+        _dto = command;
+        Answers = new AnswerFactory().GetAnswers(_dto.Answers).OrderBy(a => a.Index).ToArray();
+    }
+    public IAnswerViewModel[] Answers { get; set; }
+    public bool RequiredQuestionsAnswered => Answers?.Where(a => a.IsRequired && string.IsNullOrWhiteSpace(a.Value)).Count() == 0;
+}

@@ -1,6 +1,7 @@
 ﻿using DomraSinForms.Domain.Models.Answers;
 using DomraSinForms.Persistence;
 using MediatR;
+using Microsoft.EntityFrameworkCore;
 
 namespace DomraSinForms.Application.Answers.Commands.Create;
 public class CreateFormAnswersCommandHandler : IRequestHandler<CreateFormAnswersCommand, FormAnswers>
@@ -13,7 +14,45 @@ public class CreateFormAnswersCommandHandler : IRequestHandler<CreateFormAnswers
     }
     public async Task<FormAnswers> Handle(CreateFormAnswersCommand request, CancellationToken cancellationToken)
     {
-        var form = await _context.Forms.FindAsync(request.FormId, cancellationToken);
+        var formAnswers = await _context.FormAnswers
+            .Include(x => x.Answers)
+            .FirstOrDefaultAsync(fa => fa.UserId == request.UserId && fa.Id == request.Id);
+
+        if (formAnswers is null)
+            return null;
+
+        if (formAnswers.IsCompleted)
+            return formAnswers;
+
+        var form = await _context.Forms
+            .Include(x => x.Questions)
+            .FirstOrDefaultAsync(fa => fa.Id == formAnswers.FormId);
+
+        if (form is null)
+            return null;
+
+        foreach (var question in form.Questions)
+        {
+            var answer = formAnswers.Answers.FirstOrDefault(q => q.QuestionId == question.Id);
+            if (answer is not null)
+            {
+                if (question.IsRequired && string.IsNullOrWhiteSpace(answer.Value))
+                    return null;
+            }
+            else
+                return null;
+        }
+
+        formAnswers.IsCompleted = true;
+
+        _context.Update(formAnswers);
+        await _context.SaveChangesAsync();
+
+        return formAnswers;
+        
+        
+        
+        /*var form = await _context.Forms.FindAsync(request.FormId, cancellationToken);
 
         if (form is null)
             return null;
@@ -27,6 +66,6 @@ public class CreateFormAnswersCommandHandler : IRequestHandler<CreateFormAnswers
         await _context.AddAsync(answers, cancellationToken);
         await _context.SaveChangesAsync(cancellationToken);
 
-        return answers;
+        return answers;*/
     }
 }

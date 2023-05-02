@@ -35,14 +35,14 @@
                     </div>
                     <div class="form-group mb-2">
                         <label class="form-label">Options</label>
-                        <div id="options">
+                        <div id="options-@Model.Id">
                             @foreach (var option in Model.Options)
                             {
                                 @await Html.PartialAsync("/Views/Questions/_OptionPartial.cshtml", option);
                             }
                         </div>
 
-                        <input class="form-control btn" type="button" id="addoption" name="addoption" value="Add new option" />
+                        <input class="form-control btn" type="button" id="addoption-@Model.Id" value="Add new option" />
                     </div>
 
                     <div class="form-group mb-2">
@@ -58,9 +58,9 @@
 <script type="text/javascript">
 
     
-    const actionUrl = "@(Url.Action("AddNewOption", "Questions"))";
+    //const actionUrl = "@(Url.Action("AddNewOption", "Questions"))";
 
-    function createElementFromHTML(htmlString) {
+    /*function createElementFromHTML(htmlString) {
         let div = document.createElement('div');
         div.innerHTML = htmlString.trim();
         console.log(div);
@@ -89,37 +89,22 @@
             
             xhr.send();
         })
-    }
-    onload = () => {
-        document.getElementById("addoption")?.addEventListener("click", () => {
+    }*/
+    addEventListener("load", (event) => {
+        document.getElementById("addoption-@Model.Id")?.addEventListener("click", () => {
             let view = getPartialView("POST", actionUrl)
                 .then(data => {
                     console.log(data);
-                    document.getElementById("options").appendChild(createElementFromHTML(data));
+                    document.getElementById("options-@Model.Id").appendChild(createElementFromHTML(data));
                 })
                 .catch(err => console.error(err));
         }); 
-    };
-    let deleteOption = (optionId) => {
+    });
+    
+    /*let deleteOption = (optionId) => {
         console.log("start removing option");
         document.getElementById(optionId).remove();
-    }
-    /*$(document).ready(() =>{
-        console.log("fuck");
-        $('#addoption')
-            .click(() => {
-                console.log("start");
-                $.ajax({
-                    type: "POST",
-                    url: "",
-                    success: (partialView, status) => {
-                        $('#options').append(partialView);
-                        console.log("success");
-                    }
-                });
-                console.log("end");
-            });
-    })*/
+    }*/
 
 </script>
 @section Scripts

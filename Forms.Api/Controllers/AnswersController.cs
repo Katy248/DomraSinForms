@@ -29,11 +29,11 @@ public class AnswersController : Controller
     {
         return await _mediator.Send(query);
     }
-    [HttpPost]
+    /*[HttpPost]
     public async Task<CreateFormAnswersCommand> GetEmptyForm([FromBody] GetEmptyFormQuery query)
     {
         return await _mediator.Send(query);
-    }
+    }*/
     [HttpPost]
     public async Task<FormAnswers> Create([FromBody] CreateFormAnswersCommand command)
     {

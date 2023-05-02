@@ -1,0 +1,38 @@
+﻿@using Forms.Mvc.Models.Answers.AnswersModels;
+@model StringAnswer
+@{
+    var modelId = "__"+Model.QuestionId.Replace('-', '_');
+}
+<form id="@(modelId)-form">
+    <input asp-for="FormId" id="@(modelId)-formid" hidden/>
+    <input asp-for="Index" id="@(modelId)-index" hidden />
+    <input asp-for="IsRequired" id="@(modelId)-isrequired" hidden />
+    <input asp-for="QuestionId" id="@(modelId)-questionid" hidden />
+    <input class="form-control" id="@(modelId)-answer" asp-for="Answer" />
+</form>
+
+<script>
+    addEventListener("load", (event) => {
+        document.getElementById("@(modelId)-answer")?.addEventListener("blur", () => {
+            console.log("@(modelId)-answer lost focus");
+            let result = updateForm("POST", actionUrl, @(modelId)body())
+                .then(data => {
+                    console.log("gets data");
+                    //document.getElementById("options-@Model.QuestionId").appendChild(createElementFromHTML(data));
+                })
+                .catch(err => console.error(err));
+        });
+    });
+    function @(modelId)body() {
+        let result = {
+            FormId: document.getElementById("@(modelId)-formid").value,
+            Index: Number(document.getElementById("@(modelId)-index").value),
+            IsRequired: document.getElementById("@(modelId)-isrequired").value == "true",
+            QuestionId: document.getElementById("@(modelId)-questionid").value,
+            Answer: document.getElementById("@(modelId)-answer").value
+        };
+        console.log(JSON.stringify(result));
+        return JSON.stringify(result);
+    }
+    
+</script>

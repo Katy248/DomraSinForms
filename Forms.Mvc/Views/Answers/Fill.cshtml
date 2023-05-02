@@ -1,0 +1,66 @@
+﻿@using DomraSinForms.Application.Answers.Commands.Create;
+@using DomraSinForms.Domain.Models.Questions;
+@using Forms.Mvc.Models.Answers;
+@using Forms.Mvc.Models.Answers.AnswersModels;
+@using Microsoft.AspNetCore.Mvc.Localization;
+@model AnswersCommandViewModel
+@inject IViewLocalizer Localizer
+@{
+    //ViewData["Title"] = $"{Localizer["Fill form"].Value} {Model.Form.Title}";
+}
+
+<form asp-controller="Answers" asp-action="Fill" method="post">
+    <div class="row g-3 justify-content-center">
+        @foreach (var answer in Model.Answers.OrderBy(a => a.Index))
+        {
+            @await Html.PartialAsync("_AnswerPartial", answer)
+        }
+        <div class="col-12">
+            <button class="form-control btn btn-primary" type="submit">@Localizer["Send"]</button>
+        </div>
+    </div>
+
+    </div>
+</form>
+
+<script>
+    const actionUrl = "@(Url.Action("UpdateForm", "Answers"))";
+
+    function createElementFromHTML(htmlString) {
+        let div = document.createElement('div');
+        div.innerHTML = htmlString.trim();
+        console.log(div);
+        // Change this to div.childNodes to support multiple top-level nodes.
+        return div;
+    }
+
+    function updateForm(method, url, body) {
+        return new Promise( (resolve, reject) => {
+            const xhr = new XMLHttpRequest();
+            
+            xhr.open(method, url);
+            xhr.setRequestHeader("Content-Type", "application/json");
+            
+            xhr.onload = () => {
+                if (xhr.status == 200) {
+                    console.log("response Ok");
+                    resolve(xhr.response);
+                }
+                else reject("");
+            };
+            
+            xhr.onerror = () => {
+                console.log(xhr.response);
+                reject("");
+            };
+            
+            xhr.send(body);
+        })
+    }
+    
+
+    let deleteOption = (optionId) => {
+        console.log("start removing option");
+        document.getElementById(optionId).remove();
+    }
+</script>

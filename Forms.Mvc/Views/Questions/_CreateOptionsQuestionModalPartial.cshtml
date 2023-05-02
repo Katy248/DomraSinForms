@@ -88,7 +88,7 @@
             xhr.send();
         })
     }
-    onload = () => {
+    addEventListener("load", (event) => {
         document.getElementById("addoption")?.addEventListener("click", () => {
             let view = getPartialView("POST", actionUrl)
                 .then(data => {
@@ -96,28 +96,13 @@
                     document.getElementById("options").appendChild(createElementFromHTML(data));
                 })
                 .catch(err => console.error(err));
-        }); 
-    };
+        });
+    });
+
     let deleteOption = (optionId) => {
         console.log("start removing option");
         document.getElementById(optionId).remove();
     }
-    /*$(document).ready(() =>{
-        console.log("fuck");
-        $('#addoption')
-            .click(() => {
-                console.log("start");
-                $.ajax({
-                    type: "POST",
-                    url: "",
-                    success: (partialView, status) => {
-                        $('#options').append(partialView);
-                        console.log("success");
-                    }
-                });
-                console.log("end");
-            });
-    })*/
 
 </script>
 @section Scripts
