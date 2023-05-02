@@ -1,4 +1,6 @@
-﻿namespace Forms.Mvc.Models.Answers;
+﻿using DomraSinForms.Domain.Models.Questions;
+
+namespace Forms.Mvc.Models.Answers;
 
 public interface IAnswerViewModel
 {
@@ -7,4 +9,5 @@ public interface IAnswerViewModel
     public int Index { get; set; }
     public bool IsRequired { get; set; }
     public string Value { get; }
+    public QuestionBase? Question { get; set; }
 }

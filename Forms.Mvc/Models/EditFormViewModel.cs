@@ -11,9 +11,9 @@ namespace Forms.Mvc.Models
     {
         public Form? Form{ get; set; }
         public UpdateFormCommand UpdateFormCommand { get; set; }
-        public CreateTextQuestionCommand CreateTextQuestionCommand { get; set; }
+       /* public CreateTextQuestionCommand CreateTextQuestionCommand { get; set; }
         public CreateOptionsQuestionCommand CreateOptionsQuestionCommand { get; set; }
         public UpdateTextQuestionCommand UpdateTextQuestionCommand { get; set; }
-        public UpdateOptionsQuestionCommand UpdateOptionsQuestionCommand { get; set; }
+        public UpdateOptionsQuestionCommand UpdateOptionsQuestionCommand { get; set; }*/
     }
 }

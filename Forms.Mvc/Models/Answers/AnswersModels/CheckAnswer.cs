@@ -18,7 +18,7 @@ public class CheckAnswer : AnswerViewModel
         }
         Options = options;
     }
-    public IEnumerable<(bool Check, string Value)> Options { get; set; }
+    public List<(bool Check, string Value)> Options { get; set; }
 
     public override string Value
     {

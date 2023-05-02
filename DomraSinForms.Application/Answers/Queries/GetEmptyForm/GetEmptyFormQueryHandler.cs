@@ -3,7 +3,9 @@ using System.Threading;
 using AutoMapper;
 using DomraSinForms.Application.Answers.Commands.Create;
 using DomraSinForms.Application.Answers.Queries.GetList;
+using DomraSinForms.Application.Questions.Queries.GetList;
 using DomraSinForms.Domain.Models.Answers;
+using DomraSinForms.Domain.Models.Questions;
 using DomraSinForms.Persistence;
 using MediatR;
 using Microsoft.EntityFrameworkCore;
@@ -12,12 +14,12 @@ namespace DomraSinForms.Application.Answers.Queries.GetEmptyForm;
 public class GetEmptyFormQueryHandler : IRequestHandler<GetEmptyFormQuery, FormAnswersDto>
 {
     private readonly ApplicationDbContext _context;
-    private readonly IMapper _mapper;
+    private readonly IMediator _mediator;
 
-    public GetEmptyFormQueryHandler(ApplicationDbContext context, IMapper mapper)
+    public GetEmptyFormQueryHandler(ApplicationDbContext context, IMediator mediator)
     {
         _context = context;
-        _mapper = mapper;
+        _mediator = mediator;
     }
     public async Task<FormAnswersDto> Handle(GetEmptyFormQuery request, CancellationToken cancellationToken)
     {
@@ -71,12 +73,11 @@ public class GetEmptyFormQueryHandler : IRequestHandler<GetEmptyFormQuery, FormA
     private async Task<FormAnswersDto> UpdateCommand(FormAnswers currentFormAnswers, CancellationToken cancellationToken = default)
     {
         var form = await _context.Forms
-            .Include(f => f.Questions)
             .FirstOrDefaultAsync(f => f.Id == currentFormAnswers.FormId, cancellationToken);
 
         if (form is null)
             return null;
-
+        form.Questions = new List<QuestionBase>(await _mediator.Send(new GetQuestionListQuery { FormId = form.Id, }));
         var command = new FormAnswersDto
         {
             Id = currentFormAnswers.Id,

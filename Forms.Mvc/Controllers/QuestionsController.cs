@@ -50,9 +50,9 @@ public class QuestionsController : Controller
             routeValues: new { id = q.FormId });
     }
     [HttpPost]
-    public async Task<IActionResult> UpdateOptionsQuestion([Bind] EditFormViewModel viewModel)
+    public async Task<IActionResult> UpdateOptionsQuestion([Bind] UpdateOptionsQuestionCommand command)
     {
-        var q = await _mediator.Send(viewModel.UpdateOptionsQuestionCommand);
+        var q = await _mediator.Send(command);
 
         return RedirectToAction(
             controllerName: "Forms",

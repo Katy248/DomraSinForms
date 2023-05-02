@@ -14,7 +14,7 @@
                 <div class="h2 mb-5 text-center">New question</div>
 
                 <form asp-controller="Questions" asp-action="UpdateOptionsQuestion" method="post">
-
+                    <input data-val="true" data-val-required="The Id field is required." id="Id" name="Id" type="hidden" value="@Model.Id">
                     <div class="form-group mb-2">
                         <input class="form-control" type="text" placeholder="Question text" asp-for="QuestionText" />
                         <span asp-validation-for="QuestionText" class="text-danger"></span>

@@ -35,13 +35,22 @@ public class AnswersController : Controller
     public async Task<IActionResult> Fill(string formId)
     {
         var command = await _mediator.Send(new GetEmptyFormQuery { FormId = formId, UserId = "anon" });
-        var form = await _mediator.Send(new GetFormQuery { Id = formId });
+        //var form = await _mediator.Send(new GetFormQuery { Id = formId });
 
-        var cvm = new AnswersCommandViewModel(command);
+        var cvm = new FillFormViewModel(command);
         return View(cvm);
     }
-    [HttpPost]
+    [HttpPost("/string")]
     public async Task<IActionResult> UpdateForm([FromBody] StringAnswer answer)
+    {
+        var result = await UpdateForm(viewModel: answer);
+        if (result is not null)
+            return Ok(result);
+        
+        return BadRequest();
+    }
+    [HttpPost("/radio")]
+    public async Task<IActionResult> UpdateForm([FromBody] RadioAnswer answer)
     {
         var result = await UpdateForm(viewModel: answer);
         if (result is not null)

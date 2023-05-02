@@ -6,12 +6,12 @@ using Forms.Mvc.Models.Answers.AnswersModels;
 
 namespace Forms.Mvc.Models.Answers;
 
-public class AnswersCommandViewModel
+public class FillFormViewModel
 {
     private readonly FormAnswersDto? _dto;
 
-    public AnswersCommandViewModel() { }
-    public AnswersCommandViewModel(FormAnswersDto command)
+    public FillFormViewModel() { }
+    public FillFormViewModel(FormAnswersDto command)
     {
         _dto = command;
         Answers = new AnswerFactory().GetAnswers(_dto.Answers).OrderBy(a => a.Index).ToArray();

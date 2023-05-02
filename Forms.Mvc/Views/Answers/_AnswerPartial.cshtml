@@ -12,25 +12,22 @@
 {
     case (CheckAnswer checkAnswer):
         {
-            <div>check</div>
+            @await Html.PartialAsync("/Views/Answers/AnswerTypes/_CheckAnswerPartial.cshtml", checkAnswer);
         }
         break;
     case (RadioAnswer radioAnswer):
         {
-            <div>radio</div>
-
+            @await Html.PartialAsync("/Views/Answers/AnswerTypes/_RadioAnswerPartial.cshtml", radioAnswer);
         }
         break;
     case (StringAnswer stringAnswer):
         {
             @await Html.PartialAsync("/Views/Answers/AnswerTypes/_StringAnswerPartial.cshtml", stringAnswer);
-
         }
         break;
     case (DecimalAnswer decimalAnswer):
         {
-            <div>decimal</div>
-
+            @await Html.PartialAsync("/Views/Answers/AnswerTypes/_DecimalAnswerPartial.cshtml", decimalAnswer);
         }
         break;
 

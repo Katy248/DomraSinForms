@@ -3,25 +3,37 @@
 @using Forms.Mvc.Models.Answers;
 @using Forms.Mvc.Models.Answers.AnswersModels;
 @using Microsoft.AspNetCore.Mvc.Localization;
-@model AnswersCommandViewModel
+@model FillFormViewModel
 @inject IViewLocalizer Localizer
 @{
     //ViewData["Title"] = $"{Localizer["Fill form"].Value} {Model.Form.Title}";
 }
 
-<form asp-controller="Answers" asp-action="Fill" method="post">
-    <div class="row g-3 justify-content-center">
+<div class="row g-3 justify-content-center">
+    <div class="col-sm-10 col-md-7 col-xl-5 row g-3">
         @foreach (var answer in Model.Answers.OrderBy(a => a.Index))
         {
-            @await Html.PartialAsync("_AnswerPartial", answer)
+            <div class="col-12">
+                <div class="card">
+                    <div class="card-body">
+                        <div class="card-title">@answer.Question.QuestionText</div>
+                        @await Html.PartialAsync("_AnswerPartial", answer)
+                    </div>
+                </div>
+            </div>
         }
         <div class="col-12">
-            <button class="form-control btn btn-primary" type="submit">@Localizer["Send"]</button>
+            <form asp-controller="Answers" asp-action="CompleteForm" method="post">
+                <button class="form-control btn btn-primary" type="submit">@Localizer["Send"]</button>
+            </form>
         </div>
     </div>
+    
+    
+</div>
 
-    </div>
-</form>
+</div>
+
 
 <script>
     const actionUrl = "@(Url.Action("UpdateForm", "Answers"))";
@@ -53,7 +65,7 @@
                 console.log(xhr.response);
                 reject("");
             };
-            
+            console.log(xhr);
             xhr.send(body);
         })
     }

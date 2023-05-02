@@ -9,12 +9,15 @@ public class RadioAnswer : AnswerViewModel
     {
         if (question.AllowMultipleChoice)
             return;
-    }
-    public override string Value 
-    { 
-        get
+        foreach (var option in question.Options)
         {
-            return "";
+            Options.Add(option.Text);
         }
+    }
+    public List<string> Options { get; set; } = new();
+    public string SelectedValue { get; set; }
+    public override string Value 
+    {
+        get => SelectedValue;
     }
 }

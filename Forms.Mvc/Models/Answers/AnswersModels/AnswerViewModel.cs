@@ -10,6 +10,7 @@ public class AnswerViewModel : IAnswerViewModel
         IsRequired = question.IsRequired;
         QuestionId = question.Id;
         FormId = question.FormId;
+        Question = question;
     }
     public AnswerViewModel()
     {
@@ -22,4 +23,5 @@ public class AnswerViewModel : IAnswerViewModel
     public int Index { get; set; }
     public bool IsRequired { get; set; }
     public virtual string Value { get; }
+    public QuestionBase? Question { get; set; }
 }
