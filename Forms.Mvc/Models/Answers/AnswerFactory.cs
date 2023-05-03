@@ -6,8 +6,10 @@ namespace Forms.Mvc.Models.Answers;
 
 public class AnswerFactory : IAnswerViewModelFactory
 {
-    public IEnumerable<IAnswerViewModel> GetAnswers(IEnumerable<Answer> answers)
+    public IEnumerable<IAnswerViewModel> GetAnswers(IEnumerable<Answer>? answers)
     {
+        if (answers is null)
+            yield break;
         foreach (var answer in answers)
         {
             switch (answer.Question)

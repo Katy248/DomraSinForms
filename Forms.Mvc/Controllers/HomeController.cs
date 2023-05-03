@@ -29,7 +29,8 @@ public class HomeController : Controller
             new CookieOptions { Expires = DateTimeOffset.UtcNow.AddYears(1) }
         );
 
-        return LocalRedirect(returnUrl);
+        return Redirect(returnUrl); 
+        //LocalRedirect(returnUrl);
     }
 
     [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]

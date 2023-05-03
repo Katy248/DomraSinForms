@@ -14,7 +14,7 @@ public class FillFormViewModel
     public FillFormViewModel(FormAnswersDto command)
     {
         _dto = command;
-        Answers = new AnswerFactory().GetAnswers(_dto.Answers).OrderBy(a => a.Index).ToArray();
+        Answers = new AnswerFactory().GetAnswers(_dto?.Answers)?.OrderBy(a => a.Index)?.ToArray() ?? Array.Empty<IAnswerViewModel>();
     }
     public string FormId => _dto?.FormId ?? "";
     public IAnswerViewModel[] Answers { get; set; }

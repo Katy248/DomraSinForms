@@ -54,6 +54,7 @@ public class CheckAnswer : AnswerViewModel
 }
 public class CheckOption
 {
+    public CheckOption(){}
     public CheckOption(bool check, string value) => (Check, Value) = (check, value);
     public bool Check { get; set; }
     public string Value { get; set; }
