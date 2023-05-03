@@ -27,11 +27,11 @@ public class AnswersController : Controller
         var result = await _mediator.Send(new GetFormListQuery { Count = count, Page = page, SearchText = searchText ?? "" });
         return View(result);
     }
-    public async Task<IActionResult> Answers(string formId)
+    /*public async Task<IActionResult> Answers(string formId)
     {
         var result = await _mediator.Send(new GetFormAnswersListQuery { FormId = formId });
         return View(result);
-    }
+    }*/
     public async Task<IActionResult> Fill(string formId)
     {
         var command = await _mediator.Send(new GetEmptyFormQuery { FormId = formId, UserId = "anon" });

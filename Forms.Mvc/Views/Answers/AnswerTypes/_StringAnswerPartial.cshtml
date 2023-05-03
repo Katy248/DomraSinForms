@@ -31,30 +31,3 @@
             </div>
     </div>
 </div>
-
-
-@*<script>
-    addEventListener("load", (event) => {
-        document.getElementById("@(modelId)-answer")?.addEventListener("blur", () => {
-            console.log("@(modelId)-answer lost focus");
-            let result = updateForm("POST", actionUrl, @(modelId)body())
-                .then(data => {
-                    console.log("gets data");
-                    //document.getElementById("options-@Model.QuestionId").appendChild(createElementFromHTML(data));
-                })
-                .catch(err => console.error(err));
-        });
-    });
-    function @(modelId)body() {
-        let result = {
-            FormId: document.getElementById("@(modelId)-formid").value,
-            Index: Number(document.getElementById("@(modelId)-index").value),
-            IsRequired: document.getElementById("@(modelId)-isrequired").value == "true",
-            QuestionId: document.getElementById("@(modelId)-questionid").value,
-            Answer: document.getElementById("@(modelId)-answer").value
-        };
-        console.log(JSON.stringify(result));
-        return JSON.stringify(result);
-    }
-    
-</script>*@

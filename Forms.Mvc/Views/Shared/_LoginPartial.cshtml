@@ -1,4 +1,6 @@
 ﻿@using Microsoft.AspNetCore.Identity
+@using Microsoft.AspNetCore.Mvc.Localization;
+@inject IViewLocalizer Localizer
 @inject SignInManager<IdentityUser> SignInManager
 @inject UserManager<IdentityUser> UserManager
 
@@ -7,13 +9,13 @@
 {
     <li class="nav-item">
             <a class="nav-link" asp-area="Identity" asp-page="/Account/Manage/Index" title="Manage">@*@User.Identity?.Name*@
-                Профиль<i class="bi-person-circle ms-2 me-2"></i>
+                @Localizer["Profile"]<i class="bi-person-circle ms-2 me-2"></i>
             </a>
     </li>
     <li class="nav-item align-items-center">
         <form  class="form-inline" asp-area="Identity" asp-page="/Account/Logout" asp-route-returnUrl="@Url.Action("Index", "Home", new { area = "" })">
             <button  type="submit" class="nav-link">
-                    Выход<i class="bi-box-arrow-right ms-2 me-2"></i>
+                    @Localizer["Log out"]<i class="bi-box-arrow-right ms-2 me-2"></i>
             </button>
         </form>
     </li>
@@ -21,10 +23,10 @@
 else
 {
     <li class="nav-item">
-        <a class="nav-link" asp-area="Identity" asp-page="/Account/Register">Зарегистрироваться</a>
+        <a class="nav-link" asp-area="Identity" asp-page="/Account/Register">@Localizer["Register"]</a>
     </li>
     <li class="nav-item">
-        <a class="nav-link" asp-area="Identity" asp-page="/Account/Login">Войти</a>
+        <a class="nav-link" asp-area="Identity" asp-page="/Account/Login">@Localizer["Log in"]</a>
     </li>
 }
 </ul>

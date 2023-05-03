@@ -5,12 +5,14 @@
 @using DomraSinForms.Domain.Models.Questions;
 @using DomraSinForms.Domain.Models;
 @using Forms.Mvc.Services;
+@using Microsoft.AspNetCore.Mvc.Localization;
+@inject IViewLocalizer Localizer
 @model EditFormViewModel
 @{
-    ViewData["Title"] = "Редактирование";
+    ViewData["Title"] = @Localizer["Edit"]?.Value;
 }
 
-<h1 class="text-center">Редактирование</h1>
+<h1 class="text-center">@Localizer["Edit"]</h1>
 
 <div class="row g-1 justify-content-center">
     <div class="col-sm-10 col-md-7 col-xl-5 row g-3">
@@ -31,7 +33,7 @@
 
         <div class="col-12 border rounded p-3">
             <div class="row g-3 justify-content-center">
-                <div class="col-12 text-center h4">Вопросы</div>
+                <div class="col-12 text-center h4">@Localizer["Questions"]</div>
                 <div class="col-12">
                     <div class="row g-2">
                         @foreach (var question in Model.Form?.Questions.OrderBy(q => q.Index))
@@ -43,14 +45,14 @@
                     </div>
                 </div>
                 <div class="col-12 dropup-center dropup ">
-                    <button class="btn btn-primary form-control" data-bs-toggle="dropdown">Create new question</button>
+                    <button class="btn btn-primary form-control" data-bs-toggle="dropdown">@Localizer["Create new question"]</button>
                     <ul class="dropdown-menu">
                         <li>
-                            <button class="dropdown-item" data-bs-toggle="modal" data-bs-target="#createTextQuestionModal">Text qustion</button>
+                            <button class="dropdown-item" data-bs-toggle="modal" data-bs-target="#createTextQuestionModal">@Localizer["Text question"]</button>
                         </li>
                         <li><hr class="dropdown-divider"></li>
                         <li>
-                            <button class="dropdown-item" data-bs-toggle="modal" data-bs-target="#createOptionsQuestionModal">Options qustion</button>
+                            <button class="dropdown-item" data-bs-toggle="modal" data-bs-target="#createOptionsQuestionModal">@Localizer["Options question"]</button>
                         </li>
                     </ul>
                 </div>
@@ -62,7 +64,7 @@
 
 
 <h4 class="h5 text-center mt-5">
-    <a class="nav-link" asp-action="Index"><i class="bi-arrow-left me-2"></i> Назад к списку</a>
+    <a class="nav-link" asp-action="Index"><i class="bi-arrow-left me-2"></i>@Localizer["Back to list"]</a>
 </h4>
 
 

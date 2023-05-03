@@ -117,19 +117,16 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="Answers" xml:space="preserve">
-    <value>Answers</value>
+  <data name="Log in" xml:space="preserve">
+    <value>Вход</value>
   </data>
-  <data name="Create new form" xml:space="preserve">
-    <value>Create new form</value>
+  <data name="Log out" xml:space="preserve">
+    <value>Выход</value>
   </data>
-  <data name="DomraSinForms" xml:space="preserve">
-    <value>DomraSinForms</value>
+  <data name="Profile" xml:space="preserve">
+    <value>Прифиль</value>
   </data>
-  <data name="DSF" xml:space="preserve">
-    <value>DSF</value>
-  </data>
-  <data name="Forms" xml:space="preserve">
-    <value>Forms</value>
+  <data name="Register" xml:space="preserve">
+    <value>Регистрация</value>
   </data>
 </root>

@@ -120,8 +120,14 @@
   <data name="Answers" xml:space="preserve">
     <value>Ответы</value>
   </data>
+  <data name="Create new form" xml:space="preserve">
+    <value>Создать новую форму</value>
+  </data>
   <data name="DomraSinForms" xml:space="preserve">
     <value>DomraSinForms</value>
+  </data>
+  <data name="DSF" xml:space="preserve">
+    <value>DSF</value>
   </data>
   <data name="Forms" xml:space="preserve">
     <value>Формы</value>

@@ -16,14 +16,14 @@
             @Model.QuestionText
         </div>
         <div>
-            @Localizer["Is Required"]: <input type="checkbox" checked="@Model.IsRequired" disabled />
+            @Localizer["Is required"]: <input type="checkbox" checked="@Model.IsRequired" disabled />
         </div>
         @switch (Model)
         {
             case OptionsQuestion oq:
                 {
                     <div>
-                        Несколько вариантов: <input type="checkbox" checked="@oq.AllowMultipleChoice" disabled />
+                        @Localizer["Allow multiple choice"] <input type="checkbox" checked="@oq.AllowMultipleChoice" disabled />
                     </div>
                     @foreach (var option in oq.Options)
                     {
@@ -47,7 +47,7 @@
             {
                 case OptionsQuestion oq:
                     {
-                        <button class="btn btn-outline-secondary btn-sm" data-bs-toggle="modal" data-bs-target="#@editModalId">Edit</button>
+                        <button class="btn btn-outline-secondary btn-sm" data-bs-toggle="modal" data-bs-target="#@editModalId">@Localizer["Edit"]</button>
                         @(
                             await Html.PartialAsync("/Views/Questions/_UpdateOptionsQuestionModalPartial.cshtml",
                             new UpdateOptionsQuestionCommand 
@@ -68,7 +68,7 @@
                     break;
                 case TextQuestion tq:
                     {
-                        <button class="btn btn-outline-secondary btn-sm" data-bs-toggle="modal" data-bs-target="#@editModalId">Edit</button>
+                        <button class="btn btn-outline-secondary btn-sm" data-bs-toggle="modal" data-bs-target="#@editModalId">@Localizer["Edit"]</button>
                         @(
                             await Html.PartialAsync("/Views/Questions/_UpdateTextQuestionModalPartial.cshtml", 
                                 (UpdateTextQuestionViewModel)tq, 

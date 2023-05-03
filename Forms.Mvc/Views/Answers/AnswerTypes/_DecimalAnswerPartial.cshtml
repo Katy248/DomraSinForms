@@ -1,4 +1,6 @@
 ﻿@using Forms.Mvc.Models.Answers.AnswersModels;
+@using Microsoft.AspNetCore.Mvc.Localization;
+@inject IViewLocalizer Localizer
 @model DecimalAnswer
 @{
     var modelId = "__"+Model.QuestionId.Replace('-', '_');

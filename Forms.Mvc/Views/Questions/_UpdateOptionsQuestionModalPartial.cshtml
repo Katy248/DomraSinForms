@@ -1,6 +1,8 @@
 ﻿@using DomraSinForms.Application.Questions.Commands.CreateOptionsQuestion;
 @using DomraSinForms.Application.Questions.Commands.UpdateOptionsQuestion;
 @using DomraSinForms.Domain.Models.Questions;
+@using Microsoft.AspNetCore.Mvc.Localization;
+@inject IViewLocalizer Localizer
 @model UpdateOptionsQuestionCommand
 @{
     var modalId = ViewData["ModalId"] as string ?? "updateOptionsQuestionModal";
@@ -11,26 +13,26 @@
 
             <div class="modal-body justify-content-center">
 
-                <div class="h2 mb-5 text-center">New question</div>
+                <div class="h2 mb-5 text-center">@Localizer["Edit question"]</div>
 
                 <form asp-controller="Questions" asp-action="UpdateOptionsQuestion" method="post">
                     <input data-val="true" data-val-required="The Id field is required." id="Id" name="Id" type="hidden" value="@Model.Id">
                     <div class="form-group mb-2">
-                        <input class="form-control" type="text" placeholder="Question text" asp-for="QuestionText" />
+                        <input class="form-control" type="text" placeholder="@Localizer["Question text"]" asp-for="QuestionText" />
                         <span asp-validation-for="QuestionText" class="text-danger"></span>
                     </div>
                     <div class="form-group mb-2">
                         <label class="form-label">Index</label>
-                        <input class="form-control" type="number" placeholder="Index" asp-for="Index" />
+                        <input class="form-control" type="number" placeholder="@Localizer["Index"]" asp-for="Index" />
                         <span asp-validation-for="Index" class="text-danger"></span>
                     </div>
 
                     <div class="form-check mb-2">
-                        <label class="form-check-label">Required</label>
+                        <label class="form-check-label">@Localizer["Required"]</label>
                         <input class="form-check-input" type="checkbox" asp-for="IsRequired" />
                     </div>
                     <div class="form-check mb-2">
-                        <label class="form-check-label">Allow multiple choice</label>
+                        <label class="form-check-label">@Localizer["Allow multiple choice"]</label>
                         <input class="form-check-input" type="checkbox" asp-for="AllowMultipleChoice" />
                     </div>
                     <div class="form-group mb-2">
@@ -42,11 +44,11 @@
                             }
                         </div>
 
-                        <input class="form-control btn" type="button" id="addoption-@Model.Id" value="Add new option" />
+                        <input class="form-control btn" type="button" id="addoption-@Model.Id" value="@Localizer["Add new option"]" />
                     </div>
 
                     <div class="form-group mb-2">
-                        <input class="btn btn-primary" type="submit" />
+                        <input class="btn btn-primary" type="submit" value="@Localizer["Save"]"/>
                     </div>
                 </form>
 

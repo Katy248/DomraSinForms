@@ -6,22 +6,23 @@
 @model FillFormViewModel
 @inject IViewLocalizer Localizer
 @{
-    //ViewData["Title"] = $"{Localizer["Fill form"].Value} {Model.Form.Title}";
+    ViewData["Title"] = $"{Localizer["Fill form"]?.Value} {Model.FormId}";
 }
 
 <div class="row g-3 justify-content-center">
 
+    <div class="col-12 text-center">@Localizer["Form"]</div>
     <div class="col-sm-10 col-md-7 col-xl-5 row g-3">
         @foreach (var answer in Model.Answers.OrderBy(a => a.Index))
         {
             <div class="col-12"> @await Html.PartialAsync("_AnswerPartial", answer) </div>
         }
-        
+        <div class="col-12">
+            <form asp-controller="Answers" asp-action="CompleteForm" asp-route-formId="@Model.FormId" method="post">
+                <input class="form-control btn btn-primary" type="submit" value="@Localizer["Send"]" />
+            </form>
+        </div>
     </div>
-    <div class="col-12">
-        <form asp-controller="Answers" asp-action="CompleteForm" asp-route-formId="@Model.FormId" method="post">
-            <input class="form-control btn btn-primary" type="submit" value="@Localizer["Send"]" />
-        </form>
-    </div>
+    
 
 </div>

@@ -117,19 +117,13 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="Answers" xml:space="preserve">
-    <value>Answers</value>
+  <data name="DomraSin is a software for creating Forms (tests or questionnaire) that you can use for free" xml:space="preserve">
+    <value>DomraSin is a software for creating Forms (tests or questionnaire) that you can use for free</value>
   </data>
-  <data name="Create new form" xml:space="preserve">
-    <value>Create new form</value>
+  <data name="Home page" xml:space="preserve">
+    <value>Home page</value>
   </data>
-  <data name="DomraSinForms" xml:space="preserve">
-    <value>DomraSinForms</value>
-  </data>
-  <data name="DSF" xml:space="preserve">
-    <value>DSF</value>
-  </data>
-  <data name="Forms" xml:space="preserve">
-    <value>Forms</value>
+  <data name="What is the DomraSin" xml:space="preserve">
+    <value>What is the DomraSin</value>
   </data>
 </root>

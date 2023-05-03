@@ -1,5 +1,7 @@
 ﻿@using DomraSinForms.Application.Questions.Commands.CreateTextQuestion;
 @using DomraSinForms.Domain.Models.Questions;
+@using Microsoft.AspNetCore.Mvc.Localization;
+@inject IViewLocalizer Localizer
 @model CreateTextQuestionCommand
 @{
     Model.FormId = ViewData["FormId"] as string ?? "";
@@ -11,28 +13,28 @@
 
             <div class="modal-body justify-content-center">
 
-                <div class="h2 mb-5 text-center">New question</div>
+                <div class="h2 mb-5 text-center">@Localizer["New question"]</div>
 
                 <form asp-controller="Questions" asp-action="CreateTextQuestion" method="post">
 
                     <input asp-for="FormId" value="@Model.FormId" hidden />
 
                     <div class="form-group mb-2">
-                        <input class="form-control" type="text" placeholder="Question text" asp-for="QuestionText" />
+                        <input class="form-control" type="text" placeholder="@Localizer["Question text"]" asp-for="QuestionText" />
                         <span asp-validation-for="QuestionText" class="text-danger"></span>
                     </div>
 
                     <div class="form-check mb-2">
-                        <label class="form-check-label">Required</label>
+                        <label class="form-check-label">@Localizer["Required"]</label>
                         <input class="form-check-input" type="checkbox" asp-for="IsRequired" />
                     </div>
                     <div class="form-group mb-2">
-                        <label class="form-label">Question type</label>
+                        <label class="form-label">@Localizer["Question type"]</label>
                         <select class="form-select" asp-for="Type" asp-items="@(Html.GetEnumSelectList<TextQuestionType>())"></select>
                     </div>
 
                     <div class="form-group mb-2">
-                        <input class="btn btn-primary" type="submit" />
+                        <input class="btn btn-primary" type="submit" value="@Localizer["Create"]" />
                     </div>
                 </form>
 

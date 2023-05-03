@@ -117,19 +117,25 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="Answers" xml:space="preserve">
-    <value>Answers</value>
+  <data name="Add new option" xml:space="preserve">
+    <value>Добавить вариант</value>
   </data>
-  <data name="Create new form" xml:space="preserve">
-    <value>Create new form</value>
+  <data name="Allow multiple choice" xml:space="preserve">
+    <value>Допускает несколько вариантов</value>
   </data>
-  <data name="DomraSinForms" xml:space="preserve">
-    <value>DomraSinForms</value>
+  <data name="Create" xml:space="preserve">
+    <value>Создать</value>
   </data>
-  <data name="DSF" xml:space="preserve">
-    <value>DSF</value>
+  <data name="New question" xml:space="preserve">
+    <value>Новый вопрос</value>
   </data>
-  <data name="Forms" xml:space="preserve">
-    <value>Forms</value>
+  <data name="Options" xml:space="preserve">
+    <value>Варианты</value>
+  </data>
+  <data name="Question text" xml:space="preserve">
+    <value>Тест вопроса</value>
+  </data>
+  <data name="Required" xml:space="preserve">
+    <value>Обязательноый</value>
   </data>
 </root>

@@ -23,7 +23,6 @@
             case (CheckAnswer checkAnswer):
                 {
                     @await Html.PartialAsync("/Views/Answers/AnswerTypes/_CheckAnswerPartial.cshtml", checkAnswer, new ViewDataDictionary(ViewData) {{"ModalId", modalId}})
-                    ;
                 }
                 break;
             case (RadioAnswer radioAnswer):
