@@ -1,16 +1,21 @@
-﻿using DomraSinForms.Domain.Models.Questions;
+﻿using DomraSinForms.Domain.Models.Answers;
+using DomraSinForms.Domain.Models.Questions;
 
 namespace Forms.Mvc.Models.Answers.AnswersModels;
 
 public class StringAnswer : AnswerViewModel
 {
-    public StringAnswer(TextQuestion question) : base(question)
+    public StringAnswer(TextQuestion question, Answer answer) : base(question, answer)
     {
     }
     public StringAnswer() : base()
     {
         
     }
-    public string Answer { get; set; }
-    public override string Value => Answer; 
+    public string AnswerValue { get; set; }
+    public override string Value
+    {
+        get => AnswerValue;
+        set => AnswerValue = value;
+    }
 }

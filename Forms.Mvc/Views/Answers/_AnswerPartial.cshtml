@@ -3,34 +3,48 @@
 @using Forms.Mvc.Models.Answers;
 @using Forms.Mvc.Models.Answers.AnswersModels;
 @using Forms.Mvc.Services;
+@using Microsoft.AspNetCore.Mvc.Localization;
 @model IAnswerViewModel
+@inject IViewLocalizer Localizer
 @{
-    var radioName = $"radioGroup{Model.Index}";
+    var modalId = $"modal{Model.Index}";
+    string btnClass = string.IsNullOrWhiteSpace(Model.Value) ? "btn-outline-secondary" : "btn-outline-success";
+    string iconClass = string.IsNullOrWhiteSpace(Model.Value) ? "" : "check2";
 }
 
-@switch (Model)
-{
-    case (CheckAnswer checkAnswer):
+<div class="card">
+    <div class="card-body">
+        <div class="card-title h5">@Model.Question?.QuestionText <i class="bi-@iconClass ms-2"></i></div>
+        <button class="btn @btnClass form-control mt-2" type="button" data-bs-toggle="modal" data-bs-target="#@modalId">
+            @Localizer["Answer"]
+        </button>
+        @switch (Model)
         {
-            @await Html.PartialAsync("/Views/Answers/AnswerTypes/_CheckAnswerPartial.cshtml", checkAnswer);
-        }
-        break;
-    case (RadioAnswer radioAnswer):
-        {
-            @await Html.PartialAsync("/Views/Answers/AnswerTypes/_RadioAnswerPartial.cshtml", radioAnswer);
-        }
-        break;
-    case (StringAnswer stringAnswer):
-        {
-            @await Html.PartialAsync("/Views/Answers/AnswerTypes/_StringAnswerPartial.cshtml", stringAnswer);
-        }
-        break;
-    case (DecimalAnswer decimalAnswer):
-        {
-            @await Html.PartialAsync("/Views/Answers/AnswerTypes/_DecimalAnswerPartial.cshtml", decimalAnswer);
-        }
-        break;
+            case (CheckAnswer checkAnswer):
+                {
+                    @await Html.PartialAsync("/Views/Answers/AnswerTypes/_CheckAnswerPartial.cshtml", checkAnswer, new ViewDataDictionary(ViewData) {{"ModalId", modalId}})
+                    ;
+                }
+                break;
+            case (RadioAnswer radioAnswer):
+                {
+                    @await Html.PartialAsync("/Views/Answers/AnswerTypes/_RadioAnswerPartial.cshtml", radioAnswer, new ViewDataDictionary(ViewData) {{"ModalId", modalId}})
+                }
+                break;
+            case (StringAnswer stringAnswer):
+                {
+                    @await Html.PartialAsync("/Views/Answers/AnswerTypes/_StringAnswerPartial.cshtml", stringAnswer, new ViewDataDictionary(ViewData) {{"ModalId", modalId}})
+                }
+                break;
+            case (DecimalAnswer decimalAnswer):
+                {
+                    @*@await Html.PartialAsync("/Views/Answers/AnswerTypes/_DecimalAnswerPartial.cshtml", decimalAnswer)*@
+                }
+                break;
 
-}
+        }
+    </div>
+</div>
+
 
 

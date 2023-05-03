@@ -16,7 +16,7 @@ public class CreateFormAnswersCommandHandler : IRequestHandler<CreateFormAnswers
     {
         var formAnswers = await _context.FormAnswers
             .Include(x => x.Answers)
-            .FirstOrDefaultAsync(fa => fa.UserId == request.UserId && fa.Id == request.Id);
+            .FirstOrDefaultAsync(fa => fa.UserId == request.UserId && fa.FormId == request.FormId && !fa.IsCompleted, cancellationToken);
 
         if (formAnswers is null)
             return null;

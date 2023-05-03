@@ -40,25 +40,19 @@ public class AnswersController : Controller
         var cvm = new FillFormViewModel(command);
         return View(cvm);
     }
-    [HttpPost("/string")]
-    public async Task<IActionResult> UpdateForm([FromBody] StringAnswer answer)
+    public async Task<IActionResult> UpdateStringAnswer([Bind] StringAnswer answer)
     {
-        var result = await UpdateForm(viewModel: answer);
-        if (result is not null)
-            return Ok(result);
-        
-        return BadRequest();
+        return (await UpdateForm(answer));
     }
-    [HttpPost("/radio")]
-    public async Task<IActionResult> UpdateForm([FromBody] RadioAnswer answer)
+    public async Task<IActionResult> UpdateCheckAnswer([Bind] CheckAnswer answer)
     {
-        var result = await UpdateForm(viewModel: answer);
-        if (result is not null)
-            return Ok(result);
-        
-        return BadRequest();
+        return (await UpdateForm(answer));
     }
-    public async Task<FormAnswers?> UpdateForm(IAnswerViewModel viewModel)
+    public async Task<IActionResult> UpdateRadioAnswer([Bind] RadioAnswer answer)
+    {
+        return (await UpdateForm(answer));
+    }
+    public async Task<IActionResult> UpdateForm(IAnswerViewModel viewModel)
     {
         var result = await _mediator.Send(new UpdateFormAnswersCommand 
         { 
@@ -70,16 +64,19 @@ public class AnswersController : Controller
                 Value = viewModel.Value,
             }
         });
-        return result;
+        if (result is not null)
+            return RedirectToAction(nameof(Fill), routeValues: new { formId = result.FormId });
+
+        return RedirectToAction("Index", "Home");
     }
     [HttpPost]
     public async Task<IActionResult> CompleteForm(string formId)
     {
-        var result = await _mediator.Send(new CreateFormAnswersCommand { Id = formId, UserId = "anon" });
+        var result = await _mediator.Send(new CreateFormAnswersCommand { FormId = formId, UserId = "anon" });
         if (result is not null)
-            return Ok(result);
+            return RedirectToAction("Index", "Home");
         
-        return BadRequest();
+        return RedirectToAction(nameof(Fill), routeValues: new { formId = result.FormId });
     }
 
 

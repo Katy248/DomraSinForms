@@ -8,6 +8,6 @@ public interface IAnswerViewModel
     public string FormId { get; set; }
     public int Index { get; set; }
     public bool IsRequired { get; set; }
-    public string Value { get; }
+    public string Value { get; set; }
     public QuestionBase? Question { get; set; }
 }

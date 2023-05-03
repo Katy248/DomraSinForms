@@ -1,4 +1,5 @@
-﻿using DomraSinForms.Domain.Models.Questions;
+﻿using DomraSinForms.Domain.Models.Answers;
+using DomraSinForms.Domain.Models.Questions;
 
 namespace Forms.Mvc.Models.Answers.AnswersModels;
 
@@ -6,7 +7,7 @@ public class DecimalAnswer : AnswerViewModel
 {
     public DecimalAnswer() : base() { }
 
-    public DecimalAnswer(TextQuestion question) : base(question)
+    public DecimalAnswer(TextQuestion question, Answer answer) : base(question, answer)
     {
         
     }

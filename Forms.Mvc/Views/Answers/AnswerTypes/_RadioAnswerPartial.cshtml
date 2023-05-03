@@ -1,48 +1,42 @@
 ﻿@using Forms.Mvc.Models.Answers.AnswersModels;
+@using Microsoft.AspNetCore.Mvc.Localization;
 @model RadioAnswer
+@inject IViewLocalizer Localizer
 @{
-    var modelId = "__"+Model.QuestionId.Replace('-', '_');
+    var modalId = ViewData["ModalId"] as string ?? "somethingWrongWithThisModal";
+    var modelId = "__" + Model.QuestionId.Replace('-', '_');
 }
-<form id="@(modelId)-form">
-    <input asp-for="FormId" id="@(modelId)-formid" hidden/>
-    <input asp-for="Index" id="@(modelId)-index" hidden />
-    <input asp-for="IsRequired" id="@(modelId)-isrequired" hidden />
-    <input asp-for="QuestionId" id="@(modelId)-questionid" hidden />
-    @for (int i = 0; i < Model.Options.Count(); i++)
-    {
-        <div class="form-check">
-            <input class="form-check-input" name="radio-@(modelId)" asp-for="SelectedValue"type="radio" value="" id="@(modelId)-check-@(i)">
-            <label class="form-check-label" for="@(modelId)check">@Model.Options[i]</label>
+<div class="modal fade" tabindex="-1" id="@modalId">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content justify-content-center">
+            <form asp-controller="Answers" asp-action="UpdateRadioAnswer" method="post">
+                <div class="modal-header">
+                    <div class="modal-title h5">@Model.Question?.QuestionText</div>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="@Localizer["Close"]"></button>
+                </div>
+                <div class="modal-body">
 
+                    <input asp-for="FormId" hidden />
+                    <input asp-for="Index" hidden />
+                    <input asp-for="IsRequired" hidden />
+                    <input asp-for="QuestionId" hidden />
+                    @for (int i = 0; i < Model.Options.Count(); i++)
+                    {
+                        <div class="form-check">
+                            <input asp-for="Options[i]" hidden/>
+                            @Html.RadioButtonFor(m => m.SelectedValue, Model.Options[i], new { @class = "form-check-input",id=$"{modelId}-check-{i}"})
+                            @*
+                            <input class="form-check-input" name="radio-@(modelId)" asp-for="SelectedValue" type="radio" value="@Model.Options[i]" id="@(modelId)-check-@(i)">
+                            *@
+                            <label class="form-check-label" for="@(modelId)check">@Model.Options[i]</label>
+
+                        </div>
+                    }
+                    <div class="form-group mt-2">
+                        <button type="submit" class="btn btn-success form-control">@Localizer["Send"]</button>
+                    </div>
+
+                </div>
+            </form>
         </div>
-    }
-</form>
-
-<script>
-    addEventListener("load", (event) => {
-        let radios = document.getElementsByName("radio-@(modelId)");
-        radios.forEach(radio =>{
-            radio.addEventListener("click", event => {
-                console.log("radio click");
-                let result = updateForm("POST", (actionUrl), @(modelId)body())
-                    .then(data => {
-                        console.log("gets data");
-                        //document.getElementById("options-@Model.QuestionId").appendChild(createElementFromHTML(data));
-                    })
-                    .catch(err => console.error(err));
-            });
-        });
-    });
-    function @(modelId)body() {
-        let result = {
-            FormId: document.getElementById("@(modelId)-formid").value,
-            Index: Number(document.getElementById("@(modelId)-index").value),
-            IsRequired: document.getElementById("@(modelId)-isrequired").value == "true",
-            QuestionId: document.getElementById("@(modelId)-questionid").value,
-            SelectedValue: document.querySelector('input[name="radio-@(modelId)"]:checked').value
-        };
-        console.log(JSON.stringify(result));
-        return JSON.stringify(result);
-    }
-    
-</script>
+    </div>

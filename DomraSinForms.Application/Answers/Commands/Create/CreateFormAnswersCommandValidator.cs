@@ -6,6 +6,6 @@ public class CreateFormAnswersCommandValidator : AbstractValidator<CreateFormAns
     public CreateFormAnswersCommandValidator()
     {
         RuleFor(c => c.UserId).NotEmpty();
-        RuleFor(c => c.Id).NotEmpty();
+        RuleFor(c => c.FormId).NotEmpty();
     }
 }

@@ -15,18 +15,18 @@ public class AnswerFactory : IAnswerViewModelFactory
                 case OptionsQuestion oq:
                     if (oq.AllowMultipleChoice)
                     {
-                        yield return new CheckAnswer(oq);
+                        yield return new CheckAnswer(oq, answer);
                     }
                     else
                     {
-                        yield return new RadioAnswer(oq);
+                        yield return new RadioAnswer(oq, answer);
                     }
                     break;
                 case TextQuestion tq:
                     switch (tq.Type)
                     {
                         case TextQuestionType.Text:
-                            yield return new StringAnswer(tq);
+                            yield return new StringAnswer(tq, answer);
                             break;
                         case TextQuestionType.Number:
                             break;

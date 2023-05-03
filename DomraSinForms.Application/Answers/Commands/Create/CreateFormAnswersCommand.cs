@@ -5,5 +5,5 @@ namespace DomraSinForms.Application.Answers.Commands.Create;
 public class CreateFormAnswersCommand : IRequest<FormAnswers>
 {
     public string UserId { get; set; }
-    public string Id { get; set; }
+    public string FormId { get; set; }
 }
