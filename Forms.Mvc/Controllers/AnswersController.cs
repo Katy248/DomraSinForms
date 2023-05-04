@@ -73,7 +73,7 @@ public class AnswersController : Controller
     public async Task<IActionResult> CompleteForm(string formId)
     {
         var result = await _mediator.Send(new CreateFormAnswersCommand { FormId = formId, UserId = "anon" });
-        if (result is not null)
+        if (result is null)
             return RedirectToAction("Index", "Home");
         
         return RedirectToAction(nameof(Fill), routeValues: new { formId = result.FormId });
