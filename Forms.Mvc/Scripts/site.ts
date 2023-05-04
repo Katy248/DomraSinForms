@@ -1,4 +1,6 @@
-class ThemeSwitch {    constructor() {
+'use strict';
+class ThemeSwitch {
+    constructor() {
         this.themeSwitcher.addEventListener("click", (event) => {
             localStorage.setItem(
                 "theme",

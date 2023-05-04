@@ -1,0 +1,50 @@
+﻿@using Microsoft.AspNetCore.Mvc.Localization;
+@inject IViewLocalizer Localizer
+@model string
+@{
+    var modalId = ViewData["ModalId"] as string ?? "wrongId";
+    var formattedId = modalId.Replace('-', '_');
+    var url = Url.ActionLink(controller: "Answers", action: "Fill", values: new { formId = Model });
+}
+<div class="modal" id="@modalId">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content p-1">
+
+            <div class="modal-body justify-content-center">
+
+                <div class="card-title h2">@Localizer["Share"]</div>
+                <div class="card-text h4 mb-2">@Localizer["Link:"]</div>
+                <div class="input-group mb-2">
+                    <input class="form-control" value="@url" id="input@(formattedId)" />
+                    <button class="btn btn-outline-info" id="button@(formattedId)"><i class="bi-clipboard2-plus"></i></button>
+                </div>
+                <div class="form-group" >
+                    <button class="btn btn-outline-secondary form-control" data-bs-dismiss="modal">Ok</button>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>
+<script>
+    console.log(document);
+    document.addEventListener("load", loadEvent => {
+        document.getElementById("button@(formattedId)").addEventListener("click", clickEvent => {
+            let input = document.getElementById("input@(formattedId)");
+            console.log(input);
+            let copyText = document.getElementById("input@(formattedId)").value;
+            document.getElementById("input@(formattedId)").select();
+
+            if(!navigator.clipboard) {
+                console.error("can't copy");
+                return;
+            }
+
+            navigator.clipboard.writeText(copyText)
+                .then(ok => console.log('Its ok'))
+                .catch(err => console.log('Something went wrong', err));
+        });
+    });
+
+    
+</script>

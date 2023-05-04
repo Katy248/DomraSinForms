@@ -71,7 +71,8 @@
                             <a class="btn btn-sm btn-outline-primary form-control" asp-controller="Answers" asp-action="Fill" asp-route-formId="@form.Id">@Localizer["Fill"]</a>
                         </div>
                         <div class="col-6 col-md-3">
-                            <a class="btn btn-sm btn-outline-info form-control">@Localizer["Share"]</a>
+                            <a class="btn btn-sm btn-outline-info form-control" data-bs-toggle="modal" data-bs-target="#share@(form.Id)">@Localizer["Share"]</a>
+                            @await Html.PartialAsync("_ShareModalPartial", form.Id, new ViewDataDictionary(ViewData){{"ModalId", $"share{form.Id}"}})
                         </div>
                         <div class="col-6 col-md-3">
                             <a class="btn btn-sm btn-outline-danger form-control" data-bs-toggle="modal" data-bs-target="#delete@(form.Id)">@Localizer["Delete"]</a>

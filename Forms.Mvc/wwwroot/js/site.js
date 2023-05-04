@@ -1,3 +1,4 @@
+'use strict';
 var ThemeSwitch = (function () {
     function ThemeSwitch() {
         var _this = this;
