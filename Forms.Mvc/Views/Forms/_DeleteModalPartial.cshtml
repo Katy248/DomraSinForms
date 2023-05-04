@@ -1,0 +1,25 @@
+﻿@using DomraSinForms.Application.Forms.Queries.GetList;
+@using Microsoft.AspNetCore.Mvc.Localization;
+@model FormDto
+@inject IViewLocalizer Localizer
+@{
+    var modalId = ViewData["ModalId"] as string ?? "wrongId";
+}
+<div class="modal" id="@modalId">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content p-1 text-center">
+
+            <div class="modal-body justify-content-center">
+
+                <div class="card-title h2">@Localizer["Delete form?"]</div>
+                <div class="card-text h4 mb-1"><q>@Model.Title</q></div>
+                <div class="card-text h4 mb-4">@Localizer["This form will be permanently deleted"]</div>
+                <form asp-action="Delete" method="post">
+                    <input class="btn btn-outline-danger form-control" type="submit" value="@Localizer["Delete"]" />
+                </form>
+
+            </div>
+
+        </div>
+    </div>
+</div>

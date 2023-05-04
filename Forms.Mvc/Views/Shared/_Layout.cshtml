@@ -1,5 +1,7 @@
-﻿@using Microsoft.AspNetCore.Mvc.Localization
+﻿@using Microsoft.AspNetCore.Identity;
+@using Microsoft.AspNetCore.Mvc.Localization
 @inject IViewLocalizer Localizer
+@inject SignInManager<IdentityUser> SignInManager
 
 <!DOCTYPE html>
 <html lang="en">
@@ -27,14 +29,18 @@
                     <span class="navbar-toggler-icon"></span>
                 </button>
                 <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
-                    <ul class="navbar-nav flex-grow-1">
-                        <li class="nav-item">
-                            <a class="nav-link" asp-area="" asp-controller="Forms" asp-action="Index">@Localizer["Forms"]</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" asp-area="" asp-controller="Forms" asp-action="Create">@Localizer["Create new form"]</a>
-                        </li>
-                    </ul>
+                    @if(SignInManager.IsSignedIn(User))
+                    {
+                        <ul class="navbar-nav flex-grow-1">
+                            <li class="nav-item">
+                                <a class="nav-link" asp-area="" asp-controller="Forms" asp-action="Index">@Localizer["Forms"]</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" asp-area="" asp-controller="Forms" asp-action="Create">@Localizer["Create new form"]</a>
+                            </li>
+                        </ul>
+                    }
+                    
                     <partial name="_LoginPartial" />
                 </div>
             </div>

@@ -5,25 +5,40 @@
 
 @{
     ViewData["Title"] = Localizer["Forms"];
-    ViewData["PageCount"] = 6;
     var searchText = Model.SearchText;
+    string LastEditFormat(DateTime lastEditDate)
+    {
+        if (lastEditDate == DateTime.MinValue)
+        {
+            return "";
+        }
+        else if (lastEditDate.Date == DateTime.Today.Date)
+        {
+            return lastEditDate.ToLocalTime().ToShortTimeString();
+        }
+        else
+        {
+            return lastEditDate.ToLocalTime().ToShortDateString();
+        }
+    }
 }
-<div class="row g-5 justify-content-between">
+<div class="row g-3 justify-content-between">
 
-    <div class="col-12 text-center display-5">@Localizer["Forms"]</div>
+    <div class="col-12 text-center display-5 mb-5">@Localizer["Forms"]</div>
 
 
-    <div class="col-6 col-sm-4 text-start">
-        <a class="btn btn-primary" asp-action="Create"><i class="bi-plus-circle me-2"></i> @Localizer["New form"]</a>
+    <div class="col-12 col-sm-4 text-sm-start text-center">
+        <a class="btn btn-primary form-control" asp-action="Create"><i class="bi-plus-circle me-2"></i> @Localizer["New form"]</a>
     </div>
 
-    <div class="col-6 col-sm-4 justify-content-center btn-toolbar" role="toolbar" aria-label="Toolbar with button groups">
+    <div class="col-12 col-sm-4 justify-content-center btn-toolbar" role="toolbar" aria-label="Toolbar with button groups" @(Model.PageCount == 1 ? "hidden" : "")>
         <div class="btn-group me-2" role="group" aria-label="First group">
             @for (int i = 0; i < Model.PageCount; i++)
             {
                 <a asp-controller="Forms"
                asp-action="Index"
                asp-route-page="@i"
+               asp-route-count="@Model.Count"
                    class="btn @((i) == Model.Page ? "btn-secondary" : "btn-outline-secondary")"
                    type="button"> @(i + 1)</a>
             }
@@ -38,8 +53,37 @@
             </div>
         </form>
     </div>
+    @foreach (var form in Model.Forms)
+    {
+        <div class="col-12 col-md-6">
+            <div class="card" asp-action="Edit" asp-route-id="@form.Id">
+                <a class="card-body text-decoration-none" asp-action="Edit" asp-route-id="@form.Id">
+                    <div class="card-title h5">@form.Title</div>
+                    <div class="card-text mb-2">@form.Description</div>
+                    <div class="card-text text-muted">@Localizer["Last edit"]: @LastEditFormat(form.LastUpdateDate)</div>
+                </a>
+                <div class="card-footer">
+                    <div class="row g-1">
+                        <div class="col-6 col-md-3">
+                            <a class="btn btn-sm btn-outline-secondary form-control" asp-action="Edit" asp-route-id="@form.Id">@Localizer["Edit"]</a>
+                        </div>
+                        <div class="col-6 col-md-3">
+                            <a class="btn btn-sm btn-outline-primary form-control" asp-controller="Answers" asp-action="Fill" asp-route-formId="@form.Id">@Localizer["Fill"]</a>
+                        </div>
+                        <div class="col-6 col-md-3">
+                            <a class="btn btn-sm btn-outline-info form-control">@Localizer["Share"]</a>
+                        </div>
+                        <div class="col-6 col-md-3">
+                            <a class="btn btn-sm btn-outline-danger form-control" data-bs-toggle="modal" data-bs-target="#delete@(form.Id)">@Localizer["Delete"]</a>
+                            @await Html.PartialAsync("_DeleteModalPartial", form, new ViewDataDictionary(ViewData){{"ModalId", $"delete{form.Id}"}})
+                        </div>
+                    </div>
+                </div>
+            </div>
 
-    <table class="col-11 table">
+        </div>
+    }
+    @*<table class="col-11 table">
         <thead>
             <tr>
                 <th>
@@ -95,13 +139,15 @@
                 </tr>
             }
         </tbody>
-    </table>
+    </table>*@
 
 
 
 </div>
 
-
+<div class="row g-3">
+    
+</div>
 
 <div class="modal" id="deleteModal">
     <div class="modal-dialog modal-dialog-centered">
