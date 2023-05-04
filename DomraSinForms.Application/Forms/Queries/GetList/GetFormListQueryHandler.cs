@@ -6,7 +6,7 @@ using DomraSinForms.Persistence;
 
 namespace DomraSinForms.Application.Forms.Queries.GetList
 {
-    public class GetFormListQueryHandler : IRequestHandler<GetFormListQuery, FormsDto>
+    public class GetFormListQueryHandler : IRequestHandler<GetFormListQuery, FormListDto>
     {
         private readonly ApplicationDbContext _context;
         private readonly IMapper _mapper;
@@ -16,16 +16,18 @@ namespace DomraSinForms.Application.Forms.Queries.GetList
             _context = context;
             _mapper = mapper;
         }
-        public async Task<FormsDto> Handle(GetFormListQuery request, CancellationToken cancellationToken)
+        public async Task<FormListDto> Handle(GetFormListQuery request, CancellationToken cancellationToken)
         {
-            var result = new FormsDto
+            var result = new FormListDto
             {
                 Count = request.Count,
                 Page = request.Page,
                 SearchText = request.SearchText,
+                UserId = request.UserId,
             };
 
             var forms = _context.Forms
+                .Where(f => f.CreatorId == request.UserId)
                 .Where(f => f.Title.Contains(request.SearchText) | f.Description.Contains(request.SearchText))
                 .Skip(request.Page * request.Count)
                 .Take(request.Count);

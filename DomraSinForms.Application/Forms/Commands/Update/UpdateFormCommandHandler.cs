@@ -23,6 +23,7 @@ namespace DomraSinForms.Application.Forms.Commands.Update
             _logger.LogWarning($"Start handling of {nameof(UpdateFormCommand)}");
             var form = await _context.Forms
                 .Include(f => f.Questions)
+                .Where(f => f.CreatorId == request.UserId)
                 .FirstOrDefaultAsync(f => f.Id == request.Id, cancellationToken);
 
             if (form is null)
@@ -30,9 +31,10 @@ namespace DomraSinForms.Application.Forms.Commands.Update
 
             form.Title = request.Title;
             form.Description = request.Description;
+
             _context.Update(form);
             await _context.SaveChangesAsync(cancellationToken);
-            _logger.LogWarning($"Finish handling of {nameof(UpdateFormCommand)}");
+
             return form;
         }
     }
