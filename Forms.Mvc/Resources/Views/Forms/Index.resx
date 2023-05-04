@@ -120,9 +120,6 @@
   <data name="Delete" xml:space="preserve">
     <value>Delete</value>
   </data>
-  <data name="Delete form &lt;q&gt;&lt;/q&gt;?" xml:space="preserve">
-    <value>Delete form &lt;q&gt;&lt;/q&gt;?</value>
-  </data>
   <data name="Description" xml:space="preserve">
     <value>Description</value>
   </data>
@@ -135,11 +132,17 @@
   <data name="Forms" xml:space="preserve">
     <value>Forms</value>
   </data>
+  <data name="Last edit" xml:space="preserve">
+    <value>Last edit</value>
+  </data>
   <data name="New form" xml:space="preserve">
     <value>New form</value>
   </data>
   <data name="Search ..." xml:space="preserve">
     <value>Search ...</value>
+  </data>
+  <data name="Share" xml:space="preserve">
+    <value>Share</value>
   </data>
   <data name="Title" xml:space="preserve">
     <value>Title</value>
