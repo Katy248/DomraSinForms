@@ -14,13 +14,14 @@ public class DeleteFormCommandHandler : IRequestHandler<DeleteFormCommand, bool>
     }
     public async Task<bool> Handle(DeleteFormCommand request, CancellationToken cancellationToken)
     {
-        var form = await _context.Forms.FirstOrDefaultAsync(f => f.Id ==request.Id && f.CreatorId == request.UserId, cancellationToken);
+        var form = await _context.Forms.FirstOrDefaultAsync(f => f.Id == request.Id && f.CreatorId == request.UserId, cancellationToken);
         if (form == null)
         {
             return false;
         }
-        _context.Forms.Remove(form);
+        var result = _context.Forms.Remove(form);
         await _context.SaveChangesAsync(cancellationToken);
+
         return true;
     }
 }

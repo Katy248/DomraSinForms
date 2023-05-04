@@ -20,5 +20,16 @@ public class ApplicationDbContext : IdentityDbContext
     public DbSet<Answer> AnswerBlocks { get; set; }
     public DbSet<TextQuestion> TextQuestions { get; set; }
     public DbSet<OptionsQuestion> OptionsQuestions { get; set; }
+    public DbSet<QuestionOption> QuestionOptions { get; set; }
+    protected override void OnModelCreating(ModelBuilder builder)
+    {
+        builder
+            .Entity<OptionsQuestion>()
+            .HasMany<QuestionOption>(q => q.Options)
+            .WithOne(q => q.Question)
+            .HasForeignKey(q => q.QuestionId)
+            .OnDelete(DeleteBehavior.Cascade);
+        base.OnModelCreating(builder);
+    }
 }
 

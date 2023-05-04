@@ -44,28 +44,11 @@ public class CreateFormAnswersCommandHandler : IRequestHandler<CreateFormAnswers
         }
 
         formAnswers.IsCompleted = true;
+        formAnswers.CreationDate = DateTime.UtcNow;
 
         _context.Update(formAnswers);
-        await _context.SaveChangesAsync();
-
-        return formAnswers;
-        
-        
-        
-        /*var form = await _context.Forms.FindAsync(request.FormId, cancellationToken);
-
-        if (form is null)
-            return null;
-
-        var answers = new FormAnswers
-        {
-            FormId = request.FormId,
-            Answers = request.Answers.ToList(),
-        };
-
-        await _context.AddAsync(answers, cancellationToken);
         await _context.SaveChangesAsync(cancellationToken);
 
-        return answers;*/
+        return formAnswers;
     }
 }
