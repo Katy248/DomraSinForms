@@ -11,6 +11,8 @@ public class FormDto : IMapWith<Form>
     public string Title { get; set; }
     public string Description { get; set; }
     public string CreatorId { get; set; }
+    public DateTime CreationDate { get; set; }
+    public DateTime LastUpdateDate { get; set; }
     public List<QuestionBase> Questions { get; set; } = new();
 
     public void Mapping(Profile profile)

@@ -13,11 +13,11 @@
     <div class="col-12 text-center display-5">@Localizer["Forms"]</div>
 
 
-    <div class="col-4 text-start">
+    <div class="col-6 col-sm-4 text-start">
         <a class="btn btn-primary" asp-action="Create"><i class="bi-plus-circle me-2"></i> @Localizer["New form"]</a>
     </div>
 
-    <div class="col-4 justify-content-center btn-toolbar" role="toolbar" aria-label="Toolbar with button groups">
+    <div class="col-6 col-sm-4 justify-content-center btn-toolbar" role="toolbar" aria-label="Toolbar with button groups">
         <div class="btn-group me-2" role="group" aria-label="First group">
             @for (int i = 0; i < Model.PageCount; i++)
             {
@@ -30,7 +30,7 @@
         </div>
     </div>
 
-    <div class="col-4">
+    <div class="col-12 col-sm-4">
         <form asp-controller="Forms" asp-action="Index" asp-route-page="@searchText">
             <div class="input-group">
                 <input asp-for="@searchText" type="text" class="form-control" placeholder="@Localizer["Search ..."]" aria-label="Input group example" aria-describedby="btnGroupAddon">
@@ -45,29 +45,52 @@
                 <th>
                     @Localizer["Title"]
                 <th>
-                        @Localizer["Description"]
+                    @Localizer["Description"]
+                </th>
+                <th>
+                    @Localizer["Creation date"]
+                </th>
+                <th>
+                    @Localizer["Last edit"]
                 </th>
                 <th></th>
             </tr>
         </thead>
         <tbody>
-            @foreach (var item in Model.Forms)
+            @foreach (var form in Model.Forms)
             {
                 <tr>
                     <td>
-                        @Html.DisplayFor(modelItem => item.Title)
+                        @form.Title
                     </td>
                     <td>
-                        @Html.DisplayFor(modelItem => item.Description)
+                        @form.Description
                     </td>
                     <td>
-                        <a asp-action="Edit" asp-route-id="@item.Id">@Localizer["Edit"]</a> |
-                        <a asp-controller="Answers" asp-action="Fill" asp-route-formId="@item.Id">@Localizer["Fill"]</a> |
+                        @form.CreationDate.ToShortDateString()
+                    </td>
+                    <td>
+                        @if(form.LastUpdateDate == DateTime.MinValue) 
+                        {
+
+                        }
+                        else if(form.LastUpdateDate.Date == DateTime.Today.Date)
+                        {
+                            @form.LastUpdateDate.ToLocalTime().ToShortTimeString()   
+                        }
+                        else
+                        {
+                            @form.LastUpdateDate.ToLocalTime().ToShortDateString();
+                        }
+                    </td>
+                    <td>
+                        <a asp-action="Edit" asp-route-id="@form.Id">@Localizer["Edit"]</a> |
+                        <a asp-controller="Answers" asp-action="Fill" asp-route-formId="@form.Id">@Localizer["Fill"]</a> |
                         <a class="link-danger"
                            data-bs-toggle="modal"
                            data-bs-target="#deleteModal"
-                           data-bs-id="@item.Id"
-                           data-bs-title="@item.Title">@Localizer["Delete"]</a>
+                           data-bs-id="@form.Id"
+                           data-bs-title="@form.Title">@Localizer["Delete"]</a>
                     </td>
                 </tr>
             }

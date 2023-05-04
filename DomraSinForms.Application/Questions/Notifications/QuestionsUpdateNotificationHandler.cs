@@ -31,7 +31,7 @@ public class QuestionsUpdateNotificationHandler : INotificationHandler<Questions
                 question.Index = i + 1;
                 return question;
             }));
-
+        form.LastUpdateDate = DateTime.UtcNow;
         _context.Update(form);
 
         await _context.SaveChangesAsync(cancellationToken);

@@ -20,7 +20,7 @@ public class DeleteQuestionCommandHandler : IRequestHandler<DeleteQuestionComman
 
         if (question is null)
             return false;
-
+        
         _context.Questions.Remove(question);
         await _context.SaveChangesAsync(cancellationToken);
 

@@ -21,10 +21,6 @@ internal class UpdateOptionsCommandHandler : IRequestHandler<UpdateOptionsQuesti
         var question = await _context.OptionsQuestions
             .Include(q => q.Options)
             .FirstOrDefaultAsync(q => q.Id == request.Id, cancellationToken);
-        var question2 = await _context.OptionsQuestions
-            .Include(q => q.Options)
-            .FirstOrDefaultAsync(q => q.Id == request.Id, cancellationToken);
-
         if (question is null)
             return null;
 

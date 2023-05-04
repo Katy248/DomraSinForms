@@ -29,6 +29,7 @@ namespace DomraSinForms.Application.Forms.Queries.GetList
             var forms = _context.Forms
                 .Where(f => f.CreatorId == request.UserId)
                 .Where(f => f.Title.Contains(request.SearchText) | f.Description.Contains(request.SearchText))
+                .OrderByDescending(f => f.LastUpdateDate)
                 .Skip(request.Page * request.Count)
                 .Take(request.Count);
             result.Forms = _mapper.ProjectTo<FormDto>(forms).ToArray();

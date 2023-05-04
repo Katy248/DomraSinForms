@@ -11,6 +11,8 @@ public class Form : DbEntity
     public string Description { get; set; }
     [Required]
     public string CreatorId { get; set; }
+    public DateTime CreationDate { get; set; }
+    public DateTime? LastUpdateDate { get; set; }
     public List<QuestionBase> Questions { get; set; } = new();
     public List<FormAnswers> FormAnswers { get; set; } = new();
 
