@@ -5,12 +5,14 @@
 
 @{
     ViewData["Title"] = Localizer["Forms"];
-    var searchText = Model.SearchText;
+    var searchText = Model.Query.SearchText;
+    var order = Model.Query.OrderBy;
+
     string LastEditFormat(DateTime lastEditDate)
     {
         if (lastEditDate == DateTime.MinValue)
         {
-            return "";
+            return "-";
         }
         else if (lastEditDate.Date == DateTime.Today.Date)
         {
@@ -21,6 +23,17 @@
             return lastEditDate.ToLocalTime().ToShortDateString();
         }
     }
+
+    var orderApproaches = new[]
+    {
+        new SelectListItem(Localizer["By title"]?.Value, ((int)FormOrderApproach.Title).ToString()),
+        new SelectListItem(Localizer["By title descending"]?.Value, ((int)FormOrderApproach.TitleDescending).ToString()),
+        new SelectListItem(Localizer["By creation date"]?.Value, ((int)FormOrderApproach.Creation).ToString()),
+        new SelectListItem(Localizer["By creation date descending"]?.Value, ((int)FormOrderApproach.CreationDescending).ToString()),
+        new SelectListItem(Localizer["By last edit date"]?.Value, ((int)FormOrderApproach.LastUpdate).ToString()),
+        new SelectListItem(Localizer["By last edit date descending"]?.Value, ((int)FormOrderApproach.LastUpdateDescending).ToString()),
+    };
+
 }
 <div class="row g-3 justify-content-between">
 
@@ -31,19 +44,7 @@
         <a class="btn btn-primary form-control" asp-action="Create"><i class="bi-plus-circle me-2"></i> @Localizer["New form"]</a>
     </div>
 
-    <div class="col-12 col-sm-4 justify-content-center btn-toolbar" role="toolbar" aria-label="Toolbar with button groups" @(Model.PageCount == 1 ? "hidden" : "")>
-        <div class="btn-group me-2" role="group" aria-label="First group">
-            @for (int i = 0; i < Model.PageCount; i++)
-            {
-                <a asp-controller="Forms"
-               asp-action="Index"
-               asp-route-page="@i"
-               asp-route-count="@Model.Count"
-                   class="btn @((i) == Model.Page ? "btn-secondary" : "btn-outline-secondary")"
-                   type="button"> @(i + 1)</a>
-            }
-        </div>
-    </div>
+    
 
     <div class="col-12 col-sm-4">
         <form asp-controller="Forms" asp-action="Index" asp-route-page="@searchText">
@@ -52,6 +53,17 @@
                 <button class="btn btn-outline-secondary input-group-text" id="btnGroupAddon" type="submit"><i class="bi-search"></i></button>
             </div>
         </form>
+    </div>
+    <div class="col-12 col-sm-4">
+        <form asp-controller="Forms" asp-action="Index" asp-route-order="@order">
+            <div class="input-group">
+                <select asp-for="@order" class="form-select" asp-items="@(orderApproaches)"></select>
+                @*<input asp-for="@searchText" type="text" class="form-control" placeholder="@Localizer["Search ..."]" aria-label="Input group example" aria-describedby="btnGroupAddon">*@
+                <button class="btn btn-outline-secondary input-group-text" id="btnGroupAddon" type="submit"><i class="bi-search"></i></button>
+            </div>
+        </form>
+        
+
     </div>
     @foreach (var form in Model.Forms)
     {
@@ -84,6 +96,20 @@
 
         </div>
     }
+    <div class="col-12 justify-content-center btn-toolbar" role="toolbar" aria-label="Toolbar with button groups" @(Model.PageCount == 1 ? "hidden" : "")>
+        <div class="btn-group me-2" role="group" aria-label="First group">
+            @for (int i = 0; i < Model.PageCount; i++)
+            {
+                <a asp-controller="Forms"
+               asp-action="Index"
+               asp-route-page="@i"
+               asp-route-count="@Model.Query.Count"
+               asp-route-order="@Model.Query.OrderBy"
+                   class="btn @((i) == Model.Query.Page ? "btn-secondary" : "btn-outline-secondary")"
+                   type="button"> @(i + 1)</a>
+            }
+        </div>
+    </div>
     @*<table class="col-11 table">
         <thead>
             <tr>
@@ -150,7 +176,7 @@
     
 </div>
 
-<div class="modal" id="deleteModal">
+@*<div class="modal" id="deleteModal">
     <div class="modal-dialog modal-dialog-centered">
         <div class="modal-content p-1 text-center">
 
@@ -190,4 +216,4 @@
             })
         }
     </script>
-}
+}*@

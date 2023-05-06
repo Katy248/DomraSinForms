@@ -24,7 +24,7 @@ public class FormsController : Controller
         _signInManager = signInManager;
     }
     [Authorize]
-    public async Task<IActionResult> Index(int page = 0, int count = 10, string searchText = "")
+    public async Task<IActionResult> Index(int page = 0, int count = 10, string searchText = "", FormOrderApproach order = FormOrderApproach.LastUpdateDescending)
     {
         var userId = _signInManager.UserManager.GetUserId(User);
         if (userId is null)
@@ -36,7 +36,8 @@ public class FormsController : Controller
                 Count = count,
                 Page = page,
                 SearchText = searchText,
-                UserId = userId
+                UserId = userId,
+                OrderBy = order,
             });
 
         return View(forms);

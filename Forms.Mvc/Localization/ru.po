@@ -1,0 +1,152 @@
+# Company attributes
+msgid "DomraSinForms"
+msgstr "DomraSinForms"
+
+# Home page
+msgid "DomraSin is a software for creating Forms (tests or questionnaire) that you can use for free"
+msgstr "DomraSin -  это ПО для создания форм (тестов или анкет), которое вы можете использовать бесплатно"
+
+msgid "Home page"
+msgstr "Домашняя страница"
+
+msgid "What is the DomraSin"
+msgstr "Что такое DomraSinForms"
+
+msgid "About us"
+msgstr "О нас"
+
+msgid "Language"
+msgstr "Язык"
+
+msgid "Enable dark theme"
+msgstr "Включить тёмную тему"
+
+msgid "Disable dark theme"
+msgstr "Отключить тёмную тему"
+
+msgid "Profile"
+msgstr "Профиль"
+
+msgid "Log out"
+msgstr "Выход"
+
+msgid "Register"
+msgstr "Регистрация"
+
+msgid "Log in"
+msgstr "Вход"
+
+# Forms
+msgid "By title"
+msgstr "По названию"
+
+msgid "By title descending"
+msgstr "По названию (по убыванию)"
+
+msgid "By creation date"
+msgstr "По дате создания"
+
+msgid "By creation date descending"
+msgstr "По дате создания (по убыванию)"
+
+msgid "By last edit date"
+msgstr "По дате редактирования"
+
+msgid "By last edit date descending"
+msgstr "По дате редактирования (по убыванию)"
+
+msgid "Title"
+msgstr "Название"
+
+msgid "Description"
+msgstr "Описание"
+
+msgid "New form"
+msgstr "Новая форма"
+
+msgid "Forms"
+msgstr "Формы"
+
+msgid "Create new form"
+msgstr "Создать новую форму"
+
+msgid "Search"
+msgstr "Поиск"
+
+msgid "Search ..."
+msgstr "Поиск ..."
+
+msgid "Questions"
+msgstr "Вопросы"
+
+msgid "Text question"
+msgstr "Текстовый вопрос"
+
+msgid "Options question"
+msgstr "Вопрос с вариантами"
+
+msgid "Back to list"
+msgstr "Назад к списку"
+
+msgid "Create new question"
+msgstr "Создать новый вопрос"
+
+msgid "Edit question"
+msgstr "Редактировать вопрос"
+
+msgid "Last edit"
+msgstr "Последнее изменение"
+
+msgid "Answer"
+msgstr "Ответить"
+
+# Questions
+
+msgid "Required"
+msgstr "Обязательный"
+
+msgid "Is required"
+msgstr "Обязательный"
+
+msgid "Allow multiple choice"
+msgstr "Допускает несколько вариантов ответа"
+
+msgid "Options"
+msgstr "Варианты"
+
+msgid "Add new option"
+msgstr "Добавить вариант"
+
+msgid "New option"
+msgstr "Новый вариант"
+
+msgid "Index"
+msgstr "Индекс"
+
+msgid "Question text"
+msgstr "Текст вопроса"
+
+msgid "Question type"
+msgstr "Тип вопроса"
+
+# Base commands
+msgid "Save"
+msgstr "Сохранить"
+
+msgid "Delete"
+msgstr "Удалить"
+
+msgid "Send"
+msgstr "Отправить"
+
+msgid "Edit"
+msgstr "Редактировать"
+
+msgid "Fill"
+msgstr "Заполнить"
+
+msgid "Share"
+msgstr "Поделиться"
+
+msgid "Create"
+msgstr "Создать"

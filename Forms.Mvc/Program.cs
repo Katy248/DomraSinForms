@@ -19,11 +19,12 @@ builder.Services.AddDefaultIdentity<IdentityUser>(options => options.SignIn.Requ
     .AddEntityFrameworkStores<ApplicationDbContext>();
 builder.Services
     .AddControllersWithViews()
-    .AddViewLocalization(Microsoft.AspNetCore.Mvc.Razor.LanguageViewLocationExpanderFormat.SubFolder);
+    .AddViewLocalization();
 
 builder.Services
     .AddLocalization(options => options.ResourcesPath = "Resources")
-    .AddApplication();
+    .AddApplication()
+    .AddPortableObjectLocalization(options => options.ResourcesPath = "Localization");
 
 var app = builder.Build();
 

@@ -20,23 +20,22 @@ namespace DomraSinForms.Application.Forms.Queries.GetList
         {
             var result = new FormListDto
             {
-                Count = request.Count,
-                Page = request.Page,
-                SearchText = request.SearchText,
-                UserId = request.UserId,
+                Query = request,
             };
 
             var forms = _context.Forms
                 .Where(f => f.CreatorId == request.UserId)
                 .Where(f => f.Title.Contains(request.SearchText) | f.Description.Contains(request.SearchText))
-                .OrderByDescending(f => f.LastUpdateDate)
-                .Skip(request.Page * request.Count)
-                .Take(request.Count);
-            result.Forms = _mapper.ProjectTo<FormDto>(forms).ToArray();
+                .Order(request.OrderBy);
 
             result.PageCount = (int)Math.Round(
-                (double)_context.Forms.Where(f => f.Title.Contains(request.SearchText) | f.Description.Contains(request.SearchText)).Count() 
-                / (double)request.Count, MidpointRounding.ToPositiveInfinity);
+                (double)forms.Count() / (double)request.Count, MidpointRounding.ToPositiveInfinity);
+
+            result.Forms = _mapper.ProjectTo<FormDto>(
+                forms
+                    .Skip(request.Page * request.Count)
+                    .Take(request.Count))
+                .ToArray();
 
             return result;
         }
