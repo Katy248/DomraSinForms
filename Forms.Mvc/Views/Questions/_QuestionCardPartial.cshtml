@@ -7,6 +7,18 @@
 @{
     var deleteModalId = $"deleteModal{Model.Id}";
     var editModalId = $"editModal{Model.Id}";
+    var questionTypes = new (string? Text, TextQuestionType Type)[]
+    {
+        (Localizer["Text question"]?.Value, TextQuestionType.Text),
+        (Localizer["Number question"]?.Value, TextQuestionType.Number),
+        (Localizer["Date question"]?.Value, TextQuestionType.Date),
+        (Localizer["DateTime question"]?.Value, TextQuestionType.DateTime),
+        (Localizer["Time question"]?.Value, TextQuestionType.Time),
+    };
+    string GetTextQuestionTypeName(TextQuestion question)
+    {
+        return questionTypes.FirstOrDefault(qt => qt.Type == question.Type).Text ?? "";
+    }
 }
 
 <div class="card">
@@ -34,7 +46,7 @@
             case TextQuestion tq:
                 {
                     <div>
-                        @Localizer["Question type"]: @tq.Type
+                        @Localizer["Question type"]: @GetTextQuestionTypeName(tq)
                     </div>
                 }
                 break;
@@ -81,7 +93,7 @@
                     }
                     break;
             }
-            <button class="btn btn-danger btn-sm"
+            <button class="btn btn-outline-danger btn-sm"
                     data-bs-toggle="modal"
                     data-bs-target="#@deleteModalId">
                 @Localizer["Delete"]

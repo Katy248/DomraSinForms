@@ -21,7 +21,7 @@
                     <input asp-for="FormId" value="@Model.FormId" hidden />
 
                     <div class="form-group mb-2">
-                        <input class="form-control" type="text" placeholder="@Localizer["Question text"]" asp-for="QuestionText" />
+                        <input class="form-control form-control-lg" type="text" placeholder="@Localizer["Question text"]" asp-for="QuestionText" />
                         <span asp-validation-for="QuestionText" class="text-danger"></span>
                     </div>
 
@@ -42,11 +42,11 @@
                             }
                         </div>
 
-                        <input class="form-control btn" type="button" id="addoption" name="addoption" value="@Localizer["Add new option"]" />
+                        <input class="form-control btn btn-outline-secondary" type="button" id="addoption" name="addoption" value="@Localizer["Add new option"]" />
                     </div>
 
                     <div class="form-group mb-2">
-                        <input class="btn btn-primary" type="submit" value="@Localizer["Create"]" />
+                        <input class="btn btn-primary form-control" type="submit" value="@Localizer["Create"]" />
                     </div>
                 </form>
 

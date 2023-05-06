@@ -2,6 +2,9 @@
 msgid "DomraSinForms"
 msgstr "DomraSinForms"
 
+msgid "DSF"
+msgstr "DSF"
+
 # Home page
 msgid "DomraSin is a software for creating Forms (tests or questionnaire) that you can use for free"
 msgstr "DomraSin -  это ПО для создания форм (тестов или анкет), которое вы можете использовать бесплатно"
@@ -128,6 +131,24 @@ msgstr "Текст вопроса"
 
 msgid "Question type"
 msgstr "Тип вопроса"
+
+msgid "New question"
+msgstr "Новый вопрос"
+
+msgid "Text question"
+msgstr "Текстовый вопрос"
+
+msgid "Number question"
+msgstr "Числовой вопрос"
+
+msgid "Date question"
+msgstr "Дата"
+
+msgid "DateTime question"
+msgstr "Дата-время"
+
+msgid "Time question"
+msgstr "Время"
 
 # Base commands
 msgid "Save"
