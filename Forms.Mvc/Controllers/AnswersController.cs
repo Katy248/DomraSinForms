@@ -9,7 +9,10 @@ using Forms.Mvc.Models;
 using Forms.Mvc.Models.Answers;
 using Forms.Mvc.Models.Answers.AnswersModels;
 using MediatR;
+using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Infrastructure;
 using Microsoft.Identity.Client;
 
 namespace Forms.Mvc.Controllers;
@@ -17,10 +20,12 @@ namespace Forms.Mvc.Controllers;
 public class AnswersController : Controller
 {
     private readonly IMediator _mediator;
+    private readonly UserManager<IdentityUser> _userManager;
 
-    public AnswersController(IMediator mediator)
+    public AnswersController(IMediator mediator, UserManager<IdentityUser> userManager)
     {
         _mediator = mediator;
+        _userManager = userManager;
     }
     /*public async Task<IActionResult> Index(int page = 0, int count = 10, string? searchText = "")
     {
@@ -34,7 +39,7 @@ public class AnswersController : Controller
     }*/
     public async Task<IActionResult> Fill(string formId)
     {
-        var command = await _mediator.Send(new GetEmptyFormQuery { FormId = formId, UserId = "anon" });
+        var command = await _mediator.Send(new GetEmptyFormQuery { FormId = formId, UserId = _userManager.GetUserId(User) });
         //var form = await _mediator.Send(new GetFormQuery { Id = formId });
 
         var cvm = new FillFormViewModel(command);
@@ -73,7 +78,7 @@ public class AnswersController : Controller
         var result = await _mediator.Send(new UpdateFormAnswersCommand 
         { 
             FormId = viewModel.FormId, 
-            UserId = "anon",
+            UserId = _userManager.GetUserId(User),
             Answer = new()
             {
                 QuestionId = viewModel.QuestionId,
@@ -86,14 +91,19 @@ public class AnswersController : Controller
         return RedirectToAction("Index", "Home");
     }
     [HttpPost]
+    [Authorize]
     public async Task<IActionResult> CompleteForm(string formId)
     {
-        var result = await _mediator.Send(new CreateFormAnswersCommand { FormId = formId, UserId = "anon" });
+        var result = await _mediator.Send(new CreateFormAnswersCommand { FormId = formId, UserId = _userManager.GetUserId(User) });
         if (result is null)
-            return RedirectToAction("Index", "Home");
+            return RedirectToAction(nameof(Fill), routeValues: new { formId = formId });
         
-        return RedirectToAction(nameof(Fill), routeValues: new { formId = result.FormId });
+        return RedirectToAction(nameof(AnsweredForm));
+        
     }
-
+    public IActionResult AnsweredForm()
+    {
+        return View();
+    }
 
 }

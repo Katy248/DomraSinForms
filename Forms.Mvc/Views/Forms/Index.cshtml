@@ -35,7 +35,7 @@
     };
 
 }
-<div class="row g-3 justify-content-between">
+<div class="row g-3 justify-content-start">
 
     <div class="col-12 text-center display-5 mb-5">@Localizer["Forms"]</div>
 
@@ -59,7 +59,7 @@
             <div class="input-group">
                 <select asp-for="@order" class="form-select" asp-items="@(orderApproaches)"></select>
                 @*<input asp-for="@searchText" type="text" class="form-control" placeholder="@Localizer["Search ..."]" aria-label="Input group example" aria-describedby="btnGroupAddon">*@
-                <button class="btn btn-outline-secondary input-group-text" id="btnGroupAddon" type="submit"><i class="bi-search"></i></button>
+                <button class="btn btn-outline-secondary input-group-text" id="btnGroupAddon" type="submit"><i class="bi-funnel"></i></button>
             </div>
         </form>
         
@@ -67,27 +67,33 @@
     </div>
     @foreach (var form in Model.Forms)
     {
-        <div class="col-12 col-md-6">
-            <div class="card" asp-action="Edit" asp-route-id="@form.Id">
+        <div class="col-12 col-md-6 col-xl-4" >
+            <div class="card" asp-action="Edit" asp-route-id="@form.Id" style="height: 15rem;">
                 <a class="card-body text-decoration-none" asp-action="Edit" asp-route-id="@form.Id">
                     <div class="card-title h5">@form.Title</div>
                     <div class="card-text mb-2">@form.Description</div>
                     <div class="card-text text-muted">@Localizer["Last edit"]: @LastEditFormat(form.LastUpdateDate)</div>
                 </a>
                 <div class="card-footer">
-                    <div class="row g-1">
-                        <div class="col-6 col-md-3">
+                    <div class="row g-1 justify-content-end">
+                        @*<div class="col-6 col-md-3">
                             <a class="btn btn-sm btn-outline-secondary form-control" asp-action="Edit" asp-route-id="@form.Id">@Localizer["Edit"]</a>
+                        </div>*@
+                        <div class="col">
+                            <a class="btn btn-lg btn-outline-secondary form-control" asp-controller="Answers" asp-action="Fill" asp-route-formId="@form.Id" data-bs-toggle="tooltip" data-bs-title="@Localizer["Fill"]">
+                                <i class="bi-input-cursor-text me-2"></i>
+                            </a>
                         </div>
-                        <div class="col-6 col-md-3">
-                            <a class="btn btn-sm btn-outline-primary form-control" asp-controller="Answers" asp-action="Fill" asp-route-formId="@form.Id">@Localizer["Fill"]</a>
-                        </div>
-                        <div class="col-6 col-md-3">
-                            <a class="btn btn-sm btn-outline-info form-control" data-bs-toggle="modal" data-bs-target="#share@(form.Id)">@Localizer["Share"]</a>
+                        <div class="col">
+                            <a class="btn btn-lg btn-outline-info form-control" data-bs-toggle="modal" data-bs-target="#share@(form.Id)">
+                                <i class="bi-share me-2" data-bs-toggle="tooltip" data-bs-title="@Localizer["Share"]"></i>
+                            </a>
                             @await Html.PartialAsync("_ShareModalPartial", form.Id, new ViewDataDictionary(ViewData){{"ModalId", $"share{form.Id}"}})
                         </div>
-                        <div class="col-6 col-md-3">
-                            <a class="btn btn-sm btn-outline-danger form-control" data-bs-toggle="modal" data-bs-target="#delete@(form.Id)">@Localizer["Delete"]</a>
+                        <div class="col">
+                            <a class="btn btn-lg btn-outline-danger form-control" data-bs-toggle="modal" data-bs-target="#delete@(form.Id)">
+                                <i class="bi-trash3 me-2" data-bs-toggle="tooltip" data-bs-title="@Localizer["Delete"]"></i>
+                            </a>
                             @await Html.PartialAsync("_DeleteModalPartial", form, new ViewDataDictionary(ViewData){{"ModalId", $"delete{form.Id}"}})
                         </div>
                     </div>
@@ -172,9 +178,14 @@
 
 </div>
 
-<div class="row g-3">
-    
-</div>
+@section Scripts
+{
+    <script>
+        const tooltipTriggerList = document.querySelectorAll('[data-bs-toggle="tooltip"]')
+        const tooltipList = [...tooltipTriggerList].map(tooltipTriggerEl => new bootstrap.Tooltip(tooltipTriggerEl))
+    </script>
+}
+
 
 @*<div class="modal" id="deleteModal">
     <div class="modal-dialog modal-dialog-centered">

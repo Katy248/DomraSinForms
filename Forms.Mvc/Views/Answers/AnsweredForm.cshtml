@@ -1,0 +1,8 @@
+﻿@using Microsoft.AspNetCore.Mvc.Localization;
+@inject IViewLocalizer Localizer
+@{
+    ViewData["Title"] = Localizer["Completed form"];
+}
+
+<div class="display-4">@Localizer["You complete form"]</div>
+<div>@Localizer["This form has been completed,"]</div>
