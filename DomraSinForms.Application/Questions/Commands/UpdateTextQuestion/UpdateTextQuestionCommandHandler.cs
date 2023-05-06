@@ -1,4 +1,5 @@
-﻿using DomraSinForms.Application.Questions.Notifications;
+﻿using DomraSinForms.Application.Forms.Notifications.Update;
+using DomraSinForms.Application.Questions.Notifications;
 using DomraSinForms.Domain.Models;
 using DomraSinForms.Domain.Models.Questions;
 using DomraSinForms.Persistence;
@@ -31,6 +32,7 @@ public class UpdateTextQuestionCommandHandler : IRequestHandler<UpdateTextQuesti
         await _context.SaveChangesAsync(cancellationToken);
 
         await _mediator.Publish(new QuestionsUpdateNotification { FormId = question.FormId }, cancellationToken);
+        await _mediator.Publish(new UpdateFormNotification { FormId = question.FormId }, cancellationToken);
 
         return question;
     }

@@ -24,11 +24,46 @@ public class ApplicationDbContext : IdentityDbContext
     protected override void OnModelCreating(ModelBuilder builder)
     {
         builder
+            .Entity<Form>()
+            .HasMany<FormAnswers>(fa => fa.FormAnswers)
+            .WithOne()
+            .HasForeignKey(fa => fa.FormId)
+            .OnDelete(DeleteBehavior.Cascade);
+        
+        builder
+            .Entity<Form>()
+            .HasMany<QuestionBase>(fa => fa.Questions)
+            .WithOne()
+            .HasForeignKey(qb => qb.FormId)
+            .OnDelete(DeleteBehavior.Cascade);
+
+        /*builder
+            .Entity<QuestionBase>()
+            .HasMany<Answer>(q => q.Answers)
+            .WithOne(a => a.Question)
+            .HasForeignKey(a => a.QuestionId).IsRequired(false)
+            .OnDelete(DeleteBehavior.SetNull);*/
+        
+        builder
+            .Entity<Answer>()
+            .HasOne(a => a.Question)
+            .WithMany(q => q.Answers)
+            .HasForeignKey(a => a.QuestionId)
+            .OnDelete(DeleteBehavior.Restrict);
+
+        builder
+            .Entity<FormAnswers>()
+            .HasMany<Answer>(fa => fa.Answers)
+            .WithOne()
+            .OnDelete(DeleteBehavior.Cascade);
+
+        builder
             .Entity<OptionsQuestion>()
             .HasMany<QuestionOption>(q => q.Options)
             .WithOne(q => q.Question)
             .HasForeignKey(q => q.QuestionId)
             .OnDelete(DeleteBehavior.Cascade);
+
         base.OnModelCreating(builder);
     }
 }

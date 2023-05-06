@@ -44,10 +44,30 @@
                 break;
             case (DecimalAnswer decimalAnswer):
                 {
-                    @*@await Html.PartialAsync("/Views/Answers/AnswerTypes/_DecimalAnswerPartial.cshtml", decimalAnswer)*@
+                    @await Html.PartialAsync("/Views/Answers/AnswerTypes/_DecimalAnswerPartial.cshtml", decimalAnswer, new ViewDataDictionary(ViewData) {{"ModalId", modalId}})
                 }
                 break;
-
+            case (DateTimeAnswer dateTimeAnswer):
+                {
+                    switch (dateTimeAnswer)
+                    {
+                        case (DateAnswer dateAnswer):
+                            {
+                                @await Html.PartialAsync("/Views/Answers/AnswerTypes/_DateAnswerPartial.cshtml", dateAnswer, new ViewDataDictionary(ViewData) {{"ModalId", modalId}})
+                            }
+                            break;
+                        case (TimeAnswer timeAnswer):
+                            {
+                                @await Html.PartialAsync("/Views/Answers/AnswerTypes/_TimeAnswerPartial.cshtml", timeAnswer, new ViewDataDictionary(ViewData) {{"ModalId", modalId}})
+                            }
+                            break;
+                        default:
+                            {
+                                @await Html.PartialAsync("/Views/Answers/AnswerTypes/_DateTimeAnswerPartial.cshtml", dateTimeAnswer, new ViewDataDictionary(ViewData) {{"ModalId", modalId}})
+                            }break;
+                    }
+                }
+                break;
         }
     </div>
 </div>

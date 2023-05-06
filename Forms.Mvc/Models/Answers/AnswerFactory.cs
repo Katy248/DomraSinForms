@@ -31,12 +31,16 @@ public class AnswerFactory : IAnswerViewModelFactory
                             yield return new StringAnswer(tq, answer);
                             break;
                         case TextQuestionType.Number:
+                            yield return new DecimalAnswer(tq, answer);
                             break;
                         case TextQuestionType.Date:
+                            yield return new DateAnswer(tq, answer);
                             break;
                         case TextQuestionType.Time:
+                            yield return new TimeAnswer(tq, answer);
                             break;
                         case TextQuestionType.DateTime:
+                            yield return new DateTimeAnswer(tq, answer);
                             break;
                     }
                     break;

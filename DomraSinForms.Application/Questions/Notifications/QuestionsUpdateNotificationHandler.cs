@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using DomraSinForms.Application.Forms.Notifications.Update;
 using DomraSinForms.Persistence;
 using MediatR;
 using Microsoft.EntityFrameworkCore;
@@ -11,10 +12,12 @@ namespace DomraSinForms.Application.Questions.Notifications;
 public class QuestionsUpdateNotificationHandler : INotificationHandler<QuestionsUpdateNotification>
 {
     private readonly ApplicationDbContext _context;
+    private readonly IMediator _mediator;
 
-    public QuestionsUpdateNotificationHandler(ApplicationDbContext context)
+    public QuestionsUpdateNotificationHandler(ApplicationDbContext context, IMediator mediator)
     {
         _context = context;
+        _mediator = mediator;
     }
     public async Task Handle(QuestionsUpdateNotification notification, CancellationToken cancellationToken)
     {
@@ -33,7 +36,8 @@ public class QuestionsUpdateNotificationHandler : INotificationHandler<Questions
             }));
         form.LastUpdateDate = DateTime.UtcNow;
         _context.Update(form);
-
         await _context.SaveChangesAsync(cancellationToken);
+
+        await _mediator.Publish(new UpdateFormNotification { FormId = form.Id }, cancellationToken);
     }
 }

@@ -22,8 +22,11 @@ public class QuestionsController : Controller
     public async Task<IActionResult> CreateTextQuestion([Bind] CreateTextQuestionCommand command)
     {
         //if (!string.IsNullOrWhiteSpace(viewModel.CreateTextQuestionCommand.QuestionText))
-            await _mediator.Send(command);
-
+        try
+        {
+            _ = await _mediator.Send(command);
+        }
+        catch { }
         return RedirectToAction(
             controllerName: "Forms",
             actionName: nameof(FormsController.Edit),
@@ -32,8 +35,11 @@ public class QuestionsController : Controller
     [HttpPost]
     public async Task<IActionResult> CreateOptionsQuestion([Bind] CreateOptionsQuestionCommand command)
     {
-        await _mediator.Send(command);
-
+        try
+        {
+            _ = await _mediator.Send(command);
+        }
+        catch { }
         return RedirectToAction(
             controllerName: "Forms",
             actionName: nameof(FormsController.Edit),
@@ -42,16 +48,22 @@ public class QuestionsController : Controller
     [HttpPost]
     public async Task<IActionResult> UpdateTextQuestion([Bind] UpdateTextQuestionViewModel viewModel)
     {
-        var q = await _mediator.Send(viewModel.Command);
+        QuestionBase? q = null;
+        try
+        {
+            q = await _mediator.Send(viewModel.Command);
+        }
+        catch { }
 
         return RedirectToAction(
             controllerName: "Forms",
             actionName: nameof(FormsController.Edit),
-            routeValues: new { id = q.FormId });
+            routeValues: new { id = q?.FormId });
     }
     [HttpPost]
     public async Task<IActionResult> UpdateOptionsQuestion([Bind] UpdateOptionsQuestionCommand command)
     {
+
         var q = await _mediator.Send(command);
 
         return RedirectToAction(

@@ -1,4 +1,5 @@
-﻿using DomraSinForms.Application.Questions.Notifications;
+﻿using DomraSinForms.Application.Forms.Notifications.Update;
+using DomraSinForms.Application.Questions.Notifications;
 using DomraSinForms.Domain.Models.Questions;
 using DomraSinForms.Persistence;
 using MediatR;
@@ -38,6 +39,7 @@ public class CreateTextQuestionCommandHandler : IRequestHandler<CreateTextQuesti
         await _context.SaveChangesAsync(cancellationToken);
 
         await _mediator.Publish(new QuestionsUpdateNotification { FormId = question.FormId }, cancellationToken);
+        await _mediator.Publish(new UpdateFormNotification { FormId = form.Id }, cancellationToken);
 
         return question;
     }

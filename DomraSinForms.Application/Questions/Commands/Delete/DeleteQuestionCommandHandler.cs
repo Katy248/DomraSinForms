@@ -2,6 +2,7 @@
 using DomraSinForms.Domain.Models;
 using DomraSinForms.Persistence;
 using MediatR;
+using Microsoft.EntityFrameworkCore;
 
 namespace DomraSinForms.Application.Questions.Commands.Delete;
 public class DeleteQuestionCommandHandler : IRequestHandler<DeleteQuestionCommand, bool>
@@ -21,6 +22,8 @@ public class DeleteQuestionCommandHandler : IRequestHandler<DeleteQuestionComman
         if (question is null)
             return false;
         
+        var answers = await _context.Answers.Where(a => a.QuestionId == question.Id).ToArrayAsync();
+        _context.Answers.RemoveRange(answers);
         _context.Questions.Remove(question);
         await _context.SaveChangesAsync(cancellationToken);
 

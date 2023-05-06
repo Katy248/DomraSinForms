@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using DomraSinForms.Application.Forms.Notifications.Update;
 using DomraSinForms.Domain.Models;
 using DomraSinForms.Persistence;
 
@@ -11,11 +12,13 @@ namespace DomraSinForms.Application.Forms.Commands.Update
     public class UpdateFormCommandHandler : IRequestHandler<UpdateFormCommand, Form>
     {
         private readonly ApplicationDbContext _context;
+        private readonly IMediator _mediator;
         private readonly ILogger<UpdateFormCommand> _logger;
 
-        public UpdateFormCommandHandler(ApplicationDbContext context, ILogger<UpdateFormCommand> logger)
+        public UpdateFormCommandHandler(ApplicationDbContext context, IMediator mediator, ILogger<UpdateFormCommand> logger)
         {
             _context = context;
+            _mediator = mediator;
             _logger = logger;
         }
         public async Task<Form> Handle(UpdateFormCommand request, CancellationToken cancellationToken)
@@ -35,6 +38,8 @@ namespace DomraSinForms.Application.Forms.Commands.Update
 
             _context.Update(form);
             await _context.SaveChangesAsync(cancellationToken);
+
+            await _mediator.Publish(new UpdateFormNotification { FormId = request.Id }, cancellationToken);
 
             return form;
         }

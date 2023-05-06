@@ -22,11 +22,11 @@ public class AnswersController : Controller
     {
         _mediator = mediator;
     }
-    public async Task<IActionResult> Index(int page = 0, int count = 10, string? searchText = "")
+    /*public async Task<IActionResult> Index(int page = 0, int count = 10, string? searchText = "")
     {
         var result = await _mediator.Send(new GetFormListQuery { Count = count, Page = page, SearchText = searchText ?? "" });
         return View(result);
-    }
+    }*/
     /*public async Task<IActionResult> Answers(string formId)
     {
         var result = await _mediator.Send(new GetFormAnswersListQuery { FormId = formId });
@@ -41,6 +41,22 @@ public class AnswersController : Controller
         return View(cvm);
     }
     public async Task<IActionResult> UpdateStringAnswer([Bind] StringAnswer answer)
+    {
+        return (await UpdateForm(answer));
+    }
+    public async Task<IActionResult> UpdateDecimalAnswer([Bind] DecimalAnswer answer)
+    {
+        return (await UpdateForm(answer));
+    }
+    public async Task<IActionResult> UpdateDateAnswer([Bind] DateAnswer answer)
+    {
+        return (await UpdateForm(answer));
+    }
+    public async Task<IActionResult> UpdateTimeAnswer([Bind] TimeAnswer answer)
+    {
+        return (await UpdateForm(answer));
+    }
+    public async Task<IActionResult> UpdateDateTimeAnswer([Bind] DateTimeAnswer answer)
     {
         return (await UpdateForm(answer));
     }
