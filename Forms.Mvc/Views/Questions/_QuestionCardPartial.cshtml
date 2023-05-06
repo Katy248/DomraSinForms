@@ -53,8 +53,8 @@
         }
     </div>
 
-    <div class="card-footer">
-        <div class="btn-group" role="group">
+    <div class="card-footer btn-group" role="group">
+        @*<div class="" role="group">*@
             @switch (Model)
             {
                 case OptionsQuestion oq:
@@ -80,7 +80,10 @@
                     break;
                 case TextQuestion tq:
                     {
-                        <button class="btn btn-outline-secondary btn-sm" data-bs-toggle="modal" data-bs-target="#@editModalId">@Localizer["Edit"]</button>
+                        <button class="btn btn-outline-secondary btn-sm" data-bs-toggle="modal" data-bs-target="#@editModalId">
+                            <i class="bi-pencil me-2"></i>
+                            @Localizer["Edit"]
+                        </button>
                         @(
                             await Html.PartialAsync("/Views/Questions/_UpdateTextQuestionModalPartial.cshtml", 
                                 (UpdateTextQuestionViewModel)tq, 
@@ -96,9 +99,10 @@
             <button class="btn btn-outline-danger btn-sm"
                     data-bs-toggle="modal"
                     data-bs-target="#@deleteModalId">
-                @Localizer["Delete"]
+                <i class="bi-trash3 me-2"></i>
+                    @Localizer["Delete"]
             </button>
-        </div>
+        @*</div>*@
 
     </div>
 </div>

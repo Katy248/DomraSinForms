@@ -17,8 +17,7 @@
 <div class="row g-1 justify-content-center">
     <div class="col-sm-10 col-md-7 col-xl-5 row g-3">
 
-        <div class="col-12 border rounded p-3">
-            <div class="row">
+        <div class="col-12">
                 @(
                     await Html.PartialAsync("_EditFormPartial", new UpdateFormCommand
                     { 
@@ -28,38 +27,27 @@
                         UserId = Model.Form.CreatorId
                     })
                 )
-            </div>
 
         </div>
-
-        <div class="col-12 border rounded p-3">
-            <div class="row g-3 justify-content-center">
-                <div class="col-12 text-center h4">@Localizer["Questions"]</div>
-                <div class="col-12">
-                    <div class="row g-2">
-                        @foreach (var question in Model.Form?.Questions.OrderBy(q => q.Index))
-                        {
-                            <div class="col-12">
-                                @await Html.PartialAsync("/Views/Questions/_QuestionCardPartial.cshtml", question)
-                            </div>
-                        }
-                    </div>
-                </div>
-                <div class="col-12 dropup-center dropup ">
-                    <button class="btn btn-primary form-control" data-bs-toggle="dropdown">@Localizer["Create new question"]</button>
-                    <ul class="dropdown-menu">
-                        <li>
-                            <button class="dropdown-item" data-bs-toggle="modal" data-bs-target="#createTextQuestionModal">@Localizer["Text question"]</button>
-                        </li>
-                        <li><hr class="dropdown-divider"></li>
-                        <li>
-                            <button class="dropdown-item" data-bs-toggle="modal" data-bs-target="#createOptionsQuestionModal">@Localizer["Options question"]</button>
-                        </li>
-                    </ul>
-                </div>
+        <div class="col-12 text-center h4">@Localizer["Questions"]</div>
+        @foreach (var question in Model.Form?.Questions.OrderBy(q => q.Index))
+        {
+            <div class="col-12">
+                @await Html.PartialAsync("/Views/Questions/_QuestionCardPartial.cshtml", question)
             </div>
+        }
+        <div class="col-12 mt-5 dropup-center dropup ">
+            <button class="btn btn-primary form-control" data-bs-toggle="dropdown">@Localizer["Create new question"]</button>
+            <ul class="dropdown-menu">
+                <li>
+                    <button class="dropdown-item" data-bs-toggle="modal" data-bs-target="#createTextQuestionModal">@Localizer["Text question"]</button>
+                </li>
+                <li><hr class="dropdown-divider"></li>
+                <li>
+                    <button class="dropdown-item" data-bs-toggle="modal" data-bs-target="#createOptionsQuestionModal">@Localizer["Options question"]</button>
+                </li>
+            </ul>
         </div>
-
     </div>
 </div>
 
