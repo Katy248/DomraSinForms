@@ -15,7 +15,10 @@
 <h1 class="text-center">@Localizer["Edit"]</h1>
 
 <div class="row g-1 justify-content-center">
-    <div class="col-sm-10 col-md-7 col-xl-5 row g-3">
+    <div class="col-sm-1 col-md-2 col-xl-3">
+
+    </div>
+    <div class="col-sm-10 col-md-8 col-xl-6 row g-3">
 
         <div class="col-12">
                 @(
@@ -48,6 +51,22 @@
                 </li>
             </ul>
         </div>
+    </div>
+    
+    <div class="h5 text-center mt-sm-0 mt-5 col-sm-1 col-md-2 col-xl-3 col-12">
+        <div class="card">
+            <div class="card-body">
+                <div class="row g-3">
+               <div class="col-12">
+                        <a class="btn btn-outline-secondary form-control" asp-action="Index"><i class="bi-graph-up me-2"></i>@Localizer["Show statistics"]</a>
+                </div>                 
+                <div class="col-12">
+                <a class="btn btn-outline-secondary form-control" asp-action="Index"><i class="bi-card-checklist me-2"></i>@Localizer["Show answers"]</a>
+                </div>
+                </div>
+            </div>
+        </div>
+       
     </div>
 </div>
 
