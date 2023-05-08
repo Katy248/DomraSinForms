@@ -71,7 +71,7 @@ public class FormsController : Controller
         if (userId is null)
             return RedirectToIndex();
 
-        var form = await _mediator.Send(new GetFormQuery { Id = id, UserId = userId });
+        var form = await _mediator.Send(new GetFormQuery { Id = id });
 
         if (form is null)
             return RedirectToIndex();

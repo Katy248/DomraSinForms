@@ -21,7 +21,7 @@ public class GetFormQueryHandler : IRequestHandler<GetFormQuery, Form>
     {
         var form =  await _context.Forms
             .AsNoTracking()
-            .Where(f => f.CreatorId == request.UserId)
+          /*  .Where(f => f.CreatorId == request.UserId)*/
             .FirstOrDefaultAsync(f => f.Id == request.Id, cancellationToken);
 
         if (form is null)

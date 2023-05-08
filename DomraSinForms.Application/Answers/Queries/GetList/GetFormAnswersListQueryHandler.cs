@@ -10,7 +10,7 @@ using DomraSinForms.Persistence;
 using MediatR;
 
 namespace DomraSinForms.Application.Answers.Queries.GetList;
-public class GetFormAnswersListQueryHandler : IRequestHandler<GetFormAnswersListQuery, IEnumerable<IMapWith<FormAnswers>>>
+public class GetFormAnswersListQueryHandler : IRequestHandler<GetFormAnswersListQuery, IEnumerable<FormAnswersDto>>
 {
     private readonly ApplicationDbContext _context;
     private readonly IMapper _mapper;
@@ -20,7 +20,7 @@ public class GetFormAnswersListQueryHandler : IRequestHandler<GetFormAnswersList
         _context = context;
         _mapper = mapper;
     }
-    public async Task<IEnumerable<IMapWith<FormAnswers>>> Handle(GetFormAnswersListQuery request, CancellationToken cancellationToken)
+    public async Task<IEnumerable<FormAnswersDto>> Handle(GetFormAnswersListQuery request, CancellationToken cancellationToken)
     {
         return _mapper.ProjectTo<FormAnswersDto>(
             _context.FormAnswers

@@ -58,7 +58,7 @@
             
                 <div class="row my-1 g-3">
                <div class="col-12">
-                        <a class="btn btn-outline-secondary form-control" asp-action="Index"><i class="bi-graph-up me-2"></i>@Localizer["Show statistics"]</a>
+                        <a class="btn btn-outline-secondary form-control" asp-controller="Statistics" asp-route-formId="@Model.Form.Id" asp-action="Answers"><i class="bi-graph-up me-2"></i>@Localizer["Show statistics"]</a>
                 </div>                 
                 <div class="col-12">
                 <a class="btn btn-outline-secondary form-control" asp-action="Index"><i class="bi-card-checklist me-2"></i>@Localizer["Show answers"]</a>
