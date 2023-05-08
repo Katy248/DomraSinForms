@@ -1,4 +1,5 @@
-﻿using DomraSinForms.Application.Answers.Queries.GetList;
+﻿using DomraSinForms.Application.Answers.Queries.Get;
+using DomraSinForms.Application.Answers.Queries.GetList;
 using DomraSinForms.Application.Forms.Queries.Get;
 using Forms.Mvc.Models.Statistics;
 using MediatR;
@@ -23,6 +24,11 @@ namespace Forms.Mvc.Controllers
             };
             
             return View(model);
+        }
+        public async Task<IActionResult> FormAnswers(string Id)
+        {
+            var answer = await _mediator.Send(new GetFormAnswersQuery { Id = Id});
+            return View(answer);
         }
     }
 }

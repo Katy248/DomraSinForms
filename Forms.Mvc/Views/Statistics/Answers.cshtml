@@ -1,16 +1,14 @@
-﻿@using Forms.Mvc.Models.Statistics;
-@model FormAnswersListViewModel 
+﻿@using DomraSinForms.Application.Answers.Queries.GetList;
+@using Forms.Mvc.Models.Statistics;
+@using Microsoft.AspNetCore.Mvc.Localization;
+@inject IViewLocalizer Localizer
+@model FormAnswersListViewModel
+@{
+    var selectedAnswers = "";
+}
 <div class="row">
 
-@foreach(var item in Model.AnswersDto)
-{
-    <div class="col">
-        <div class="card">
-            <div class="card-body">
-    <div >@item.Id</div>
-    <div >@item.CreationDate.ToShortDateString()</div>                
-            </div>
-        </div>
-    </div>
-}
- </div>
+    <select class="form-control" asp-for="@selectedAnswers" asp-items="@(new SelectList(Model.AnswersDto, nameof(FormAnswersDto.Id), nameof(FormAnswersDto.Id)))"></select>
+    <a asp-action="FormAnswers" asp-route-answersId="@selectedAnswers"> @Localizer["See more"]</a>
+
+</div>
