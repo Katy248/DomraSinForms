@@ -6,9 +6,23 @@
 @{
     var selectedAnswers = "";
 }
-<div class="row">
+<div class="row g-3">
+    @foreach (var answer in Model.AnswersDto)
+    {
+        <div class="col-12">
+            <div class="card">
+                <div class="card-body">
+                    <div>@answer.Id</div>
+                    <div>@answer.CreationDate</div>
 
-    <select class="form-control" asp-for="@selectedAnswers" asp-items="@(new SelectList(Model.AnswersDto, nameof(FormAnswersDto.Id), nameof(FormAnswersDto.Id)))"></select>
-    <a asp-action="FormAnswers" asp-route-answersId="@selectedAnswers"> @Localizer["See more"]</a>
+                </div>
+                <div class="card-footer">
+                    <a class="btn btn-outline-info form-control" asp-action="FormAnswers" asp-route-formId="@answer.Id"> @Localizer["See more"]</a>
+                </div>
+            </div>
+            
+        </div>
+    }
+    @*<select class="form-control" asp-for="@selectedAnswers" asp-items="@(new SelectList(Model.AnswersDto, nameof(FormAnswersDto.Id), nameof(FormAnswersDto.Id)))"></select>*@
 
 </div>

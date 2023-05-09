@@ -1,0 +1,10 @@
+﻿@using Forms.Mvc.Models.Answers;
+@model IAnswerViewModel
+
+<div class="card">
+    <div class="card-body">
+        <div class="card-title">@Model.Question.QuestionText</div>
+        <input class="form-control" value="@Model.Value" disabled />
+        
+    </div>
+</div>
