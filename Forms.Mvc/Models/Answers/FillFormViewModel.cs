@@ -16,6 +16,11 @@ public class FillFormViewModel
         _dto = command;
         Answers = new AnswerFactory().GetAnswers(_dto?.Answers)?.OrderBy(a => a.Index)?.ToArray() ?? Array.Empty<IAnswerViewModel>();
     }
+    public FillFormViewModel(FormAnswers command)
+    {
+        /*_dto = command;*/
+        Answers = new AnswerFactory().GetAnswers(_dto?.Answers)?.OrderBy(a => a.Index)?.ToArray() ?? Array.Empty<IAnswerViewModel>();
+    }
     public string FormId => _dto?.FormId ?? "";
     public IAnswerViewModel[] Answers { get; set; }
     public bool RequiredQuestionsAnswered => Answers?.Where(a => a.IsRequired && string.IsNullOrWhiteSpace(a.Value)).Count() == 0;

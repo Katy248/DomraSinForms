@@ -1,8 +1,11 @@
 ﻿using DomraSinForms.Application.Answers.Queries.Get;
+using DomraSinForms.Application.Answers.Queries.GetEmptyForm;
 using DomraSinForms.Application.Answers.Queries.GetList;
 using DomraSinForms.Application.Forms.Queries.Get;
+using Forms.Mvc.Models.Answers;
 using Forms.Mvc.Models.Statistics;
 using MediatR;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Forms.Mvc.Controllers
@@ -25,10 +28,12 @@ namespace Forms.Mvc.Controllers
             
             return View(model);
         }
-        public async Task<IActionResult> FormAnswers(string Id)
+        public async Task<IActionResult> FormAnswers(string formId)
         {
-            var answer = await _mediator.Send(new GetFormAnswersQuery { Id = Id});
-            return View(answer);
+            var command = await _mediator.Send(new GetFormAnswersQuery { Id = formId});
+
+            var cvm = new FillFormViewModel(command);
+            return View(cvm);
         }
     }
 }
