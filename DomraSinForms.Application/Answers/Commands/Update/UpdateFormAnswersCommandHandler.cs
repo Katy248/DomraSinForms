@@ -16,7 +16,7 @@ public class UpdateFormAnswersCommandHandler : IRequestHandler<UpdateFormAnswers
     {
         var formAnswers = await _context.FormAnswers
             .Include(f => f.Answers)
-            .FirstOrDefaultAsync(f => f.FormId == request.FormId && f.UserId == request.UserId, cancellationToken);
+            .FirstOrDefaultAsync(f => f.FormId == request.FormId && f.UserId == request.UserId && !f.IsCompleted, cancellationToken);
         if (formAnswers is null)
             return null;
 
