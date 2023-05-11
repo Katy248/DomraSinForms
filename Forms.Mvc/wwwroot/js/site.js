@@ -62,6 +62,21 @@ var AutoSaveForm = (function () {
     }
     return AutoSaveForm;
 }());
+var CookieAlerter = (function () {
+    function CookieAlerter(cookieAlertId, allowCookieButtonId, cookieStorageKey) {
+        var _this = this;
+        var _a;
+        this.allowCookieButtonClickEventListener = function (event) {
+            _this.setCookie(true);
+        };
+        this.cookieStorageKey = cookieStorageKey;
+        (_a = document.getElementById(allowCookieButtonId)) === null || _a === void 0 ? void 0 : _a.addEventListener('click', this.allowCookieButtonClickEventListener);
+    }
+    CookieAlerter.prototype.setCookie = function (cookieAccepted) {
+        localStorage.setItem(this.cookieStorageKey, cookieAccepted ? "true" : "false");
+    };
+    return CookieAlerter;
+}());
 var themeSwitch = new ThemeSwitch();
 var autoSaveForm = new AutoSaveForm();
 //# sourceMappingURL=site.js.map

@@ -95,5 +95,19 @@ class AutoSaveForm {
     }
 }
 
+class CookieAlerter {
+    cookieStorageKey: string;
+    constructor(cookieAlertId: string, allowCookieButtonId: string, cookieStorageKey: string) {
+        this.cookieStorageKey = cookieStorageKey;
+        document.getElementById(allowCookieButtonId)?.addEventListener('click', this.allowCookieButtonClickEventListener);
+    }
+    allowCookieButtonClickEventListener: EventListener = (event: Event) => {
+        this.setCookie(true);
+    }
+    setCookie(cookieAccepted: Boolean) {
+        localStorage.setItem(this.cookieStorageKey, cookieAccepted ? "true" : "false");
+    }
+}
+
 let themeSwitch = new ThemeSwitch();
 let autoSaveForm = new AutoSaveForm();

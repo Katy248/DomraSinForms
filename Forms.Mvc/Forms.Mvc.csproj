@@ -9,17 +9,22 @@
 
   <ItemGroup>
     <Compile Remove="Data\**" />
+    <Compile Remove="Views\FormAnswers\**" />
     <Compile Remove="wwwroot\lib\bootstrap-icons\**" />
     <Compile Remove="wwwroot\ts\**" />
     <Content Remove="Data\**" />
+    <Content Remove="Views\FormAnswers\**" />
     <Content Remove="wwwroot\lib\bootstrap-icons\**" />
     <Content Remove="wwwroot\ts\**" />
     <EmbeddedResource Remove="Data\**" />
+    <EmbeddedResource Remove="Views\FormAnswers\**" />
     <EmbeddedResource Remove="wwwroot\lib\bootstrap-icons\**" />
     <EmbeddedResource Remove="wwwroot\ts\**" />
     <None Remove="Data\**" />
+    <None Remove="Views\FormAnswers\**" />
     <None Remove="wwwroot\lib\bootstrap-icons\**" />
     <None Remove="wwwroot\ts\**" />
+    <TypeScriptCompile Remove="Views\FormAnswers\**" />
     <TypeScriptCompile Remove="wwwroot\lib\bootstrap-icons\**" />
     <TypeScriptCompile Remove="wwwroot\ts\**" />
   </ItemGroup>
@@ -47,7 +52,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Views\FormAnswers\" />
     <Folder Include="wwwroot\js\" />
     <Folder Include="wwwroot\lib\bootstrap\js\" />
     <Folder Include="wwwroot\lib\jquery\dist\" />

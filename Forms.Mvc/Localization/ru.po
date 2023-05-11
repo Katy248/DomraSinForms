@@ -109,6 +109,9 @@ msgstr "Эта форма будет удалена вместе со всеми
 msgid "Delete form?"
 msgstr "Удалить форму?"
 
+msgid "Editing"
+msgstr "Редактирование"
+
 # Questions
 
 msgid "Required"
