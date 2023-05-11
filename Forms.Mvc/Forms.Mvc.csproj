@@ -9,13 +9,18 @@
 
   <ItemGroup>
     <Compile Remove="Data\**" />
+    <Compile Remove="wwwroot\lib\bootstrap-icons\**" />
     <Compile Remove="wwwroot\ts\**" />
     <Content Remove="Data\**" />
+    <Content Remove="wwwroot\lib\bootstrap-icons\**" />
     <Content Remove="wwwroot\ts\**" />
     <EmbeddedResource Remove="Data\**" />
+    <EmbeddedResource Remove="wwwroot\lib\bootstrap-icons\**" />
     <EmbeddedResource Remove="wwwroot\ts\**" />
     <None Remove="Data\**" />
+    <None Remove="wwwroot\lib\bootstrap-icons\**" />
     <None Remove="wwwroot\ts\**" />
+    <TypeScriptCompile Remove="wwwroot\lib\bootstrap-icons\**" />
     <TypeScriptCompile Remove="wwwroot\ts\**" />
   </ItemGroup>
 
