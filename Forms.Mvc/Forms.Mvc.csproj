@@ -49,6 +49,8 @@
   <ItemGroup>
     <Folder Include="Views\FormAnswers\" />
     <Folder Include="wwwroot\js\" />
+    <Folder Include="wwwroot\lib\bootstrap\js\" />
+    <Folder Include="wwwroot\lib\jquery\dist\" />
   </ItemGroup>
   
 
