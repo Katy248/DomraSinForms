@@ -19,15 +19,15 @@ public class GetFormQueryHandler : IRequestHandler<GetFormQuery, Form>
     }
     public async Task<Form> Handle(GetFormQuery request, CancellationToken cancellationToken)
     {
-        var form =  await _context.Forms
+        var form = await _context.Forms
             .AsNoTracking()
-          /*  .Where(f => f.CreatorId == request.UserId)*/
+            /*  .Where(f => f.CreatorId == request.UserId)*/
             .FirstOrDefaultAsync(f => f.Id == request.Id, cancellationToken);
 
         if (form is null)
             return null;
 
-        form.Questions = new List<QuestionBase>(await _mediator.Send(new GetQuestionListQuery{ FormId = form.Id, }));
+        form.Questions = new List<QuestionBase>(await _mediator.Send(new GetQuestionListQuery { FormId = form.Id, }));
 
         return form;
     }

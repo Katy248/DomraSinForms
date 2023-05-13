@@ -1,14 +1,4 @@
-﻿using DomraSinForms.Application.Questions.Commands.CreateOptionsQuestion;
-using DomraSinForms.Application.Questions.Commands.CreateTextQuestion;
-using DomraSinForms.Application.Questions.Commands.Delete;
-using DomraSinForms.Application.Questions.Commands.UpdateTextQuestion;
-using DomraSinForms.Application.Questions.Queries.Get;
-using DomraSinForms.Application.Questions.Queries.GetList;
-using DomraSinForms.Domain.Models.Questions;
-using MediatR;
-using Microsoft.AspNetCore.Mvc;
-
-namespace Forms.Api.Controllers;
+﻿namespace Forms.Api.Controllers;
 
 /*public class QuestionsController : CRUDController<QuestionBase, CreateTextQuestionCommand, GetQuestionQuery, GetQuestionListQuery, UpdateTextQuestionCommand, DeleteQuestionCommand>
 {

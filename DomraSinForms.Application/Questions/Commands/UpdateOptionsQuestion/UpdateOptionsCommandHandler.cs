@@ -1,6 +1,5 @@
 ﻿using DomraSinForms.Application.Forms.Notifications.Update;
 using DomraSinForms.Application.Questions.Notifications;
-using DomraSinForms.Domain.Models;
 using DomraSinForms.Domain.Models.Questions;
 using DomraSinForms.Persistence;
 using MediatR;

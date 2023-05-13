@@ -1,6 +1,5 @@
 ﻿using AutoMapper;
 using DomraSinForms.Application.Mapper;
-using DomraSinForms.Domain.Models;
 using DomraSinForms.Domain.Models.Answers;
 
 namespace DomraSinForms.Application.Answers.Queries.GetList;

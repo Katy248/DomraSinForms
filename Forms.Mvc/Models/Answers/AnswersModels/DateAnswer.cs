@@ -5,7 +5,7 @@ namespace Forms.Mvc.Models.Answers.AnswersModels;
 
 public class DateAnswer : DateTimeAnswer
 {
-    public DateAnswer() : base() 
+    public DateAnswer() : base()
     {
     }
 

@@ -1,5 +1,4 @@
-﻿using AutoMapper;
-using DomraSinForms.Application.Forms.Notifications.Update;
+﻿using DomraSinForms.Application.Forms.Notifications.Update;
 using DomraSinForms.Domain.Models;
 using DomraSinForms.Persistence;
 

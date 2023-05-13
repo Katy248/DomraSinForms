@@ -1,6 +1,4 @@
-﻿using DomraSinForms.Application.Interfaces;
-using DomraSinForms.Domain.Models;
-using MediatR;
+﻿using MediatR;
 
 namespace DomraSinForms.Application.Forms.Queries.GetList;
 

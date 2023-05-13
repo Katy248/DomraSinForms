@@ -1,19 +1,13 @@
 ﻿using DomraSinForms.Application.Answers.Commands.Create;
 using DomraSinForms.Application.Answers.Commands.Update;
 using DomraSinForms.Application.Answers.Queries.GetEmptyForm;
-using DomraSinForms.Application.Answers.Queries.GetList;
 using DomraSinForms.Application.Forms.Queries.Get;
-using DomraSinForms.Application.Forms.Queries.GetList;
-using DomraSinForms.Domain.Models.Answers;
-using Forms.Mvc.Models;
 using Forms.Mvc.Models.Answers;
 using Forms.Mvc.Models.Answers.AnswersModels;
 using MediatR;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Mvc.Infrastructure;
-using Microsoft.Identity.Client;
 
 namespace Forms.Mvc.Controllers;
 
@@ -40,9 +34,9 @@ public class AnswersController : Controller
     public async Task<IActionResult> Fill(string formId)
     {
         var command = await _mediator.Send(new GetEmptyFormQuery { FormId = formId, UserId = _userManager.GetUserId(User) });
-        //var form = await _mediator.Send(new GetFormQuery { Id = formId });
+        var form = await _mediator.Send(new GetFormQuery { Id = formId });
 
-        var cvm = new FillFormViewModel(command);
+        var cvm = new FillFormViewModel(command, form);
         return View(cvm);
     }
     public async Task<IActionResult> UpdateStringAnswer([Bind] StringAnswer answer)
@@ -75,9 +69,9 @@ public class AnswersController : Controller
     }
     public async Task<IActionResult> UpdateForm(IAnswerViewModel viewModel)
     {
-        var result = await _mediator.Send(new UpdateFormAnswersCommand 
-        { 
-            FormId = viewModel.FormId, 
+        var result = await _mediator.Send(new UpdateFormAnswersCommand
+        {
+            FormId = viewModel.FormId,
             UserId = _userManager.GetUserId(User),
             Answer = new()
             {
@@ -97,9 +91,9 @@ public class AnswersController : Controller
         var result = await _mediator.Send(new CreateFormAnswersCommand { FormId = formId, UserId = _userManager.GetUserId(User) });
         if (result is null)
             return RedirectToAction(nameof(Fill), routeValues: new { formId = formId });
-        
+
         return RedirectToAction(nameof(AnsweredForm));
-        
+
     }
     public IActionResult AnsweredForm()
     {

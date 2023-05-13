@@ -54,12 +54,14 @@
             </div>
         </form>
     </div>
+    
     <div class="col-12 col-sm-4">
         <form asp-controller="Forms" asp-action="Index" asp-route-order="@order">
             <div class="input-group">
                 <select asp-for="@order" class="form-select">
                     <option value="@( ((int)FormOrderApproach.Title).ToString() )">
                         @Localizer["By title"]
+
 
                     </option>
                     <option value="@( ((int)FormOrderApproach.TitleDescending).ToString() )">
@@ -139,10 +141,12 @@
 
 </div>
 
+
+
 @section Scripts
-    {
+{
     <script>
         const tooltipTriggerList = document.querySelectorAll('[data-bs-toggle="tooltip"]')
         const tooltipList = [...tooltipTriggerList].map(tooltipTriggerEl => new bootstrap.Tooltip(tooltipTriggerEl))
     </script>
-    }
+}

@@ -33,6 +33,9 @@ var ThemeSwitch = (function () {
                 _this.scheme.addEventListener("change", _this.changeSchemeEventListener, true);
             }
         };
+        this.isDarkTheme = function () {
+            return _this.themeSwitcher.checked;
+        };
         this.themeSwitcher.addEventListener("click", function (event) {
             localStorage.setItem("theme", _this.themeSwitcher.checked ? "dark" : "light");
             _this.checkTheme();

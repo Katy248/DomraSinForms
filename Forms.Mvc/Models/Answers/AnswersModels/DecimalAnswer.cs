@@ -9,7 +9,7 @@ public class DecimalAnswer : AnswerViewModel
 
     public DecimalAnswer(TextQuestion question, Answer answer) : base(question, answer)
     {
-        
+
     }
     public decimal Number { get; set; }
     public override string Value => Number.ToString();

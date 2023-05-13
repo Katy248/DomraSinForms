@@ -1,6 +1,5 @@
 ﻿using DomraSinForms.Application.Answers.Commands.Create;
 using DomraSinForms.Application.Answers.Queries.Get;
-using DomraSinForms.Application.Answers.Queries.GetEmptyForm;
 using DomraSinForms.Application.Answers.Queries.GetList;
 using DomraSinForms.Application.Mapper;
 using DomraSinForms.Domain.Models.Answers;

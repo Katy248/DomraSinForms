@@ -18,7 +18,7 @@ public class RadioAnswer : AnswerViewModel
     }
     public List<string> Options { get; set; } = new();
     public string SelectedValue { get; set; }
-    public override string Value 
+    public override string Value
     {
         get => SelectedValue;
         set

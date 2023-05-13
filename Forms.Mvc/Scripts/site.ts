@@ -68,6 +68,9 @@ class ThemeSwitch {
             );
         }
     };
+
+    isDarkTheme = () =>
+        this.themeSwitcher.checked;
 }
 
 class AutoSaveForm {
@@ -109,5 +112,5 @@ class CookieAlerter {
     }
 }
 
-let themeSwitch = new ThemeSwitch();
+const themeSwitch = new ThemeSwitch();
 let autoSaveForm = new AutoSaveForm();

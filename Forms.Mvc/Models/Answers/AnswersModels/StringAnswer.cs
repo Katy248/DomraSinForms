@@ -10,7 +10,7 @@ public class StringAnswer : AnswerViewModel
     }
     public StringAnswer() : base()
     {
-        
+
     }
     public string AnswerValue { get; set; }
     public override string Value

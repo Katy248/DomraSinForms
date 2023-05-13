@@ -1,11 +1,9 @@
-﻿using DomraSinForms.Application.Answers.Queries.Get;
-using DomraSinForms.Application.Answers.Queries.GetEmptyForm;
+﻿using System.Web.Helpers;
+using DomraSinForms.Application.Answers.Queries.Get;
 using DomraSinForms.Application.Answers.Queries.GetList;
-using DomraSinForms.Application.Forms.Queries.Get;
 using Forms.Mvc.Models.Answers;
 using Forms.Mvc.Models.Statistics;
 using MediatR;
-using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Forms.Mvc.Controllers
@@ -18,23 +16,57 @@ namespace Forms.Mvc.Controllers
         {
             _mediator = mediator;
         }
-        public async Task<IActionResult> Answers(string formId)
-        {
-            var model = new FormAnswersListViewModel
-            {
-                AnswersDto = await _mediator.Send(new GetFormAnswersListQuery { FormId = formId }),
-                Form = await _mediator.Send(new GetFormQuery { Id = formId })                        
-            };
-            
-            return View(model);
-        }
-        public async Task<IActionResult> FormAnswers(string formId)
-        {
-            var command = await _mediator.Send(new GetFormAnswersQuery { Id = formId});
 
-            var cvm = new FillFormViewModel(command);
-            return View(cvm);
+        /// <summary>
+        /// Выводит все вопросы и диаграммы для их ответов.
+        /// </summary>
+        /// <param name="formId"></param>
+        /// <returns></returns>
+        /// <exception cref="Exception"></exception>
+        public async Task<IActionResult> Summary(string formId)
+        {
+            var vm = new SummaryViewModel
+            { 
+                FormId = formId,
+                AnswersDto = await _mediator.Send(new GetFormAnswersListQuery { FormId = formId }),
+            };
+            return View(vm);
+        }
+        /// <summary>
+        /// Выводит все ответы одного пользователя.
+        /// </summary>
+        /// <param name="formId"></param>
+        /// <returns></returns>
+        public async Task<IActionResult> FormAnswersList(string formId)
+        {
+            var vm = new FormAnswersViewModel
+            {
+                FormId = formId,
+                FormAnswersList = await _mediator.Send(new GetFormAnswersListQuery { FormId = formId })
+            };
+            return View(vm);
+        }
+        /// <summary>
+        /// Выводит все ответы на вопрос.
+        /// </summary>
+        /// <param name="questionId"></param>
+        /// <returns></returns>
+        /// <exception cref="Exception"></exception>
+        public async Task<IActionResult> Question(string questionId)
+        {
+            return View();
         }
     }
 }
 
+
+/*public async Task<IActionResult> Answers(string formId)
+{
+    var model = new FormAnswersListViewModel
+    {
+        AnswersDto = await _mediator.Send(new GetFormAnswersListQuery { FormId = formId }),
+        Form = await _mediator.Send(new GetFormQuery { Id = formId })                        
+    };
+
+    return View(model);
+}*/

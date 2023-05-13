@@ -10,7 +10,7 @@ public class DateTimeAnswer : AnswerViewModel
     }
     public DateTimeAnswer() : base()
     {
-        
+
     }
     public DateTime DateTimeValue { get; set; }
     public override string Value

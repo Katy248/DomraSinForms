@@ -1,0 +1,100 @@
+﻿@using Forms.Mvc.Models.Answers;
+@using Forms.Mvc.Models.Statistics;
+@using System.Web.Helpers;
+@using Microsoft.AspNetCore.Mvc.Localization;
+@model FormAnswersViewModel
+@inject IViewLocalizer Localizer
+
+<div class="row g-3 justify-content-center">
+    <div class="col-sm-10 col-md-8 col-xl-6 row g-3">
+        <!--Navigation-->
+        <div class="col-12 col-md-6">
+            <a class="btn btn-outline-secondary form-control" asp-action="Summary" asp-route-formId="@Model.FormId">@Localizer["Summary"]</a>
+        </div>
+        <div class="col-12 col-md-6">
+            <a class="btn btn-secondary form-control">@Localizer["All answers"]</a>
+        </div>
+
+        @foreach (var formAnswers in Model.FormAnswersList)
+        {
+            <div class="col-12">
+                <div class="card">
+                    <div class="card-header">@formAnswers.CreationDate</div>
+                </div>
+            </div>
+        }
+        <div class="col-12">
+            <div class="card">
+                <div class="card-footer bg-light-subtle">
+                    <div class="text-center img-fluid justify-content-center" id="chart1"></div>
+                </div>
+            </div>
+        </div>
+        <div class="col-12">
+            <div class="text-center img-fluid justify-content-center" id="chart2"></div>
+        </div>
+        <div class="col-12">
+            <div class="text-center img-fluid justify-content-center" id="chart3"></div>
+        </div>
+        <div class="col-12">
+            <div class="text-center img-fluid justify-content-center" id="chart4"></div>
+        </div>
+    </div>
+</div>
+@section scripts{
+    <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+    <script>
+        google.charts.load('current', { 'packages': ['corechart'] });
+        google.charts.setOnLoadCallback(drawChart);
+
+        function drawChart() {
+            var data = new google.visualization.DataTable();
+            data.addColumn('string', 'Tax Type');
+            data.addColumn('number', 'Tax Percentage');
+            data.addRows([
+                ['Soc. Sec. Tax', { v: 30, f: '30%' }],
+                ['Income Tax', { v: 35, f: '35%' }],
+                ['Borrowing', { v: 15, f: '15%' }],
+                ['Corp. Tax', { v: 12, f: '12%' }],
+                ['Misc', { v: 8, f: '8%' }]
+            ]);
+
+            // Simple Pie Chart:
+            var option = {
+                pieHole: 0.4,
+                enableInteractivity: false,
+                pieSliceBorderColor: '',
+                backgroundColor: {
+                    fillOpacity:0
+                },
+                legend: {
+                    textStyle: {
+                        color: themeSwitch.isDarkTheme() ? 'white' : 'black'
+                    }
+                },
+            };
+
+            var chart = new google.visualization.PieChart(document.getElementById('chart1'));
+            chart.draw(data, option);
+
+            //3D Pie Chart:
+            option.is3D = true;
+            chart = new google.visualization.PieChart(document.getElementById('chart2'));
+            chart.draw(data, option);
+
+            // Exploded Pie Chart:
+            option.is3D = false;
+            option.slices = {
+                1: { offset: 0.3 },
+                3: { offset: 0.5 }
+            };
+            chart = new google.visualization.PieChart(document.getElementById('chart3'));
+            chart.draw(data, option);
+
+            // Exploded 3D Pie Chart:
+            option.is3D = true;
+            chart = new google.visualization.PieChart(document.getElementById('chart4'));
+            chart.draw(data, option);
+        }
+    </script>
+}

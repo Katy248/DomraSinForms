@@ -1,5 +1,4 @@
-﻿using DomraSinForms.Application.Interfaces;
-using DomraSinForms.Application.Mapper;
+﻿using DomraSinForms.Application.Mapper;
 using DomraSinForms.Domain.Models.Questions;
 
 namespace DomraSinForms.Application.Questions.Commands.UpdateTextQuestion;

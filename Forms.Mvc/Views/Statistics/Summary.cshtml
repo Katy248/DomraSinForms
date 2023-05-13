@@ -1,0 +1,48 @@
+﻿@using DomraSinForms.Application.Answers.Queries.GetList;
+@using Forms.Mvc.Models.Statistics;
+@using Microsoft.AspNetCore.Mvc.Localization;
+@inject IViewLocalizer Localizer
+@model SummaryViewModel
+@{
+    ViewData["Title"] = Localizer["Form answers"];
+}
+<div class="row g-3 justify-content-center">
+    <div class="col-sm-10 col-md-8 col-xl-6 row g-3">
+        <!--Navigation-->
+        <div class="col-12 col-md-6">
+            <a class="btn btn-secondary form-control">@Localizer["Summary"]</a>
+        </div>
+        <div class="col-12 col-md-6">
+            <a class="btn btn-outline-secondary form-control" asp-action="FormAnswersList" asp-route-formId="@Model.FormId">@Localizer["All answers"]</a>
+        </div>
+
+        @foreach (var question in Model.Questions)
+        {
+            <div class="col-12">
+                <div class="card">
+                    <div class="card-body">
+                        <div>@question.Question.Id</div>
+                        <div>@question.Question.QuestionText</div>
+                        <div>@string.Concat(question.Answsers)</div>
+                    </div>
+                </div>
+            </div>
+        }
+    </div>
+</div>
+@*@foreach (var answer in Model.AnswersDto)
+        {
+            <div class="col-12">
+                <div class="card">
+                    <div class="card-body">
+                        <div>@answer.Id</div>
+                        <div>@answer.CreationDate</div>
+
+                    </div>
+                    <div class="card-footer">
+                        <a class="btn btn-outline-info form-control" asp-action="FormAnswers" asp-route-formId="@answer.Id"> @Localizer["See more"]</a>
+                    </div>
+                </div>
+
+            </div>
+        }*@

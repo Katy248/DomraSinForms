@@ -6,7 +6,7 @@
 @model FillFormViewModel
 @inject IViewLocalizer Localizer
 @{
-    ViewData["Title"] = $"{Localizer["Fill form"]?.Value} {Model.FormId}";
+    ViewData["Title"] = $"{Localizer["Fill form"]?.Value} {Model.Form?.Title}";
     var sendButtonClass = Model.RequiredQuestionsAnswered ? "btn-success" : "btn-outline-secondary";
 }
 
@@ -14,7 +14,8 @@
 {
     <div class="row g-3 justify-content-center">
 
-        <div class="col-12 text-center">@Localizer["Form"]</div>
+        <div class="col-12 h1 text-center">@Model.Form?.Title</div>
+        <div class="col-12 h5 text-center text-muted">@Model.Form?.Description</div>
         <div class="col-sm-10 col-md-7 col-xl-5 row g-3">
             @foreach (var answer in Model.Answers.OrderBy(a => a.Index))
             {

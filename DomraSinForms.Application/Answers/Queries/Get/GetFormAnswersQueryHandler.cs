@@ -1,8 +1,5 @@
-﻿using DomraSinForms.Application.Answers.Queries.GetList;
-using DomraSinForms.Application.Questions.Queries.GetList;
-using DomraSinForms.Domain.Models;
+﻿using DomraSinForms.Application.Questions.Queries.GetList;
 using DomraSinForms.Domain.Models.Answers;
-using DomraSinForms.Domain.Models.Questions;
 using DomraSinForms.Persistence;
 using MediatR;
 using Microsoft.EntityFrameworkCore;
@@ -23,7 +20,7 @@ namespace DomraSinForms.Application.Answers.Queries.Get
         public async Task<FormAnswers> Handle(GetFormAnswersQuery request, CancellationToken cancellationToken)
         {
             var formAnswers = await _context.FormAnswers
-            .Include(f => f.Answers)
+                .Include(f => f.Answers)
                 .FirstOrDefaultAsync(f => f.Id == request.Id, cancellationToken);
             var questions = await _mediator.Send(new GetQuestionListQuery { FormId = formAnswers.FormId, });
 

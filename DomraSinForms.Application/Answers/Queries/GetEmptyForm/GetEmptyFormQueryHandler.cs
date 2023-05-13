@@ -1,8 +1,4 @@
-﻿using System.Security;
-using System.Threading;
-using AutoMapper;
-using DomraSinForms.Application.Answers.Commands.Create;
-using DomraSinForms.Application.Answers.Queries.GetList;
+﻿using DomraSinForms.Application.Answers.Queries.GetList;
 using DomraSinForms.Application.Questions.Queries.GetList;
 using DomraSinForms.Domain.Models.Answers;
 using DomraSinForms.Domain.Models.Questions;
@@ -39,7 +35,7 @@ public class GetEmptyFormQueryHandler : IRequestHandler<GetEmptyFormQuery, FormA
             .Include(f => f.Questions)
             .FirstOrDefaultAsync(f => f.Id == formId, cancellationToken);
 
-        
+
         if (form is null)
             return null;
         var formAnswers = new FormAnswers

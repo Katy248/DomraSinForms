@@ -2,7 +2,6 @@
 using DomraSinForms.Application.Interfaces;
 using DomraSinForms.Application.Mapper;
 using DomraSinForms.Domain.Models;
-using DomraSinForms.Domain.Models.Questions;
 
 namespace DomraSinForms.Application.Forms.Commands.Update
 {

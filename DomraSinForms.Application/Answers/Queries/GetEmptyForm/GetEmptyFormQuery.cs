@@ -1,5 +1,4 @@
-﻿using DomraSinForms.Application.Answers.Commands.Create;
-using DomraSinForms.Application.Answers.Queries.GetList;
+﻿using DomraSinForms.Application.Answers.Queries.GetList;
 using MediatR;
 
 namespace DomraSinForms.Application.Answers.Queries.GetEmptyForm;

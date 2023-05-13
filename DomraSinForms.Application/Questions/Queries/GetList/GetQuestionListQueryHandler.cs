@@ -1,6 +1,5 @@
 ﻿using System.Collections.Immutable;
 using AutoMapper;
-using DomraSinForms.Application.Mapper;
 using DomraSinForms.Domain.Models.Questions;
 using DomraSinForms.Persistence;
 using MediatR;
@@ -38,7 +37,7 @@ public class GetQuestionListQueryHandler : IRequestHandler<GetQuestionListQuery,
 
         var qs = (tqs as IEnumerable<QuestionBase>).Concat(oqs);
 
-        return qs.OrderBy(q=>q.Index)
+        return qs.OrderBy(q => q.Index)
             .ToImmutableList();
     }
 }

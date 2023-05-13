@@ -1,8 +1,6 @@
 ﻿using AutoMapper;
-using DomraSinForms.Application.Mapper;
-using DomraSinForms.Domain.Models;
-using MediatR;
 using DomraSinForms.Persistence;
+using MediatR;
 
 namespace DomraSinForms.Application.Forms.Queries.GetList
 {

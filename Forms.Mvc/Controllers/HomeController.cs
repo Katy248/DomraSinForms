@@ -1,5 +1,4 @@
 ﻿using System.Diagnostics;
-using DomraSinForms.Persistence;
 
 using Forms.Mvc.Models;
 using Microsoft.AspNetCore.Localization;
@@ -29,7 +28,7 @@ public class HomeController : Controller
             new CookieOptions { Expires = DateTimeOffset.UtcNow.AddYears(1) }
         );
 
-        return Redirect(returnUrl); 
+        return Redirect(returnUrl);
         //LocalRedirect(returnUrl);
     }
 

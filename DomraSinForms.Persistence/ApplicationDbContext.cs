@@ -29,7 +29,7 @@ public class ApplicationDbContext : IdentityDbContext
             .WithOne()
             .HasForeignKey(fa => fa.FormId)
             .OnDelete(DeleteBehavior.Cascade);
-        
+
         builder
             .Entity<Form>()
             .HasMany<QuestionBase>(fa => fa.Questions)
@@ -43,7 +43,7 @@ public class ApplicationDbContext : IdentityDbContext
             .WithOne(a => a.Question)
             .HasForeignKey(a => a.QuestionId).IsRequired(false)
             .OnDelete(DeleteBehavior.SetNull);*/
-        
+
         builder
             .Entity<Answer>()
             .HasOne(a => a.Question)
