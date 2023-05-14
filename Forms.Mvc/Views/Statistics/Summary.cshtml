@@ -1,6 +1,7 @@
 ﻿@using DomraSinForms.Application.Answers.Queries.GetList;
 @using Forms.Mvc.Models.Statistics;
 @using Microsoft.AspNetCore.Mvc.Localization;
+@using System.Web.Helpers;
 @inject IViewLocalizer Localizer
 @model SummaryViewModel
 @{
@@ -19,13 +20,8 @@
         @foreach (var question in Model.Questions)
         {
             <div class="col-12">
-                <div class="card">
-                    <div class="card-body">
-                        <div>@question.Question.Id</div>
-                        <div>@question.Question.QuestionText</div>
-                        <div>@string.Join(' ', question.Answsers)</div>
-                    </div>
-                </div>
+                @await Html.PartialAsync("_AnsweredQuestionPartial", question)
+                
             </div>
         }
         <div class="col-12">
