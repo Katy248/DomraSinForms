@@ -1,7 +1,4 @@
-﻿using System.Web.Helpers;
-using DomraSinForms.Application.Answers.Queries.Get;
-using DomraSinForms.Application.Answers.Queries.GetList;
-using Forms.Mvc.Models.Answers;
+﻿using DomraSinForms.Application.Answers.Queries.GetList;
 using Forms.Mvc.Models.Statistics;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
@@ -26,7 +23,7 @@ namespace Forms.Mvc.Controllers
         public async Task<IActionResult> Summary(string formId)
         {
             var vm = new SummaryViewModel
-            { 
+            {
                 FormId = formId,
                 AnswersDto = await _mediator.Send(new GetFormAnswersListQuery { FormId = formId }),
             };

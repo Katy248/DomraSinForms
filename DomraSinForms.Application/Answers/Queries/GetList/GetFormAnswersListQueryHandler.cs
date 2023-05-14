@@ -25,7 +25,7 @@ public class GetFormAnswersListQueryHandler : IRequestHandler<GetFormAnswersList
             .Select(fa => fa.Id)
             .ToArrayAsync(cancellationToken);
 
-        
+
         var result = new List<FormAnswersDto>(formAnswersIds.Length);
         await foreach (var fa in Handle(formAnswersIds, cancellationToken))
         {
@@ -38,7 +38,7 @@ public class GetFormAnswersListQueryHandler : IRequestHandler<GetFormAnswersList
     {
         foreach (var id in ids)
         {
-            yield return  _mapper.Map<FormAnswers>(await _mediator.Send(new GetFormAnswersQuery { Id = id }, cancellationToken));
+            yield return _mapper.Map<FormAnswers>(await _mediator.Send(new GetFormAnswersQuery { Id = id }, cancellationToken));
         }
     }
 }

@@ -17,7 +17,7 @@ public class SummaryViewModel
             Questions = GetQuestions(value);
         }
     }
-    public IEnumerable<QuestionSummary> Questions { get; set;} = Array.Empty<QuestionSummary>();
+    public IEnumerable<QuestionSummary> Questions { get; set; } = Array.Empty<QuestionSummary>();
 
 
 
@@ -27,10 +27,10 @@ public class SummaryViewModel
         var answers = formAnswers.SelectMany(a => a.Answers);
         foreach (var question in answers.Select(a => a.Question).DistinctBy(q => q.Id))
         {
-            yield return new QuestionSummary 
-            { 
-                Question = question, 
-                Answsers = answers.Where(a => a.QuestionId == question.Id).Select(a => a.Value) 
+            yield return new QuestionSummary
+            {
+                Question = question,
+                Answsers = answers.Where(a => a.QuestionId == question.Id).Select(a => a.Value)
             };
         }
     }

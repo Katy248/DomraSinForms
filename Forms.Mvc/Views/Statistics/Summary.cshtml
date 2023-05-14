@@ -1,8 +1,10 @@
 ﻿@using DomraSinForms.Application.Answers.Queries.GetList;
+@using DomraSinForms.ChartsWrapper.Models.Options;
 @using Forms.Mvc.Models.Statistics;
 @using Microsoft.AspNetCore.Mvc.Localization;
-@using System.Web.Helpers;
+@using DomraSinForms.ChartsWrapper.Models;
 @inject IViewLocalizer Localizer
+@inject DomraSinForms.ChartsWrapper.Wrappers.Wrapper Wrapper
 @model SummaryViewModel
 @{
     ViewData["Title"] = Localizer["Form answers"];
@@ -43,7 +45,8 @@
     </div>
 </div>
 @section scripts{
-    <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+    @Wrapper.Init()
+    @Wrapper.WriteCharts()
     <script>
         google.charts.load('current', { 'packages': ['corechart'] });
         google.charts.setOnLoadCallback(drawChart);
