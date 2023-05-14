@@ -6,5 +6,10 @@ namespace DomraSinForms.ChartsWrapper.Models.Options
     {
         [JsonProperty("color")]
         public string Color { get; set; }
+
+        [JsonProperty("fontSize")]
+        public string? FontSize { get; set; }
+        [JsonProperty("fontName")]
+        public string? FontName { get; set; }
     }
 }

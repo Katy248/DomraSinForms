@@ -1,13 +1,14 @@
-﻿namespace DomraSinForms.ChartsWrapper.Models;
-public class PieChart
+﻿using Microsoft.AspNetCore.Html;
+using Newtonsoft.Json;
+
+namespace DomraSinForms.ChartsWrapper.Models;
+public class PieChart : Chart
 {
-    public static IEnumerable<object[]> GetDataTable(IQuestionSummary question)
+    const string PieChartName = nameof(PieChart);
+    public PieChart(string elementId, IEnumerable<object[]> dataTable, ChartOptions options) : base(elementId, PieChartName, dataTable, options)
     {
-        var answersPercents = new List<object[]>();
-        foreach (var answer in question.Answsers.Distinct())
-        {
-            answersPercents.Add(new object[] { answer, question.Answsers.Count() / question.Answsers.Where(a => a == answer).Count() * 100});
-        }
-        return answersPercents;
+        
     }
+    
+    
 }

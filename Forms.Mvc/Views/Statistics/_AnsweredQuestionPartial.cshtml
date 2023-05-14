@@ -16,21 +16,28 @@
     </div>
 </div>
 @{
-    Wrapper.AddChart(Model.Question.Id, Model, new ChartOptions
+    Wrapper.AddChart(
+        new PieChart(Model.Question.Id, Chart.GetDataTable(Model), new ChartOptions
+        {
+            BackgroundColor = new BackgroundColor
             {
-                BackgroundColor = new BackgroundColor
+                FillOpacity = 0
+            },
+            PieHole = 0.4m,
+            PieSliceBorderColor = "",
+            Is3D = false,
+            Legend = new Legend
+            {
+                TextStyle = new TextStyle
                 {
-                    FillOpacity = 0
-                },
-                PieHole = 0.4m,
-                PieSliceBorderColor = "",
-                Is3D = false,
-                Legend = new Legend
-                {
-                    TextStyle = new TextStyle
-                    {
-                        Color = "white"
-                    }
-                },
-            });
+                    Color = "white"
+                }
+            },
+            CssClassNames = new CssClasses
+            {
+                HeaderCell = "bg-primary",
+                TableCell = "bg-primary",
+                Legend = "link"
+            },
+        }));
 }

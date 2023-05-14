@@ -6,5 +6,7 @@ namespace DomraSinForms.ChartsWrapper.Models.Options
     {
         [JsonProperty("textStyle")]
         public TextStyle TextStyle { get; set; }
+        [JsonProperty("position")]
+        public string? Position { get; set; } = "left";
     }
 }

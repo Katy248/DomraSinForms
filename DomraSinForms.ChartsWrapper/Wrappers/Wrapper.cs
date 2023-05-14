@@ -1,4 +1,5 @@
-﻿using System.Text;
+﻿using System.Reflection;
+using System.Text;
 using DomraSinForms.ChartsWrapper.Models;
 using Microsoft.AspNetCore.Html;
 using Newtonsoft.Json;
@@ -6,7 +7,7 @@ using Newtonsoft.Json;
 namespace DomraSinForms.ChartsWrapper.Wrappers;
 public class Wrapper
 {
-    private List<HtmlString> Charts = new();
+    private List<Chart> Charts = new();
 
     public HtmlString Init()
     {
@@ -17,14 +18,20 @@ public class Wrapper
     }
     public HtmlString WriteCharts()
     {
+
         var builder = new StringBuilder();
         foreach (var chart in Charts)
         {
-            builder.Append(chart.Value);
+            var fn = "drawChartNo" + int.Abs(chart.Value.GetHashCode());
+            builder.Append($"<script>" +
+                $"google.charts.load('current', {{ 'packages': ['corechart'] }});" +
+                $"google.charts.setOnLoadCallback({fn});" +
+                $"function {fn} (){{ {chart.Value} }}" +
+                $"</script>");
         }
         return new HtmlString(builder.ToString());
     }
-    public HtmlString Chart(string elementId, IQuestionSummary model, ChartOptions options)
+    public HtmlString Chart1(string elementId, IQuestionSummary model, ChartOptions options)
     {
         var fn = "drawChartNo" + model.Question.Index;
         var value = $$"""
@@ -32,15 +39,19 @@ public class Wrapper
             google.charts.load('current', { 'packages': ['corechart'] });
                 google.charts.setOnLoadCallback({{fn}});
                 function {{fn}} () {
-                    {{GetPieChart(elementId, PieChart.GetDataTable(model), options)}}
+                    {{GetPieChart(elementId, Chart.GetDataTable(model), options)}}
                 }
             </script>
             """;
         return new HtmlString(value);
     }
-    public void AddChart(string elementId, IQuestionSummary model, ChartOptions options)
+    /*public void AddChart(string elementId, IQuestionSummary model, ChartOptions options)
     {
-        Charts.Add(Chart(elementId, model, options));
+        Charts.Add(Chart1(elementId, model, options));
+    }*/
+    public void AddChart(Chart chart)
+    {
+        Charts.Add(chart);
     }
     public string GetPieChart(string elementId, IEnumerable<object[]> dataTable, ChartOptions options)
     {
