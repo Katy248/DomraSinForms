@@ -24,6 +24,15 @@
         }
     }
 
+    string FormatTextLength(string text, int length = 88)
+    {
+        if (text.Length >= length)
+        {
+            return new string(text.Take(length - 3).ToArray()) + "...";
+        }
+        return text;   
+    }
+
     var orderApproaches = new[]
     {
         new SelectListItem(Localizer["By title"]?.Value, ((int)FormOrderApproach.Title).ToString()),
@@ -90,8 +99,8 @@
         <div class="col-12 col-md-6 col-xl-4">
             <div class="card" asp-action="Edit" asp-route-id="@form.Id" style="height: 15rem;">
                 <a class="card-body text-decoration-none" asp-action="Edit" asp-route-id="@form.Id">
-                    <div class="card-title h5">@form.Title</div>
-                    <div class="card-text mb-2">@form.Description</div>
+                    <div class="card-title h5">@FormatTextLength(form.Title, 35)</div>
+                    <div class="card-text mb-2">@FormatTextLength(form.Description)</div>
                     <div class="card-text text-muted">@Localizer["Last edit"]: @LastEditFormat(form.LastUpdateDate)</div>
                 </a>
                 <div class="card-footer">
