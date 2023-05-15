@@ -30,7 +30,7 @@ public class SummaryViewModel
             yield return new QuestionSummary
             {
                 Question = question,
-                Answsers = answers.Where(a => a.QuestionId == question.Id).Select(a => a.Value)
+                Answsers = answers.Where(a => a.QuestionId == question.Id).Select(a => a.Value).ToArray()
             };
         }
     }

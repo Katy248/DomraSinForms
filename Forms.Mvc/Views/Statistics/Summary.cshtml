@@ -19,7 +19,7 @@
             <a class="btn btn-outline-secondary form-control" asp-action="FormAnswersList" asp-route-formId="@Model.FormId">@Localizer["All answers"]</a>
         </div>
 
-        @foreach (var question in Model.Questions)
+        @foreach (var question in Model.Questions.OrderBy(q => q.Question.Index))
         {
             <div class="col-12">
                 @await Html.PartialAsync("_AnsweredQuestionPartial", question)

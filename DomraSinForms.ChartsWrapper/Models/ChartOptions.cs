@@ -28,4 +28,11 @@ public class ChartOptions
 
     [JsonProperty("cssClassNames")]
     public CssClasses CssClassNames { get; set; }
+
+    [JsonProperty("hAxis")]
+    public AxisOptions HorizontalAxis { get; set; }
+    [JsonProperty("vAxis")]
+    public AxisOptions VerticalAxis { get; set; }
+    [JsonProperty("annotations")]
+    public Annotation Annotations { get; set; }
 }
