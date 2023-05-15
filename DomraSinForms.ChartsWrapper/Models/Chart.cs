@@ -22,13 +22,15 @@ public class Chart
     }
     public string Value { get; set; }
 
-    public static IEnumerable<object[]> GetDataTable(IQuestionSummary question)
+    public static IEnumerable<object[]> GetDataTableWithPercentage(IQuestionSummary question)
     {
         foreach (var answer in question.Answsers.Distinct())
            yield return new object[] { answer, question.Answsers.Count() / question.Answsers.Where(a => a == answer).Count() * 100 };
     }
-}
-public enum ChartType
-{
-    PieChart,
+    public static IEnumerable<object[]> GetDataTableWithCount(IQuestionSummary question)
+    {
+        var answers = question.Answsers.SelectMany(a => a.Split("; ")).ToArray();
+        foreach (var answer in answers.Distinct())
+           yield return new object[] { answer, answers.Where(a => a == answer).Count() };
+    }
 }

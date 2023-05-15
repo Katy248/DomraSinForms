@@ -39,7 +39,7 @@ public class Wrapper
             google.charts.load('current', { 'packages': ['corechart'] });
                 google.charts.setOnLoadCallback({{fn}});
                 function {{fn}} () {
-                    {{GetPieChart(elementId, Chart.GetDataTable(model), options)}}
+                    {{GetPieChart(elementId, Chart.GetDataTableWithPercentage(model), options)}}
                 }
             </script>
             """;

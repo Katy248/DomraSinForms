@@ -1,4 +1,5 @@
-﻿@using Forms.Mvc.Models.Answers;
+﻿@using DomraSinForms.Domain.Models.Questions;
+@using Forms.Mvc.Models.Answers;
 @using Forms.Mvc.Models.Statistics;
 @using DomraSinForms.ChartsWrapper.Models;
 @using DomraSinForms.ChartsWrapper.Models.Options;
@@ -12,32 +13,82 @@
         <div>@(string.Join(' ', Model.Answsers.SelectMany(a => a.Split(';'))))</div>*@
     </div>
     <div class="card-footer">
-        <div id="@Model.Question.Id"></div>
+        @switch (Model.Question)
+        {
+            case OptionsQuestion options:
+                {
+                    <div id="@Model.Question.Id"></div>
+
+                    if (options.AllowMultipleChoice)
+                    {
+                        Wrapper.AddChart(
+                        new BarChart(Model.Question.Id, Chart.GetDataTableWithCount(Model), new ChartOptions
+                            {
+                                BackgroundColor = new BackgroundColor
+                                {
+                                    FillOpacity = 0
+                                },
+                                PieHole = 0.4m,
+                                PieSliceBorderColor = "",
+                                Is3D = false,
+                                Legend = new Legend
+                                {
+                                    TextStyle = new TextStyle
+                                    {
+                                        Color = "white"
+                                    }
+                                },
+                                CssClassNames = new CssClasses
+                                {
+                                    HeaderCell = "bg-primary",
+                                    TableCell = "bg-primary",
+                                    Legend = "link"
+                                },
+                            }));
+                    }
+                    else
+                    {
+                        Wrapper.AddChart(
+                        new PieChart(Model.Question.Id, Chart.GetDataTableWithPercentage(Model), new ChartOptions
+                            {
+                                BackgroundColor = new BackgroundColor
+                                {
+                                    FillOpacity = 0
+                                },
+                                PieHole = 0.4m,
+                                PieSliceBorderColor = "",
+                                Is3D = false,
+                                Legend = new Legend
+                                {
+                                    TextStyle = new TextStyle
+                                    {
+                                        Color = "white"
+                                    }
+                                },
+                                CssClassNames = new CssClasses
+                                {
+                                    HeaderCell = "bg-primary",
+                                    TableCell = "bg-primary",
+                                    Legend = "link"
+                                },
+                            }));
+                    }
+                }
+
+                break;
+            case TextQuestion:
+
+                @foreach (var answer in Model.Answsers)
+                {
+                    <div class="form-group my-1">
+                        <input class="form-control" value="@answer" disabled />
+                    </div>
+                }
+                break;
+        }
     </div>
 </div>
 @{
-    Wrapper.AddChart(
-        new PieChart(Model.Question.Id, Chart.GetDataTable(Model), new ChartOptions
-        {
-            BackgroundColor = new BackgroundColor
-            {
-                FillOpacity = 0
-            },
-            PieHole = 0.4m,
-            PieSliceBorderColor = "",
-            Is3D = false,
-            Legend = new Legend
-            {
-                TextStyle = new TextStyle
-                {
-                    Color = "white"
-                }
-            },
-            CssClassNames = new CssClasses
-            {
-                HeaderCell = "bg-primary",
-                TableCell = "bg-primary",
-                Legend = "link"
-            },
-        }));
+
+
 }
