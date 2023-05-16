@@ -25,7 +25,7 @@ builder.Services
 builder.Services
     .AddLocalization(options => options.ResourcesPath = "Resources")
     .AddApplication()
-    .AddChartsWrapper()
+    .AddWrappers()
     .AddPortableObjectLocalization(options => options.ResourcesPath = "Localization");
 
 var app = builder.Build();

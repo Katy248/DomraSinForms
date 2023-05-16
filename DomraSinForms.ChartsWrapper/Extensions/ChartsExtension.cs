@@ -4,8 +4,10 @@ using Microsoft.Extensions.DependencyInjection;
 namespace DomraSinForms.ChartsWrapper.Extensions;
 public static class ChartsExtension
 {
-    public static IServiceCollection AddChartsWrapper(this IServiceCollection services)
+    public static IServiceCollection AddWrappers(this IServiceCollection services)
     {
-        return services.AddScoped<Wrapper>();
+        return services
+            .AddScoped<ScriptWrapper>()
+            .AddScoped<Wrapper>();
     }
 }

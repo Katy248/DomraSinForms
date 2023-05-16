@@ -1,10 +1,14 @@
 ﻿@using DomraSinForms.Domain.Models.Questions;
 @using Forms.Mvc.Models.Answers;
+@using Microsoft.AspNetCore.Html;
+@using Newtonsoft.Json;
 @using Forms.Mvc.Models.Statistics;
 @using DomraSinForms.ChartsWrapper.Models;
 @using DomraSinForms.ChartsWrapper.Models.Options;
 @using Microsoft.AspNetCore.Mvc.Localization;
+@using System.Text;
 @inject DomraSinForms.ChartsWrapper.Wrappers.Wrapper Wrapper
+@inject DomraSinForms.ChartsWrapper.Wrappers.ScriptWrapper ScriptWrapper
 @inject IViewLocalizer Localizer
 @model QuestionSummary
 @{
@@ -13,6 +17,32 @@
                 Color = "white",
             };
     Model.Answsers.First();
+    var countData = JsonConvert.SerializeObject(Chart.GetDataTableWithCount(Model));
+    string FormatTextToUtf8(string text)
+    {
+        return Encoding.UTF8.GetString(Encoding.Default.GetBytes(text));
+    }
+
+
+
+    string script = $@"<script>
+                var options = {{
+                chart: {{
+                    type: 'bar'
+                }},
+                series: [{{
+                    name: 'sales',
+                    data: JSON.parse('{countData}')
+                }}],
+                xaxis: {{
+                    categories: [1991, 1992, 1993, 1994, 1995, 1996, 1997, 1998, 1999]
+                }}
+                }}
+
+                var chart = new ApexCharts(document.querySelector('#chart-{Model.Question.Id}'), options);
+
+                chart.render();</script>";
+    ScriptWrapper.Add(script);
 }
 <div class="card" data-bs-toggle="modal" data-bs-target="#modal-@Model.Question.Id">
     <div class="card-body">
@@ -24,6 +54,7 @@
             case OptionsQuestion options:
                 {
                     <div id="@Model.Question.Id"></div>
+                    <div id="chart-@Model.Question.Id"></div>
 
                     if (options.AllowMultipleChoice)
                     {
@@ -118,3 +149,33 @@
         </div>
     </div>
 </div>
+    
+    @if (Model.Question is OptionsQuestion optionsQuestion)
+    {
+        @if(optionsQuestion.AllowMultipleChoice)
+        {
+
+
+        }
+        else
+        {
+            <script>
+                var options = {
+                    chart: {
+                        type: 'line'
+                    },
+                    series: [{
+                        name: 'sales',
+                        data: JSON.parse(@(new HtmlString(countData)))
+                    }],
+                    xaxis: {
+                        categories: [1991, 1992, 1993, 1994, 1995, 1996, 1997, 1998, 1999]
+                    }
+                }
+
+                var chart = new ApexCharts(document.querySelector("#chart-@Model.Question.Id"), options);
+
+                chart.render();
+            </script>
+        }
+    }

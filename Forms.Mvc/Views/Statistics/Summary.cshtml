@@ -5,6 +5,7 @@
 @using DomraSinForms.ChartsWrapper.Models;
 @inject IViewLocalizer Localizer
 @inject DomraSinForms.ChartsWrapper.Wrappers.Wrapper Wrapper
+@inject DomraSinForms.ChartsWrapper.Wrappers.ScriptWrapper ScriptWrapper
 @model SummaryViewModel
 @{
     ViewData["Title"] = Localizer["Form answers"];
@@ -44,8 +45,11 @@
     </div>
 </div>
 @section scripts{
+    
     @Wrapper.Init()
+    @(ScriptWrapper.Init(@"<script src=""https://cdn.jsdelivr.net/npm/apexcharts""></script>"))
     @Wrapper.WriteCharts()
+    @ScriptWrapper.WriteAll()
     @*<script>
         google.charts.load('current', { 'packages': ['corechart'] });
         google.charts.setOnLoadCallback(drawChart);
