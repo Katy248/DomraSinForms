@@ -1,14 +1,30 @@
 ﻿@using DomraSinForms.Application.Answers.Queries.GetList;
+@using DomraSinForms.ChartsWrapper.ApexCharts.Charts;
+@using DomraSinForms.ChartsWrapper.ApexCharts;
 @using DomraSinForms.ChartsWrapper.Models.Options;
 @using Forms.Mvc.Models.Statistics;
+@using Microsoft.AspNetCore.Html;
 @using Microsoft.AspNetCore.Mvc.Localization;
 @using DomraSinForms.ChartsWrapper.Models;
+@using Newtonsoft.Json;
+@using Newtonsoft.Json.Serialization;
 @inject IViewLocalizer Localizer
 @inject DomraSinForms.ChartsWrapper.Wrappers.Wrapper Wrapper
 @inject DomraSinForms.ChartsWrapper.Wrappers.ScriptWrapper ScriptWrapper
 @model SummaryViewModel
 @{
     ViewData["Title"] = Localizer["Form answers"];
+    Dictionary<object, object> GetCountData(QuestionSummary summary)
+    {
+        var result = new Dictionary<object, object>();
+
+        var allAnswers = summary.Answsers.SelectMany(a => a.Split("; ")).ToArray();
+        foreach (var answer in allAnswers.Distinct())
+        {
+            result.Add(answer, allAnswers.Count(a => a == answer));
+        }
+        return result;
+    }
 }
 <div class="row g-3 justify-content-center">
     <div class="col-sm-10 col-md-8 col-xl-6 row g-3">
@@ -22,9 +38,9 @@
 
         @foreach (var question in Model.Questions.OrderBy(q => q.Question.Index))
         {
-            <div class="col-12">
+                <div class="col-12">
                 @await Html.PartialAsync("_AnsweredQuestionPartial", question)
-            </div>
+                </div>
         }
         @*<div class="col-12">
             <div class="card">
@@ -44,80 +60,42 @@
         </div>*@
     </div>
 </div>
-@section scripts{
-    
-    @Wrapper.Init()
-    @(ScriptWrapper.Init(@"<script src=""https://cdn.jsdelivr.net/npm/apexcharts""></script>"))
-    @Wrapper.WriteCharts()
-    @ScriptWrapper.WriteAll()
-    @*<script>
-        google.charts.load('current', { 'packages': ['corechart'] });
-        google.charts.setOnLoadCallback(drawChart);
-
-        function drawChart() {
-            var data = new google.visualization.DataTable();
-            data.addColumn('string', 'Tax Type');
-            data.addColumn('number', 'Tax Percentage');
-            data.addRows([
-                ['Soc. Sec. Tax', { v: 30, f: '30%' }],
-                ['Income Tax', { v: 35, f: '35%' }],
-                ['Borrowing', { v: 15, f: '15%' }],
-                ['Corp. Tax', { v: 12, f: '12%' }],
-                ['Misc', { v: 8, f: '8%' }]
-            ]);
-
-            // Simple Pie Chart:
-            var option = {
-                pieHole: 0.4,
-                enableInteractivity: false,
-                pieSliceBorderColor: '',
-                backgroundColor: {
-                    fillOpacity: 0
-                },
-                legend: {
-                    textStyle: {
-                        color: themeSwitch.isDarkTheme() ? 'white' : 'black'
+@section scripts {
+        <script src="https://cdn.jsdelivr.net/npm/apexcharts"></script>
+        <script>
+            function WriteChart(elementId, chartOptions){
+                console.log('chart');
+                let chart = new ApexCharts(document.querySelector(`#${elementId}`), chartOptions);
+                console.log()
+                chart.render();
+            }
+        </script>
+    @foreach (var question in Model.Questions)
+    {
+        var chartOptions = JsonConvert.SerializeObject(
+        new OptionsBuilder()
+        .AddData<BarChartDataConverter>(GetCountData(question))
+            .Build(),
+        new JsonSerializerSettings
+                    {
+                        ContractResolver = new CamelCasePropertyNamesContractResolver(),
+                        NullValueHandling = NullValueHandling.Ignore,
                     }
-                },
-            };
-
-            var chart = new google.visualization.PieChart(document.getElementById('chart1'));
-            chart.draw(data, option);
-
-            //3D Pie Chart:
-            option.is3D = true;
-            chart = new google.visualization.PieChart(document.getElementById('chart2'));
-            chart.draw(data, option);
-
-            // Exploded Pie Chart:
-            option.is3D = false;
-            option.slices = {
-                1: { offset: 0.3 },
-                3: { offset: 0.5 }
-            };
-            chart = new google.visualization.PieChart(document.getElementById('chart3'));
-            chart.draw(data, option);
-
-            // Exploded 3D Pie Chart:
-            option.is3D = true;
-            chart = new google.visualization.PieChart(document.getElementById('chart4'));
-            chart.draw(data, option);
-        }
-    </script>*@
+    );
+        <script type="text/javascript">
+            var options = JSON.parse('@(new HtmlString(chartOptions))');
+            options.theme.mode = themeSwitch.isDarkTheme() ? 'dark' : 'light';
+            //options.theme.mode = 'dark';
+            options.theme.palette = 'palette8';
+            console.log(options);
+            console.log(options.series);
+            console.log(options.xaxis);
+            WriteChart('chart-@(question.Question.Id)', options);
+        </script>
+    }
 }
-@*@foreach (var answer in Model.AnswersDto)
-        {
-            <div class="col-12">
-                <div class="card">
-                    <div class="card-body">
-                        <div>@answer.Id</div>
-                        <div>@answer.CreationDate</div>
-
-                    </div>
-                    <div class="card-footer">
-                        <a class="btn btn-outline-info form-control" asp-action="FormAnswers" asp-route-formId="@answer.Id"> @Localizer["See more"]</a>
-                    </div>
-                </div>
-
-            </div>
-        }*@
+<style>
+    .apexcharts-canvas {
+        background-color: transparent;
+    }
+</style>

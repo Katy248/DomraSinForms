@@ -3,6 +3,7 @@ using System.Text;
 using DomraSinForms.ChartsWrapper.Models;
 using Microsoft.AspNetCore.Html;
 using Newtonsoft.Json;
+using Newtonsoft.Json.Serialization;
 
 namespace DomraSinForms.ChartsWrapper.Wrappers;
 public class Wrapper
@@ -55,8 +56,8 @@ public class Wrapper
     }
     public string GetPieChart(string elementId, IEnumerable<object[]> dataTable, ChartOptions options)
     {
-        var dataJson = JsonConvert.SerializeObject(dataTable);
-        var optionsJson = JsonConvert.SerializeObject(options);
+        var dataJson = JsonConvert.SerializeObject(dataTable, _serializeSettings);
+        var optionsJson = JsonConvert.SerializeObject(options, _serializeSettings);
         var htmlValue = $$"""
             let data = google.visualization.arrayToDataTable(JSON.parse('{{dataJson}}'), true);
             let options = JSON.parse('{{optionsJson}}');
@@ -65,4 +66,5 @@ public class Wrapper
             """;
         return htmlValue;
     }
+    private readonly JsonSerializerSettings _serializeSettings = new() { ContractResolver = new CamelCasePropertyNamesContractResolver() };
 }
