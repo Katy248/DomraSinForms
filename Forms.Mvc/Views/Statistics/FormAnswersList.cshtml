@@ -18,7 +18,8 @@
         {
             <div class="col-12">
                 <div class="card">
-                    <div class="card-header">@formAnswers.CreationDate</div>
+                    <div class="card-header">@Localizer["Creation date"]: @formAnswers.CreationDate</div>
+                    <div class="card-body">@Localizer["Answers count"]: @formAnswers.Answers.Count</div>
                 </div>
             </div>
         }
