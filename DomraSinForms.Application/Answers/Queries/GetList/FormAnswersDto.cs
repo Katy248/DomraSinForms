@@ -9,7 +9,6 @@ public class FormAnswersDto : IMapWith<FormAnswers>
     public string Id { get; set; }
     public string FormId { get; set; }
     public string UserId { get; set; }
-    public string CreatorId { get; set; }
     public DateTime CreationDate { get; set; }
     public List<Answer> Answers { get; set; }
     public void Mapping(Profile profile)

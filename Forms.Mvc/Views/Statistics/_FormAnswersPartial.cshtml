@@ -1,0 +1,44 @@
+﻿@using DomraSinForms.Application.Answers.Queries.GetList;
+@using DomraSinForms.Domain.Models.Questions;
+@using Microsoft.AspNetCore.Mvc.Localization;
+@inject IViewLocalizer Localizer
+@model FormAnswersDto
+@{
+    var modalId = ViewData["ModalId"] as string ?? "createOptionsQuestionModal";
+}
+<div class="modal fade" tabindex="-1" id="@modalId">
+    <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
+        <div class="modal-content">
+            <div class="modal-body">
+                <h2 class="text-center mb-3">@Localizer["Answers"]</h2>
+                <div class="row g-3">
+                    @foreach (var answer in Model.Answers)
+                    {
+                        <div class="col-12">
+                            <div class="card">
+                                <div class="card-body">
+                                <div class="card-title h5">@answer.Question.QuestionText</div>
+                                @switch (answer.Question)
+                                    {
+                                        case OptionsQuestion oq:
+                                            var answers = answer.Value.Split("; ");
+                                            @foreach (var option in oq.Options)
+                                            {
+                                                <input class="form-control my-2 @(answers.Contains(option.Text) ? "bg-success" : "")" value="@option.Text" disabled />
+                                            }
+                                            break;
+                                        case TextQuestion tq:
+                                            <input class="form-control @(!string.IsNullOrWhiteSpace(answer.Value) ? "bg-success" : "")" value="@answer.Value" disabled/>
+                                            break;
+                                    }
+                                    
+                                </div>
+                            </div>
+                        </div>
+                    }
+                </div>
+
+            </div>
+        </div>
+    </div>
+</div>
