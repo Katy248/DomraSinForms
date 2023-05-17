@@ -225,3 +225,18 @@ msgstr "Больше"
 
 msgid "Form answers"
 msgstr "Ответы формы"
+
+msgid "Summary"
+msgstr "Сводка"
+
+msgid "All answers"
+msgstr "Все ответы"
+
+msgid "Answers count"
+msgstr "Количество ответов"
+
+msgid "Answers count"
+msgstr "Количество ответов"
+
+msgid "Answers"
+msgstr "Ответы"

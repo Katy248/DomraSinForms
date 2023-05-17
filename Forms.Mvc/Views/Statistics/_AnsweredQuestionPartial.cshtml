@@ -92,7 +92,7 @@
                 break;
             case TextQuestion:
 
-                @foreach (var answer in Model.Answsers)
+                @foreach (var answer in Model.Answsers.Distinct().Take(10))
                 {
                     <div class="form-group my-1">
                         <input class="form-control" value="@answer" disabled />
