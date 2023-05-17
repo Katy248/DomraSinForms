@@ -27,6 +27,8 @@ namespace Forms.Mvc.Controllers
                 FormId = formId,
                 AnswersDto = await _mediator.Send(new GetFormAnswersListQuery { FormId = formId }),
             };
+            if (vm is null)
+                return NotFound();
             return View(vm);
         }
         /// <summary>
@@ -41,29 +43,9 @@ namespace Forms.Mvc.Controllers
                 FormId = formId,
                 FormAnswersList = await _mediator.Send(new GetFormAnswersListQuery { FormId = formId })
             };
+            if (vm is null)
+                return NotFound();
             return View(vm);
-        }
-        /// <summary>
-        /// Выводит все ответы на вопрос.
-        /// </summary>
-        /// <param name="questionId"></param>
-        /// <returns></returns>
-        /// <exception cref="Exception"></exception>
-        public async Task<IActionResult> Question(string questionId)
-        {
-            return View();
         }
     }
 }
-
-
-/*public async Task<IActionResult> Answers(string formId)
-{
-    var model = new FormAnswersListViewModel
-    {
-        AnswersDto = await _mediator.Send(new GetFormAnswersListQuery { FormId = formId }),
-        Form = await _mediator.Send(new GetFormQuery { Id = formId })                        
-    };
-
-    return View(model);
-}*/
