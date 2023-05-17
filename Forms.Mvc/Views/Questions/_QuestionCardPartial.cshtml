@@ -39,7 +39,7 @@
                     </div>
                     @foreach (var option in oq.Options)
                     {
-                        <input class="form-control mt-2" value="@option.Text" disabled/>
+                        <input class="form-control mt-2" value="@option.Text" disabled />
                     }
                 }
                 break;
@@ -55,53 +55,17 @@
 
     <div class="card-footer btn-group" role="group">
         @*<div class="" role="group">*@
-            @switch (Model)
-            {
-                case OptionsQuestion oq:
-                    {
-                        <button class="btn btn-outline-secondary btn-sm" data-bs-toggle="modal" data-bs-target="#@editModalId">@Localizer["Edit"]</button>
-                        @(
-                            await Html.PartialAsync("/Views/Questions/_UpdateOptionsQuestionModalPartial.cshtml",
-                            new UpdateOptionsQuestionCommand 
-                            {
-                                Id = oq.Id,
-                                AllowMultipleChoice = oq.AllowMultipleChoice,
-                                Index = oq.Index,
-                                IsRequired = oq.IsRequired,
-                                Options = oq.Options,
-                                QuestionText = oq.QuestionText,
-                            },
-                            new ViewDataDictionary(ViewData)
-                            {
-                                { "ModalId", editModalId }
-                            })
-                            )
-                    }
-                    break;
-                case TextQuestion tq:
-                    {
-                        <button class="btn btn-outline-secondary btn-sm" data-bs-toggle="modal" data-bs-target="#@editModalId">
-                            <i class="bi-pencil me-2"></i>
-                            @Localizer["Edit"]
-                        </button>
-                        @(
-                            await Html.PartialAsync("/Views/Questions/_UpdateTextQuestionModalPartial.cshtml", 
-                                (UpdateTextQuestionViewModel)tq, 
-                                new ViewDataDictionary(ViewData)
-                                {
-                                    { "FormId", Model.FormId },
-                                    { "ModalId", editModalId }
-                                })
-                         )
-                    }
-                    break;
-            }
-            <button class="btn btn-outline-danger btn-sm"
-                    data-bs-toggle="modal"
-                    data-bs-target="#@deleteModalId">
-                <i class="bi-trash3 me-2"></i>
-                    @Localizer["Delete"]
-            </button>
+        <button class="btn btn-outline-secondary btn-sm" data-bs-toggle="modal" data-bs-target="#@editModalId">
+            <i class="bi-pencil me-2"></i>
+            @Localizer["Edit"]
+        </button>
+
+        <button class="btn btn-outline-danger btn-sm"
+                data-bs-toggle="modal"
+                data-bs-target="#@deleteModalId">
+            <i class="bi-trash3 me-2"></i>
+            @Localizer["Delete"]
+        </button>
         @*</div>*@
 
     </div>
@@ -124,3 +88,41 @@
         </div>
     </div>
 </div>
+@switch (Model)
+{
+    case OptionsQuestion oq:
+        {
+
+            @(
+                        await Html.PartialAsync("/Views/Questions/_UpdateOptionsQuestionModalPartial.cshtml",
+                        new UpdateOptionsQuestionCommand
+                    {
+                        Id = oq.Id,
+                        AllowMultipleChoice = oq.AllowMultipleChoice,
+                        Index = oq.Index,
+                        IsRequired = oq.IsRequired,
+                        Options = oq.Options,
+                        QuestionText = oq.QuestionText,
+                    },
+                        new ViewDataDictionary(ViewData)
+                            {
+                                { "ModalId", editModalId }
+                            })
+                        )
+        }
+        break;
+    case TextQuestion tq:
+        {
+
+            @(
+                        await Html.PartialAsync("/Views/Questions/_UpdateTextQuestionModalPartial.cshtml",
+                            (UpdateTextQuestionViewModel)tq,
+                            new ViewDataDictionary(ViewData)
+                                {
+                                    { "FormId", Model.FormId },
+                                    { "ModalId", editModalId }
+                                })
+                     )
+        }
+        break;
+}

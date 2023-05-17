@@ -33,7 +33,7 @@
         var allAnswers = summary.Answsers.SelectMany(a => a.Split("; ")).ToArray();
         foreach (var answer in allAnswers.Distinct())
         {
-            result.Add(answer, (double)allAnswers.Count(a => a == answer) / (double)allAnswers.Length);
+            result.Add(answer, (double)allAnswers.Count(a => a == answer) / (double)allAnswers.Length * 100d);
         }
         return result;
     }
