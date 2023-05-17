@@ -240,3 +240,45 @@ msgstr "Количество ответов"
 
 msgid "Answers"
 msgstr "Ответы"
+
+#Identity
+
+
+msgid "Email"
+msgstr "Email"
+
+msgid "Password"
+msgstr "Пароль"
+
+msgid "Remember me"
+msgstr "Запомнить меня"
+
+msgid "Forgot your password?"
+msgstr "Забыли пароль?"
+
+msgid "Register as a new user"
+msgstr "Зарегистрироваться"
+
+msgid "Resend email confirmation"
+msgstr "Переслать письмо с подтверждением"
+
+msgid "Use another service to log in."
+msgstr "Использовать другой сервис для входа."
+
+msgid "There are no external authentication services configured. See this <a href=\"https://go.microsoft.com/fwlink/?LinkID=532715\">article about setting up this ASP.NET application to support logging in via external services</a>."
+msgstr "Глупый текст"
+
+msgid "Log in using your {0} account"
+msgstr "Войти используя ваш {0} аккаунт"
+
+msgid "Confirm email"
+msgstr "Подтвердить почту"
+
+msgid "You have successfully logged out of the application."
+msgstr "Вы успешно вышли"
+
+msgid "Register"
+msgstr "Зарегистрироваться"
+
+msgid "Confirm Password"
+msgstr "Подтверждение пароля"
