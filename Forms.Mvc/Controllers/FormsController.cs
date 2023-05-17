@@ -58,8 +58,9 @@ public class FormsController : Controller
         if (!ModelState.IsValid)
             return View(command);
 
-        await _mediator.Send(command);
-
+        var result = await _mediator.Send(command);
+        if (result is not null)
+            return RedirectToAction(nameof(Edit), new { id = result.Id });
         return RedirectToIndex();
     }
     [Authorize]
