@@ -31,6 +31,7 @@ public class AnswersController : Controller
         var result = await _mediator.Send(new GetFormAnswersListQuery { FormId = formId });
         return View(result);
     }*/
+    [Authorize]
     public async Task<IActionResult> Fill(string formId)
     {
         var command = await _mediator.Send(new GetEmptyFormQuery { FormId = formId, UserId = _userManager.GetUserId(User) });
