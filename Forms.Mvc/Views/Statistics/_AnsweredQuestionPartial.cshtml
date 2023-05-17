@@ -22,55 +22,14 @@
             {
                 Color = "white",
             };
-    Model.Answsers.First();
-    //var countData = JsonConvert.SerializeObject(Chart.GetDataTableWithCount(Model));
-    string FormatTextToUtf8(string text)
-    {
-        return Encoding.UTF8.GetString(Encoding.Default.GetBytes(text));
-    }
 
-    Dictionary<object, object> GetCountData()
-    {
-        var result = new Dictionary<object, object>();
-
-        var allAnswers = Model.Answsers.SelectMany(a => a.Split("; ")).ToArray();
-        foreach (var answer in allAnswers.Distinct())
-        {
-            result.Add(answer, allAnswers.Count(a => a == answer));
-        }
-        return result;
-    }
-
-    var chartOptions = JsonConvert.SerializeObject(
-        new OptionsBuilder()
-        .AddData<BarChartDataConverter>(GetCountData())
-            .Build(),
-        new JsonSerializerSettings 
-        { 
-            ContractResolver = new CamelCasePropertyNamesContractResolver(), 
-            NullValueHandling = NullValueHandling.Ignore,
-        }
-    );
 }
 
-@section Scripts {
-    <script type="text/javascript">
-        var options = JSON.parse('@(new HtmlString(chartOptions))');
-        //options.theme.mode = themeSwitch.isDarkTheme() ? 'dark' : 'light';
-        options.theme.mode = 'light';
-        console.log(options);
-        WriteChart('chart-@(Model.Question.Id)', options);
-        document.addEventListener('load', event => {
-
-        });
-    </script>
-}
-
-<div class="card" data-bs-toggle="modal" data-bs-target="#modal-@Model.Question.Id">
-    <div class="card-body">
+<div class="card card-button" data-bs-toggle="modal" data-bs-target="#modal-@Model.Question.Id">
+    <div class="card-header">
         <div class="card-title h5">@Model.Question.QuestionText</div>
     </div>
-    <div class="card-footer" onload="console.log()">
+    <div class="card-body" onload="console.log()">
         @switch (Model.Question)
         {
             case OptionsQuestion options:

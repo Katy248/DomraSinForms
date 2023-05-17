@@ -23,3 +23,12 @@ body {
 a {
     cursor: pointer;
 }
+.card-button:hover {
+    transition: .5s;
+    /*border-color: var(--bs-secondary-color);*/
+    color: var(--bs-light-text-emphasis);
+    background-color: var(--bs-tertiary-bg);
+}
+body[data-bs-theme=light] .card-button:hover {
+    border-color: var(--bs-secondary-color);
+}

@@ -19,7 +19,7 @@
         @foreach (var formAnswers in Model.FormAnswersList)
         {
             <div class="col-12">
-                <div class="card" data-bs-toggle="modal" data-bs-target="#@formAnswers.Id">
+                <div class="card card-button" data-bs-toggle="modal" data-bs-target="#@formAnswers.Id">
                     <div class="card-header">@Localizer["Creation date"]: @formAnswers.CreationDate</div>
                     <div class="card-body">@Localizer["Answers count"]: @formAnswers.Answers.Count</div>
                 </div>

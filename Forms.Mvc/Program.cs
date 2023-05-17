@@ -12,7 +12,6 @@ builder.Services.AddDbContext<ApplicationDbContext>(options =>
 {
     options.UseSqlServer(connectionString);
     options.EnableDetailedErrors(true);
-    options.EnableSensitiveDataLogging(true);
 });
 builder.Services.AddDatabaseDeveloperPageExceptionFilter();
 
