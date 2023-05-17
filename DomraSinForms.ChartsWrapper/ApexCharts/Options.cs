@@ -9,10 +9,11 @@ namespace DomraSinForms.ChartsWrapper.ApexCharts;
 public class Options
 {
     public Chart Chart { get; set; } = new();
-    public List<Series> Series { get; set; } = new();
+    public List<object> Series { get; set; } = new();
     [JsonProperty("xaxis")]
     public Axis XAxis { get; set; } = new();
     public Theme Theme { get; set; } = new();
+    public IEnumerable<object> Labels { get; set; }
 }
 
 public class Theme

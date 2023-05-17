@@ -2,6 +2,7 @@
 @using DomraSinForms.ChartsWrapper.ApexCharts.Charts;
 @using DomraSinForms.ChartsWrapper.ApexCharts;
 @using DomraSinForms.ChartsWrapper.Models.Options;
+@using DomraSinForms.Domain.Models.Questions;
 @using Forms.Mvc.Models.Statistics;
 @using Microsoft.AspNetCore.Html;
 @using Microsoft.AspNetCore.Mvc.Localization;
@@ -22,6 +23,17 @@
         foreach (var answer in allAnswers.Distinct())
         {
             result.Add(answer, allAnswers.Count(a => a == answer));
+        }
+        return result;
+    }
+    Dictionary<object, object> GetPercentageData(QuestionSummary summary)
+    {
+        var result = new Dictionary<object, object>();
+
+        var allAnswers = summary.Answsers.SelectMany(a => a.Split("; ")).ToArray();
+        foreach (var answer in allAnswers.Distinct())
+        {
+            result.Add(answer, (double)allAnswers.Count(a => a == answer) / (double)allAnswers.Length);
         }
         return result;
     }
@@ -72,26 +84,34 @@
         </script>
     @foreach (var question in Model.Questions)
     {
-        var chartOptions = JsonConvert.SerializeObject(
-        new OptionsBuilder()
-        .AddData<BarChartDataConverter>(GetCountData(question))
-            .Build(),
-        new JsonSerializerSettings
+        if (question.Question is OptionsQuestion oq)
+        {
+            var optionsBuilder = new OptionsBuilder()
+            .UsePalette(1);
+            if (oq.AllowMultipleChoice)
+                optionsBuilder.AddData<BarChartDataConverter>(GetCountData(question));
+            else
+                optionsBuilder.AddData<PieChartDataConverter>(GetPercentageData(question));
+
+            var chartOptions = JsonConvert.SerializeObject(
+                optionsBuilder.Build(),
+                new JsonSerializerSettings
                     {
                         ContractResolver = new CamelCasePropertyNamesContractResolver(),
                         NullValueHandling = NullValueHandling.Ignore,
                     }
     );
-        <script type="text/javascript">
-            var options = JSON.parse('@(new HtmlString(chartOptions))');
-            options.theme.mode = themeSwitch.isDarkTheme() ? 'dark' : 'light';
-            //options.theme.mode = 'dark';
-            options.theme.palette = 'palette8';
-            console.log(options);
-            console.log(options.series);
-            console.log(options.xaxis);
-            WriteChart('chart-@(question.Question.Id)', options);
-        </script>
+            <script type="text/javascript">
+                var options = JSON.parse('@(new HtmlString(chartOptions))');
+                options.theme.mode = themeSwitch.isDarkTheme() ? 'dark' : 'light';
+                console.log(options);
+                console.log(options.series);
+                console.log(options.xaxis);
+                WriteChart('chart-@(question.Question.Id)', options);
+            </script>
+        }
+
+        
     }
 }
 <style>

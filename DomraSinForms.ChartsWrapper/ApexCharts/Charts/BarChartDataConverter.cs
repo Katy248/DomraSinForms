@@ -9,7 +9,7 @@ public class BarChartDataConverter : IChartDataConverter
 {
     public string ChartType => "bar";
 
-    public Tuple<IEnumerable<object>, IEnumerable<object>> Convert(Dictionary<object, object> data)
+    public void Convert(Dictionary<object, object> data, Options options)
     {
         var series = new List<object>();
         var categories = new List<object>();
@@ -19,6 +19,7 @@ public class BarChartDataConverter : IChartDataConverter
             categories.Add(item.Key);
         }
 
-        return new Tuple<IEnumerable<object>, IEnumerable<object>>(series, categories);
+        options.Series.Add(new Series { Data = series, Name = "" });
+        options.XAxis.Categories = categories;
     }
 }

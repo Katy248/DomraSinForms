@@ -11,10 +11,8 @@ public class OptionsBuilder
     public OptionsBuilder AddData<TChartDataConverter>(Dictionary<object, object> data, string seriesName = "") where  TChartDataConverter : IChartDataConverter, new()
     {
         var converter = new TChartDataConverter();
-        var (series, categories) = converter.Convert(data);
+        converter.Convert(data, _options);
 
-        _options.Series.Add(new Series { Data = series, Name = seriesName });
-        _options.XAxis.Categories = categories;
         _options.Chart.Type = converter.ChartType.ToLower();
 
         return this;
@@ -35,6 +33,6 @@ public class OptionsBuilder
 
 public interface IChartDataConverter
 {
-    Tuple<IEnumerable<object>, IEnumerable<object>> Convert(Dictionary<object, object> data);
+    void Convert(Dictionary<object, object> data, Options options);
     public string ChartType { get; }
 }

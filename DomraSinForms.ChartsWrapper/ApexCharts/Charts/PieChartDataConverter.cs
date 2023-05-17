@@ -9,8 +9,17 @@ public class PieChartDataConverter : IChartDataConverter
 {
     public string ChartType => "pie";
 
-    public Tuple<IEnumerable<object>, IEnumerable<object>> Convert(Dictionary<object, object> data)
+    public void Convert(Dictionary<object, object> data, Options options)
     {
-        throw new NotImplementedException();
+        var series = new List<object>();
+        var labels = new List<object>();
+        foreach (var item in data)
+        {
+            series.Add(item.Value);
+            labels.Add(item.Key);
+        }
+
+        options.Series = series.ToList();
+        options.Labels = labels;
     }
 }
