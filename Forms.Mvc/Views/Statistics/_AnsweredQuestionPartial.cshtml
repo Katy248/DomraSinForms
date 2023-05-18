@@ -5,25 +5,11 @@
 @using Microsoft.AspNetCore.Html;
 @using Newtonsoft.Json;
 @using Forms.Mvc.Models.Statistics;
-@using DomraSinForms.ChartsWrapper.Models;
-@using DomraSinForms.ChartsWrapper.Models.Options;
 @using Microsoft.AspNetCore.Mvc.Localization;
 @using System.Text;
 @using Newtonsoft.Json.Serialization;
-@inject DomraSinForms.ChartsWrapper.Wrappers.Wrapper Wrapper
-@inject DomraSinForms.ChartsWrapper.Wrappers.ScriptWrapper ScriptWrapper
 @inject IViewLocalizer Localizer
 @model QuestionSummary
-
-
-
-@{
-    var textStyle = new TextStyle
-            {
-                Color = "white",
-            };
-
-}
 
 <div class="card card-button" data-bs-toggle="modal" data-bs-target="#modal-@Model.Question.Id">
     <div class="card-header">
