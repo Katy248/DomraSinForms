@@ -2,7 +2,6 @@ using DomraSinForms.Application;
 using DomraSinForms.Persistence;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
-using DomraSinForms.ChartsWrapper.Extensions;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -23,7 +22,6 @@ builder.Services
 builder.Services
     .AddLocalization(options => options.ResourcesPath = "Resources")
     .AddApplication()
-    .AddWrappers()
     .AddPortableObjectLocalization(options => options.ResourcesPath = "Localization");
 
 var app = builder.Build();

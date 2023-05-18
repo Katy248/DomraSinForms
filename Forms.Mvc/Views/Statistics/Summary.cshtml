@@ -1,17 +1,16 @@
 ﻿@using DomraSinForms.Application.Answers.Queries.GetList;
 @using DomraSinForms.ChartsWrapper.ApexCharts.Charts;
 @using DomraSinForms.ChartsWrapper.ApexCharts;
-@using DomraSinForms.ChartsWrapper.Models.Options;
 @using DomraSinForms.Domain.Models.Questions;
 @using Forms.Mvc.Models.Statistics;
 @using Microsoft.AspNetCore.Html;
 @using Microsoft.AspNetCore.Mvc.Localization;
-@using DomraSinForms.ChartsWrapper.Models;
 @using Newtonsoft.Json;
 @using Newtonsoft.Json.Serialization;
+@using DomraSinForms.ChartsWrapper.ApexCharts.Charts.BarChart;
+@using DomraSinForms.ChartsWrapper.ApexCharts.Charts.PieChart;
+@using DomraSinForms.ChartsWrapper.ApexCharts.Extensions;
 @inject IViewLocalizer Localizer
-@inject DomraSinForms.ChartsWrapper.Wrappers.Wrapper Wrapper
-@inject DomraSinForms.ChartsWrapper.Wrappers.ScriptWrapper ScriptWrapper
 @model SummaryViewModel
 @{
     ViewData["Title"] = Localizer["Form answers"];
@@ -86,23 +85,17 @@
     {
         if (question.Question is OptionsQuestion oq)
         {
-            var optionsBuilder = new OptionsBuilder()
+            var optionsBuilder = new ChartOptionsBuilder()
             .UsePalette(1);
             if (oq.AllowMultipleChoice)
-                optionsBuilder.AddData<BarChartDataConverter>(GetCountData(question));
+                optionsBuilder.CreateBarChart(GetCountData(question));
             else
-                optionsBuilder.AddData<PieChartDataConverter>(GetPercentageData(question));
+                optionsBuilder.CreatePieChart(GetPercentageData(question));
 
-            var chartOptions = JsonConvert.SerializeObject(
-                optionsBuilder.Build(),
-                new JsonSerializerSettings
-                    {
-                        ContractResolver = new CamelCasePropertyNamesContractResolver(),
-                        NullValueHandling = NullValueHandling.Ignore,
-                    }
-    );
+            var chartOptions = optionsBuilder.Build().Serialize();
+
             <script type="text/javascript">
-                var options = JSON.parse('@(new HtmlString(chartOptions))');
+                var options = JSON.parse('@(chartOptions)');
                 options.theme.mode = themeSwitch.isDarkTheme() ? 'dark' : 'light';
                 console.log(options);
                 console.log(options.series);
