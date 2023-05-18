@@ -7,7 +7,7 @@ using MediatR;
 using Microsoft.EntityFrameworkCore;
 
 namespace DomraSinForms.Application.Answers.Queries.GetEmptyForm;
-public class GetEmptyFormQueryHandler : IRequestHandler<GetEmptyFormQuery, FormAnswersDto>
+public class GetEmptyFormQueryHandler : IRequestHandler<GetEmptyFormQuery, FormAnswersDto?>
 {
     private readonly ApplicationDbContext _context;
     private readonly IMediator _mediator;
@@ -17,7 +17,7 @@ public class GetEmptyFormQueryHandler : IRequestHandler<GetEmptyFormQuery, FormA
         _context = context;
         _mediator = mediator;
     }
-    public async Task<FormAnswersDto> Handle(GetEmptyFormQuery request, CancellationToken cancellationToken)
+    public async Task<FormAnswersDto?> Handle(GetEmptyFormQuery request, CancellationToken cancellationToken)
     {
         var currentAnswer = await _context.FormAnswers
             .Include(fa => fa.Answers)
@@ -29,7 +29,7 @@ public class GetEmptyFormQueryHandler : IRequestHandler<GetEmptyFormQuery, FormA
             return await UpdateCommand(currentAnswer, cancellationToken);
     }
 
-    private async Task<FormAnswersDto> CreateNewCommand(string formId, string userId, CancellationToken cancellationToken = default)
+    private async Task<FormAnswersDto?> CreateNewCommand(string formId, string userId, CancellationToken cancellationToken = default)
     {
         var form = await _context.Forms
             .Include(f => f.Questions)
@@ -66,7 +66,7 @@ public class GetEmptyFormQueryHandler : IRequestHandler<GetEmptyFormQuery, FormA
 
         return command;
     }
-    private async Task<FormAnswersDto> UpdateCommand(FormAnswers currentFormAnswers, CancellationToken cancellationToken = default)
+    private async Task<FormAnswersDto?> UpdateCommand(FormAnswers currentFormAnswers, CancellationToken cancellationToken = default)
     {
         var form = await _context.Forms
             .FirstOrDefaultAsync(f => f.Id == currentFormAnswers.FormId, cancellationToken);

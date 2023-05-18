@@ -4,7 +4,7 @@ using MediatR;
 using Microsoft.EntityFrameworkCore;
 
 namespace DomraSinForms.Application.Questions.Queries.Get;
-public class GetQuestionQueryHandler : IRequestHandler<GetQuestionQuery, QuestionBase>
+public class GetQuestionQueryHandler : IRequestHandler<GetQuestionQuery, QuestionBase?>
 {
     private readonly ApplicationDbContext _context;
 
@@ -12,7 +12,7 @@ public class GetQuestionQueryHandler : IRequestHandler<GetQuestionQuery, Questio
     {
         _context = context;
     }
-    public async Task<QuestionBase> Handle(GetQuestionQuery request, CancellationToken cancellationToken)
+    public async Task<QuestionBase?> Handle(GetQuestionQuery request, CancellationToken cancellationToken)
     {
         var questionBase = await _context.Questions.FindAsync(request.Id, cancellationToken);
         switch (questionBase)

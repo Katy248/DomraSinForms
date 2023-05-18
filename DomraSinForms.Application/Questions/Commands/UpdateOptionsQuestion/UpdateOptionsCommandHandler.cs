@@ -6,7 +6,7 @@ using MediatR;
 using Microsoft.EntityFrameworkCore;
 
 namespace DomraSinForms.Application.Questions.Commands.UpdateOptionsQuestion;
-internal class UpdateOptionsCommandHandler : IRequestHandler<UpdateOptionsQuestionCommand, OptionsQuestion>
+internal class UpdateOptionsCommandHandler : IRequestHandler<UpdateOptionsQuestionCommand, OptionsQuestion?>
 {
     private readonly ApplicationDbContext _context;
     private readonly IMediator _mediator;
@@ -16,7 +16,7 @@ internal class UpdateOptionsCommandHandler : IRequestHandler<UpdateOptionsQuesti
         _context = context;
         _mediator = mediator;
     }
-    public async Task<OptionsQuestion> Handle(UpdateOptionsQuestionCommand request, CancellationToken cancellationToken)
+    public async Task<OptionsQuestion?> Handle(UpdateOptionsQuestionCommand request, CancellationToken cancellationToken)
     {
         var question = await _context.OptionsQuestions
             .Include(q => q.Options)

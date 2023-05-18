@@ -3,6 +3,8 @@ using DomraSinForms.Domain.Models;
 
 namespace Forms.Mvc.Models.Statistics;
 
+#nullable disable
+
 public class SummaryViewModel
 {
     private IEnumerable<FormAnswersDto> _answersDto = Array.Empty<FormAnswersDto>();
@@ -19,9 +21,6 @@ public class SummaryViewModel
     }
     public IEnumerable<QuestionSummary> Questions { get; set; } = Array.Empty<QuestionSummary>();
 
-
-
-
     private IEnumerable<QuestionSummary> GetQuestions(IEnumerable<FormAnswersDto> formAnswers)
     {
         var answers = formAnswers.SelectMany(a => a.Answers);
@@ -30,7 +29,7 @@ public class SummaryViewModel
             yield return new QuestionSummary
             {
                 Question = question,
-                Answsers = answers.Where(a => a.QuestionId == question.Id).Select(a => a.Value).ToArray()
+                Answers = answers.Where(a => a.QuestionId == question.Id).Select(a => a.Value).ToArray()
             };
         }
     }

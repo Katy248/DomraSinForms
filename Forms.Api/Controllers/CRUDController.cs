@@ -1,4 +1,4 @@
-﻿using DomraSinForms.Application.Interfaces;
+﻿/*using DomraSinForms.Application.Interfaces;
 using DomraSinForms.Application.Mapper;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
@@ -45,3 +45,4 @@ public class CRUDController<TEntity, TCreateCommand, TRetrieveSingleQuery, TRetr
         return await _mediator.Send(command);
     }
 }
+*/

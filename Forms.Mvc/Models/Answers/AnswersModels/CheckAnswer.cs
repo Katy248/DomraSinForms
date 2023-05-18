@@ -19,7 +19,7 @@ public class CheckAnswer : AnswerViewModel
         Options = options;
         Value = answer.Value;
     }
-    public List<CheckOption> Options { get; set; }
+    public List<CheckOption> Options { get; set; } = new();
 
     public override string Value
     {
@@ -53,7 +53,7 @@ public class CheckAnswer : AnswerViewModel
 }
 public class CheckOption
 {
-    public CheckOption() { }
+    public CheckOption() : this(false, "") { }
     public CheckOption(bool check, string value) => (Check, Value) = (check, value);
     public bool Check { get; set; }
     public string Value { get; set; }

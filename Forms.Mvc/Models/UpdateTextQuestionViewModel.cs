@@ -3,6 +3,8 @@ using DomraSinForms.Domain.Models.Questions;
 
 namespace Forms.Mvc.Models;
 
+#nullable disable
+
 public class UpdateTextQuestionViewModel
 {
     public TextQuestion Question { get; set; }

@@ -6,7 +6,7 @@ namespace Forms.Mvc.Services;
 
 public static class HtmlPrefixScopeExtensions
 {
-    private const string IdsToReuseKey = "__htmlPrefixScopeExtensions_IdsToReuse_";
+    public const string IdsToReuseKey = "__htmlPrefixScopeExtensions_IdsToReuse_";
     public static IDisposable BeginCollectionItem(this IHtmlHelper html, string collectionName)
     {
         return BeginCollectionItem(html, collectionName, html.ViewContext.Writer);
@@ -43,8 +43,8 @@ public static class HtmlPrefixScopeExtensions
         // We need to use the same sequence of IDs following a server-side validation failure,
         // otherwise the framework won't render the validation error messages next to each item.
         var key = IdsToReuseKey + collectionName;
-        var queue = (Queue<string>)httpContext.Items[key];
-        if (queue == null)
+
+        if (httpContext.Items[key] is Queue<string> queue)
         {
             httpContext.Items[key] = queue = new Queue<string>();
             if (httpContext.Request.Method == "POST" && httpContext.Request.HasFormContentType)
@@ -52,15 +52,16 @@ public static class HtmlPrefixScopeExtensions
                 StringValues previouslyUsedIds = httpContext.Request.Form[collectionName + ".index"];
                 if (!string.IsNullOrEmpty(previouslyUsedIds))
                     foreach (var previouslyUsedId in previouslyUsedIds)
-                        queue.Enqueue(previouslyUsedId);
+                        queue.Enqueue(previouslyUsedId ?? string.Empty);
             }
+            return queue;
         }
-        return queue;
+        return new Queue<string>();
     }
     internal class HtmlFieldPrefixScope : IDisposable
     {
-        internal readonly TemplateInfo TemplateInfo;
-        internal readonly string PreviousHtmlFieldPrefix;
+        public readonly TemplateInfo TemplateInfo;
+        public readonly string PreviousHtmlFieldPrefix;
         public HtmlFieldPrefixScope(TemplateInfo templateInfo, string htmlFieldPrefix)
         {
             TemplateInfo = templateInfo;

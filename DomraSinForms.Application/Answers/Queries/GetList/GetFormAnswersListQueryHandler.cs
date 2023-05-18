@@ -1,4 +1,5 @@
-﻿using AutoMapper;
+﻿using System.Runtime.CompilerServices;
+using AutoMapper;
 using DomraSinForms.Application.Answers.Queries.Get;
 using DomraSinForms.Domain.Models.Answers;
 using DomraSinForms.Persistence;
@@ -34,7 +35,7 @@ public class GetFormAnswersListQueryHandler : IRequestHandler<GetFormAnswersList
         return result;
     }
 
-    private async IAsyncEnumerable<FormAnswers> Handle(IEnumerable<string> ids, CancellationToken cancellationToken = default)
+    private async IAsyncEnumerable<FormAnswers> Handle(IEnumerable<string> ids, [EnumeratorCancellation] CancellationToken cancellationToken = default)
     {
         foreach (var id in ids)
         {

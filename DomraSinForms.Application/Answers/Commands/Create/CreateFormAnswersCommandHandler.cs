@@ -4,7 +4,7 @@ using MediatR;
 using Microsoft.EntityFrameworkCore;
 
 namespace DomraSinForms.Application.Answers.Commands.Create;
-public class CreateFormAnswersCommandHandler : IRequestHandler<CreateFormAnswersCommand, FormAnswers>
+public class CreateFormAnswersCommandHandler : IRequestHandler<CreateFormAnswersCommand, FormAnswers?>
 {
     private readonly ApplicationDbContext _context;
 
@@ -12,7 +12,7 @@ public class CreateFormAnswersCommandHandler : IRequestHandler<CreateFormAnswers
     {
         _context = context;
     }
-    public async Task<FormAnswers> Handle(CreateFormAnswersCommand request, CancellationToken cancellationToken)
+    public async Task<FormAnswers?> Handle(CreateFormAnswersCommand request, CancellationToken cancellationToken)
     {
         var formAnswers = await _context.FormAnswers
             .Include(x => x.Answers)

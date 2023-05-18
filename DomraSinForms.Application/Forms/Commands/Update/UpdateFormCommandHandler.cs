@@ -8,7 +8,7 @@ using Microsoft.Extensions.Logging;
 
 namespace DomraSinForms.Application.Forms.Commands.Update
 {
-    public class UpdateFormCommandHandler : IRequestHandler<UpdateFormCommand, Form>
+    public class UpdateFormCommandHandler : IRequestHandler<UpdateFormCommand, Form?>
     {
         private readonly ApplicationDbContext _context;
         private readonly IMediator _mediator;
@@ -20,7 +20,7 @@ namespace DomraSinForms.Application.Forms.Commands.Update
             _mediator = mediator;
             _logger = logger;
         }
-        public async Task<Form> Handle(UpdateFormCommand request, CancellationToken cancellationToken)
+        public async Task<Form?> Handle(UpdateFormCommand request, CancellationToken cancellationToken)
         {
             _logger.LogWarning($"Start handling of {nameof(UpdateFormCommand)}");
             var form = await _context.Forms

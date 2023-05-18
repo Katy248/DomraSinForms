@@ -1,4 +1,7 @@
 ﻿namespace DomraSinForms.Domain.Models.Answers;
+
+#nullable disable
+
 public class FormAnswers : DbEntity
 {
     public string FormId { get; set; }

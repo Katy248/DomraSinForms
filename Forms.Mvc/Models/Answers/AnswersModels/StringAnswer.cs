@@ -5,14 +5,9 @@ namespace Forms.Mvc.Models.Answers.AnswersModels;
 
 public class StringAnswer : AnswerViewModel
 {
-    public StringAnswer(TextQuestion question, Answer answer) : base(question, answer)
-    {
-    }
-    public StringAnswer() : base()
-    {
-
-    }
-    public string AnswerValue { get; set; }
+    public StringAnswer(TextQuestion question, Answer answer) : base(question, answer) { }
+    public StringAnswer() : base() { }
+    public string AnswerValue { get; set; } = "";
     public override string Value
     {
         get => AnswerValue;

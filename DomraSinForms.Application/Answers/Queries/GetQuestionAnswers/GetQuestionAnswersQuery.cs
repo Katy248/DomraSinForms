@@ -7,5 +7,5 @@ public class GetQuestionAnswersQuery : IRequest<IEnumerable<Answer>>
     /// <summary>
     /// Question Id.
     /// </summary>
-    public string QuestionId { get; set; }
+    public string QuestionId { get; set; } = "";
 }

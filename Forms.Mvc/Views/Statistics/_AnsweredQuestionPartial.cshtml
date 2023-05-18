@@ -34,7 +34,7 @@
                 break;
             case TextQuestion:
 
-                @foreach (var answer in Model.Answsers.Distinct().Take(10))
+                @foreach (var answer in Model.Answers.Distinct().Take(10))
                 {
                     <div class="form-group my-1">
                         <input class="form-control" value="@answer" disabled />
@@ -51,7 +51,7 @@
 
             <div class="modal-body justify-content-center">
                 <div class="h2 mb-3">@Localizer["All answers"]:</div>
-                @foreach (var answers in Model.Answsers.ToArray())
+                @foreach (var answers in Model.Answers.ToArray())
                 {
                     <div class="card my-2">
                         <div class="card-body">

@@ -7,7 +7,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace DomraSinForms.Application.Forms.Queries.Get;
 
-public class GetFormQueryHandler : IRequestHandler<GetFormQuery, Form>
+public class GetFormQueryHandler : IRequestHandler<GetFormQuery, Form?>
 {
     private readonly ApplicationDbContext _context;
     private readonly IMediator _mediator;
@@ -17,7 +17,7 @@ public class GetFormQueryHandler : IRequestHandler<GetFormQuery, Form>
         _context = context;
         _mediator = mediator;
     }
-    public async Task<Form> Handle(GetFormQuery request, CancellationToken cancellationToken)
+    public async Task<Form?> Handle(GetFormQuery request, CancellationToken cancellationToken)
     {
         var form = await _context.Forms
             .AsNoTracking()

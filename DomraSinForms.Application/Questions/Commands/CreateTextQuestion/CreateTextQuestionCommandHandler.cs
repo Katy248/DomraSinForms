@@ -6,7 +6,7 @@ using MediatR;
 using Microsoft.EntityFrameworkCore;
 
 namespace DomraSinForms.Application.Questions.Commands.CreateTextQuestion;
-public class CreateTextQuestionCommandHandler : IRequestHandler<CreateTextQuestionCommand, TextQuestion>
+public class CreateTextQuestionCommandHandler : IRequestHandler<CreateTextQuestionCommand, TextQuestion?>
 {
     private readonly ApplicationDbContext _context;
     private readonly IMediator _mediator;
@@ -16,7 +16,7 @@ public class CreateTextQuestionCommandHandler : IRequestHandler<CreateTextQuesti
         _context = context;
         _mediator = mediator;
     }
-    public async Task<TextQuestion> Handle(CreateTextQuestionCommand request, CancellationToken cancellationToken)
+    public async Task<TextQuestion?> Handle(CreateTextQuestionCommand request, CancellationToken cancellationToken)
     {
         var form = await _context.Forms
             .Include(x => x.Questions)

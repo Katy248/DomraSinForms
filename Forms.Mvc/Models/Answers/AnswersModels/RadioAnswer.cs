@@ -17,15 +17,15 @@ public class RadioAnswer : AnswerViewModel
         Value = answer.Value;
     }
     public List<string> Options { get; set; } = new();
-    public string SelectedValue { get; set; }
+    public string SelectedValue { get; set; } = "";
     public override string Value
     {
         get => SelectedValue;
         set
         {
-            if (Options is null | Options.Count == 0)
+            if (Options is null | Options?.Count == 0)
                 return;
-            var val = Options.FirstOrDefault(o => o == value);
+            var val = Options?.FirstOrDefault(o => o == value);
 
             if (val is not null)
                 SelectedValue = val;

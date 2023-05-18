@@ -34,46 +34,57 @@ public class AnswersController : Controller
     [Authorize]
     public async Task<IActionResult> Fill(string formId)
     {
-        var command = await _mediator.Send(new GetEmptyFormQuery { FormId = formId, UserId = _userManager.GetUserId(User) });
+        var userId = _userManager.GetUserId(User);
+        if (userId is null)
+            return RedirectToAction(controllerName: "Home", actionName: "Index");
+
+        var command = await _mediator.Send(new GetEmptyFormQuery { FormId = formId, UserId = userId });
         var form = await _mediator.Send(new GetFormQuery { Id = formId });
+
+        if (command is null || form is null)
+            return RedirectToAction(controllerName: "Home", actionName: "Index");
 
         var cvm = new FillFormViewModel(command, form);
         return View(cvm);
     }
     public async Task<IActionResult> UpdateStringAnswer([Bind] StringAnswer answer)
     {
-        return (await UpdateForm(answer));
+        return await UpdateForm(answer);
     }
     public async Task<IActionResult> UpdateDecimalAnswer([Bind] DecimalAnswer answer)
     {
-        return (await UpdateForm(answer));
+        return await UpdateForm(answer);
     }
     public async Task<IActionResult> UpdateDateAnswer([Bind] DateAnswer answer)
     {
-        return (await UpdateForm(answer));
+        return await UpdateForm(answer);
     }
     public async Task<IActionResult> UpdateTimeAnswer([Bind] TimeAnswer answer)
     {
-        return (await UpdateForm(answer));
+        return await UpdateForm(answer);
     }
     public async Task<IActionResult> UpdateDateTimeAnswer([Bind] DateTimeAnswer answer)
     {
-        return (await UpdateForm(answer));
+        return await UpdateForm(answer);
     }
     public async Task<IActionResult> UpdateCheckAnswer([Bind] CheckAnswer answer)
     {
-        return (await UpdateForm(answer));
+        return await UpdateForm(answer);
     }
     public async Task<IActionResult> UpdateRadioAnswer([Bind] RadioAnswer answer)
     {
-        return (await UpdateForm(answer));
+        return await UpdateForm(answer);
     }
-    public async Task<IActionResult> UpdateForm(IAnswerViewModel viewModel)
+    protected async Task<IActionResult> UpdateForm(IAnswerViewModel viewModel)
     {
+        var userId = _userManager.GetUserId(User);
+        if (userId is null)
+            return RedirectToAction(nameof(Fill), routeValues: new { formId = viewModel.FormId });
+
         var result = await _mediator.Send(new UpdateFormAnswersCommand
         {
             FormId = viewModel.FormId,
-            UserId = _userManager.GetUserId(User),
+            UserId = userId,
             Answer = new()
             {
                 QuestionId = viewModel.QuestionId,
@@ -89,7 +100,11 @@ public class AnswersController : Controller
     [Authorize]
     public async Task<IActionResult> CompleteForm(string formId)
     {
-        var result = await _mediator.Send(new CreateFormAnswersCommand { FormId = formId, UserId = _userManager.GetUserId(User) });
+        var userId = _userManager.GetUserId(User);
+        if (userId is null)
+            return RedirectToAction(nameof(Fill), routeValues: new { formId = formId });
+
+        var result = await _mediator.Send(new CreateFormAnswersCommand { FormId = formId, UserId = userId });
         if (result is null)
             return RedirectToAction(nameof(Fill), routeValues: new { formId = formId });
 

@@ -4,7 +4,7 @@ using MediatR;
 using Microsoft.EntityFrameworkCore;
 
 namespace DomraSinForms.Application.Answers.Commands.Update;
-public class UpdateFormAnswersCommandHandler : IRequestHandler<UpdateFormAnswersCommand, FormAnswers>
+public class UpdateFormAnswersCommandHandler : IRequestHandler<UpdateFormAnswersCommand, FormAnswers?>
 {
     private readonly ApplicationDbContext _context;
 
@@ -12,8 +12,11 @@ public class UpdateFormAnswersCommandHandler : IRequestHandler<UpdateFormAnswers
     {
         _context = context;
     }
-    public async Task<FormAnswers> Handle(UpdateFormAnswersCommand request, CancellationToken cancellationToken)
+    public async Task<FormAnswers?> Handle(UpdateFormAnswersCommand request, CancellationToken cancellationToken)
     {
+        if (request.Answer is null)
+            return null;
+
         var formAnswers = await _context.FormAnswers
             .Include(f => f.Answers)
             .FirstOrDefaultAsync(f => f.FormId == request.FormId && f.UserId == request.UserId && !f.IsCompleted, cancellationToken);

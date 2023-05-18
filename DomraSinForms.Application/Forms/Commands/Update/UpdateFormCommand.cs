@@ -5,12 +5,12 @@ using DomraSinForms.Domain.Models;
 
 namespace DomraSinForms.Application.Forms.Commands.Update
 {
-    public class UpdateFormCommand : IUpdateRequest<Form>, IMapWith<Form>
+    public class UpdateFormCommand : IUpdateRequest<Form?>, IMapWith<Form>
     {
-        public string Id { get; set; }
-        public string Title { get; set; }
-        public string Description { get; set; }
-        public string UserId { get; set; }
+        public string Id { get; set; } = string.Empty;
+        public string Title { get; set; } = string.Empty;
+        public string Description { get; set; } = string.Empty;
+        public string UserId { get; set; } = string.Empty;
         public void Mapping(Profile profile)
         {
             profile.CreateMap<Form, UpdateFormCommand>()

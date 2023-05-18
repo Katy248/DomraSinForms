@@ -7,10 +7,10 @@ namespace DomraSinForms.Application.Forms.Queries.GetList;
 
 public class FormDto : IMapWith<Form>
 {
-    public string Id { get; set; }
-    public string Title { get; set; }
-    public string Description { get; set; }
-    public string CreatorId { get; set; }
+    public string Id { get; set; } = string.Empty;
+    public string Title { get; set; } = string.Empty;
+    public string Description { get; set; } = string.Empty;
+    public string CreatorId { get; set; } = string.Empty;
     public DateTime CreationDate { get; set; }
     public DateTime LastUpdateDate { get; set; }
     public List<QuestionBase> Questions { get; set; } = new();

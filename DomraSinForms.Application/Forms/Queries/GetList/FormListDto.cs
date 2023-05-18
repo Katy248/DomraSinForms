@@ -1,4 +1,7 @@
 ﻿namespace DomraSinForms.Application.Forms.Queries.GetList;
+
+#nullable disable
+
 public class FormListDto
 {
     public IEnumerable<FormDto> Forms { get; set; }

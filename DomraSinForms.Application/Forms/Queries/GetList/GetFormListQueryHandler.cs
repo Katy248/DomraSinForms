@@ -1,6 +1,7 @@
 ﻿using AutoMapper;
 using DomraSinForms.Persistence;
 using MediatR;
+using Microsoft.EntityFrameworkCore;
 
 namespace DomraSinForms.Application.Forms.Queries.GetList
 {
@@ -29,11 +30,11 @@ namespace DomraSinForms.Application.Forms.Queries.GetList
             result.PageCount = (int)Math.Round(
                 (double)forms.Count() / (double)request.Count, MidpointRounding.ToPositiveInfinity);
 
-            result.Forms = _mapper.ProjectTo<FormDto>(
+            result.Forms = await _mapper.ProjectTo<FormDto>(
                 forms
                     .Skip(request.Page * request.Count)
                     .Take(request.Count))
-                .ToArray();
+                .ToArrayAsync();
 
             return result;
         }

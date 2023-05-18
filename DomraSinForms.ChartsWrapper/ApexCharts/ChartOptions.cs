@@ -8,25 +8,25 @@ public class ChartOptions
     [JsonProperty("xaxis")]
     public Axis XAxis { get; set; } = new();
     public Theme Theme { get; set; } = new();
-    public IEnumerable<object> Labels { get; set; }
+    public IEnumerable<object>? Labels { get; set; }
 }
 
 public class Theme
 {
-    public string Mode { get; set; }
-    public string Palette { get; set; }
+    public string? Mode { get; set; }
+    public string? Palette { get; set; }
 }
 
 public class Chart
 {
-    public string Type { get; set; }
+    public string? Type { get; set; }
 }
 public class Axis
 {
-    public IEnumerable<object> Categories { get; set; }
+    public IEnumerable<object>? Categories { get; set; }
 }
 public class Series
 {
-    public string Name { get; set; }
-    public IEnumerable<object> Data { get; set; }
+    public string? Name { get; set; }
+    public IEnumerable<object>? Data { get; set; }
 }

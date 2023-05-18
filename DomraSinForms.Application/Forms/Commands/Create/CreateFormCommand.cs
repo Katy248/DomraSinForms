@@ -6,9 +6,9 @@ using MediatR;
 namespace DomraSinForms.Application.Forms.Commands.Create;
 public class CreateFormCommand : IRequest<Form>, IMapWith<Form>
 {
-    public string Title { get; set; }
-    public string Description { get; set; }
-    public string CreatorId { get; set; }
+    public string Title { get; set; } = string.Empty;
+    public string Description { get; set; } = string.Empty;
+    public string CreatorId { get; set; } = string.Empty;
     public void Mapping(Profile profile)
     {
         profile.CreateMap<CreateFormCommand, Form>()

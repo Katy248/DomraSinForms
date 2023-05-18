@@ -25,7 +25,7 @@ public class FillFormViewModel
         Form = form;
     }
     public string FormId => _dto?.FormId ?? "";
-    public IAnswerViewModel[] Answers { get; set; }
+    public IAnswerViewModel[] Answers { get; set; } = Array.Empty<IAnswerViewModel>();
     public bool RequiredQuestionsAnswered => Answers?.Where(a => a.IsRequired && string.IsNullOrWhiteSpace(a.Value)).Count() == 0;
 
     public Form? Form { get; }

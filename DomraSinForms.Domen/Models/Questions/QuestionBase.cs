@@ -1,6 +1,9 @@
 ﻿using DomraSinForms.Domain.Models.Answers;
 
 namespace DomraSinForms.Domain.Models.Questions;
+
+#nullable disable
+
 public abstract class QuestionBase : DbEntity
 {
     public string QuestionText { get; set; }

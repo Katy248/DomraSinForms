@@ -6,7 +6,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace DomraSinForms.Application.Answers.Queries.Get
 {
-    public class GetFormAnswersQueryHandler : IRequestHandler<GetFormAnswersQuery, FormAnswers>
+    public class GetFormAnswersQueryHandler : IRequestHandler<GetFormAnswersQuery, FormAnswers?>
     {
         private readonly ApplicationDbContext _context;
         private readonly IMediator _mediator;
@@ -17,11 +17,15 @@ namespace DomraSinForms.Application.Answers.Queries.Get
             _mediator = mediator;
         }
 
-        public async Task<FormAnswers> Handle(GetFormAnswersQuery request, CancellationToken cancellationToken)
+        public async Task<FormAnswers?> Handle(GetFormAnswersQuery request, CancellationToken cancellationToken)
         {
             var formAnswers = await _context.FormAnswers
                 .Include(f => f.Answers)
                 .FirstOrDefaultAsync(f => f.Id == request.Id, cancellationToken);
+
+            if (formAnswers is null)
+                return null;
+
             var questions = await _mediator.Send(new GetQuestionListQuery { FormId = formAnswers.FormId, });
 
             foreach (var question in questions)

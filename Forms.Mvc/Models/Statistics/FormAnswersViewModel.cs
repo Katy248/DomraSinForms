@@ -2,6 +2,8 @@
 
 namespace Forms.Mvc.Models.Statistics;
 
+#nullable disable
+
 public class FormAnswersViewModel
 {
     public string FormId { get; set; }

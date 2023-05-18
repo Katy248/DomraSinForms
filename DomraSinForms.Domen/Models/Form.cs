@@ -4,12 +4,12 @@ using DomraSinForms.Domain.Models.Questions;
 
 namespace DomraSinForms.Domain.Models;
 
+#nullable disable
+
 public class Form : DbEntity
 {
-    [Required]
     public string Title { get; set; }
     public string Description { get; set; }
-    [Required]
     public string CreatorId { get; set; }
     public DateTime CreationDate { get; set; }
     public DateTime? LastUpdateDate { get; set; }

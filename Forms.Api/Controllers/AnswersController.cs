@@ -8,7 +8,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace Forms.Api.Controllers;
 
-[ApiController, Route("api/[controller]/[action]")]
+/*[ApiController, Route("api/[controller]/[action]")]
 public class AnswersController : Controller
 {
     private readonly IMediator _mediator;
@@ -18,24 +18,24 @@ public class AnswersController : Controller
         _mediator = mediator;
     }
 
-    [HttpPost]
+    *//*[HttpPost]
     public async Task<FormAnswers> Get([FromBody] GetFormAnswersQuery query)
     {
         return await _mediator.Send(query);
-    }
+    }*//*
     [HttpPost]
     public async Task<IEnumerable<IMapWith<FormAnswers>>> GetList([FromBody] GetFormAnswersListQuery query)
     {
         return await _mediator.Send(query);
     }
-    /*[HttpPost]
+    *//*[HttpPost]
     public async Task<CreateFormAnswersCommand> GetEmptyForm([FromBody] GetEmptyFormQuery query)
     {
         return await _mediator.Send(query);
-    }*/
+    }*//*
     [HttpPost]
     public async Task<FormAnswers> Create([FromBody] CreateFormAnswersCommand command)
     {
         return await _mediator.Send(command);
     }
-}
+}*/

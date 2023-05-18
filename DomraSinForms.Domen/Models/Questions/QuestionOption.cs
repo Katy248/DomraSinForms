@@ -1,5 +1,7 @@
 ﻿namespace DomraSinForms.Domain.Models.Questions;
 
+#nullable disable
+
 public class QuestionOption : DbEntity
 {
     public string Text { get; set; }
