@@ -21,6 +21,7 @@ builder.Services
 
 builder.Services
     .AddLocalization(options => options.ResourcesPath = "Resources")
+    .AddDataAnnotationsPortableObjectLocalization()
     .AddApplication()
     .AddPortableObjectLocalization(options => options.ResourcesPath = "Localization");
 
