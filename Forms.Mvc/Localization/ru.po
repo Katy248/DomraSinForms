@@ -187,6 +187,9 @@ msgstr "Дата-время"
 msgid "Time question"
 msgstr "Время"
 
+msgid "New optioin"
+msgstr "Новый вариант"
+
 # Base commands
 msgid "Save"
 msgstr "Сохранить"

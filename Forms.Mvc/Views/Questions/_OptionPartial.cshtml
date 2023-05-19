@@ -5,7 +5,7 @@
 @inject IViewLocalizer Localizer
 
 @{
-    Model.Text ??= "New option";
+    Model.Text ??= Localizer["New option"]?.Value ?? "";
     var deleteButtonId = $"delete-option-button-{Model.Id}";
     var optionId = $"option-{Model.Id}";
 }
