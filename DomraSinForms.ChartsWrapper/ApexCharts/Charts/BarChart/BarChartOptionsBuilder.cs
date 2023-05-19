@@ -4,6 +4,7 @@ public class BarChartOptionsBuilder : ChartOptionsBuilder, IBarChartOptionsBuild
     public BarChartOptionsBuilder(IChartOptionsBuilder builder, Dictionary<object, object> data)
     {
         _options = builder.IntermediateInstance;
+        _options.Chart.Type = "bar";
         InitChart(data);
     }
     private void InitChart(Dictionary<object, object> data)

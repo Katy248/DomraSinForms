@@ -4,6 +4,7 @@ public class PieChartOptionsBuilder : ChartOptionsBuilder, IPieChartOptionsBuild
     public PieChartOptionsBuilder(IChartOptionsBuilder builder, Dictionary<object, object> data)
     {
         _options = builder.IntermediateInstance;
+        _options.Chart.Type = "pie";
         InitChart(data);
     }
     private void InitChart(Dictionary<object, object> data)
