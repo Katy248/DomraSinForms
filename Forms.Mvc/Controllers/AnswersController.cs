@@ -2,7 +2,7 @@
 using DomraSinForms.Application.Answers.Commands.Create;
 using DomraSinForms.Application.Answers.Commands.Update;
 using DomraSinForms.Application.Answers.Queries.GetEmptyForm;
-using DomraSinForms.Application.Answers.Queries.GetList;
+using DomraSinForms.Domain.Models;
 using DomraSinForms.Application.Forms.Queries.Get;
 using DomraSinForms.Application.Forms.Queries.GetList;
 using DomraSinForms.Domain.Identity;
@@ -52,17 +52,22 @@ public class AnswersController : Controller
 
         return View(forms);
     }
+    /// <summary>
+    /// Returns view with questions to answer.
+    /// </summary>
+    /// <param name="id"><see cref="Form"/> id.</param>
+    /// <returns></returns>
     [Authorize]
-    public async Task<IActionResult> Fill(string formId)
+    public async Task<IActionResult> Fill(string id)
     {
-        var form = await _mediator.Send(new GetFormQuery { Id = formId });
+        var form = await _mediator.Send(new GetFormQuery { Id = id });
 
         var userId = _userManager.GetUserId(User);
 
         if (form is null || userId is null || form.IsInArchive)
             return RedirectToAction(controllerName: "Home", actionName: "Index");
 
-        var command = await _mediator.Send(new GetEmptyFormQuery { FormId = formId, UserId = userId });
+        var command = await _mediator.Send(new GetEmptyFormQuery { FormId = id, UserId = userId });
 
         if (command is null)
             return RedirectToAction(controllerName: "Home", actionName: "Index");
@@ -119,7 +124,7 @@ public class AnswersController : Controller
             }
         });
         if (result is not null)
-            return RedirectToAction(nameof(Fill), routeValues: new { formId = result.FormId });
+            return RedirectToAction(nameof(Fill), routeValues: new { id = result.FormId });
 
         return RedirectToAction("Index", "Home");
     }
@@ -129,14 +134,13 @@ public class AnswersController : Controller
     {
         var userId = _userManager.GetUserId(User);
         if (userId is null)
-            return RedirectToAction(nameof(Fill), routeValues: new { formId = formId });
+            return RedirectToAction(nameof(Fill), routeValues: new { id = formId });
 
         var result = await _mediator.Send(new CreateFormAnswersCommand { FormId = formId, UserId = userId });
         if (result is null)
-            return RedirectToAction(nameof(Fill), routeValues: new { formId = formId });
+            return RedirectToAction(nameof(Fill), routeValues: new { id = formId });
 
         return RedirectToAction(nameof(AnsweredForm));
-
     }
     public IActionResult AnsweredForm()
     {

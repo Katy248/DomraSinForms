@@ -4,7 +4,7 @@
 @{
     var modalId = ViewData["ModalId"] as string ?? "wrongId";
     var formattedId = modalId.Replace('-', '_');
-    var url = Url.ActionLink(controller: "Answers", action: "Fill", values: new { formId = Model });
+    var url = Url.ActionLink(controller: "Answers", action: "Fill", values: new { id = Model });
 }
 <div class="modal" id="@modalId">
     <div class="modal-dialog modal-dialog-centered">

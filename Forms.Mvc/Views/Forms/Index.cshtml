@@ -53,7 +53,7 @@
                     <a class="btn btn-sm btn-outline-secondary form-control" asp-action="Edit" asp-route-id="@form.Id">@Localizer["Edit"]</a>
                     </div>*@
                         <div class="col">
-                            <a class="btn btn-lg btn-outline-secondary form-control" asp-controller="Answers" asp-action="Fill" asp-route-formId="@form.Id" data-bs-toggle="tooltip" data-bs-title="@Localizer["Fill"]">
+                            <a class="btn btn-lg btn-outline-secondary form-control" asp-controller="Answers" asp-action="Fill" asp-route-id="@form.Id" data-bs-toggle="tooltip" data-bs-title="@Localizer["Fill"]">
                                 <i class="bi-input-cursor-text me-2"></i>
                             </a>
                         </div>
