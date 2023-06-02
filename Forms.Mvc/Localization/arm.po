@@ -135,8 +135,8 @@ msgstr "Պատասխանել"
 msgid "This form will be permanently deleted with all the questions and answers data"
 msgstr "Այս ձևը կջնջվի հարցուպատասխանի բոլոր տվյալների հետ միասին"
 
-msgid "Delete form?"
-msgstr "Հեռացնե՞լ ձևը"
+msgid "Delete form '{0}'?"
+msgstr "Հեռացնե՞լ ձևը '{0}'"
 
 msgid "Editing"
 msgstr "Խմբագրում"

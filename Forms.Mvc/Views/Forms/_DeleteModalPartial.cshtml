@@ -11,9 +11,9 @@
 
             <div class="modal-body justify-content-center">
 
-                <div class="card-title h2">@Localizer["Delete form?"]</div>
-                <div class="card-text h4 mb-1"><q>@Model.Title</q></div>
-                <div class="card-text h4 mb-4">@Localizer["This form will be permanently deleted with all the questions and answers data"]</div>
+                <div class="card-title h2 mb-4">@Localizer.GetString("Delete form '{0}'?", Model.Title)</div>
+                @*<div class="card-text mb-1"><q></q></div>*@
+                <div class="card-text mb-4">@Localizer["This form will be permanently deleted with all the questions and answers data"]</div>
                 <form asp-action="Delete" asp-route-id="@Model.Id" method="post">
                     <input class="btn btn-outline-danger form-control" type="submit" value="@Localizer["Delete"]" />
                 </form>

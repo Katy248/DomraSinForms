@@ -135,8 +135,8 @@ msgstr "Ответить"
 msgid "This form will be permanently deleted with all the questions and answers data"
 msgstr "Эта форма будет удалена вместе со всеми данными о вопросах и ответах"
 
-msgid "Delete form?"
-msgstr "Удалить форму?"
+msgid "Delete form '{0}'?"
+msgstr "Удалить форму '{0}'?"
 
 msgid "Editing"
 msgstr "Редактирование"
