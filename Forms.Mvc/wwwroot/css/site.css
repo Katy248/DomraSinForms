@@ -41,7 +41,8 @@ body[data-bs-theme=light] .card-button:hover {
 svg {
     background: none !important;
 }
-body[data-bs-theme=dark] .apexcharts-text/*, text */{
+body[data-bs-theme=dark] .apexcharts-text {
     fill: var(--bs-secondary-text-emphasis) !important;
+    color: var(--bs-secondary-text-emphasis) !important;
     font-family: var(--bs-font-sans-serif) !important;
 }

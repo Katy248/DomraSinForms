@@ -7,6 +7,13 @@ public class BarChartOptionsBuilder : ChartOptionsBuilder, IBarChartOptionsBuild
         _options.Chart.Type = "bar";
         InitChart(data);
     }
+
+    public IBarChartOptionsBuilder UseHorizontal(bool use = true)
+    {
+        _options.PlotOptions.Bar.Horizontal = use;
+        return this;
+    }
+
     private void InitChart(Dictionary<object, object> data)
     {
         var series = new List<object>();

@@ -10,8 +10,12 @@ public class ChartOptions
     public Theme Theme { get; set; } = new();
     public IEnumerable<object>? Labels { get; set; }
     public Stroke Stroke { get; set; } = new();
+    public PlotOptions PlotOptions { get; set; } = new();
 }
-
+public class PlotOptions
+{
+    public Bar Bar { get; set; } = new();
+}
 public class Stroke
 {
     public string Curve { get; set; }
@@ -72,4 +76,8 @@ public class Series
     public string? Name { get; set; }
     public IEnumerable<object>? Data { get; set; }
     public string? Type { get; set; }
+}
+public class Bar
+{
+    public bool? Horizontal { get; set; }
 }
