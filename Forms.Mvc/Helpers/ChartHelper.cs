@@ -55,6 +55,7 @@ public static class ChartHelper
         return new ChartOptionsBuilder()
             .UsePalette(1)
             .SetupToolBar(options => options.Show()
+                .EnableTool(ToolBarTool.Pan, @"<i class=\""bi-hand-index fs-3\""></i>")
                 .EnableTool(ToolBarTool.ZoomIn, @"<i class=\""bi-zoom-in fs-3\"" ></i>")
                 .EnableTool(ToolBarTool.ZoomOut, @"<i class=\""bi-zoom-out fs-3\"" width=\""20\""></i>")
                 .EnableTool(ToolBarTool.ResetZoom, @"<i class=\""bi-x-circle fs-5\"" width=\""20px\""></i>")
