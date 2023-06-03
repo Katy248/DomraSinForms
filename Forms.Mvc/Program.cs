@@ -9,10 +9,7 @@ var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 var connectionString = builder.Configuration.GetConnectionString("DefaultConnection") ?? throw new InvalidOperationException("Connection string 'DefaultConnection' not found.");
-builder.Services.AddDbContext<ApplicationDbContext>(options =>
-{
-    options.UseSqlServer(connectionString, options => options.MigrationsAssembly(typeof(ApplicationDbContext).Assembly.GetName().Name));
-});
+builder.Services.AddPersistence(connectionString);
 builder.Services.AddDatabaseDeveloperPageExceptionFilter();
 
 builder.Services.AddDefaultIdentity<User>(options =>
@@ -34,6 +31,7 @@ builder.Services
     .AddApplication()
     .AddPortableObjectLocalization(options => options.ResourcesPath = "Localization");
 
+builder.Logging.AddConsole();
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
