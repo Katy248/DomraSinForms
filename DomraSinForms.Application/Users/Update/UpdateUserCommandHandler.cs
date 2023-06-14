@@ -24,7 +24,8 @@ public class UpdateUserCommandHandler : IRequestHandler<UpdateUserCommand, Optio
             return Option<User>.None();
 
         user.Email = request.Email;
-        user.UserName = request.Username;
+        //user.UserName = request.Username;
+        await _userManager.SetUserNameAsync(user, request.Username);
         if (!string.IsNullOrWhiteSpace(request.NickName))
             user.NickName = request.NickName;
 
