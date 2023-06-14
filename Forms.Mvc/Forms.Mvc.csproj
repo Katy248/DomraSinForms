@@ -23,7 +23,11 @@
     <TypeScriptCompile Remove="Views\FormAnswers\**" />
     <TypeScriptCompile Remove="wwwroot\ts\**" />
   </ItemGroup>
-
+  <ItemGroup>
+    <Content Include="Localization\**" >
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+  </ItemGroup>
   <ItemGroup>
     <PackageReference Include="Microsoft.AspNetCore.Diagnostics.EntityFrameworkCore" Version="7.0.5" />
     <PackageReference Include="Microsoft.AspNetCore.Identity.EntityFrameworkCore" Version="7.0.5" />
