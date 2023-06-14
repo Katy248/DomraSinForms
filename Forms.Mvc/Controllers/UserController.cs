@@ -1,4 +1,4 @@
-﻿using DomraSinForms.Application.Users.Update;
+﻿using DomraSinForms.Application.Users.Commands.Update;
 using DomraSinForms.Domain.Identity;
 using Forms.Mvc.ViewModels;
 using MediatR;
