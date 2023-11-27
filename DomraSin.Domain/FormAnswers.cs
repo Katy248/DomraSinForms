@@ -1,11 +1,7 @@
-﻿
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace DomraSin.Domain;
+﻿namespace DomraSin.Domain;
 public class FormAnswers : EntityBase
 {
+    public Form Form { get; set; }
+    public IEnumerable<Answer> Answers { get; set; }
+    public User? User { get; set; }
 }
