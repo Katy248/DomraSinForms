@@ -5,9 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace DomraSin.Domain
+namespace DomraSin.Domain;
+public class FormAnswers : EntityBase
 {
-    public  class FormAnswers: EntityBase
-    {
-    }
 }

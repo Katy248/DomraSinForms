@@ -1,13 +1,8 @@
-﻿using DomraSin.Persistance;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿namespace DomraSin.Domain;
 
-namespace DomraSin.Domain
+public class Form : EntityBase
 {
-    public class Form :EntityBase
-    {
-    }
+    public string Name { get; set; }
+    public IEnumerable<Question> Questions { get; set; }
 }
+
