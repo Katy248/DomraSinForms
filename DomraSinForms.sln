@@ -9,6 +9,12 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DomraSin.Server", "DomraSin
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DomraSin.Client", "DomraSin.Client\DomraSin.Client.csproj", "{6B537DBA-8EF5-43F4-BC6E-538E11BCEB1A}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DomraSin.Domain", "DomraSin.Domain\DomraSin.Domain.csproj", "{E28912AC-0324-4FCC-9C0B-401D4472794F}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DomraSin.Persistance", "DomraSin.Persistance\DomraSin.Persistance.csproj", "{853850AD-97F0-4591-9991-9D4790B59516}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DomraSin.Application", "DomraSin.Application\DomraSin.Application.csproj", "{CCEA8E0D-8617-4ADA-AB2F-5DE1D3C39C7D}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -27,6 +33,18 @@ Global
 		{6B537DBA-8EF5-43F4-BC6E-538E11BCEB1A}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{6B537DBA-8EF5-43F4-BC6E-538E11BCEB1A}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{6B537DBA-8EF5-43F4-BC6E-538E11BCEB1A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E28912AC-0324-4FCC-9C0B-401D4472794F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E28912AC-0324-4FCC-9C0B-401D4472794F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E28912AC-0324-4FCC-9C0B-401D4472794F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E28912AC-0324-4FCC-9C0B-401D4472794F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{853850AD-97F0-4591-9991-9D4790B59516}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{853850AD-97F0-4591-9991-9D4790B59516}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{853850AD-97F0-4591-9991-9D4790B59516}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{853850AD-97F0-4591-9991-9D4790B59516}.Release|Any CPU.Build.0 = Release|Any CPU
+		{CCEA8E0D-8617-4ADA-AB2F-5DE1D3C39C7D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{CCEA8E0D-8617-4ADA-AB2F-5DE1D3C39C7D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{CCEA8E0D-8617-4ADA-AB2F-5DE1D3C39C7D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{CCEA8E0D-8617-4ADA-AB2F-5DE1D3C39C7D}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
