@@ -1,13 +1,7 @@
-﻿
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace DomraSin.Domain
+﻿namespace DomraSin.Domain;
+public class QuestionOption : EntityBase
 {
-    public class QuestionOption:EntityBase
-    {
-    }
+    public string Value { get; set; }
+    public ScoreType Type { get; set; }
+    public int Count { get; set; }
 }

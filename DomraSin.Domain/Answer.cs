@@ -1,12 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿namespace DomraSin.Domain;
 
-namespace DomraSin.Domain
+public class Answer : EntityBase
 {
-    public class Answer : EntityBase
-    {
-    }
+    public Question Question { get; set; }
+    public string Value { get; set; }
 }
+
