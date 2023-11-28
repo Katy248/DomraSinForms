@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace DomraSin.Domain;
+﻿namespace DomraSin.Domain.Models;
 
 public class Question : EntityBase
 {

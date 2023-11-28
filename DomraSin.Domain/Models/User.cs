@@ -1,4 +1,4 @@
-﻿namespace DomraSin.Domain;
+﻿namespace DomraSin.Domain.Models;
 
 public class User : EntityBase
 {
