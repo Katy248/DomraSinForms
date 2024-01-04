@@ -12,4 +12,9 @@
     <PackageReference Include="Swashbuckle.AspNetCore" Version="6.4.0" />
   </ItemGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\DomraSin.Application\DomraSin.Application.csproj" />
+    <ProjectReference Include="..\DomraSin.Persistance\DomraSin.Persistence.csproj" />
+  </ItemGroup>
+
 </Project>
