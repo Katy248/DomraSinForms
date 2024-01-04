@@ -10,7 +10,7 @@ namespace DomraSin.Domain.Interfaces.Repositories;
 public interface IFormItemsRepository 
 {
     Task<FormItem> Get(string id, CancellationToken cancellationToken);
-    IQueryable<FormItem> GetCollection(string formId, CancellationToken cancellationToken);
+    IQueryable<FormItem> GetCollection(string formId);
     /// <summary>
     /// Create new <see cref="FormItem"/>, or update existing in database.
     /// </summary>

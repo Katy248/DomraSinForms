@@ -1,13 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using DomraSin.Domain.Models;
 
-namespace DomraSin.Domain.Interfaces.Repositories
+namespace DomraSin.Domain.Interfaces.Repositories;
+
+public interface IAnswersRepository
 {
-    public interface IAnswersRepository
-    {
-
-    }
+    IQueryable<Answer> GetCollection (string formAnswersId);
 }
