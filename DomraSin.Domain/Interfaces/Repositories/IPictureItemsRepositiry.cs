@@ -8,4 +8,5 @@ namespace DomraSin.Domain.Interfaces.Repositories;
 
 public interface IPictureItemsRepositiry
 {
+
 }
