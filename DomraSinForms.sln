@@ -5,15 +5,15 @@ VisualStudioVersion = 17.5.33424.131
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DomraSinForms.ChartsWrapper", "DomraSinForms.ChartsWrapper\DomraSinForms.ChartsWrapper.csproj", "{6530CF9E-096C-4EEB-8F92-7B78246FFF11}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DomraSin.Server", "DomraSin.Server\DomraSin.Server.csproj", "{54CE1A1F-095A-49FB-AF61-D2A1C5CEB02D}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DomraSin.Server", "DomraSin.Server\DomraSin.Server.csproj", "{54CE1A1F-095A-49FB-AF61-D2A1C5CEB02D}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DomraSin.Client", "DomraSin.Client\DomraSin.Client.csproj", "{6B537DBA-8EF5-43F4-BC6E-538E11BCEB1A}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DomraSin.Client", "DomraSin.Client\DomraSin.Client.csproj", "{6B537DBA-8EF5-43F4-BC6E-538E11BCEB1A}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DomraSin.Domain", "DomraSin.Domain\DomraSin.Domain.csproj", "{E28912AC-0324-4FCC-9C0B-401D4472794F}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DomraSin.Domain", "DomraSin.Domain\DomraSin.Domain.csproj", "{E28912AC-0324-4FCC-9C0B-401D4472794F}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DomraSin.Persistance", "DomraSin.Persistance\DomraSin.Persistance.csproj", "{853850AD-97F0-4591-9991-9D4790B59516}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DomraSin.Persistence", "DomraSin.Persistance\DomraSin.Persistence.csproj", "{853850AD-97F0-4591-9991-9D4790B59516}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DomraSin.Application", "DomraSin.Application\DomraSin.Application.csproj", "{CCEA8E0D-8617-4ADA-AB2F-5DE1D3C39C7D}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DomraSin.Application", "DomraSin.Application\DomraSin.Application.csproj", "{CCEA8E0D-8617-4ADA-AB2F-5DE1D3C39C7D}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
