@@ -1,22 +1,18 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using DomraSin.Application.Extensions;
+﻿using DomraSin.Application.Extensions;
 using FluentValidation;
 using MediatR;
 
 namespace DomraSin.Application.Features.Users.Register;
-public class RequestHandler(
-    IEnumerable<IValidator<Request>> validators) : IRequestHandler<Request>
-    
+internal class RequestHandler(
+    IEnumerable<IValidator<Request>> validators) : IRequestHandler<Request, Response>
 {
     private readonly IEnumerable<IValidator<Request>> _validators = validators;
 
-    public async Task Handle(Request request, CancellationToken cancellationToken)
+    public async Task<Response> Handle(Request request, CancellationToken cancellationToken)
     {
         if (!await _validators.ValidateMany(request, cancellationToken))
-            return;
+            return new Response(false);
+        
+        return new Response(false);
     }
 }
