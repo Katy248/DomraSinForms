@@ -16,5 +16,13 @@ namespace DomraSin.Persistence
         public DbSet<FormAnswers> FormAnswers { get; set; }
         public DbSet<FormItem> FormItems { get; set; }
         public DbSet<ScoreType> ScoreTypes{ get; set; }
+        public DbSet<PictureItem> PictureItems { get; set; }
+        public DbSet<Question> Question { get; set; }
+        public DbSet<QuestionOption> QuestionOptions { get; set; }
+
+        protected override void OnModelCreating(ModelBuilder builder)
+        {
+            
+        }
     }
 }
