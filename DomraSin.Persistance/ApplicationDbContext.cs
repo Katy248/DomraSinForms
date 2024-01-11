@@ -22,7 +22,16 @@ namespace DomraSin.Persistence
 
         protected override void OnModelCreating(ModelBuilder builder)
         {
-            
+            builder.Entity<Form>()
+                .HasMany(fa => fa.FormAnswers)
+                .HasOne(fa => fa.Form)
+                .HasForeignKey(fa => fa.FormId)                
+                .OnDelete(DeleteBehavior.Cascade);
+            builder.Entity<Form>()
+                .HasMany(fa => fa.Question)
+                .WithOne()
+                .HasForeignKey(fa => fa.FormId)
+                .OnDelete(DeleteBehavior.Cascade);
         }
     }
 }
