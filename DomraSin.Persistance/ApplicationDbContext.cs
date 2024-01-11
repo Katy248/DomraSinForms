@@ -19,7 +19,7 @@ namespace DomraSin.Persistence
         public DbSet<PictureItem> PictureItems { get; set; }
         public DbSet<Question> Question { get; set; }
         public DbSet<QuestionOption> QuestionOptions { get; set; }
-
+        
         protected override void OnModelCreating(ModelBuilder builder)
         {
             builder.Entity<Form>()
