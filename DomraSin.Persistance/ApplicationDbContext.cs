@@ -1,4 +1,5 @@
-﻿using DomraSin.Domain.Models;
+﻿using DomraSin.Domain.Models.FormItems;
+using DomraSin.Domain.Models;
 using Microsoft.EntityFrameworkCore;
 
 namespace DomraSin.Persistence
@@ -19,19 +20,5 @@ namespace DomraSin.Persistence
         public DbSet<PictureItem> PictureItems { get; set; }
         public DbSet<Question> Question { get; set; }
         public DbSet<QuestionOption> QuestionOptions { get; set; }
-        
-        protected override void OnModelCreating(ModelBuilder builder)
-        {
-            builder.Entity<Form>()
-                .HasMany(fa => fa.FormAnswers)
-                .HasOne(fa => fa.Form)
-                .HasForeignKey(fa => fa.FormId)                
-                .OnDelete(DeleteBehavior.Cascade);
-            builder.Entity<Form>()
-                .HasMany(fa => fa.Question)
-                .WithOne()
-                .HasForeignKey(fa => fa.FormId)
-                .OnDelete(DeleteBehavior.Cascade);
-        }
     }
 }
