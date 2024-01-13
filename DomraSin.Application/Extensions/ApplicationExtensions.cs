@@ -4,6 +4,7 @@ using System.ComponentModel.Design;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Carter;
 using DomraSin.Application.Services.Authentication;
 using Microsoft.Extensions.DependencyInjection;
 
@@ -15,5 +16,7 @@ public static class ApplicationExtensions
         {
 
         })
-        .AddTransient<PasswordService>();
+        .AddCarter()
+        .AddTransient<PasswordService>()
+        .AddTransient<JwtAuthenticationService>();
 }
