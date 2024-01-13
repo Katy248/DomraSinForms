@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace DomraSin.Application.Services;
+namespace DomraSin.Application.Services.Authentication;
 public class PasswordService
 {
     public string GetHash(string password)

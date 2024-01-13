@@ -5,7 +5,7 @@ using DomraSin.Domain.Models;
 using Microsoft.Extensions.Configuration;
 using Microsoft.IdentityModel.Tokens;
 
-namespace DomraSin.Application.Services;
+namespace DomraSin.Application.Services.Authentication;
 public class JwtAuthenticationService
 {
     protected readonly IConfiguration _configuration;
