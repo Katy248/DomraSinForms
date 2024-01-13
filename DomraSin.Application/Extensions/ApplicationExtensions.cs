@@ -6,6 +6,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Carter;
 using DomraSin.Application.Services.Authentication;
+using FluentValidation;
 using Microsoft.Extensions.DependencyInjection;
 
 namespace DomraSin.Application.Extensions;
@@ -17,6 +18,7 @@ public static class ApplicationExtensions
 
         })
         .AddCarter()
+        .AddValidatorsFromAssembly(typeof(ApplicationExtensions).Assembly)
         .AddTransient<PasswordService>()
         .AddTransient<JwtAuthenticationService>();
 }
