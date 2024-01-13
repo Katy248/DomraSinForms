@@ -4,7 +4,7 @@ using System.ComponentModel.Design;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using DomraSin.Application.Services;
+using DomraSin.Application.Services.Authentication;
 using Microsoft.Extensions.DependencyInjection;
 
 namespace DomraSin.Application.Extensions;

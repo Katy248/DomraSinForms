@@ -1,5 +1,5 @@
 ﻿using DomraSin.Application.Extensions;
-using DomraSin.Application.Services;
+using DomraSin.Application.Services.Authentication;
 using DomraSin.Domain.Interfaces.Repositories;
 using DomraSin.Domain.Models;
 using FluentValidation;
