@@ -18,7 +18,7 @@ public class JwtAuthenticationService
     {
         yield return new Claim(ClaimTypes.NameIdentifier, user.Id);
         yield return new Claim(ClaimTypes.Name, user.Name);
-        yield return new Claim(ClaimTypes.Email, user.Mail);
+        yield return new Claim(ClaimTypes.Email, user.Email);
     }
     public JwtSecurityToken GetToken(User user)
     {

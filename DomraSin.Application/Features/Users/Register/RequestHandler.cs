@@ -25,7 +25,7 @@ internal class RequestHandler(
 
         var user = new User 
         { 
-            Mail = request.Email,
+            Email = request.Email,
             Name = request.Username,
             PasswordHash = _passwordService.GetHash(request.Password),
             Verified = false,
