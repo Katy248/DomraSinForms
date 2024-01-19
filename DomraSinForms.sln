@@ -7,13 +7,13 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DomraSinForms.ChartsWrapper
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DomraSin.Server", "DomraSin.Server\DomraSin.Server.csproj", "{54CE1A1F-095A-49FB-AF61-D2A1C5CEB02D}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DomraSin.Client", "DomraSin.Client\DomraSin.Client.csproj", "{6B537DBA-8EF5-43F4-BC6E-538E11BCEB1A}"
-EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DomraSin.Domain", "DomraSin.Domain\DomraSin.Domain.csproj", "{E28912AC-0324-4FCC-9C0B-401D4472794F}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DomraSin.Persistence", "DomraSin.Persistance\DomraSin.Persistence.csproj", "{853850AD-97F0-4591-9991-9D4790B59516}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DomraSin.Application", "DomraSin.Application\DomraSin.Application.csproj", "{CCEA8E0D-8617-4ADA-AB2F-5DE1D3C39C7D}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DomraSin.Client", "DomraSin.Client\DomraSin.Client\DomraSin.Client.csproj", "{179290F1-81A2-43F6-936E-451EF7B8C441}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -29,10 +29,6 @@ Global
 		{54CE1A1F-095A-49FB-AF61-D2A1C5CEB02D}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{54CE1A1F-095A-49FB-AF61-D2A1C5CEB02D}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{54CE1A1F-095A-49FB-AF61-D2A1C5CEB02D}.Release|Any CPU.Build.0 = Release|Any CPU
-		{6B537DBA-8EF5-43F4-BC6E-538E11BCEB1A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{6B537DBA-8EF5-43F4-BC6E-538E11BCEB1A}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{6B537DBA-8EF5-43F4-BC6E-538E11BCEB1A}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{6B537DBA-8EF5-43F4-BC6E-538E11BCEB1A}.Release|Any CPU.Build.0 = Release|Any CPU
 		{E28912AC-0324-4FCC-9C0B-401D4472794F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{E28912AC-0324-4FCC-9C0B-401D4472794F}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{E28912AC-0324-4FCC-9C0B-401D4472794F}.Release|Any CPU.ActiveCfg = Release|Any CPU
@@ -45,6 +41,10 @@ Global
 		{CCEA8E0D-8617-4ADA-AB2F-5DE1D3C39C7D}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{CCEA8E0D-8617-4ADA-AB2F-5DE1D3C39C7D}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{CCEA8E0D-8617-4ADA-AB2F-5DE1D3C39C7D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{179290F1-81A2-43F6-936E-451EF7B8C441}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{179290F1-81A2-43F6-936E-451EF7B8C441}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{179290F1-81A2-43F6-936E-451EF7B8C441}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{179290F1-81A2-43F6-936E-451EF7B8C441}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
