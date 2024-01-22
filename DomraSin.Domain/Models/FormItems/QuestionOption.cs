@@ -1,4 +1,4 @@
-﻿namespace DomraSin.Domain.Models;
+﻿namespace DomraSin.Domain.Models.FormItems;
 public class QuestionOption : EntityBase
 {
     public string Value { get; set; }
