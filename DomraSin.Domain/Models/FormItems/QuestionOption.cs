@@ -1,7 +1,13 @@
-﻿namespace DomraSin.Domain.Models.FormItems;
-public class QuestionOption : EntityBase
+using System;
+
+namespace DomraSin.Domain.Models.FormItems;
+
+public class QuestionOption
 {
+    public QuestionOptionId Id { get; set; }
     public string Value { get; set; }
-    public ScoreType Type { get; set; }
-    public int Count { get; set; }
+    public ScoreType ScoreType { get; set; }
+    public int Score { get; set; }
 }
+
+public readonly record struct QuestionOptionId(Guid Value);

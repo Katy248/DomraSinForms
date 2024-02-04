@@ -4,5 +4,5 @@ namespace DomraSin.Domain.Interfaces.Repositories;
 
 public interface IAnswersRepository
 {
-    IQueryable<Answer> GetCollection (string formAnswersId);
+    IQueryable<Answer> GetCollection(FormAnswersId formAnswersId);
 }

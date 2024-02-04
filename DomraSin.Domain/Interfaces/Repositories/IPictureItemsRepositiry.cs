@@ -8,5 +8,5 @@ namespace DomraSin.Domain.Interfaces.Repositories;
 
 public interface IPictureItemsRepositiry
 {
-
+    //TODO: write methods
 }
