@@ -1,6 +1,5 @@
-﻿namespace DomraSin.Application.Features.Users.Login;
+﻿using DomraSin.Domain;
 
-internal record Response(bool IsSuccess, string? JwtToken = null)
-{
-    public static readonly Response Failed = new(false);
-};
+namespace DomraSin.Application.Features.Users.Login;
+
+internal record Response : Result<string>;

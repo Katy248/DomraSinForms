@@ -1,4 +1,5 @@
-﻿using DomraSin.Application.Extensions;
+﻿using System.IO;
+using DomraSin.Application.Extensions;
 using DomraSin.Application.Services.Authentication;
 using DomraSin.Domain.Interfaces.Repositories;
 using DomraSin.Domain.Models;
@@ -18,10 +19,10 @@ internal class RequestHandler(
     public async Task<Response> Handle(Request request, CancellationToken cancellationToken)
     {
         if (!await _validators.ValidateMany(request, cancellationToken))
-            return new Response(false);
+            return Response.Failure();
 
         if (await _usersRepository.UserExists(request.Email, cancellationToken))
-            return new Response(false);
+            return Response.Failure();
 
         var user = new User 
         { 

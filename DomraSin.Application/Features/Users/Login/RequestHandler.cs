@@ -28,20 +28,20 @@ internal class RequestHandler : IRequestHandler<Request, Response>
     public async Task<Response> Handle(Request request, CancellationToken cancellationToken)
     {
         if (!await _validators.ValidateMany(request, cancellationToken))
-            return Response.Failed;
+            return Response.Failure();
 
         if (!await _usersRepository.UserExists(request.Email, cancellationToken))
-            return Response.Failed;
+            return Response.Failure();
 
         var user = await _usersRepository.GetByEmail(request.Email, cancellationToken);
 
         if (!_passwordService.Compare(user.PasswordHash, request.Password))
-            return Response.Failed;
+            return Response.Failure();
 
         var handler = new JwtSecurityTokenHandler();
         
         var jwtToken = handler.WriteToken(_jwtAuthenticationService.GetToken(user));
 
-        return new Response(true, jwtToken);
+        return new Response.Success(jwtToken);
     }
 }
