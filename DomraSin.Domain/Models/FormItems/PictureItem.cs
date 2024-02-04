@@ -1,4 +1,4 @@
-﻿namespace DomraSin.Domain.Models;
+﻿namespace DomraSin.Domain.Models.FormItems;
 
 public class PictureItem : FormItem<PictureItemId>
 {
