@@ -9,8 +9,8 @@ namespace DomraSin.Domain.Interfaces.Repositories;
 
 public interface IQuestionRepository
 {
-    Task<Question> Get(string id, CancellationToken cancellationToken);
-    IQueryable<Question> GetCollection(string questionId);
+    Task<Question> Get(FormItemId id, CancellationToken cancellationToken);
+    IQueryable<Question> GetCollection(FormId id);
     Task<bool> Insert(Question question, CancellationToken cancellationToken);
-    Task<bool> Delete(string questionId, CancellationToken cancellationToken);
+    Task<bool> Delete(FormItemId id, CancellationToken cancellationToken);
 }
