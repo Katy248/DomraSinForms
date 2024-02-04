@@ -4,7 +4,6 @@ namespace DomraSin.Domain.Models;
 
 public class Question : FormItem<QuestionId>
 {
-    public Question() => this.Type = FormItemType.Question;
     public Form Form { get; set; }
     public string Text { get; set; }
     public IEnumerable<QuestionOption> Options { get; set; }
