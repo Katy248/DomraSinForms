@@ -1,6 +1,7 @@
-﻿using System;
+using System;
 
-namespace DomraSin.Domain.Models;
+namespace DomraSin.Domain.Models.FormItems;
+
 public class QuestionOption
 {
     public QuestionOptionId Id { get; set; }

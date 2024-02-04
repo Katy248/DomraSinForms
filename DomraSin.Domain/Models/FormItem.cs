@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using DomraSin.Domain.Models;
 
 namespace DomraSin.Domain.Models;
