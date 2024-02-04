@@ -7,10 +7,9 @@ using System.Threading.Tasks;
 
 namespace DomraSin.Domain.Interfaces.Repositories;
 
-public interface IFormItemsRepository 
+public interface IFormItemsRepository
 {
-    Task<FormItem> Get(string id, CancellationToken cancellationToken);
-    IQueryable<FormItem> GetCollection(string formId);
+    IQueryable<FormItem> GetCollection(FormId formId);
     /// <summary>
     /// Create new <see cref="FormItem"/>, or update existing in database.
     /// </summary>

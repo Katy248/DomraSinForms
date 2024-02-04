@@ -9,8 +9,8 @@ namespace DomraSin.Domain.Interfaces.Repositories;
 
 public interface IScoreTypesRepository
 {
-    //Task<Form> Get(string id, CancellationToken cancellationToken);
-    IQueryable<ScoreType> GetCollection(string formId);
+    Task<ScoreType> Get(ScoreTypeId id, CancellationToken cancellationToken);
+    IQueryable<ScoreType> GetCollection(FormId formId);
     Task<bool> Insert(ScoreType scoreType, CancellationToken cancellationToken);
-    Task<bool> Delete(string scoreId, CancellationToken cancellationToken);
+    Task<bool> Delete(ScoreTypeId id, CancellationToken cancellationToken);
 }

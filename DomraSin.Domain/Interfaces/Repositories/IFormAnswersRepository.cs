@@ -9,8 +9,8 @@ namespace DomraSin.Domain.Interfaces.Repositories;
 
 public interface IFormAnswersRepository
 {
-    Task<FormAnswers> Get(string id, CancellationToken cancellationToken);
-    IQueryable<FormAnswers> GetCollection(string formAnswerId);
+    Task<FormAnswers> Get(FormAnswersId id, CancellationToken cancellationToken);
+    IQueryable<FormAnswers> GetCollection(FormId formId);
     /// <summary>
     /// Create new <see cref="FormAnswers"/>, or update existing in database.
     /// </summary>
