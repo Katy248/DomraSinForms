@@ -16,7 +16,7 @@ public class JwtAuthenticationService
     }
     private static IEnumerable<Claim> GetClaims(User user)
     {
-        yield return new Claim(ClaimTypes.NameIdentifier, user.Id);
+        yield return new Claim(ClaimTypes.NameIdentifier, user.Id.Value.ToString());
         yield return new Claim(ClaimTypes.Name, user.Name);
         yield return new Claim(ClaimTypes.Email, user.Email);
     }

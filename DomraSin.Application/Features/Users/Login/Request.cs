@@ -6,4 +6,4 @@ using System.Threading.Tasks;
 using MediatR;
 
 namespace DomraSin.Application.Features.Users.Login;
-internal record Request(string Email, string Password) : IRequest<Response>;
+internal record Request(string Email, string Password) : IRequest<Response?>;
