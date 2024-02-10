@@ -7,7 +7,7 @@ using MediatR;
 using Microsoft.IdentityModel.JsonWebTokens;
 
 namespace DomraSin.Application.Features.Users.Login;
-internal class RequestHandler : IRequestHandler<Request, Response>
+internal class RequestHandler : IRequestHandler<Request, Response?>
 {
     private readonly IEnumerable<IValidator<Request>> _validators;
     private readonly IUsersRepository _usersRepository;
@@ -15,9 +15,9 @@ internal class RequestHandler : IRequestHandler<Request, Response>
     private readonly JwtAuthenticationService _jwtAuthenticationService;
 
     public RequestHandler(
-        IEnumerable<IValidator<Request>> validators, 
-        IUsersRepository usersRepository, 
-        PasswordService passwordService, 
+        IEnumerable<IValidator<Request>> validators,
+        IUsersRepository usersRepository,
+        PasswordService passwordService,
         JwtAuthenticationService jwtAuthenticationService)
     {
         _validators = validators;
@@ -25,23 +25,23 @@ internal class RequestHandler : IRequestHandler<Request, Response>
         _passwordService = passwordService;
         _jwtAuthenticationService = jwtAuthenticationService;
     }
-    public async Task<Response> Handle(Request request, CancellationToken cancellationToken)
+    public async Task<Response?> Handle(Request request, CancellationToken cancellationToken)
     {
         if (!await _validators.ValidateMany(request, cancellationToken))
-            return Response.Failure();
+            return null;
 
         if (!await _usersRepository.UserExists(request.Email, cancellationToken))
-            return Response.Failure();
+            return null;
 
         var user = await _usersRepository.GetByEmail(request.Email, cancellationToken);
 
         if (!_passwordService.Compare(user.PasswordHash, request.Password))
-            return Response.Failure();
+            return null;
 
         var handler = new JwtSecurityTokenHandler();
-        
+
         var jwtToken = handler.WriteToken(_jwtAuthenticationService.GetToken(user));
 
-        return new Response.Success(jwtToken);
+        return new Response(jwtToken);
     }
 }
