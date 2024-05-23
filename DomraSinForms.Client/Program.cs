@@ -9,9 +9,9 @@ builder.Services.AddRazorComponents()
     .AddInteractiveServerComponents();
     // .AddInteractiveWebAssemblyComponents()
 
-builder.Services
+/*builder.Services
     .AddPersistenceLayer()
-    .AddApplicationLayer();
+    .AddApplicationLayer();*/
 
 var app = builder.Build();
 
