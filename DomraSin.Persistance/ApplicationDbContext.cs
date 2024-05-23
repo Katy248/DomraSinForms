@@ -1,8 +1,8 @@
-﻿using DomraSin.Domain.Models.FormItems;
-using DomraSin.Domain.Models;
+﻿using DomraSinForms.Domain.Models.FormItems;
+using DomraSinForms.Domain.Models;
 using Microsoft.EntityFrameworkCore;
 
-namespace DomraSin.Persistence
+namespace DomraSinForms.Persistence
 {
     public class ApplicationDbContext: DbContext
     {

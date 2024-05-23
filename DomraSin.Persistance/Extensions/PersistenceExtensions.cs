@@ -5,7 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Microsoft.Extensions.DependencyInjection;
 
-namespace DomraSin.Persistence.Extensions;
+namespace DomraSinForms.Persistence.Extensions;
 public static class PersistenceExtensions
 {
     public static IServiceCollection AddPersistenceLayer(this IServiceCollection services) =>

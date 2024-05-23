@@ -1,7 +1,7 @@
 using System;
 using System.Threading;
 using System.Threading.Tasks;
-using DomraSin.Persistence;
+using DomraSinForms.Persistence;
 
 namespace DomraSin.Persistance;
 
