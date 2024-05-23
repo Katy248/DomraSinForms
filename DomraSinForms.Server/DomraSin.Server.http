@@ -1,6 +1,0 @@
-@DomraSin.Server_HostAddress = http://localhost:5090
-
-GET {{DomraSin.Server_HostAddress}}/weatherforecast/
-Accept: application/json
-
-###
