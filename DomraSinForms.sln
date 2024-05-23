@@ -13,7 +13,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DomraSinForms.Persistence",
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DomraSinForms.Application", "DomraSinForms.Application\DomraSinForms.Application.csproj", "{CCEA8E0D-8617-4ADA-AB2F-5DE1D3C39C7D}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DomraSinorms.Client", "DomraSin.Client\DomraSinorms.Client\DomraSinorms.Client.csproj", "{179290F1-81A2-43F6-936E-451EF7B8C441}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DomraSinForms.Client", "DomraSin.Client\DomraSinForms.Client\DomraSinForms.Client.csproj", "{179290F1-81A2-43F6-936E-451EF7B8C441}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

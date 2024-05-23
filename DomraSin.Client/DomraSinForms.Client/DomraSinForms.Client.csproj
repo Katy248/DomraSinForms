@@ -10,4 +10,9 @@
     <PackageReference Include="Microsoft.AspNetCore.Components.WebAssembly.Server" Version="8.0.5" />
   </ItemGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\..\DomraSin.Persistance\DomraSinForms.Persistence.csproj" />
+    <ProjectReference Include="..\..\DomraSinForms.Application\DomraSinForms.Application.csproj" />
+  </ItemGroup>
+
 </Project>

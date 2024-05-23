@@ -4,4 +4,4 @@ using MediatR;
 
 namespace DomraSinForms.Application.Features.Forms.Create;
 
-public record Response : IRequest<Result<FormId>>;
+public record Response;

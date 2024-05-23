@@ -1,11 +1,17 @@
-using DomraSin.Client.Components;
+using DomraSinForms.Client.Components;
+using DomraSinForms.Application.Extensions;
+using DomraSinForms.Persistence.Extensions;
 
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.AddRazorComponents()
-    .AddInteractiveServerComponents()
-    .AddInteractiveWebAssemblyComponents();
+    .AddInteractiveServerComponents();
+    // .AddInteractiveWebAssemblyComponents()
+
+builder.Services
+    .AddPersistenceLayer()
+    .AddApplicationLayer();
 
 var app = builder.Build();
 
@@ -27,8 +33,8 @@ app.UseStaticFiles();
 app.UseAntiforgery();
 
 app.MapRazorComponents<App>()
-    .AddInteractiveServerRenderMode()
-    .AddInteractiveWebAssemblyRenderMode();
+    .AddInteractiveServerRenderMode();
+    // .AddInteractiveWebAssemblyRenderMode()
 
 
 app.Run();
