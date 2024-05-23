@@ -1,0 +1,108 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+* {
+    @apply transition-all ease-in-out text-fg box-border
+}
+
+body {
+    @apply min-h-screen flex flex-col bg-sky-100;
+}
+
+main {
+    @apply flex-grow flex flex-col text-black rounded-t-xl py-4 px-5 sm:px-10 md:px-14 lg:px-20 xl:px-32
+}
+
+/* Text */
+
+h1 {
+    @apply text-3xl font-bold py-3
+}
+
+p {
+    @apply my-5
+}
+
+/* Buttons */
+.btn {
+    @apply px-4 py-2 rounded-lg drop-shadow-lg;
+}
+
+.btn.btn-primary {
+    @apply bg-blue-500 text-white hover:bg-blue-600 duration-700;
+}
+
+.btn.btn-secondary {
+    @apply bg-slate-500 text-white hover:bg-slate-600 duration-700;
+}
+
+.btn.btn-success {
+    @apply bg-lime-500 hover:bg-lime-600 duration-700;
+}
+
+.btn.btn-warning {
+    @apply bg-yellow-500 hover:bg-yellow-600 duration-700
+}
+
+.btn.btn-danger {
+    @apply bg-orange-500 hover:bg-red-600 delay-200 duration-700
+}
+
+.btn.btn-info {
+    @apply bg-teal-500 hover:bg-teal-600 duration-700
+}
+/* Cards */
+
+.card {
+    @apply bg-slate-200 p-6 rounded-xl border border-gray-300
+}
+/* Form */
+
+form {
+    @apply flex flex-col gap-3
+}
+
+input {
+    @apply outline-none
+}
+
+.input {
+    @apply p-2 rounded-lg border-2 border-gray-200 focus:border-blue-300 block drop-shadow-md shadow-white focus:ring ring-blue-300
+}
+
+/* Nav */
+
+nav {
+    @apply flex flex-row gap-4 p-2
+}
+
+.nav-link {
+    @apply p-2 hover:text-blue-400
+}
+
+.nav-link.active {
+    @apply text-blue-400 font-semibold
+}
+
+/* Errors */
+
+#blazor-error-ui {
+    @apply bg-red-200 m-4 p-4 rounded-xl border  border-red-300 flex flex-col gap-3
+}
+
+#blazor-error-ui a {
+    @apply btn
+}
+
+.error-buttons {
+    @apply flex flex-row
+}
+
+#blazor-error-ui a.reload {
+    @apply p-2
+}
+
+#blazor-error-ui a.dismiss {
+    @apply p-2
+}

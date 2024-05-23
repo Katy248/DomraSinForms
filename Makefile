@@ -1,7 +1,8 @@
 help:
 	echo "Fuck"
-run:
-	dotnet run --project DomraSin.Server
+
+watch:
+	dotnet watch --project DomraSinForms.Client
 
 watch-css:
 	cd ./DomraSinForms.Client/ && \

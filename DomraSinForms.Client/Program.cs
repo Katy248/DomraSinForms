@@ -4,7 +4,7 @@ using DomraSinForms.Persistence.Extensions;
 
 var builder = WebApplication.CreateBuilder(args);
 
-// Add services to the container.
+// AdDomraSind services to the container.
 builder.Services.AddRazorComponents()
     .AddInteractiveServerComponents();
     // .AddInteractiveWebAssemblyComponents()
