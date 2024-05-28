@@ -1,5 +1,6 @@
 ﻿using Carter;
 using DomraSinForms.Application.Services.Authentication;
+using DomraSinForms.Domain.Interfaces;
 using FluentValidation;
 using Microsoft.Extensions.DependencyInjection;
 
@@ -13,6 +14,6 @@ public static class ApplicationExtensions
             })
         .AddCarter()
         .AddValidatorsFromAssembly(typeof(ApplicationExtensions).Assembly)
-        .AddTransient<PasswordService>()
+        .AddTransient<IPassswordHasher, PasswordService>()
         .AddTransient<JwtAuthenticationService>();
 }

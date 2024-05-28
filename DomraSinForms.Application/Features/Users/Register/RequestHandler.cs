@@ -1,6 +1,7 @@
 ﻿using System.IO;
 using DomraSinForms.Application.Extensions;
 using DomraSinForms.Application.Services.Authentication;
+using DomraSinForms.Domain.Interfaces;
 using DomraSinForms.Domain.Interfaces.Repositories;
 using DomraSinForms.Domain.Models;
 using FluentValidation;
@@ -11,15 +12,15 @@ internal class RequestHandler : IRequestHandler<Request, Response?>
 {
     private readonly IEnumerable<IValidator<Request>> _validators;
     private readonly IUsersRepository _usersRepository;
-    private readonly PasswordService _passwordService;
+    private readonly IPassswordHasher _passwordHasher;
 
     public RequestHandler(IEnumerable<IValidator<Request>> validators,
         IUsersRepository usersRepository,
-        PasswordService passwordService)
+        IPassswordHasher passwordHasher)
     {
         _validators = validators;
         _usersRepository = usersRepository;
-        _passwordService = passwordService;
+        _passwordHasher = passwordHasher;
     }
 
     public async Task<Response?> Handle(Request request, CancellationToken cancellationToken)
@@ -31,7 +32,8 @@ internal class RequestHandler : IRequestHandler<Request, Response?>
             return null;
 
         var user = User
-            .CreateNew(name: request.Username, request.Email, _passwordService.GetHash(request.Password), verified: false);
+            .CreateNew(name: request.Username, request.Email, false)
+            .HashPassword(_passwordHasher, request.Password);
 
         var insertResult = await _usersRepository.Insert(user, cancellationToken);
 
