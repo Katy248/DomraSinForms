@@ -6,4 +6,4 @@ using System.Threading.Tasks;
 using MediatR;
 
 namespace DomraSinForms.Application.Features.Users.Login;
-internal record Request(string Email, string Password) : IRequest<Response?>;
+public record Request(string Email, string Password) : IRequest<Response?>;

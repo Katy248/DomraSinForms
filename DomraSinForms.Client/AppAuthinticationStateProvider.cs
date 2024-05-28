@@ -10,19 +10,20 @@ public class AppAuthinticationStateProvider : AuthenticationStateProvider
 {
     private const string AuthTokenKey = "AUTH_TOKEN";
     private static readonly AuthenticationState NotAuthorized = new(new(new ClaimsIdentity()));
+
     private readonly ProtectedLocalStorage _localStorage;
 
     public AppAuthinticationStateProvider(ProtectedLocalStorage localStorage)
     {
         _localStorage = localStorage;
     }
-    
+
     public override async Task<AuthenticationState> GetAuthenticationStateAsync()
     {
         var token = await _localStorage.GetAsync<string>(AuthTokenKey);
         if (token.Value is null)
             return NotAuthorized;
-        
+
         JwtSecurityTokenHandler handler = new();
         var jwt = handler.ReadJwtToken(token.Value);
 

@@ -2,4 +2,4 @@
 
 namespace DomraSinForms.Application.Features.Users.Login;
 
-internal record Response(string JwtToken);
+public record Response(string JwtToken);
