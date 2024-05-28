@@ -1,10 +1,12 @@
 ﻿@page "/test"
 @rendermode InteractiveServer
 
+<div class="clamp">
+    
 <h3>Counter <span>@count</span></h3>
 <button class="btn btn-primary" @onclick="IncreaseCount">Increment</button>
 <h1>Big title</h1>
-<div class="flex flex-col p-4 gap-4">
+<div class="flex flex-col gap-4">
     <button class="btn btn-primary">Primary</button>
     <button class="btn btn-success">Success</button>
     <button class="btn btn-secondary">Secondary</button>
@@ -12,6 +14,7 @@
     <button class="btn btn-danger">Danger</button>
     <button class="btn btn-info">Info</button>
 </div>
+</div>  
 
 @code {
     public int count = 0;

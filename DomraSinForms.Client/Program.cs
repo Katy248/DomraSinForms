@@ -9,6 +9,9 @@ builder.Services.AddRazorComponents()
     .AddInteractiveServerComponents();
     // .AddInteractiveWebAssemblyComponents()
 
+builder.Services
+    .AddCascadingAuthenticationState()
+    .AddAuthenticationCore();
 /*builder.Services
     .AddPersistenceLayer()
     .AddApplicationLayer();*/
