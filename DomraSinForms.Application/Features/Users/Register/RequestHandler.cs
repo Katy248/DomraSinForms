@@ -7,14 +7,20 @@ using FluentValidation;
 using MediatR;
 
 namespace DomraSinForms.Application.Features.Users.Register;
-internal class RequestHandler(
-    IEnumerable<IValidator<Request>> validators,
-    IUsersRepository usersRepository,
-    PasswordService passwordService) : IRequestHandler<Request, Response?>
+internal class RequestHandler : IRequestHandler<Request, Response?>
 {
-    private readonly IEnumerable<IValidator<Request>> _validators = validators;
-    private readonly IUsersRepository _usersRepository = usersRepository;
-    private readonly PasswordService _passwordService = passwordService;
+    private readonly IEnumerable<IValidator<Request>> _validators;
+    private readonly IUsersRepository _usersRepository;
+    private readonly PasswordService _passwordService;
+
+    public RequestHandler(IEnumerable<IValidator<Request>> validators,
+        IUsersRepository usersRepository,
+        PasswordService passwordService)
+    {
+        _validators = validators;
+        _usersRepository = usersRepository;
+        _passwordService = passwordService;
+    }
 
     public async Task<Response?> Handle(Request request, CancellationToken cancellationToken)
     {
