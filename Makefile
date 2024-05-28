@@ -13,6 +13,12 @@ install-ef-tools:
 	dotnet tool update --global dotnet-ef
 	dotnet ef
 
-make-migration: NAME ?=
-make-migration:
-	dotnet ef migrations add "$(NAME)"
+add-migration: NAME ?=
+add-migration:
+
+	cd DomraSinForms.Persistence && \
+	\
+	dotnet ef migrations add "$(NAME)" \
+		--project DomraSinForms.Persistence.csproj \
+		--startup-project ../DomraSinForms.Client/DomraSinForms.Client.csproj \
+		--output-dir ./Migrations
