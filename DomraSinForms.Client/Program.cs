@@ -7,14 +7,13 @@ var builder = WebApplication.CreateBuilder(args);
 // AdDomraSind services to the container.
 builder.Services.AddRazorComponents()
     .AddInteractiveServerComponents();
-    // .AddInteractiveWebAssemblyComponents()
+// .AddInteractiveWebAssemblyComponents()
 
 builder.Services
     .AddCascadingAuthenticationState()
-    .AddAuthenticationCore();
-/*builder.Services
-    .AddPersistenceLayer()
-    .AddApplicationLayer();*/
+    .AddAuthenticationCore()
+    .AddPersistenceLayer("Database=DSF_DB")
+    .AddApplicationLayer();
 
 var app = builder.Build();
 

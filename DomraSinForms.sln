@@ -7,7 +7,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DomraSinForms.ChartsWrapper
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DomraSinForms.Domain", "DomraSinForms.Domain\DomraSinForms.Domain.csproj", "{E28912AC-0324-4FCC-9C0B-401D4472794F}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DomraSinForms.Persistence", "DomraSin.Persistance\DomraSinForms.Persistence.csproj", "{853850AD-97F0-4591-9991-9D4790B59516}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DomraSinForms.Persistence", "DomraSinForms.Persistance\DomraSinForms.Persistence.csproj", "{853850AD-97F0-4591-9991-9D4790B59516}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DomraSinForms.Application", "DomraSinForms.Application\DomraSinForms.Application.csproj", "{CCEA8E0D-8617-4ADA-AB2F-5DE1D3C39C7D}"
 EndProject
