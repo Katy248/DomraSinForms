@@ -1,6 +1,20 @@
 @page "/auth/register"
-<h3>Register</h3>
-
+<div class="clamp">
+    <h1>Register</h1>
+    <div class="card">
+        
+        <form>
+            <input class="input" type="email" placeholder="example@@mail.com" autocomplete="username">
+            <input class="input" type="password" placeholder="Password" autocomplete="new-password" minlength="5" maxlength="20" pattern="[A-Za-z0-9#!?/.,;:@@#$%^&*()-=_+]{8,}">
+            <input class="input" type="password" placeholder="Repeat password" autocomplete="new-password" minlength="5" maxlength="20" pattern="[A-Za-z0-9#!?/.,;:@@#$%^&*()-=_+]{8,}">
+            <input type="submit" class="btn btn-primary">
+        </form>
+    </div>
+    <p>
+        Already have an account?
+    </p>
+    <NavLink class="btn btn-primary" href="auth/login">Login</NavLink>
+</div>
 @code {
     
 }

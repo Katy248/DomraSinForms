@@ -2,9 +2,8 @@
 
 namespace DomraSinForms.Domain.Models;
 
-public class User
+public class User: EntityBase<UserId>
 {
-    public UserId Id { get; set; }
     public string Name { get; set; }
     public string? Nickname { get; set; }
     public string Email { get; set; }

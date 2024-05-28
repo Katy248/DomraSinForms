@@ -9,7 +9,7 @@ namespace DomraSinForms.Persistence
         public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options)
         : base(options)
         {
-            Database.EnsureCreated();
+            // Database.EnsureCreated();
         }
         public DbSet<User> Users { get; set; }
         public DbSet<Answer> Answers { get; set; }
