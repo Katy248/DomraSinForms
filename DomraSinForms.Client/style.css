@@ -14,7 +14,7 @@ main {
     @apply flex-grow flex flex-row justify-center text-black rounded-t-xl py-4 px-5 sm:px-10 md:px-14 lg:px-20 xl:px-32
 }
 .clamp {
-    @apply w-full p-2 sm:p-20 md:p-32 lg:p-32 xl:w-3/4 2xl:w-1/2 flex flex-col
+    @apply w-full p-2 sm:px-20 md:px-32 lg:px-32 xl:w-3/4 2xl:w-1/2 flex flex-col flex-wrap
 }
 
 /* Text */
