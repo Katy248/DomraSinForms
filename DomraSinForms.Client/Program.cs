@@ -4,10 +4,14 @@ using DomraSinForms.Persistence.Extensions;
 
 var builder = WebApplication.CreateBuilder(args);
 
+builder.Logging.ClearProviders();
+builder.Logging.AddConsole();
+
 // AdDomraSind services to the container.
 builder.Services.AddRazorComponents()
     .AddInteractiveServerComponents();
 // .AddInteractiveWebAssemblyComponents()
+
 
 builder.Services
     .AddCascadingAuthenticationState()

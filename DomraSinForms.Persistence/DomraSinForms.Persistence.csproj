@@ -24,4 +24,8 @@
     <ProjectReference Include="..\DomraSinForms.Domain\DomraSinForms.Domain.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Attributes\" />
+  </ItemGroup>
+
 </Project>
