@@ -16,7 +16,7 @@ builder.Services.AddRazorComponents()
 builder.Services
     .AddCascadingAuthenticationState()
     .AddAuthenticationCore()
-    .AddPersistenceLayer("Database=DSF_DB")
+    .AddPersistenceLayer(@"Server=localhost,1433;Password=<YourStrong@Passw0rd>;User Id=sa;Database=DSF;MultipleActiveResultSets=true;Encrypt=False;TrustServerCertificate=False;")
     .AddApplicationLayer();
 
 var app = builder.Build();

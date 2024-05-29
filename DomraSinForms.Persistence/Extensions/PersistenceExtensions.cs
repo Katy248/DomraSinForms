@@ -11,7 +11,7 @@ public static class PersistenceExtensions
             .AddScoped<IUsersRepository, UserRepository>()
             .AddDbContext<ApplicationDbContext>(options =>
             {
-                options.UseNpgsql(connectionString,
+                options.UseSqlServer(connectionString,
                     dbOptions =>
                     {
                         dbOptions.MigrationsAssembly(typeof(PersistenceExtensions).Assembly.FullName);
