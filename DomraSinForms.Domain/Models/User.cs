@@ -11,6 +11,8 @@ public class User: EntityBase<UserId>
     public bool Verified { get; set; }
     public byte[] Salt { get; set; }
     public string PasswordHash { get; set; }
+    public IEnumerable<Form> UserForms { get; set; }
+    public IEnumerable<Form> AllowedToRedactForms { get; set; }
 
     public static User CreateNew(string name, string email, bool verified = false) =>
         new User

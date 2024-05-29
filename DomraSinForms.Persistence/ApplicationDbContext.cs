@@ -53,6 +53,13 @@ public class ApplicationDbContext : DbContext
             .Property(a => a.Id)
             .HasConversion(new ToGuidValueConverter<QuestionOptionId>(
                 id => id.Value, value => new(value)));
+
+        builder.Entity<User>()
+            .HasMany(u => u.UserForms)
+            .WithOne(f => f.Creator);
+        builder.Entity<Form>()
+            .HasMany(f => f.Redactors)
+            .WithMany(u => u.AllowedToRedactForms);
         base.OnModelCreating(builder);
     }
 }
