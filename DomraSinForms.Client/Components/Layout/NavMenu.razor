@@ -1,35 +1,53 @@
-﻿<div class="  flex flex-col py-2 bg-white drop-shadow-md shadow-blue-200 w-full">
+﻿<!-- Navbar -->
+<nav class="navbar navbar-expand-lg navbar-light bg-body-tertiary">
+    <!-- Container wrapper -->
+    <div class="container">
+        <!-- Toggle button -->
+        <button
+            data-mdb-collapse-init
+            class="navbar-toggler"
+            type="button"
+            data-mdb-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent"
+            aria-expanded="false"
+            aria-label="Toggle navigation">
+            <i class="fas fa-bars"></i>
+        </button>
 
-    <div class="text-xl text-center py-2">
-        DomraSinForms
+        <!-- Collapsible wrapper -->
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+
+            <!-- Left links -->
+            <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                <!-- Navbar brand -->
+                <li class="nav-item">
+                    <a class="navbar-brand mt-2 mt-lg-0" href="#">
+                        DSF
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <NavLink class="nav-link" href="" Match="NavLinkMatch.All">Home</NavLink>
+                </li>
+                <li class="nav-item">
+                    <NavLink class="nav-link" href="/forms">Forms</NavLink>
+                </li>
+                <li class="nav-item">
+                    <NavLink class="nav-link" href="/test">Test</NavLink>
+                </li>
+            </ul>
+            <!-- Left links -->
+            @*<ul class="navbar-nav me-auto mb-2 mb-lg-0">
+            </ul>*@
+            <!-- Right links -->
+            <HeaderUser/>
+            <!-- Right links -->
+        </div>
+        <!-- Collapsible wrapper -->
+
+        @* <HeaderUser/> *@
+
+
     </div>
-
-    <nav class="nav" role="navigation">
-        <div class="nav-item "></div>
-        <div class="nav-item ">
-
-            <NavLink class="nav-link" href="" Match="NavLinkMatch.All">
-                Home
-            </NavLink>
-            <NavLink class="nav-link" href="forms">
-                Forms
-            </NavLink>
-            <NavLink class="nav-link" href="test">
-                Test
-            </NavLink>
-        </div>
-        <div class="nav-item">
-            <AuthorizeView>
-                <NotAuthorized>
-                    <NavLink class="nav-link" href="auth/login">
-                        Login
-                    </NavLink>
-                    <NavLink class="nav-link" href="auth/register">
-                        Register
-                    </NavLink>
-                </NotAuthorized>
-            </AuthorizeView>
-        </div>
-    </nav>
-
-</div>
+    <!-- Container wrapper -->
+</nav>
+<!-- Navbar -->

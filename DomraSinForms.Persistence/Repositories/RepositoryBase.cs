@@ -1,9 +1,8 @@
 using DomraSinForms.Domain.Models;
-using DomraSinForms.Persistence;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
 
-namespace DomraSin.Persistance;
+namespace DomraSinForms.Persistence.Repositories;
 
 public abstract class RepositoryBase<TEntity, TId> 
     where TEntity : EntityBase<TId> 
@@ -12,7 +11,7 @@ public abstract class RepositoryBase<TEntity, TId>
     protected readonly ApplicationDbContext Context;
     protected readonly ILogger Logger;
 
-    public RepositoryBase(ApplicationDbContext context, ILogger logger)
+    protected RepositoryBase(ApplicationDbContext context, ILogger logger)
     {
         Context = context;
         Logger = logger;
@@ -27,9 +26,10 @@ public abstract class RepositoryBase<TEntity, TId>
             .Set<TEntity>()
             .FirstOrDefaultAsync(e => e.Id.Equals(id), cancellationToken);
     } 
-    public virtual Task<bool> Delete(TId id, CancellationToken cancellationToken)
+    public virtual async Task<bool> Delete(TId id, CancellationToken cancellationToken)
     {
-        throw new NotImplementedException();
+        await BeforeDelete(id, cancellationToken);
+        return false;
     } 
     
     public virtual Task<bool> EntityExists(TId id, CancellationToken cancellationToken)

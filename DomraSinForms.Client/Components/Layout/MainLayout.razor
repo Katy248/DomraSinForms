@@ -1,21 +1,25 @@
 ﻿@inherits LayoutComponentBase
 
-<header class="sidebar">
+<header>
     <NavMenu/>
 </header>
 
-<main>
+<main class="container">
     @Body
-
-    
 </main>
-<div id="blazor-error-ui">
-    An unhandled error has occurred.
-    <div class="flex flex-row gap-2">
-        <a href="" class="btn btn-primary">Reload</a>
-        <a class="btn btn-warning">Dismiss</a>
+
+<footer class="mt-5">
+    <div class="container">
+
+
+        <div class="card card-body text-bg-warning" id="blazor-error-ui" hidden>
+            <div class="block">
+                An unhandled error has occurred.
+            </div>
+            <div class="block">
+                <a href="" class="btn btn-primary">Reload</a>
+                <a class="btn btn-secondary">Dismiss</a>
+            </div>
+        </div>
     </div>
-</div>
-<footer>
-    <MobileNavMenu></MobileNavMenu>
 </footer>

@@ -3,8 +3,8 @@ using System;
 using DomraSinForms.Persistence;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
-using Microsoft.EntityFrameworkCore.Metadata;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
+using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 
 #nullable disable
 
@@ -18,24 +18,24 @@ namespace DomraSinForms.Persistence.Migrations
 #pragma warning disable 612, 618
             modelBuilder
                 .HasAnnotation("ProductVersion", "8.0.6")
-                .HasAnnotation("Relational:MaxIdentifierLength", 128);
+                .HasAnnotation("Relational:MaxIdentifierLength", 63);
 
-            SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder);
+            NpgsqlModelBuilderExtensions.UseIdentityByDefaultColumns(modelBuilder);
 
             modelBuilder.Entity("DomraSinForms.Domain.Models.Answer", b =>
                 {
                     b.Property<Guid>("Id")
-                        .HasColumnType("uniqueidentifier");
+                        .HasColumnType("uuid");
 
                     b.Property<Guid?>("FormAnswersId")
-                        .HasColumnType("uniqueidentifier");
+                        .HasColumnType("uuid");
 
                     b.Property<Guid>("QuestionId")
-                        .HasColumnType("uniqueidentifier");
+                        .HasColumnType("uuid");
 
                     b.Property<string>("Value")
                         .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                        .HasColumnType("text");
 
                     b.HasKey("Id");
 
@@ -49,14 +49,14 @@ namespace DomraSinForms.Persistence.Migrations
             modelBuilder.Entity("DomraSinForms.Domain.Models.Form", b =>
                 {
                     b.Property<Guid>("Id")
-                        .HasColumnType("uniqueidentifier");
+                        .HasColumnType("uuid");
 
-                    b.Property<Guid>("CreatorId")
-                        .HasColumnType("uniqueidentifier");
+                    b.Property<Guid?>("CreatorId")
+                        .HasColumnType("uuid");
 
                     b.Property<string>("Name")
                         .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                        .HasColumnType("text");
 
                     b.HasKey("Id");
 
@@ -68,13 +68,13 @@ namespace DomraSinForms.Persistence.Migrations
             modelBuilder.Entity("DomraSinForms.Domain.Models.FormAnswers", b =>
                 {
                     b.Property<Guid>("Id")
-                        .HasColumnType("uniqueidentifier");
+                        .HasColumnType("uuid");
 
                     b.Property<Guid>("FormId")
-                        .HasColumnType("uniqueidentifier");
+                        .HasColumnType("uuid");
 
                     b.Property<Guid?>("UserId")
-                        .HasColumnType("uniqueidentifier");
+                        .HasColumnType("uuid");
 
                     b.HasKey("Id");
 
@@ -88,18 +88,18 @@ namespace DomraSinForms.Persistence.Migrations
             modelBuilder.Entity("DomraSinForms.Domain.Models.FormItem", b =>
                 {
                     b.Property<Guid>("Id")
-                        .HasColumnType("uniqueidentifier");
+                        .HasColumnType("uuid");
 
                     b.Property<string>("Discriminator")
                         .IsRequired()
                         .HasMaxLength(13)
-                        .HasColumnType("nvarchar(13)");
+                        .HasColumnType("character varying(13)");
 
                     b.Property<Guid>("FormId")
-                        .HasColumnType("uniqueidentifier");
+                        .HasColumnType("uuid");
 
                     b.Property<int>("Index")
-                        .HasColumnType("int");
+                        .HasColumnType("integer");
 
                     b.HasKey("Id");
 
@@ -115,20 +115,20 @@ namespace DomraSinForms.Persistence.Migrations
             modelBuilder.Entity("DomraSinForms.Domain.Models.FormItems.QuestionOption", b =>
                 {
                     b.Property<Guid>("Id")
-                        .HasColumnType("uniqueidentifier");
+                        .HasColumnType("uuid");
 
                     b.Property<Guid?>("QuestionId")
-                        .HasColumnType("uniqueidentifier");
+                        .HasColumnType("uuid");
 
                     b.Property<int>("Score")
-                        .HasColumnType("int");
+                        .HasColumnType("integer");
 
                     b.Property<Guid>("ScoreTypeId")
-                        .HasColumnType("uniqueidentifier");
+                        .HasColumnType("uuid");
 
                     b.Property<string>("Value")
                         .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                        .HasColumnType("text");
 
                     b.HasKey("Id");
 
@@ -142,14 +142,14 @@ namespace DomraSinForms.Persistence.Migrations
             modelBuilder.Entity("DomraSinForms.Domain.Models.ScoreType", b =>
                 {
                     b.Property<Guid>("Id")
-                        .HasColumnType("uniqueidentifier");
+                        .HasColumnType("uuid");
 
                     b.Property<Guid>("FormId")
-                        .HasColumnType("uniqueidentifier");
+                        .HasColumnType("uuid");
 
                     b.Property<string>("Name")
                         .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                        .HasColumnType("text");
 
                     b.HasKey("Id");
 
@@ -161,38 +161,48 @@ namespace DomraSinForms.Persistence.Migrations
             modelBuilder.Entity("DomraSinForms.Domain.Models.User", b =>
                 {
                     b.Property<Guid>("Id")
-                        .HasColumnType("uniqueidentifier");
+                        .HasColumnType("uuid");
 
                     b.Property<string>("Email")
                         .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<Guid?>("FormId")
-                        .HasColumnType("uniqueidentifier");
+                        .HasColumnType("text");
 
                     b.Property<string>("Name")
                         .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                        .HasColumnType("text");
 
                     b.Property<string>("Nickname")
-                        .HasColumnType("nvarchar(max)");
+                        .HasColumnType("text");
 
                     b.Property<string>("PasswordHash")
                         .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                        .HasColumnType("text");
 
                     b.Property<byte[]>("Salt")
                         .IsRequired()
-                        .HasColumnType("varbinary(max)");
+                        .HasColumnType("bytea");
 
                     b.Property<bool>("Verified")
-                        .HasColumnType("bit");
+                        .HasColumnType("boolean");
 
                     b.HasKey("Id");
 
-                    b.HasIndex("FormId");
-
                     b.ToTable("Users");
+                });
+
+            modelBuilder.Entity("FormUser", b =>
+                {
+                    b.Property<Guid>("AllowedToRedactFormsId")
+                        .HasColumnType("uuid");
+
+                    b.Property<Guid>("RedactorsId")
+                        .HasColumnType("uuid");
+
+                    b.HasKey("AllowedToRedactFormsId", "RedactorsId");
+
+                    b.HasIndex("RedactorsId");
+
+                    b.ToTable("FormUser");
                 });
 
             modelBuilder.Entity("DomraSinForms.Domain.Models.FormItems.PictureItem", b =>
@@ -201,11 +211,11 @@ namespace DomraSinForms.Persistence.Migrations
 
                     b.Property<string>("AltText")
                         .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                        .HasColumnType("text");
 
                     b.Property<string>("PictureLink")
                         .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                        .HasColumnType("text");
 
                     b.HasDiscriminator().HasValue("PictureItem");
                 });
@@ -215,11 +225,11 @@ namespace DomraSinForms.Persistence.Migrations
                     b.HasBaseType("DomraSinForms.Domain.Models.FormItem");
 
                     b.Property<bool>("IsRequired")
-                        .HasColumnType("bit");
+                        .HasColumnType("boolean");
 
                     b.Property<string>("Text")
                         .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                        .HasColumnType("text");
 
                     b.HasDiscriminator().HasValue("Question");
                 });
@@ -242,10 +252,8 @@ namespace DomraSinForms.Persistence.Migrations
             modelBuilder.Entity("DomraSinForms.Domain.Models.Form", b =>
                 {
                     b.HasOne("DomraSinForms.Domain.Models.User", "Creator")
-                        .WithMany()
-                        .HasForeignKey("CreatorId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .WithMany("UserForms")
+                        .HasForeignKey("CreatorId");
 
                     b.Navigation("Creator");
                 });
@@ -304,23 +312,34 @@ namespace DomraSinForms.Persistence.Migrations
                     b.Navigation("Form");
                 });
 
-            modelBuilder.Entity("DomraSinForms.Domain.Models.User", b =>
+            modelBuilder.Entity("FormUser", b =>
                 {
                     b.HasOne("DomraSinForms.Domain.Models.Form", null)
-                        .WithMany("Redactors")
-                        .HasForeignKey("FormId");
+                        .WithMany()
+                        .HasForeignKey("AllowedToRedactFormsId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("DomraSinForms.Domain.Models.User", null)
+                        .WithMany()
+                        .HasForeignKey("RedactorsId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
                 });
 
             modelBuilder.Entity("DomraSinForms.Domain.Models.Form", b =>
                 {
                     b.Navigation("Items");
-
-                    b.Navigation("Redactors");
                 });
 
             modelBuilder.Entity("DomraSinForms.Domain.Models.FormAnswers", b =>
                 {
                     b.Navigation("Answers");
+                });
+
+            modelBuilder.Entity("DomraSinForms.Domain.Models.User", b =>
+                {
+                    b.Navigation("UserForms");
                 });
 
             modelBuilder.Entity("DomraSinForms.Domain.Models.FormItems.Question", b =>

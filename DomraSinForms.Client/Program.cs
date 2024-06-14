@@ -1,5 +1,6 @@
 using DomraSinForms.Client.Components;
 using DomraSinForms.Application.Extensions;
+using DomraSinForms.Client.Components.Pages.Auth;
 using DomraSinForms.Persistence.Extensions;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -16,8 +17,10 @@ builder.Services.AddRazorComponents()
 builder.Services
     .AddCascadingAuthenticationState()
     .AddAuthenticationCore()
-    .AddPersistenceLayer(@"Server=localhost,1433;Password=<YourStrong@Passw0rd>;User Id=sa;Database=DSF;MultipleActiveResultSets=true;Encrypt=False;TrustServerCertificate=False;")
-    .AddApplicationLayer();
+    .AddPersistenceLayer($"Host=localhost; Database={Environment.GetEnvironmentVariable("POSTGRES_DB")}; Username={Environment.GetEnvironmentVariable("POSTGRES_USER")}; Password={Environment.GetEnvironmentVariable("POSTGRES_PASSWORD")}")
+    .AddApplicationLayer()
+    
+    .AddTransient<RegisterViewModel>();
 
 var app = builder.Build();
 

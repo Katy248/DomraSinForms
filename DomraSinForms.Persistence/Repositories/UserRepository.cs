@@ -1,11 +1,9 @@
 using DomraSinForms.Domain.Interfaces.Repositories;
 using DomraSinForms.Domain.Models;
-using DomraSinForms.Persistence;
 using Microsoft.EntityFrameworkCore;
-
 using Microsoft.Extensions.Logging;
 
-namespace DomraSin.Persistance;
+namespace DomraSinForms.Persistence.Repositories;
 
 public class UserRepository : RepositoryBase<User, UserId>, IUsersRepository
 {
@@ -14,6 +12,7 @@ public class UserRepository : RepositoryBase<User, UserId>, IUsersRepository
     }
     public Task<User?> GetByEmail(string email, CancellationToken cancellationToken)
     {
+        Logger.LogDebug($"Start searching for user with email \"{email}\"");
         return Context
             .Users
             .FirstOrDefaultAsync(e => e.Email == email, cancellationToken);

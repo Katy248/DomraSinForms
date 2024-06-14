@@ -34,6 +34,9 @@ p {
 
 .btn.btn-primary {
     @apply bg-blue-500 text-white hover:bg-blue-600 duration-700;
+    & * {
+        @apply text-white;
+    }
 }
 
 .btn.btn-secondary {

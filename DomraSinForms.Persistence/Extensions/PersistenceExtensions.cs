@@ -1,5 +1,5 @@
-﻿using DomraSin.Persistance;
-using DomraSinForms.Domain.Interfaces.Repositories;
+﻿using DomraSinForms.Domain.Interfaces.Repositories;
+using DomraSinForms.Persistence.Repositories;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
 
@@ -11,7 +11,7 @@ public static class PersistenceExtensions
             .AddScoped<IUsersRepository, UserRepository>()
             .AddDbContext<ApplicationDbContext>(options =>
             {
-                options.UseSqlServer(connectionString,
+                options.UseNpgsql(connectionString: connectionString,
                     dbOptions =>
                     {
                         dbOptions.MigrationsAssembly(typeof(PersistenceExtensions).Assembly.FullName);
