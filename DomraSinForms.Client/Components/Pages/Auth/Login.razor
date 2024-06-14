@@ -1,25 +1,30 @@
 @page "/auth/login"
+@using Microsoft.EntityFrameworkCore.Metadata.Internal
+
 <h1 class="display-2 text-center">Login</h1>
 <Clamp>
 
     <div class="card card-body">
-        <form>
+        <EditForm Model="ViewModel.Data" OnValidSubmit="OnFormSubmit">
+            <DataAnnotationsValidator/>
             <div class="mb-3">
-
-                <input class="form-control" type="email" placeholder="example@@mail.com" autocomplete="username">
+                <InputText @bind-Value="ViewModel.Data.Email" class="form-control" type="email" placeholder="example@mail.com" autocomplete="username"/>
+                <ValidationMessage For="() => ViewModel.Data.Email" class="form-text text-danger"/>
             </div>
             <div class="mb-3">
 
-                <input class="form-control"
-                       type="password"
-                       placeholder="Password"
-                       autocomplete="current-password"
-                       minlength="5"
-                       maxlength="20"
-                       pattern="[A-Za-z0-9#!?/.,;:@@#$%^&*()-=_+]{8,}">
+                <InputText @bind-Value="ViewModel.Data.Password"
+                           class="form-control"
+                           type="password"
+                           placeholder="Password"
+                           autocomplete="current-password"
+                           minlength="5"
+                           maxlength="20"
+                           pattern="[A-Za-z0-9#!?/.,;:#$%^&*()-=_+]{8,}"/>
+                <ValidationMessage For="() => ViewModel.Data.Password" class="form-text text-danger"/>
             </div>
             <button class="btn btn-primary btn-lg form-control" type="submit">Login </button>
-        </form>
+        </EditForm>
     </div>
     <div class="card card-body mt-5">
         <p class="text-center">
@@ -28,7 +33,23 @@
         </p>
     </div>
 </Clamp>
+<div>
+    @* @(AuthProvider.GetAuthenticationStateAsync().GetAwaiter().GetResult()) *@
+</div>
 
 @code {
+    [Inject] LoginViewModel ViewModel { get; set; }
+    [Inject] ILogger<Login> Logger { get; set; }
+    [Inject] AppAuthinticationStateProvider AuthProvider { get; set; }
+    [Inject] NavigationManager  NavManager { get; set; }
+
+    private async Task OnFormSubmit(EditContext obj)
+    {
+        Logger.LogInformation($"Email: {ViewModel.Data.Email}; Password: {ViewModel.Data.Password}");
+        if (await AuthProvider.Login(ViewModel.Data.Email, ViewModel.Data.Password))
+        {
+            NavManager.NavigateTo("/");
+        }
+    }
 
 }

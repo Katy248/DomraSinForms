@@ -84,11 +84,18 @@
     [Inject] public RegisterViewModel ViewModel { get; set; }
     [Inject] public ISender Sender { get; set; }
     [Inject] public ILogger<Register> Logger { get; set; }
+    [Inject] public NavigationManager NavManager { get; set; }
 
 
-    void OnFormSubmit(EditContext context)
+    async Task OnFormSubmit(EditContext context)
     {
-        var resp = Sender.Send(ViewModel.Request);
+        var resp = await Sender.Send(ViewModel.Request);
+
+        if (resp is not null)
+        {
+            Logger.LogInformation($"Register responce: {resp.UserData.Id}: {resp.UserData.Email}");
+            NavManager.NavigateTo("/auth/register-success");
+        }
     }
 
 

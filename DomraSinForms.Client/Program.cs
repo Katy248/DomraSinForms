@@ -1,7 +1,9 @@
 using DomraSinForms.Client.Components;
 using DomraSinForms.Application.Extensions;
+using DomraSinForms.Client;
 using DomraSinForms.Client.Components.Pages.Auth;
 using DomraSinForms.Persistence.Extensions;
+using Microsoft.AspNetCore.Components.Authorization;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -10,17 +12,20 @@ builder.Logging.AddConsole();
 
 // AdDomraSind services to the container.
 builder.Services.AddRazorComponents()
-    .AddInteractiveServerComponents();
-// .AddInteractiveWebAssemblyComponents()
+    .AddInteractiveServerComponents()
+    .AddInteractiveWebAssemblyComponents();
 
 
 builder.Services
     .AddCascadingAuthenticationState()
     .AddAuthenticationCore()
-    .AddPersistenceLayer($"Host=localhost; Database={Environment.GetEnvironmentVariable("POSTGRES_DB")}; Username={Environment.GetEnvironmentVariable("POSTGRES_USER")}; Password={Environment.GetEnvironmentVariable("POSTGRES_PASSWORD")}")
+    .AddPersistenceLayer(builder.Configuration.GetConnectionString("Postgres") ?? throw new Exception("Fuck it up"))
     .AddApplicationLayer()
-    
-    .AddTransient<RegisterViewModel>();
+    .AddScoped<AuthenticationStateProvider, AppAuthinticationStateProvider>()
+    .AddScoped<AppAuthinticationStateProvider>()
+    .AddTransient<RegisterViewModel>()
+    .AddTransient<LoginViewModel>()
+    ;
 
 var app = builder.Build();
 
@@ -42,8 +47,8 @@ app.UseStaticFiles();
 app.UseAntiforgery();
 
 app.MapRazorComponents<App>()
-    .AddInteractiveServerRenderMode();
-    // .AddInteractiveWebAssemblyRenderMode()
+    .AddInteractiveServerRenderMode()
+    .AddInteractiveWebAssemblyRenderMode();
 
 
 app.Run();
