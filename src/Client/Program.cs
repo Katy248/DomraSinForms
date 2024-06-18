@@ -3,6 +3,7 @@ using DomraSinForms.Application.Extensions;
 using DomraSinForms.Client;
 using DomraSinForms.Client.Components.Pages.Auth;
 using DomraSinForms.Persistence.Extensions;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Components.Authorization;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -18,7 +19,9 @@ builder.Services.AddRazorComponents()
 
 builder.Services
     .AddCascadingAuthenticationState()
-    .AddAuthenticationCore()
+    .AddAuthenticationCore().AddAuthentication(JwtBearerDefaults.AuthenticationScheme).AddJwtBearer();
+    
+    builder.Services
     .AddPersistenceLayer(builder.Configuration.GetConnectionString("Postgres") ?? throw new Exception("Fuck it up"))
     .AddApplicationLayer()
     .AddScoped<AuthenticationStateProvider, AppAuthenticationStateProvider>()
