@@ -1,0 +1,32 @@
+<AuthorizeView>
+    <NotAuthorized>
+        <ul class="navbar-nav mb-2 mb-lg-0 gap-2">
+            <li class="nav-item">
+                <NavLink class="btn btn-primary form-control" href="/auth/login" ActiveClass="btn-outline-primary">
+                    Login
+                    <i class="fas fa-right-to-bracket ms-2"></i>
+                </NavLink>
+            </li>
+            <li class="nav-item">
+                <NavLink class="btn btn-info form-control" href="/auth/register" ActiveClass="btn-outline-info">
+                    Register
+                    <i class="fas fa-user-plus ms-2"></i>
+                </NavLink>
+            </li>
+        </ul>
+    </NotAuthorized>
+    <Authorized>
+        <ul class="navbar-nav mb-2 mb-lg-0 gap-2">
+            <li class="nav-item">
+                <NavLink class="nav-link link-primary" href="/account" ActiveClass="btn-outline-info">
+                    Profile
+                    <i class="fas fa-user ms-2"></i>
+                </NavLink>
+            </li>
+        </ul>
+    </Authorized>
+</AuthorizeView>
+
+@code {
+
+}

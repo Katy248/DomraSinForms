@@ -1,0 +1,102 @@
+@page "/auth/register"
+@using System.ComponentModel.DataAnnotations
+@using DomraSinForms.Application.Features.Users.Register
+@using MediatR
+
+<h1 class="display-2 text-center">Register</h1>
+<Clamp>
+
+    <div class="card">
+        <div class="card-body">
+
+            <EditForm Model="ViewModel.Data" OnValidSubmit="OnFormSubmit">
+                <DataAnnotationsValidator/>
+                @* <ValidationSummary/> *@
+
+                <div class="mb-3">
+                    <label class="form-label">Your unique username:</label>
+                    <div class="input-group">
+                        <div class="input-group-text">
+                            <i class="fas fa-user"></i>
+                        </div>
+                        <InputText id="username" class="form-control" @bind-Value="ViewModel.Data.Username"/>
+                    </div>
+                    <div class="form-text text-danger">
+                        <ValidationMessage For="() => ViewModel.Data.Username"/>
+                    </div>
+
+                </div>
+
+                <div class="mb-3">
+                    <label for="" class="form-label">Email address:</label>
+                    <div class="input-group">
+                        <div class="input-group-text">
+                            <i class="fas fa-envelope"></i>
+                        </div>
+                        <InputText class="form-control" @bind-Value="ViewModel.Data.Email" type="email" autocomplete="username"/>
+                    </div>
+                    <div class="form-text text-danger">
+                        <ValidationMessage For="() => ViewModel.Data.Email"/>
+                    </div>
+                </div>
+
+                <div class="mb-3">
+                    <label for="" class="form-label">New password:</label>
+                    <div class="input-group">
+                        <div class="input-group-text">
+                            <i class="fas fa-key"></i>
+                        </div>
+                        <InputText class="form-control" @bind-Value="ViewModel.Data.Password" type="password" placeholder="Password" autocomplete="new-password" minlength="5" maxlength="20"/>
+                        <InputText class="form-control" @bind-Value="ViewModel.Data.PasswordConfirmation" type="password" placeholder="Repeat password" autocomplete="new-password" minlength="5" maxlength="20"/>
+                    </div>
+                    <div class="form-text text-danger">
+                        <ValidationMessage For="() => ViewModel.Data.Password"/>
+                        <ValidationMessage For="() => ViewModel.Data.PasswordConfirmation"/>
+                    </div>
+                    @* <span class="form-text text-body-tertiary">Must contains only latin characters, numbers and symbols: !@@#$%^&*()_+,./?;':"[]{}=-</span> *@
+                </div>
+
+                <div class="field">
+                    <button class="btn btn-primary form-control btn-lg" type="submit">
+                        Register
+                        <i class="fa-solid fa-user-plus ms-2"></i>
+                    </button>
+                </div>
+            </EditForm>
+        </div>
+    </div>
+
+
+    <div class="card card-body mt-5">
+        <p class="text-center">
+            Already have an account?
+            <NavLink class="link link-primary" href="auth/login">
+                Login
+                <span class="fa-solid fa-right-to-bracket ms-2"></span>
+            </NavLink>
+        </p>
+    </div>
+
+</Clamp>
+
+@code {
+
+    [Inject] public RegisterViewModel ViewModel { get; set; }
+    [Inject] public ISender Sender { get; set; }
+    [Inject] public ILogger<Register> Logger { get; set; }
+    [Inject] public NavigationManager NavManager { get; set; }
+
+
+    async Task OnFormSubmit(EditContext context)
+    {
+        var resp = await Sender.Send(ViewModel.Request);
+
+        if (resp is not null)
+        {
+            Logger.LogInformation($"Register responce: {resp.UserData.Id}: {resp.UserData.Email}");
+            NavManager.NavigateTo("/auth/register-success");
+        }
+    }
+
+
+}
