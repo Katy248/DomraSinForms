@@ -32,16 +32,18 @@
             <NavLink class="link link-primary" href="auth/register">Register</NavLink>
         </p>
     </div>
+    <div class="mt-5"></div>
+    <Card>
+
+        <ExternalAuthProviders/>
+    </Card>
 </Clamp>
-<div>
-    @* @(AuthProvider.GetAuthenticationStateAsync().GetAwaiter().GetResult()) *@
-</div>
 
 @code {
     [Inject] LoginViewModel ViewModel { get; set; }
     [Inject] ILogger<Login> Logger { get; set; }
-    [Inject] AppAuthinticationStateProvider AuthProvider { get; set; }
-    [Inject] NavigationManager  NavManager { get; set; }
+    [Inject] AppAuthenticationStateProvider AuthProvider { get; set; }
+    [Inject] NavigationManager NavManager { get; set; }
 
     private async Task OnFormSubmit(EditContext obj)
     {

@@ -21,8 +21,8 @@ builder.Services
     .AddAuthenticationCore()
     .AddPersistenceLayer(builder.Configuration.GetConnectionString("Postgres") ?? throw new Exception("Fuck it up"))
     .AddApplicationLayer()
-    .AddScoped<AuthenticationStateProvider, AppAuthinticationStateProvider>()
-    .AddScoped<AppAuthinticationStateProvider>()
+    .AddScoped<AuthenticationStateProvider, AppAuthenticationStateProvider>()
+    .AddScoped<AppAuthenticationStateProvider>()
     .AddTransient<RegisterViewModel>()
     .AddTransient<LoginViewModel>()
     ;
