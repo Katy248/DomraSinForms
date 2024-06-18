@@ -15,9 +15,13 @@ watch-css:
 #= Migrations targets ==========================================================
 
 install-ef-tools:
-	dotnet tool install --global dotnet-ef || exit 0
-	dotnet tool update --global dotnet-ef
-	dotnet ef
+	@echo "Installing tools"
+	@dotnet tool install --global dotnet-ef || exit 0
+	@echo "Installed"
+	@echo "Updating tools"
+	@dotnet tool update --global dotnet-ef
+	@echo "Updated"
+	@dotnet ef --version
 
 add-migration: NAME ?=
 add-migration:
