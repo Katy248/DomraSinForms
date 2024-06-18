@@ -3,15 +3,15 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.5.33424.131
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DomraSinForms.ChartsWrapper", "DomraSinForms.ChartsWrapper\DomraSinForms.ChartsWrapper.csproj", "{6530CF9E-096C-4EEB-8F92-7B78246FFF11}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ChartsWrapper", "src\ChartsWrapper\DomraSinForms.ChartsWrapper.csproj", "{6530CF9E-096C-4EEB-8F92-7B78246FFF11}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DomraSinForms.Domain", "DomraSinForms.Domain\DomraSinForms.Domain.csproj", "{E28912AC-0324-4FCC-9C0B-401D4472794F}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Domain", "src\Domain\DomraSinForms.Domain.csproj", "{E28912AC-0324-4FCC-9C0B-401D4472794F}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DomraSinForms.Persistence", "DomraSinForms.Persistence\DomraSinForms.Persistence.csproj", "{853850AD-97F0-4591-9991-9D4790B59516}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Persistence", "src\Persistence\DomraSinForms.Persistence.csproj", "{853850AD-97F0-4591-9991-9D4790B59516}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DomraSinForms.Application", "DomraSinForms.Application\DomraSinForms.Application.csproj", "{CCEA8E0D-8617-4ADA-AB2F-5DE1D3C39C7D}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Application", "src\Application\DomraSinForms.Application.csproj", "{CCEA8E0D-8617-4ADA-AB2F-5DE1D3C39C7D}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DomraSinForms.Client", "DomraSinForms.Client\DomraSinForms.Client.csproj", "{179290F1-81A2-43F6-936E-451EF7B8C441}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Client", "src\Client\DomraSinForms.Client.csproj", "{179290F1-81A2-43F6-936E-451EF7B8C441}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
