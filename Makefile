@@ -57,3 +57,11 @@ start-sql:
 stop-sql:
 	@echo "This target will use sudo"
 	@sudo docker-compose down
+
+#= Utils targets ===============================================================
+
+env-file: .env
+	@echo ".env file created"
+
+.env: example.env
+	@cp $< $@
