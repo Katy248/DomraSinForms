@@ -1,6 +1,6 @@
 # DomraSinForms
 
-## Software Design
+## System Design
 
 ```mermaid
 ---
@@ -11,9 +11,12 @@ client["DomraSinForms.Client"]
 app["DomraSinForms.Application"]
 db["DomraSinForms.Persistence"]
 domain["DomraSinForms.Domain"]
+server["DomraSinForms.Server"]
 
+
+server --> app
+server --> db
 client --> app
-client --> db
 app --> domain
 app --> db
 db --> domain
