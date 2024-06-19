@@ -63,5 +63,5 @@ stop-sql:
 env-file: .env
 	@echo ".env file created"
 
-.env: example.env
+.env: examples/example.env
 	@cp $< $@
