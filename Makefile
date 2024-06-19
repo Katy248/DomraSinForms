@@ -1,4 +1,9 @@
-.include: .env
+#=                        ======================================================
+#= DomraSinForms Makefile ======================================================
+#==== by Katy248 ===============================================================
+
+include .env
+export
 
 ServerProject = DomraSinForms.Server
 ClientProject = DomraSinForms.Client
