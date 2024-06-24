@@ -1,4 +1,5 @@
 ﻿using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations;
 using System.Configuration;
 using System.Text.RegularExpressions;
 using DomraSinForms.Domain.Models.Answers;
@@ -6,7 +7,7 @@ using DomraSinForms.Domain.Models.Questions;
 
 namespace Forms.Mvc.ViewModels.Answers.AnswersModels;
 
-public class PhoneNumberAnswer : AnswerViewModel
+public partial class PhoneNumberAnswer : AnswerViewModel
 {
     public PhoneNumberAnswer() : base()
     {
@@ -16,7 +17,7 @@ public class PhoneNumberAnswer : AnswerViewModel
     {
     }
     private string? _value;
-    [RegexStringValidator("[\\+\\(\\)\\-\\d]+")]
+    [RegularExpression("[\\+\\(\\)\\-\\d]+")]
     [Required(AllowEmptyStrings = false)]
     public override string Value
     {
@@ -25,8 +26,11 @@ public class PhoneNumberAnswer : AnswerViewModel
         {
             if (string.IsNullOrWhiteSpace(value))
                 return;
-            if (Regex.IsMatch(value, @"[\+\(\)\-\d]+"))
+            if (PhoneNumberRegex().IsMatch(value))
                 _value = value;
         }
     }
+
+    [GeneratedRegex(@"[\+\(\)\-\d]+")]
+    private static partial Regex PhoneNumberRegex();
 }
