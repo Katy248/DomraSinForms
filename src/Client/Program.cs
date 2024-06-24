@@ -20,14 +20,15 @@ builder.Services.AddRazorComponents()
 builder.Services
     .AddCascadingAuthenticationState()
     .AddAuthenticationCore().AddAuthentication(JwtBearerDefaults.AuthenticationScheme).AddJwtBearer();
-    
-    builder.Services
+
+builder.Services
     .AddPersistenceLayer(builder.Configuration.GetConnectionString("Postgres") ?? throw new Exception("Fuck it up"))
     .AddApplicationLayer()
     .AddScoped<AuthenticationStateProvider, AppAuthenticationStateProvider>()
     .AddScoped<AppAuthenticationStateProvider>()
     .AddTransient<RegisterViewModel>()
     .AddTransient<LoginViewModel>()
+    .AddHttpContextAccessor()
     ;
 
 var app = builder.Build();

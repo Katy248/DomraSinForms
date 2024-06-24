@@ -1,6 +1,7 @@
 using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
 using MediatR;
+using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Components.Authorization;
 using Microsoft.AspNetCore.Components.Server.ProtectedBrowserStorage;
@@ -13,23 +14,26 @@ namespace DomraSinForms.Client;
 public class AppAuthenticationStateProvider : AuthenticationStateProvider
 {
     private const string AuthTokenKey = "DOMRA_SIN_FORMS_AUTH_TOKEN";
-    private static readonly AuthenticationState NotAuthorized = new(new(new ClaimsIdentity()));
+    private static readonly ClaimsPrincipal Anonymous = new(new ClaimsIdentity());
 
     private readonly ProtectedLocalStorage _localStorage;
     private readonly ISender _sender;
     private readonly ILogger<AppAuthenticationStateProvider> _logger;
-
+    private readonly IHttpContextAccessor httpContextAccessor;
 
     public AppAuthenticationStateProvider(ProtectedLocalStorage localStorage, ISender sender,
-        ILogger<AppAuthenticationStateProvider> logger)
+        ILogger<AppAuthenticationStateProvider> logger, IHttpContextAccessor httpContextAccessor)
     {
         _localStorage = localStorage;
         _sender = sender;
         _logger = logger;
+        this.httpContextAccessor = httpContextAccessor;
     }
 
     public override async Task<AuthenticationState> GetAuthenticationStateAsync()
     {
+        return new(httpContextAccessor.HttpContext?.User ?? Anonymous);
+
         string? token = null;
         try
         {
@@ -38,11 +42,11 @@ public class AppAuthenticationStateProvider : AuthenticationStateProvider
         }
         catch
         {
-            return NotAuthorized;
+            return new(Anonymous);
         }
 
         if (token is null)
-            return NotAuthorized;
+            return new(Anonymous);
 
         JwtSecurityTokenHandler handler = new();
         var jwt = handler.ReadJwtToken(token);
@@ -51,19 +55,31 @@ public class AppAuthenticationStateProvider : AuthenticationStateProvider
         return state;
     }
 
+    public ClaimsPrincipal GetClaims(string token)
+    {
+        JwtSecurityTokenHandler handler = new();
+        var jwt = handler.ReadJwtToken(token);
+        var claims = new ClaimsPrincipal(new ClaimsIdentity(jwt.Claims, JwtBearerDefaults.AuthenticationScheme));
+        return claims;
+    }
+
     /// <summary>
     /// 
     /// </summary>
     /// <returns>True if login is success, otherwise false</returns>
     public async Task<bool> Login(string email, string password)
     {
-        var responce = await _sender.Send(new DomraSinForms.Application.Features.Users.Login.Request(email, password));
-        if (responce is not null)
+        var response = await _sender.Send(new DomraSinForms.Application.Features.Users.Login.Request(email, password));
+        if (response is not null)
         {
-            await _localStorage.SetAsync(AuthTokenKey, responce.JwtToken);
+            await _localStorage.SetAsync(AuthTokenKey, response.JwtToken);
+            await httpContextAccessor.HttpContext.SignInAsync(
+                GetClaims(response.JwtToken)
+            );
             NotifyAuthenticationStateChanged(GetAuthenticationStateAsync());
             return true;
         }
+
 
         return false;
     }
