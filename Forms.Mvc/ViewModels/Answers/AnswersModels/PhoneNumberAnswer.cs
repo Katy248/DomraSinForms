@@ -1,6 +1,4 @@
 ﻿using System.ComponentModel.DataAnnotations;
-using System.ComponentModel.DataAnnotations;
-using System.Configuration;
 using System.Text.RegularExpressions;
 using DomraSinForms.Domain.Models.Answers;
 using DomraSinForms.Domain.Models.Questions;
@@ -21,7 +19,7 @@ public partial class PhoneNumberAnswer : AnswerViewModel
     [Required(AllowEmptyStrings = false)]
     public override string Value
     {
-        get => _value;
+        get => _value ?? "";
         set
         {
             if (string.IsNullOrWhiteSpace(value))
