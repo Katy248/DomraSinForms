@@ -9,8 +9,7 @@ ServerProject = DomraSinForms.Server
 ClientProject = DomraSinForms.Client
 ClientProjectFile = ./src/Client/$(ClientProject).csproj
 
-help:
-	echo "Fuck"
+default: help
 
 #= Build Targets ===============================================================
 
@@ -70,3 +69,24 @@ env-file: .env
 
 .env: examples/example.env
 	@cp $< $@
+
+#= Help targets ================================================================
+
+HelpScript := ./scripts/make
+
+help:
+	@sh ./scripts/make/help.sh
+
+help-md:
+	@MD=1 sh ./scripts/make/help.sh
+
+#= Stupid targets ====
+
+notify:
+	notify-send \
+		"Cool test" \
+		"Cool test notification" \
+		--action=default="Default text" \
+		--action=second="Another action" \
+		--action=third="Third action" \
+		--transient
