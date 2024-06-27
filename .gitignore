@@ -362,3 +362,5 @@ MigrationBackup/
 # Fody - auto-generated XML schema
 FodyWeavers.xsd
 /Forms.Mvc/Scripts/database.drawio
+Forms.Mvc/wwwroot/js/
+
