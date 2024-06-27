@@ -21,25 +21,29 @@
                 {
                     <span class="text-success"><i class="bi-check2"></i></span>
                 }
-            </div> 
-            
+            </div>
         </div>
         <div class="form-group mb-5">
             <div class="form-label text-muted">@Localizer["Nick"]:</div>
             <div class="display-6">@(Model.NickName ?? Localizer["Not specified"]?.Value)</div>
         </div>
         <div class="form-group d-grid">
-            <button class="btn btn-success object-fit-container" data-bs-toggle="modal" data-bs-target="#editProfileModal">@Localizer["Change user data"]</button>
+            <button class="btn btn-success object-fit-container" data-bs-toggle="modal"
+                data-bs-target="#editProfileModal">@Localizer["Change user data"]</button>
         </div>
     </div>
 </div>
-
 @(
-await Html.PartialAsync(
-        "_EditUserModalPartial", 
-        new UpdateUserCommand{ Id= Model.Id, Email = Model.Email, NickName = Model.NickName, Username = Model.UserName},
-        new ViewDataDictionary(ViewData)
-        {
-            {"ModalId", "editProfileModal"}
-        })
+await Html.PartialAsync("_EditUserModalPartial",
+model: new UpdateUserCommand
+{
+    Id = Model.Id,
+    Email = Model?.Email ?? "",
+    NickName = Model?.NickName ?? "",
+    Username = Model?.UserName ?? ""
+},
+viewData: new ViewDataDictionary(ViewData)
+{
+new KeyValuePair<string, object?>("ModalId", "editProfileModal")
+})
 )

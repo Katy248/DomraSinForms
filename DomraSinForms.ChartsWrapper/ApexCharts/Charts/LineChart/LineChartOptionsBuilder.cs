@@ -12,7 +12,7 @@ public class LineChartOptionsBuilder : ChartOptionsBuilder, ILineChartOptionsBui
     {
         _options.Stroke.Curve = lineStroke switch
         {
-            LineStroke.StepLine => "stepline",
+            LineStroke.StepLine => "stepLine".ToLower(),
             LineStroke.Straight => "straight",
             LineStroke.Smooth => "smooth",
             _ => "smooth"

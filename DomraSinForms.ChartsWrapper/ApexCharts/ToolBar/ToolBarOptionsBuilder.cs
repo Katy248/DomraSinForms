@@ -12,25 +12,25 @@ public class ToolBarOptionsBuilder : IToolBarOptionsBuilder
         switch (tool)
         {
             case ToolBarTool.Download:
-                _options.Tools.Download = (object)customClass ?? true;
+                _options.Tools.Download = (object?)customClass ?? true;
                 break;
             case ToolBarTool.Selection:
-                _options.Tools.Selection = (object)customClass ?? true;
+                _options.Tools.Selection = (object?)customClass ?? true;
                 break;
             case ToolBarTool.Zoom:
-                _options.Tools.Zoom = (object)customClass ?? true;
+                _options.Tools.Zoom = (object?)customClass ?? true;
                 break;
             case ToolBarTool.ZoomIn:
-                _options.Tools.ZoomIn = (object)customClass ?? true;
+                _options.Tools.ZoomIn = (object?)customClass ?? true;
                 break;
             case ToolBarTool.ZoomOut:
-                _options.Tools.ZoomOut = (object)customClass ?? true;
+                _options.Tools.ZoomOut = (object?)customClass ?? true;
                 break;
             case ToolBarTool.Pan:
-                _options.Tools.Pan = (object)customClass ?? true;
+                _options.Tools.Pan = (object?)customClass ?? true;
                 break;
             case ToolBarTool.ResetZoom:
-                _options.Tools.Reset = (object)customClass ?? true;
+                _options.Tools.Reset = (object?)customClass ?? true;
                 break;
             default:
                 break;
