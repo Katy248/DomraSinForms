@@ -2,7 +2,7 @@ ServerProject := "DomraSinForms.Server"
 ClientProject := "DomraSinForms.Client"
 ClientProjectFile := "./src/Client" / ClientProject + ".csproj"
 
-export DOTNET_WATCH_RESTART_ON_RUDE_EDIT := true
+export DOTNET_WATCH_RESTART_ON_RUDE_EDIT := "true"
 
 [private]
 default: help
@@ -19,7 +19,7 @@ publish:
 
 [group('build')]
 watch:
-    dotnet watch --project {{ ClientProjectFile }} --non-interactive
+    dotnet watch --project {{ ClientProjectFile }}
 
 [group('build')]
 watch-css:

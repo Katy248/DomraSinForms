@@ -1,91 +1,96 @@
 @page "/forms"
-@attribute [Authorize]
-<h1 class="display-1 text-center">Your forms</h1>
-
-<div class="row my-5">
-    <div class="col-4">
-        <button class="btn btn-primary form-control">
-            <i class="fas fa-plus"></i>
-            Add new form
-        </button>
-
-    </div>
-    <div class="col-4">
-        <form>
-            <div class="input-group">
-                <input type="text" class="form-control" placeholder="Search...">
-                <button class="btn btn-outline-secondary">
-                    <i class="fas fa-search"></i>
+<AuthorizeView>
+    <Authorizing>
+        <h1 class="display-1">Authorizing...</h1>
+        <p>Please wait</p>
+    </Authorizing>
+    <NotAuthorized>
+        <DomraSinForms.Client.Components.Errors.NotAuthorized />
+    </NotAuthorized>
+    <Authorized>
+        <h1 class="display-1 text-center">Your forms</h1>
+        <div class="row my-5">
+            <div class="col-4">
+                <button class="btn btn-primary form-control">
+                    <i class="fas fa-plus"></i>
+                    Add new form
                 </button>
             </div>
-        </form>
-    </div>
-    <div class="col-4">
-        <form>
-            <div class="input-group">
-                <div class="input-group-text">
-                    Order
-                </div>
-                <select name="" id="" class="form-control">
-                    <option value="">By name</option>
-                    <option value="">By creation date</option>
-                    <option value="">By last edit date</option>
-                </select>
-                <button class="btn btn-outline-secondary">
-                    <i class="fas fa-filter"></i>
-                </button>
+            <div class="col-4">
+                <form>
+                    <div class="input-group">
+                        <input type="text" class="form-control" placeholder="Search...">
+                        <button class="btn btn-outline-secondary">
+                            <i class="fas fa-search"></i>
+                        </button>
+                    </div>
+                </form>
             </div>
-        </form>
-    </div>
-
-</div>
-
-<div class="d-flex justify-content-center my-5">
-    <div class="btn-group">
-        @foreach (var i in Enumerable.Range(120, 5))
-        {
-            <button class="btn @(i == 3 ? "btn-secondary" : "btn-outline-secondary")">
-                @(i + 1)
-            </button>
-        }
-    </div>
-</div>
-
-<div class="row">
-    @for (int i = 0; i < 10; i++)
-    {
-        <div class="col-12 col-md-6 col-xl-4 g-3">
-            <div class="card">
-                <div class="card-body">
-                    <div class="mb-3">
-                        <h5 class="card-title">
-                            Some title
-                        </h5>
-                        <div class="card-subtitle text-body-secondary">
-                            Last edit yesterday
-                        </div>
+            <div class="col-4">
+                <form>
+                    <div class="input-group">
+                        <select name="" id="" class="form-control">
+                            <option value="">By name</option>
+                            <option value="">By creation date</option>
+                            <option value="">By last edit date</option>
+                        </select>
+                        <button class="btn btn-outline-secondary">
+                            <i class="fas fa-filter"></i>
+                        </button>
                     </div>
-                    <div class="card-text">
-                        Lorem ipsum dolor sit amet, consectetur adipisicing elit. Accusamus accusantium beatae blanditiis consequatur, delectus, eligendi fugiat illum impedit laudantium quia, rem repellendus reprehenderit soluta tempore tenetur ut velit vitae voluptatibus?
-                    </div>
-                </div>
-                <div class="card-footer">
-                    <div class="d-flex flex-row gap-2 justify-content-center flex-grow-1">
-                        <NavLink class="btn btn-outline-secondary flex-grow-1" href=@($"/forms/edit/{i}")>
-                            <i class="fas fa-edit"></i>
-                            Edit
-                        </NavLink>
-                        <a class="btn btn-outline-info flex-grow">
-                            <i class="fas fa-copy"></i>
-                            Copy link
-                        </a>
-                        <a class="btn btn-outline-danger flex-grow-1">
-                            <i class="fas fa-trash"></i>
-                            Delete
-                        </a>
-                    </div>
-                </div>
+                </form>
             </div>
         </div>
-    }
-</div>
+        <div class="d-flex justify-content-center my-5">
+            <div class="btn-group">
+                @foreach (var i in Enumerable.Range(120, 5))
+                {
+                    <button class="btn @(i == 3 ? "btn-secondary" : "btn-outline-secondary")">
+                        @(i + 1)
+                    </button>
+                }
+            </div>
+        </div>
+        <div class="row">
+            @for (int i = 0; i < 10; i++)
+            {
+                <div class="col-12 col-md-6 col-xl-4 g-3">
+                    <div class="card">
+                        <div class="card-body">
+                            <div class="mb-3">
+                                <h5 class="card-title">
+                                    Some title
+                                </h5>
+                                <div class="card-subtitle text-body-secondary">
+                                    Last edit yesterday
+                                </div>
+                            </div>
+                            <div class="card-text">
+                                Lorem ipsum dolor sit amet, consectetur adipisicing elit. Accusamus accusantium beatae
+                                blanditiis consequatur, delectus, eligendi fugiat illum impedit laudantium quia, rem
+                                repellendus
+                                reprehenderit soluta tempore tenetur ut velit vitae voluptatibus?
+                            </div>
+                        </div>
+                        <div class="card-footer">
+                            <div class="d-flex flex-row gap-2 justify-content-center flex-grow-1">
+                                <NavLink class="btn btn-outline-secondary flex-grow-1" href=@($"/forms/edit/{i}")>
+                                    <i class="fas fa-edit"></i>
+                                    Edit
+                                </NavLink>
+                                <a class="btn btn-outline-info flex-grow">
+                                    <i class="fas fa-copy"></i>
+                                    Copy link
+                                </a>
+                                <a class="btn btn-outline-danger flex-grow-1">
+                                    <i class="fas fa-trash"></i>
+                                    Delete
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            }
+        </div>
+    </Authorized>
+</AuthorizeView>
