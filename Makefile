@@ -9,7 +9,8 @@ ServerProject = DomraSinForms.Server
 ClientProject = DomraSinForms.Client
 ClientProjectFile = ./src/Client/$(ClientProject).csproj
 
-default: help
+
+all default: help
 
 #= Build Targets ===============================================================
 
@@ -90,3 +91,8 @@ notify:
 		--action=second="Another action" \
 		--action=third="Third action" \
 		--transient
+
+.PHONY: help help-md \
+	publish watch watch-css \
+	install-ef-tools add-migration update-database \
+	start-sql stop-sql env-file
