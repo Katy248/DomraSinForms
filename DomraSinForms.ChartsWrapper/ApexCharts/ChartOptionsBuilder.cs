@@ -1,5 +1,4 @@
-﻿using DomraSinForms.ChartsWrapper.ApexCharts;
-using DomraSinForms.ChartsWrapper.ApexCharts.ToolBar;
+﻿using DomraSinForms.ChartsWrapper.ApexCharts.ToolBar;
 
 namespace DomraSinForms.ChartsWrapper.ApexCharts;
 public class ChartOptionsBuilder : IChartOptionsBuilder

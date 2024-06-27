@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace DomraSinForms.ChartsWrapper.ApexCharts.ToolBar;
+﻿namespace DomraSinForms.ChartsWrapper.ApexCharts.ToolBar;
 public class ToolBarOptionsBuilder : IToolBarOptionsBuilder
 {
     private ToolBarOptions _options = new();
