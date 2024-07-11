@@ -1,4 +1,5 @@
 ServerProject := "DomraSinForms.Server"
+ServerProjectFile := "./src/Server" / "DomraSinForms.Server" + ".csproj"
 ClientProject := "DomraSinForms.Client"
 ClientProjectFile := "./src/Client" / ClientProject + ".csproj"
 
@@ -22,9 +23,15 @@ watch:
     dotnet watch --project {{ ClientProjectFile }}
 
 [group('build')]
+[doc('Watch tailwindcss. Deprecated')]
 watch-css:
     cd ./src/Client/ && \
     	npx tailwindcss --watch --minify -i style.css -o ./wwwroot/app.css
+
+[group('build')]
+[doc('Run server project')]
+run-server:
+    dotnet run --project {{ ServerProjectFile }}
 
 #= Migrations targets ==========================================================
 
@@ -77,5 +84,6 @@ env-file:
 #= Help targets ================================================================
 
 [group('help')]
+[doc('Print this help message')]
 help:
     @just --list --color always --unsorted --list-heading $'DSF Justfile\nRecipes:\n'
