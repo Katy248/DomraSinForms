@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
 
 namespace DomraSinForms.Persistence;
@@ -14,7 +9,7 @@ public static class Extensions
         return services
             .AddDbContext<ApplicationDbContext>(options =>
             {
-                options.UseSqlServer(connectionString, 
+                options.UseNpgsql(connectionString,
                     options => options.MigrationsAssembly(typeof(ApplicationDbContext).Assembly.GetName().Name));
             })
             ;
