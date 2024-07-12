@@ -4,7 +4,7 @@
     string GetClass(string item)
     {
         var title = ViewData["Title"] as string;
-        return IsCurrentView(item) ? "active" : "";
+        return IsCurrentView(item) ? "active list-group-item-primary" : "";
     }
     bool IsCurrentView(string viewName)
     {
@@ -20,11 +20,11 @@
         @if (IsCurrentView(Localizer["Form answers"]?.Value ?? "") | IsCurrentView(Localizer["All answers"]?.Value ??
         ""))
         {
-            <a class="list-group-item list-group-item-action list-group-item-secondary @GetClass(Localizer["Form answers"]?.Value ?? "")"
+            <a class="list-group-item list-group-item-action @GetClass(Localizer["Form answers"]?.Value ?? "")"
                 aria-current="true" asp-controller="Statistics" asp-route-formId="@Model" asp-action="Summary">
                 <i class="bi-bar-chart me-3"></i>@Localizer["Form answers"]
             </a>
-            <a class="list-group-item list-group-item-action list-group-item-secondary @GetClass(Localizer["All answers"]?.Value ?? "")"
+            <a class="list-group-item list-group-item-action @GetClass(Localizer["All answers"]?.Value ?? "")"
                 aria-current="true" asp-controller="Statistics" asp-route-formId="@Model" asp-action="FormAnswersList">
                 <i class="bi-list-ul me-3"></i>@Localizer["All answers"]
             </a>
