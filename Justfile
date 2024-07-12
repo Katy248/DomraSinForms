@@ -1,7 +1,7 @@
 ServerProject := "DomraSinForms.Server"
 ServerProjectFile := "./src/Server" / "DomraSinForms.Server" + ".csproj"
-ClientProject := "DomraSinForms.Client"
-ClientProjectFile := "./src/Client" / ClientProject + ".csproj"
+ClientProject := "DomraSinForms.Clients.Web.Mvc"
+ClientProjectFile := "./src/Clients/Web.Mvc" / ClientProject + ".csproj"
 
 export DOTNET_WATCH_RESTART_ON_RUDE_EDIT := "true"
 
@@ -23,10 +23,8 @@ watch:
     dotnet watch --project {{ ClientProjectFile }}
 
 [group('build')]
-[doc('Watch tailwindcss. Deprecated')]
-watch-css:
-    cd ./src/Client/ && \
-    	npx tailwindcss --watch --minify -i style.css -o ./wwwroot/app.css
+run:
+    dotnet run --project {{ ClientProjectFile }}
 
 [group('build')]
 [doc('Run server project')]

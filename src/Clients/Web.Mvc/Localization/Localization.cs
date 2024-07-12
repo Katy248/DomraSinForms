@@ -6,7 +6,7 @@ public class Localization
     {
         {"ru", "Русский"},
         {"en", "English"},
-        //{"epo", "Esperanto"},
-        { "arm", "Հայկական" }
+        { "arm", "Հայկական" },
+        /* {"epo", "Esperanto"}, */
     };
 }
