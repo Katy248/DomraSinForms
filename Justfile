@@ -1,7 +1,7 @@
 ServerProject := "DomraSinForms.Server"
 ServerProjectFile := "./src/Server" / "DomraSinForms.Server" + ".csproj"
 ClientProject := "DomraSinForms.Clients.Web.Mvc"
-ClientProjectFile := "./src/Clients/Web.Mvc" / ClientProject + ".csproj"
+ClientProjectFile := "./src/Clients/Web/Mvc" / ClientProject + ".csproj"
 
 export DOTNET_WATCH_RESTART_ON_RUDE_EDIT := "true"
 
