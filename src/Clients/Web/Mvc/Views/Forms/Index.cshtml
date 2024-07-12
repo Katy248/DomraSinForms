@@ -45,7 +45,20 @@
                 <a class="card-body text-decoration-none" asp-action="Edit" asp-route-id="@form.Id">
                     <div class="card-title h5 flex-nowrap text-overflow-ellipsis">@form.Title</div>
                     <div class="card-text mb-2 text-overflow-ellipsis">@form.Description</div>
-                    <div class="card-text text-muted small align-text-bottom">@Localizer["Last edit"]: @form.FormatLastUpdate(Localizer["Today {0}"]?.Value ?? "") </div>
+                    <div class="card-text text-muted small align-text-bottom">
+                        @if (form.LastUpdateDate.Year != 1)
+                        {
+                            <span>
+                                @Localizer["Last edit"]: @form.FormatLastUpdate(Localizer["Today {0}"]?.Value ?? "")
+                            </span>
+                        }
+                        @if (form.Version is not null) 
+                        {
+                            <span class="fst-italic">
+                                (@Localizer["Form version"] #@form.Version?.Index)
+                            </span>
+                        }
+                    </div>
                 </a>
                 <div class="card-footer">
                     <div class="row g-1 justify-content-end">

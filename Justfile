@@ -2,6 +2,8 @@ ServerProject := "DomraSinForms.Server"
 ServerProjectFile := "./src/Server" / "DomraSinForms.Server" + ".csproj"
 ClientProject := "DomraSinForms.Clients.Web.Mvc"
 ClientProjectFile := "./src/Clients/Web/Mvc" / ClientProject + ".csproj"
+AuthProject := "DomraSinForms.Clients.Web.Auth"
+AuthProjectFile := "./src/Clients/Web/Auth" / AuthProject + ".csproj"
 
 export DOTNET_WATCH_RESTART_ON_RUDE_EDIT := "true"
 
@@ -25,6 +27,10 @@ watch:
 [group('build')]
 run:
     dotnet run --project {{ ClientProjectFile }}
+
+[group('build')]
+run-auth:
+    dotnet run --project {{ AuthProjectFile }}
 
 [group('build')]
 [doc('Run server project')]
