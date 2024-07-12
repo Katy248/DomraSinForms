@@ -4,14 +4,12 @@
 @using Microsoft.AspNetCore.Localization
 @using Microsoft.AspNetCore.Mvc.Localization
 @using Microsoft.Extensions.Options
-
 @inject IViewLocalizer Localizer
 @{
     var returnUrl = string.IsNullOrEmpty(Context.Request.Path) ? "~/" : $"~{Context.Request.Path}";
-
     var languages = Localization.SupportedLanguages;
 }
-<div class="dropdown-center">
+<div class="dropup user-select-none">
     <label class="h5 dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="true">
         <i class="bi-translate me-2"></i>@Localizer["Language"]
     </label>
@@ -19,7 +17,8 @@
         @foreach (var lang in languages)
         {
             <li>
-                <form asp-controller="Home" asp-action="SetLanguage" asp-route-language="@lang.Key" asp-route-returnUrl="@returnUrl" method="post">
+                <form asp-controller="Home" asp-action="SetLanguage" asp-route-language="@lang.Key"
+                    asp-route-returnUrl="@returnUrl" method="post">
                     <button class="dropdown-item" onclick="this.for.submit()">
                         @lang.Value
                     </button>
