@@ -1,4 +1,4 @@
-﻿using DomraSinForms.Persistence;
+﻿using DomraSinForms.Domain.Contracts;
 using MediatR;
 using Microsoft.EntityFrameworkCore;
 
@@ -6,9 +6,9 @@ namespace DomraSinForms.Application.Forms.Commands.Delete;
 
 public class DeleteFormCommandHandler : IRequestHandler<DeleteFormCommand, bool>
 {
-    private readonly ApplicationDbContext _context;
+    private readonly IDatabaseContext _context;
 
-    public DeleteFormCommandHandler(ApplicationDbContext context)
+    public DeleteFormCommandHandler(IDatabaseContext context)
     {
         _context = context;
     }
@@ -20,7 +20,7 @@ public class DeleteFormCommandHandler : IRequestHandler<DeleteFormCommand, bool>
 
         var versions = await _context.FormVersions.Where(fv => fv.FormId == form.Id).ToArrayAsync(cancellationToken);
 
-        _context.RemoveRange(versions, cancellationToken);
+        _context.FormVersions.RemoveRange(versions);
         _context.Forms.Remove(form);
         await _context.SaveChangesAsync(cancellationToken);
 

@@ -1,17 +1,17 @@
 ﻿using System.Collections.Immutable;
 using AutoMapper;
+using DomraSinForms.Domain.Contracts;
 using DomraSinForms.Domain.Models.Questions;
-using DomraSinForms.Persistence;
 using MediatR;
 using Microsoft.EntityFrameworkCore;
 
 namespace DomraSinForms.Application.Questions.Queries.GetList;
 public class GetQuestionListQueryHandler : IRequestHandler<GetQuestionListQuery, IEnumerable<QuestionBase>>
 {
-    private readonly ApplicationDbContext _context;
+    private readonly IDatabaseContext _context;
     private readonly IMapper _mapper;
 
-    public GetQuestionListQueryHandler(ApplicationDbContext context, IMapper mapper)
+    public GetQuestionListQueryHandler(IDatabaseContext context, IMapper mapper)
     {
         _context = context;
         _mapper = mapper;

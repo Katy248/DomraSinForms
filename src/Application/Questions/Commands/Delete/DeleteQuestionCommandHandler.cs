@@ -1,15 +1,15 @@
 ﻿using DomraSinForms.Application.Questions.Notifications;
-using DomraSinForms.Persistence;
+using DomraSinForms.Domain.Contracts;
 using MediatR;
 using Microsoft.EntityFrameworkCore;
 
 namespace DomraSinForms.Application.Questions.Commands.Delete;
 public class DeleteQuestionCommandHandler : IRequestHandler<DeleteQuestionCommand, bool>
 {
-    private readonly ApplicationDbContext _context;
+    private readonly IDatabaseContext _context;
     private readonly IMediator _mediator;
 
-    public DeleteQuestionCommandHandler(ApplicationDbContext context, IMediator mediator)
+    public DeleteQuestionCommandHandler(IDatabaseContext context, IMediator mediator)
     {
         _context = context;
         _mediator = mediator;

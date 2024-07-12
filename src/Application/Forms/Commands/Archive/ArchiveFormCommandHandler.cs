@@ -1,19 +1,14 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using DomraSinForms.Domain.Contracts;
 using DomraSinForms.Domain.Models;
-using DomraSinForms.Persistence;
 using MediatR;
 using Microsoft.EntityFrameworkCore;
 
 namespace DomraSinForms.Application.Forms.Commands.Archive;
 public class ArchiveFormCommandHandler : IRequestHandler<ArchiveFormCommand, Form?>
 {
-    private readonly ApplicationDbContext _context;
+    private readonly IDatabaseContext _context;
 
-    public ArchiveFormCommandHandler(ApplicationDbContext context)
+    public ArchiveFormCommandHandler(IDatabaseContext context)
     {
         _context = context;
     }
@@ -26,7 +21,7 @@ public class ArchiveFormCommandHandler : IRequestHandler<ArchiveFormCommand, For
 
         form.IsInArchive = true;
 
-        _context.Update(form);
+        _context.Forms.Update(form);
         await _context.SaveChangesAsync(cancellationToken);
 
         return form;

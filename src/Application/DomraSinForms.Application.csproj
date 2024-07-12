@@ -23,6 +23,6 @@
 
   <ItemGroup>
     <ProjectReference Include="..\Domain\DomraSinForms.Domain.csproj" />
-    <ProjectReference Include="..\Persistence\DomraSinForms.Persistence.csproj" />
+    <!-- <ProjectReference Include="..\Persistence\DomraSinForms.Persistence.csproj" /> -->
   </ItemGroup>
 </Project>

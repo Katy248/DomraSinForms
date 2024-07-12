@@ -1,16 +1,16 @@
 ﻿using AutoMapper;
+using DomraSinForms.Domain.Contracts;
 using DomraSinForms.Domain.Models;
-using DomraSinForms.Persistence;
 
 using MediatR;
 
 namespace DomraSinForms.Application.Forms.Commands.Create;
 public class CreateFormCommandHandler : IRequestHandler<CreateFormCommand, Form>
 {
-    private readonly ApplicationDbContext _context;
+    private readonly IDatabaseContext _context;
     private readonly IMapper _mapper;
 
-    public CreateFormCommandHandler(ApplicationDbContext context, IMapper mapper)
+    public CreateFormCommandHandler(IDatabaseContext context, IMapper mapper)
     {
         _context = context;
         _mapper = mapper;

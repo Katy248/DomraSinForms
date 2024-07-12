@@ -1,14 +1,14 @@
-﻿using DomraSinForms.Domain.Models.Versions;
-using DomraSinForms.Persistence;
+﻿using DomraSinForms.Domain.Contracts;
+using DomraSinForms.Domain.Models.Versions;
 using MediatR;
 using Microsoft.EntityFrameworkCore;
 
 namespace DomraSinForms.Application.Forms.Notifications.Update;
 public class UpdateFormNotificationHandler : INotificationHandler<UpdateFormNotification>
 {
-    private readonly ApplicationDbContext _context;
+    private readonly IDatabaseContext _context;
 
-    public UpdateFormNotificationHandler(ApplicationDbContext context)
+    public UpdateFormNotificationHandler(IDatabaseContext context)
     {
         _context = context;
     }
@@ -22,7 +22,7 @@ public class UpdateFormNotificationHandler : INotificationHandler<UpdateFormNoti
             .FirstAsync(f => f.Id == notification.FormId, cancellationToken);
 
         form.Version = new FormVersion { FormId = form.Id, CreationDate = DateTime.UtcNow, Index = form.Version?.Index + 1 ?? 1 };
-        _context.Update(form);
+        _context.Forms.Update(form);
 
 
         await _context.SaveChangesAsync(cancellationToken);

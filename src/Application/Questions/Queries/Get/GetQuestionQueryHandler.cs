@@ -1,14 +1,14 @@
-﻿using DomraSinForms.Domain.Models.Questions;
-using DomraSinForms.Persistence;
+﻿using DomraSinForms.Domain.Contracts;
+using DomraSinForms.Domain.Models.Questions;
 using MediatR;
 using Microsoft.EntityFrameworkCore;
 
 namespace DomraSinForms.Application.Questions.Queries.Get;
 public class GetQuestionQueryHandler : IRequestHandler<GetQuestionQuery, QuestionBase?>
 {
-    private readonly ApplicationDbContext _context;
+    private readonly IDatabaseContext _context;
 
-    public GetQuestionQueryHandler(ApplicationDbContext context)
+    public GetQuestionQueryHandler(IDatabaseContext context)
     {
         _context = context;
     }

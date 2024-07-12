@@ -1,14 +1,14 @@
-﻿using DomraSinForms.Domain.Models.Answers;
-using DomraSinForms.Persistence;
+﻿using DomraSinForms.Domain.Contracts;
+using DomraSinForms.Domain.Models.Answers;
 using MediatR;
 using Microsoft.EntityFrameworkCore;
 
 namespace DomraSinForms.Application.Answers.Commands.Create;
 public class CreateFormAnswersCommandHandler : IRequestHandler<CreateFormAnswersCommand, FormAnswers?>
 {
-    private readonly ApplicationDbContext _context;
+    private readonly IDatabaseContext _context;
 
-    public CreateFormAnswersCommandHandler(ApplicationDbContext context)
+    public CreateFormAnswersCommandHandler(IDatabaseContext context)
     {
         _context = context;
     }
@@ -48,7 +48,7 @@ public class CreateFormAnswersCommandHandler : IRequestHandler<CreateFormAnswers
         formAnswers.CreationDate = DateTime.UtcNow;
         //formAnswers.FormVersionId = form.Version?.Id;
 
-        _context.Update(formAnswers);
+        _context.FormAnswers.Update(formAnswers);
         await _context.SaveChangesAsync(cancellationToken);
 
         return formAnswers;

@@ -1,19 +1,19 @@
 ﻿using System.Runtime.CompilerServices;
 using AutoMapper;
 using DomraSinForms.Application.Answers.Queries.Get;
+using DomraSinForms.Domain.Contracts;
 using DomraSinForms.Domain.Models.Answers;
-using DomraSinForms.Persistence;
 using MediatR;
 using Microsoft.EntityFrameworkCore;
 
 namespace DomraSinForms.Application.Answers.Queries.GetList;
 public class GetFormAnswersListQueryHandler : IRequestHandler<GetFormAnswersListQuery, IEnumerable<FormAnswersDto>>
 {
-    private readonly ApplicationDbContext _context;
+    private readonly IDatabaseContext _context;
     private readonly IMapper _mapper;
     private readonly IMediator _mediator;
 
-    public GetFormAnswersListQueryHandler(ApplicationDbContext context, IMapper mapper, IMediator mediator)
+    public GetFormAnswersListQueryHandler(IDatabaseContext context, IMapper mapper, IMediator mediator)
     {
         _context = context;
         _mapper = mapper;

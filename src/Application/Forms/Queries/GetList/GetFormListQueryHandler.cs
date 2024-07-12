@@ -1,5 +1,5 @@
 ﻿using AutoMapper;
-using DomraSinForms.Persistence;
+using DomraSinForms.Domain.Contracts;
 using MediatR;
 using Microsoft.EntityFrameworkCore;
 
@@ -7,10 +7,10 @@ namespace DomraSinForms.Application.Forms.Queries.GetList
 {
     public class GetFormListQueryHandler : IRequestHandler<GetFormListQuery, FormListDto>
     {
-        private readonly ApplicationDbContext _context;
+        private readonly IDatabaseContext _context;
         private readonly IMapper _mapper;
 
-        public GetFormListQueryHandler(ApplicationDbContext context, IMapper mapper)
+        public GetFormListQueryHandler(IDatabaseContext context, IMapper mapper)
         {
             _context = context;
             _mapper = mapper;

@@ -1,18 +1,18 @@
 ﻿using DomraSinForms.Application.Answers.Queries.GetList;
 using DomraSinForms.Application.Questions.Queries.GetList;
+using DomraSinForms.Domain.Contracts;
 using DomraSinForms.Domain.Models.Answers;
 using DomraSinForms.Domain.Models.Questions;
-using DomraSinForms.Persistence;
 using MediatR;
 using Microsoft.EntityFrameworkCore;
 
 namespace DomraSinForms.Application.Answers.Queries.GetEmptyForm;
 public class GetEmptyFormQueryHandler : IRequestHandler<GetEmptyFormQuery, FormAnswersDto?>
 {
-    private readonly ApplicationDbContext _context;
+    private readonly IDatabaseContext _context;
     private readonly IMediator _mediator;
 
-    public GetEmptyFormQueryHandler(ApplicationDbContext context, IMediator mediator)
+    public GetEmptyFormQueryHandler(IDatabaseContext context, IMediator mediator)
     {
         _context = context;
         _mediator = mediator;

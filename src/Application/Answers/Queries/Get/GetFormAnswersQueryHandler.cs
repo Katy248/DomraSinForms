@@ -1,6 +1,6 @@
 ﻿using DomraSinForms.Application.Questions.Queries.GetList;
+using DomraSinForms.Domain.Contracts;
 using DomraSinForms.Domain.Models.Answers;
-using DomraSinForms.Persistence;
 using MediatR;
 using Microsoft.EntityFrameworkCore;
 
@@ -8,10 +8,10 @@ namespace DomraSinForms.Application.Answers.Queries.Get
 {
     public class GetFormAnswersQueryHandler : IRequestHandler<GetFormAnswersQuery, FormAnswers?>
     {
-        private readonly ApplicationDbContext _context;
+        private readonly IDatabaseContext _context;
         private readonly IMediator _mediator;
 
-        public GetFormAnswersQueryHandler(ApplicationDbContext context, IMediator mediator)
+        public GetFormAnswersQueryHandler(IDatabaseContext context, IMediator mediator)
         {
             _context = context;
             _mediator = mediator;
