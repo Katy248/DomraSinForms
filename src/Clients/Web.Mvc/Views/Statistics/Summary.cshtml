@@ -16,17 +16,15 @@
 @model SummaryViewModel
 @{
     ViewData["Title"] = Localizer["Form answers"]?.Value;
-    
     var formChartOptions = new ChartOptionsBuilder()
-        .UsePalette(1)
-        .CreateLineChart(ChartHelper.AnswersActions(Model.AnswersDto), LineChartDataType.Area)
-        .UseLineStyle(LineStroke.Smooth)
-        .Build().Serialize();
+    .UsePalette(1)
+    .CreateLineChart(ChartHelper.AnswersActions(Model.AnswersDto), LineChartDataType.Area)
+    .UseLineStyle(LineStroke.Smooth)
+    .Build().Serialize();
 }
 <div class="h1 text-center">
     @Localizer["Form answers"]
 </div>
-
 <div class="row g-3 justify-content-center">
     <div class="col-sm-1 col-md-3 col-xl-3"></div>
     <div class="col-sm-12 col-md-6 col-xl-6 row g-3 gx-4 justify-content-center">
@@ -40,9 +38,9 @@
         </div>
         @foreach (var question in Model.Questions.OrderBy(q => q.Question.Index))
         {
-                <div class="col-12">
+            <div class="col-12">
                 @await Html.PartialAsync("_AnsweredQuestionPartial", question)
-                </div>
+            </div>
         }
     </div>
     <div class="col-sm-12 col-md-3 col-xl-3 col-12 mt-sm-0 mt-5">
@@ -51,16 +49,16 @@
 </div>
 @section scripts {
     <script src="~/lib/apexcharts.js"></script>
-        <script>
-            function WriteChart(elementId, chartOptions){
-                console.log('chart');
-                let chart = new ApexCharts(document.querySelector(`#${elementId}`), chartOptions);
-                console.log()
-                chart.render();
-            }
+    <script>
+        function WriteChart(elementId, chartOptions) {
+            console.log('chart');
+            let chart = new ApexCharts(document.querySelector(`#${elementId}`), chartOptions);
+            console.log()
+            chart.render();
+        }
 
-            WriteChart('chart-formChart',JSON.parse('@formChartOptions'))
-        </script>
+        WriteChart('chart-formChart', JSON.parse('@formChartOptions'))
+    </script>
     @foreach (var question in Model.Questions)
     {
         if (question.Question is OptionsQuestion oq)
@@ -70,20 +68,16 @@
                 optionsBuilder.CreateBarChart(ChartHelper.GetCountData(question));
             else
                 optionsBuilder.CreatePieChart(ChartHelper.GetPercentageData(question));
-
             var chartOptions = optionsBuilder.Build().Serialize();
-
             <script type="text/javascript">
-                var options = JSON.parse('@(chartOptions)');
-                //options.theme.mode = themeSwitch.isDarkTheme() ? 'dark' : 'light';
-                console.log(options);
-                console.log(options.series);
-                console.log(options.xaxis);
-                WriteChart('chart-@(question.Question.Id)', options);
-            </script>
+    var options = JSON.parse('@(chartOptions)');
+    //options.theme.mode = themeSwitch.isDarkTheme() ? 'dark' : 'light';
+    console.log(options);
+    console.log(options.series);
+    console.log(options.xaxis);
+    WriteChart('chart-@(question.Question.Id)', options);
+</script>
         }
-
-        
     }
     <script>
         const tooltipTriggerList = document.querySelectorAll('[data-bs-toggle="tooltip"]')
