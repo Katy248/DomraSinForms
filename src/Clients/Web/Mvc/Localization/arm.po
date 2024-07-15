@@ -102,7 +102,7 @@ msgstr "Ստեղծել նոր ձև"
 msgid "Search"
 msgstr "Որոնում"
 
-msgid "Search ..."
+msgid "Search..."
 msgstr Որոնում..."
 
 msgid "Anonymous"

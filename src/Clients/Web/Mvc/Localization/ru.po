@@ -102,8 +102,8 @@ msgstr "Создать новую форму"
 msgid "Search"
 msgstr "Поиск"
 
-msgid "Search ..."
-msgstr "Поиск ..."
+msgid "Search..."
+msgstr "Поиск..."
 
 msgid "Anonymous"
 msgstr "Анонимно"
