@@ -15,9 +15,9 @@ public class GetUserActionsSummaryQueryHandler : IRequestHandler<GetUserActionsS
     {
         var result = new UsersActionsSummary
         {
-            Forms = await _context.Forms.Where(f => f.CreatorId == request.UserId).ToArrayAsync(),
-            FormAnswers = await _context.FormAnswers.Include(fa => fa.Form).Where(f => f.UserId == request.UserId && f.IsCompleted).ToArrayAsync(),
-            FormVersions = await _context.FormVersions.Where(f => f.Form.CreatorId == request.UserId).ToArrayAsync()
+            Forms = await _context.Forms.Where(f => f.CreatorId == request.UserId).ToArrayAsync(cancellationToken: cancellationToken),
+            FormAnswers = await _context.FormAnswers.Include(fa => fa.Form).Where(f => f.UserId == request.UserId && f.IsCompleted).ToArrayAsync(cancellationToken: cancellationToken),
+            FormVersions = await _context.FormVersions.Where(f => f.Form.CreatorId == request.UserId).ToArrayAsync(cancellationToken: cancellationToken)
         };
 
         return result;
