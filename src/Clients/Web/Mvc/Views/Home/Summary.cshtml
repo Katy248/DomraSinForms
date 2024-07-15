@@ -47,6 +47,9 @@
                     <a class="card card-button text-decoration-none" asp-controller="Forms" asp-action="Edit" asp-route-id="@form.Id">
                         <div class="card-body">
                             <div class="card-title h5 text-overflow-ellipsis">@form.Title</div>
+                            <div class="mb-3">
+                                @(form.Description)
+                            </div>
                             <div class="text-muted small">@form.FormatLastUpdate(Localizer["Today {0}"]?.Value ?? "")</div>
                         </div>
                     </a>
@@ -97,6 +100,9 @@
                     <a class="card card-button text-decoration-none" asp-controller="Forms" asp-action="Edit" asp-route-id="@formAnswers.Id">
                         <div class="card-body">
                             <div class="card-title h5 text-overflow-ellipsis">@formAnswers.Form.Title</div>
+                            <div class="mb-3">
+                                @(formAnswers.Form.Description)
+                            </div>
                             <div class="text-muted small">@formAnswers.FormatCreationDate(Localizer["Today {0}"]?.Value ?? "")</div>
                         </div>
                     </a>
