@@ -11,7 +11,46 @@ public class ChartOptions
     public IEnumerable<object>? Labels { get; set; }
     public Stroke Stroke { get; set; } = new();
     public PlotOptions PlotOptions { get; set; } = new();
+    public FillOptions Fill { get; set; } = new();
+    public GridOptions Grid { get; set; } = new();
 }
+
+public class GridOptions
+{
+    public bool Show { get; set; } = false;
+}
+
+public class FillOptions
+{
+    public FillPattern Pattern { get; set; } = new();
+}
+
+public class FillPattern
+{
+    [JsonIgnore]
+    public FillPatternStyle Style
+    {
+        set
+        {
+            var stringValue = value.ToString();
+            var arrValue = stringValue.ToCharArray();
+            arrValue[0] = arrValue[0].ToString().ToLower()[0];
+
+            StyleValue = new string(arrValue);
+        }
+    }
+
+    [JsonProperty("style")]
+    public string StyleValue { get; private set; } = "";
+    public uint Width { get; set; }
+    public uint Height { get; set; }
+    public uint StrokeWidth { get; set; }
+}
+public enum FillPatternStyle
+{
+    VerticalLines, HorizontalLines, StandardLines, Squares, Circles
+}
+
 public class PlotOptions
 {
     public Bar Bar { get; set; } = new();

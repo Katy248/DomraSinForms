@@ -16,4 +16,10 @@ public static class ChartOptionsExtensions
         serializerConfig?.Invoke(settings);
         return new HtmlString(JsonConvert.SerializeObject(options, settings));
     }
+    public static string SerializeToString(this ChartOptions options, Action<JsonSerializerSettings>? serializerConfig = null)
+    {
+        var settings = Settings;
+        serializerConfig?.Invoke(settings);
+        return JsonConvert.SerializeObject(options, settings);
+    }
 }

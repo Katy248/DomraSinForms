@@ -65,14 +65,15 @@
         {
             var optionsBuilder = ChartHelper.GetChartOptionsBuilder();
             if (oq.AllowMultipleChoice)
-                optionsBuilder.CreateBarChart(ChartHelper.GetCountData(question));
+                optionsBuilder.CreateBarChart(ChartHelper.GetCountData(question)).UseHorizontal();
             else
                 optionsBuilder.CreatePieChart(ChartHelper.GetPercentageData(question));
             var chartOptions = optionsBuilder.Build().Serialize();
             <script type="text/javascript">
-    var options = JSON.parse('@(chartOptions)');
+    console.debug("Start chart '@(question.Question.Id)'");
+    var options = @(chartOptions)
+        console.log(options);
     //options.theme.mode = themeSwitch.isDarkTheme() ? 'dark' : 'light';
-    console.log(options);
     console.log(options.series);
     console.log(options.xaxis);
     WriteChart('chart-@(question.Question.Id)', options);

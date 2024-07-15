@@ -1,6 +1,7 @@
 ﻿using DomraSinForms.Application.Answers.Queries.GetList;
 using DomraSinForms.Application.Forms.Queries.GetList;
 using DomraSinForms.ChartsWrapper.ApexCharts;
+using DomraSinForms.ChartsWrapper.ApexCharts.Fill;
 using DomraSinForms.Domain.Models;
 using DomraSinForms.Domain.Models.Answers;
 using DomraSinForms.Domain.Models.Versions;
@@ -53,6 +54,14 @@ public static class ChartHelper
     public static IChartOptionsBuilder GetChartOptionsBuilder()
     {
         return new ChartOptionsBuilder()
+        .WithFill(fill =>
+        {
+            uint size = 12;
+            fill.Pattern.StrokeWidth = size;
+            fill.Pattern.Height = size;
+            fill.Pattern.Width = size;
+            fill.Pattern.Style = FillPatternStyle.Circles;
+        }).ShowGrid(false)
             .UsePalette(1)
             .SetupToolBar(options => options.Show()
                 .EnableTool(ToolBarTool.Pan, @"<i class=\""bi-hand-index fs-3\""></i>")

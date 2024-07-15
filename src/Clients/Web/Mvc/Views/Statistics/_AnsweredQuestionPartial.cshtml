@@ -10,7 +10,6 @@
 @using Newtonsoft.Json.Serialization;
 @inject IViewLocalizer Localizer
 @model QuestionSummary
-
 <div class="card card-button" data-bs-toggle="modal" data-bs-target="#modal-@Model.Question.Id">
     <div class="card-header">
         <div class="card-title h5">@Model.Question.QuestionText</div>
@@ -34,14 +33,12 @@
         }
     </div>
 </div>
-
 <div class="modal" id="modal-@Model.Question.Id">
     <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
         <div class="modal-content p-1 text-center">
-
             <div class="modal-body justify-content-center">
                 <div class="h2 mb-3">@Localizer["All answers"]:</div>
-                @foreach (var answers in Model.Answers.ToArray())
+                @foreach (var answers in Model.Answers.Take(10))
                 {
                     <div class="card my-2">
                         <div class="card-body">
