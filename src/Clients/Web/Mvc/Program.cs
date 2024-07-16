@@ -30,6 +30,11 @@ builder.Services
     .AddApplication()
     .AddPortableObjectLocalization(options => options.ResourcesPath = "Localization");
 
+builder.Services.AddHttpsRedirection(options =>
+{
+    options.HttpsPort = 5028;
+});
+
 builder.Logging.AddConsole();
 var app = builder.Build();
 
@@ -58,7 +63,6 @@ app.MapControllerRoute(
     name: "default",
     pattern: "{controller=Home}/{action=Index}/{id?}");
 app.MapRazorPages();
-
 app.Run();
 
 
