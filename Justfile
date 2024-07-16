@@ -25,6 +25,13 @@ watch:
     dotnet watch --project {{ ClientProjectFile }}
 
 [group('build')]
+run-on-work-machine:
+    dotnet run \
+        --project {{ ClientProjectFile }} \
+        --urls "https://10.81.14.149:5027" \
+        --configuration Release
+
+[group('build')]
 run:
     dotnet run --project {{ ClientProjectFile }}
 
@@ -91,3 +98,43 @@ env-file:
 [doc('Print this help message')]
 help:
     @just --list --color always --unsorted --list-heading $'DSF Justfile\nRecipes:\n'
+
+#= HTTPS targets ===============================================================
+
+HttpsConfigFile := "./configs/https.config"
+HttpsSertificateSigningRequest := "./csr.pem"
+HttpsSigninKey := "./key.pem"
+HttpsCertificateFile := "./https.crt"
+
+[group('https')]
+openssl-setup Password:
+    @openssl req \
+        -config {{ HttpsConfigFile }} \
+        -new \
+        -out {{ HttpsSertificateSigningRequest }}
+    @openssl x509 \
+        -req \
+        -days 365 \
+        -extfile {{ HttpsConfigFile }} \
+        -extensions v3_req \
+        -in {{ HttpsSertificateSigningRequest }} \
+        -signkey {{HttpsSigninKey}} \
+        -out {{HttpsCertificateFile}}
+    @openssl pkcs12 \
+        -export \
+        -out https.pfx \
+        -inkey {{HttpsSigninKey}} \
+        -in {{HttpsCertificateFile}} \
+        -password pass:{{Password}}
+
+[group('https')]
+dotnet-certs-setup:
+    @dotnet dev-certs https --clean
+    @dotnet dev-certs https
+    @dotnet dev-certs https -c
+
+[group('https')]
+export-cert:
+    @dotnet dev-certs https --clean
+    @dotnet dev-certs https --export-path {{ HttpsCertificateFile }}
+    @dotnet dev-certs https -c
