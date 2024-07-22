@@ -8,12 +8,12 @@ public static class GravatarHelper
 {
 
     private const string AvatarKey = "AvatarSourceKey";
-    private const string BaseAvatarUrl = "https://www.gravatar.com/avatar/";
+    private const string BaseAvatarUrl = "https://www.gravatar.com/avatar/{0}?d=identicon";
     public static void AddAvatar<T>(this ViewDataDictionary<T> viewData, string? email)
     {
         if (string.IsNullOrWhiteSpace(email)) return;
 
-        viewData[AvatarKey] = BaseAvatarUrl + Hash(email.Trim().ToLower());
+        viewData[AvatarKey] = string.Format(BaseAvatarUrl, Hash(email.Trim().ToLower()));
     }
     public static string? GetAvatarUrl<T>(this ViewDataDictionary<T> viewData)
     {
