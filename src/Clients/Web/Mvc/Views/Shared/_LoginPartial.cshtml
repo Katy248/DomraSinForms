@@ -1,33 +1,52 @@
-﻿@using DomraSinForms.Domain.Identity;
+﻿@using DomraSinForms.Clients.Web.Mvc.Helpers
+@using DomraSinForms.Domain.Identity;
 @using Microsoft.AspNetCore.Identity
 @using Microsoft.AspNetCore.Mvc.Localization;
+@using System.Security.Cryptography;
+@using System.Text;
 @inject IViewLocalizer Localizer
 @inject SignInManager<User> SignInManager
 @inject UserManager<User> UserManager
-
+@{
+    if (SignInManager.IsSignedIn(User))
+    {
+        var dsfUser = await UserManager.GetUserAsync(User) ?? new();
+        ViewData.AddAvatar(dsfUser.Email);
+    }
+}
 <ul class="navbar-nav">
-@if (SignInManager.IsSignedIn(User))
-{
-    <li class="nav-item">
-            <a class="nav-link" asp-controller="User" asp-action="Profile" title="Manage">@*@User.Identity?.Name*@
-                @Localizer["Profile"]<i class="bi-person-circle ms-2 me-2"></i>
+    @if (SignInManager.IsSignedIn(User))
+    {
+        <li class="nav-item">
+            <a class="nav-link" asp-controller="User" asp-action="Profile"
+                title="@Localizer["Profile"]">@*@User.Identity?.Name*@
+                @Localizer["Profile"]
+                @if (ViewData.GetAvatarUrl() is not null)
+                {
+                    <img class="rounded-circle ms-2" height="23" src="@ViewData.GetAvatarUrl()" />
+                }
+                else
+                {
+                    <i class="bi-person-circle ms-2 me-2"></i>
+                }
             </a>
-    </li>
-    <li class="nav-item align-items-center">
-        <form  class="form-inline" asp-area="Identity" asp-page="/Account/Logout" asp-route-returnUrl="@Url.Action("Index", "Home", new { area = "" })">
-            <button  type="submit" class="nav-link">
+        </li>
+        <li class="nav-item align-items-center">
+            <form class="form-inline" asp-area="Identity" asp-page="/Account/Logout"
+                asp-route-returnUrl="@Url.Action("Index", "Home", new { area = "" })">
+                <button type="submit" class="nav-link">
                     @Localizer["Log out"]<i class="bi-box-arrow-right ms-2 me-2"></i>
-            </button>
-        </form>
-    </li>
-}
-else
-{
-    <li class="nav-item">
-        <a class="nav-link" asp-area="Identity" asp-page="/Account/Register">@Localizer["Register"]</a>
-    </li>
-    <li class="nav-item">
-        <a class="nav-link" asp-area="Identity" asp-page="/Account/Login">@Localizer["Log in"]</a>
-    </li>
-}
+                </button>
+            </form>
+        </li>
+    }
+    else
+    {
+        <li class="nav-item">
+            <a class="nav-link" asp-area="Identity" asp-page="/Account/Register">@Localizer["Register"]</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" asp-area="Identity" asp-page="/Account/Login">@Localizer["Log in"]</a>
+        </li>
+    }
 </ul>

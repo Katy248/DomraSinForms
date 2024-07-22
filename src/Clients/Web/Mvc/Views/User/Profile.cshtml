@@ -1,11 +1,21 @@
 ﻿@using DomraSinForms.Application.Users.Commands.Update;
+@using DomraSinForms.Clients.Web.Mvc.Helpers;
 @inject IViewLocalizer Localizer
 @model DomraSinForms.Domain.Identity.User
 @{
     ViewData["Title"] = Localizer["Profile"];
+    ViewData.AddAvatar(Model.Email);
 }
 <div class="display-4 text-center mb-5">
-    @Localizer["Profile"]<i class="bi-person-circle ms-4 me-2"></i>
+    @Localizer["Profile"]
+    @if (ViewData.GetAvatarUrl() is not null)
+    {
+        <img class="rounded-circle ms-4" src="@ViewData.GetAvatarUrl()" />
+    }
+    else
+    {
+        <i class="bi-person-circle ms-4 me-2"></i>
+    }
 </div>
 <div class="row g-3 justify-content-center">
     <div class="col-sm-12 col-md-6 col-xl-6 row g-3 gx-4">
