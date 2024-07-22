@@ -30,10 +30,7 @@ builder.Services
     .AddApplication()
     .AddPortableObjectLocalization(options => options.ResourcesPath = "Localization");
 
-builder.Services.AddHttpsRedirection(options =>
-{
-    options.HttpsPort = 5028;
-});
+
 
 builder.Logging.AddConsole();
 var app = builder.Build();
@@ -52,7 +49,7 @@ else
 
 ConfigLocalization(app);
 
-app.UseHttpsRedirection();
+// UseHttps(app);
 app.UseStaticFiles();
 
 app.UseRouting();
@@ -65,10 +62,7 @@ app.MapControllerRoute(
 app.MapRazorPages();
 app.Run();
 
-
-
-
-void ConfigLocalization(WebApplication application)
+static void ConfigLocalization(WebApplication application)
 {
     var supportedCultures = Localization.SupportedLanguages.Select(i => i.Key).ToArray();
     var options = new RequestLocalizationOptions()
@@ -77,4 +71,16 @@ void ConfigLocalization(WebApplication application)
         .SetDefaultCulture(supportedCultures[0]);
 
     application.UseRequestLocalization(options);
+}
+
+static void AddHttps(WebApplicationBuilder builder)
+{
+    builder.Services.AddHttpsRedirection(options =>
+    {
+        options.HttpsPort = 5028;
+    });
+}
+static void UseHttps(WebApplication app)
+{
+    app.UseHttpsRedirection();
 }
