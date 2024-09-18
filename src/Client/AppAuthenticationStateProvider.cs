@@ -1,14 +1,9 @@
 using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
 using MediatR;
-using Microsoft.AspNetCore.Authentication;
-using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Components.Authorization;
 using Microsoft.AspNetCore.Components.Server.ProtectedBrowserStorage;
-using Microsoft.AspNetCore.Identity;
-using Microsoft.IdentityModel.JsonWebTokens;
-using JwtConstants = Microsoft.IdentityModel.JsonWebTokens.JwtConstants;
 using LoginFeature = DomraSinForms.Application.Features.Users.Login;
 
 namespace DomraSinForms.Client;
@@ -21,15 +16,13 @@ public class AppAuthenticationStateProvider : AuthenticationStateProvider
     private readonly ProtectedLocalStorage _localStorage;
     private readonly ISender _sender;
     private readonly ILogger<AppAuthenticationStateProvider> _logger;
-    private readonly IHttpContextAccessor httpContextAccessor;
 
     public AppAuthenticationStateProvider(ProtectedLocalStorage localStorage, ISender sender,
-        ILogger<AppAuthenticationStateProvider> logger, IHttpContextAccessor httpContextAccessor)
+        ILogger<AppAuthenticationStateProvider> logger)
     {
         _localStorage = localStorage;
         _sender = sender;
         _logger = logger;
-        this.httpContextAccessor = httpContextAccessor;
     }
 
     public override async Task<AuthenticationState> GetAuthenticationStateAsync()
