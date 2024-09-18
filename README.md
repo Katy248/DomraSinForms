@@ -17,6 +17,7 @@ _Simple web app for creating surveys, forms etc._
 - Statistics
 - Light/dark modes
 - Localization (currently: English, Russian and Armenian)
+- Completely free and open source
 
 ## Screenshots
 
