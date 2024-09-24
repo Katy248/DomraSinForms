@@ -33,6 +33,14 @@ _Simple web app for creating surveys, forms etc._
 
 ![alt text](.github/images/statistics-page.png)
 
+## TODO
+
+- [ ] Finnish caching
+- [ ] Move to blazor
+- [ ] Add used libs to Readme
+
+_Feel free to contribute_
+
 ## Project status
 
 Currently, **DSF** isn't in active development, but any bugs will be fixed as soon as possible.
