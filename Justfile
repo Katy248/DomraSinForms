@@ -85,6 +85,16 @@ start-sql:
 stop-sql:
     @sudo docker-compose down
 
+#= Redis targets ==============================================================
+
+[group('redis')]
+[unix]
+[confirm('This target will use sudo, ok? [y/n]')]
+[doc('Installs and enables redis service')]
+install-redis:
+    @sudo dnf install redis
+    @sudo systemctl enable --now redis
+
 #= Utils targets ===============================================================
 
 [group('utils')]

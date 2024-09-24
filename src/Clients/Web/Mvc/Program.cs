@@ -3,6 +3,7 @@ using DomraSinForms.Domain.Identity;
 using DomraSinForms.Persistence;
 using Forms.Mvc.Localization;
 using Microsoft.AspNetCore.Identity;
+using Microsoft.Extensions.Caching.Distributed;
 using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -13,11 +14,11 @@ builder.Services.AddPersistence(connectionString);
 
 builder.Services.AddDefaultIdentity<User>(options =>
 {
-    options.SignIn.RequireConfirmedAccount = false;
-    options.SignIn.RequireConfirmedEmail = false;
-    options.SignIn.RequireConfirmedPhoneNumber = false;
-    options.Lockout.MaxFailedAccessAttempts = 700;
-    options.Lockout.DefaultLockoutTimeSpan = TimeSpan.MinValue;
+  options.SignIn.RequireConfirmedAccount = false;
+  options.SignIn.RequireConfirmedEmail = false;
+  options.SignIn.RequireConfirmedPhoneNumber = false;
+  options.Lockout.MaxFailedAccessAttempts = 700;
+  options.Lockout.DefaultLockoutTimeSpan = TimeSpan.MinValue;
 })
     .AddEntityFrameworkStores<ApplicationDbContext>();
 builder.Services
@@ -30,23 +31,23 @@ builder.Services
     .AddApplication()
     .AddPortableObjectLocalization(options => options.ResourcesPath = "Localization");
 
-
-
+AddCaching(builder);
 builder.Logging.AddConsole();
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())
 {
-    // app.UseMigrationsEndPoint();
+  // app.UseMigrationsEndPoint();
 }
 else
 {
-    app.UseExceptionHandler("/Home/Error");
-    // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
-    app.UseHsts();
+  app.UseExceptionHandler("/Home/Error");
+  // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
+  app.UseHsts();
 }
 
+UseCaching(app);
 ConfigLocalization(app);
 
 // UseHttps(app);
@@ -62,25 +63,53 @@ app.MapControllerRoute(
 app.MapRazorPages();
 app.Run();
 
-static void ConfigLocalization(WebApplication application)
+void ConfigLocalization(WebApplication application)
 {
-    var supportedCultures = Localization.SupportedLanguages.Select(i => i.Key).ToArray();
-    var options = new RequestLocalizationOptions()
-        .AddSupportedCultures(supportedCultures)
-        .AddSupportedUICultures(supportedCultures)
-        .SetDefaultCulture(supportedCultures[0]);
+  var supportedCultures = Localization.SupportedLanguages.Select(i => i.Key).ToArray();
+  var options = new RequestLocalizationOptions()
+      .AddSupportedCultures(supportedCultures)
+      .AddSupportedUICultures(supportedCultures)
+      .SetDefaultCulture(supportedCultures[0]);
 
-    application.UseRequestLocalization(options);
+  application.UseRequestLocalization(options);
 }
 
-static void AddHttps(WebApplicationBuilder builder)
+void AddCaching(WebApplicationBuilder builder)
 {
-    builder.Services.AddHttpsRedirection(options =>
+  if (!builder.Configuration.GetValue<bool>("UseRedis")) return;
+
+  builder.Services.AddStackExchangeRedisCache(options =>
+  {
+    options.Configuration = "localhost:6379";
+    options.ConfigurationOptions = new()
     {
-        options.HttpsPort = 5028;
-    });
+      AbortOnConnectFail = true,
+      EndPoints = { options.Configuration },
+
+    };
+  });
+
+  builder.Services.AddOutputCache(options =>
+  {
+    options.DefaultExpirationTimeSpan = TimeSpan.FromMinutes(5);
+  });
 }
-static void UseHttps(WebApplication app)
+
+void UseCaching(WebApplication app)
 {
-    app.UseHttpsRedirection();
+  if (!builder.Configuration.GetValue<bool>("UseRedis")) return;
+
+  app.UseOutputCache();
+}
+
+void AddHttps(WebApplicationBuilder builder)
+{
+  builder.Services.AddHttpsRedirection(options =>
+  {
+    options.HttpsPort = 5028;
+  });
+}
+void UseHttps(WebApplication app)
+{
+  app.UseHttpsRedirection();
 }

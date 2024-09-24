@@ -9,98 +9,103 @@ using MediatR;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.OutputCaching;
 
 namespace Forms.Mvc.Controllers;
 
 public class FormsController : Controller
 {
-    private readonly IMediator _mediator;
-    private readonly SignInManager<User> _signInManager;
+  private readonly IMediator _mediator;
+  private readonly SignInManager<User> _signInManager;
 
-    public FormsController(IMediator mediator, SignInManager<User> signInManager)
-    {
-        _mediator = mediator;
-        _signInManager = signInManager;
-    }
-    [Authorize]
-    public async Task<IActionResult> Index(int page = 0, int count = 10, string searchText = "", FormOrderApproach order = FormOrderApproach.LastUpdateDescending)
-    {
-        var userId = _signInManager.UserManager.GetUserId(User);
-        if (userId is null)
-            return RedirectToIndex();
+  public FormsController(IMediator mediator, SignInManager<User> signInManager)
+  {
+    _mediator = mediator;
+    _signInManager = signInManager;
+  }
+  [Authorize]
+  [OutputCache(Duration = 3600, VaryByRouteValueNames = ["page", "count", "searchText", "order"])]
+  public async Task<IActionResult> Index(int page = 0, int count = 10, string searchText = "", FormOrderApproach order = FormOrderApproach.LastUpdateDescending)
+  {
+    var userId = _signInManager.UserManager.GetUserId(User);
+    if (userId is null)
+      return RedirectToIndex();
 
-        var forms = await _mediator.Send(
-            new GetFormListQuery
-            {
-                Count = count,
-                Page = page,
-                SearchText = searchText,
-                UserId = userId,
-                OrderBy = order,
-            });
+    var forms = await _mediator.Send(
+        new GetFormListQuery
+        {
+          Count = count,
+          Page = page,
+          SearchText = searchText,
+          UserId = userId,
+          OrderBy = order,
+        });
 
-        return View(forms);
-    }
+    return View(forms);
+  }
 
-    [Authorize]
-    public IActionResult Create()
-    {
-        var userId = _signInManager.UserManager.GetUserId(User);
-        if (userId is null)
-            return RedirectToIndex();
+  [Authorize]
+  [OutputCache()]
+  public IActionResult Create()
+  {
+    var userId = _signInManager.UserManager.GetUserId(User);
+    if (userId is null)
+      return RedirectToIndex();
 
-        var command = new CreateFormCommand { CreatorId = userId };
+    var command = new CreateFormCommand { CreatorId = userId };
 
-        return View(command);
-    }
-    [HttpPost, Authorize]
-    public async Task<IActionResult> Create([Bind] CreateFormCommand command)
-    {
-        if (!ModelState.IsValid)
-            return View(command);
+    return View(command);
+  }
+  [HttpPost]
+  [Authorize]
+  public async Task<IActionResult> Create([Bind] CreateFormCommand command)
+  {
+    if (!ModelState.IsValid)
+      return View(command);
 
-        var result = await _mediator.Send(command);
-        if (result is not null)
-            return RedirectToAction(nameof(Edit), new { id = result.Id });
-        return RedirectToIndex();
-    }
-    [Authorize]
-    public async Task<IActionResult> Edit(string id)
-    {
-        var userId = _signInManager.UserManager.GetUserId(User);
-        if (userId is null)
-            return RedirectToIndex();
+    var result = await _mediator.Send(command);
+    if (result is not null)
+      return RedirectToAction(nameof(Edit), new { id = result.Id });
+    return RedirectToIndex();
+  }
+  [Authorize]
+  // [OutputCache(Duration = 30, VaryByRouteValueNames = ["id"])]
+  public async Task<IActionResult> Edit(string id)
+  {
+    var userId = _signInManager.UserManager.GetUserId(User);
+    if (userId is null)
+      return RedirectToIndex();
 
-        var form = await _mediator.Send(new GetFormQuery { Id = id });
+    var form = await _mediator.Send(new GetFormQuery { Id = id });
 
-        if (form is null)
-            return RedirectToIndex();
+    if (form is null)
+      return RedirectToIndex();
 
-        return View(
-            new EditFormViewModel { Form = form });
-    }
-    [HttpPost, Authorize]
-    public async Task<IActionResult> Edit([Bind] UpdateFormCommand command)
-    {
-        if (ModelState.IsValid)
-            await _mediator.Send(command);
+    return View(
+        new EditFormViewModel { Form = form });
+  }
+  [HttpPost, Authorize]
+  public async Task<IActionResult> Edit([Bind] UpdateFormCommand command)
+  {
+    if (ModelState.IsValid)
+      await _mediator.Send(command);
 
-        return RedirectToAction(nameof(Edit), routeValues: new { Id = command.Id });
-    }
-    [HttpPost, Authorize]
-    public async Task<IActionResult> Delete(string id)
-    {
-        var userId = _signInManager.UserManager.GetUserId(User);
-        if (userId is null)
-            return RedirectToIndex();
+    return RedirectToAction(nameof(Edit), routeValues: new { Id = command.Id });
+  }
+  [HttpPost, Authorize]
+  public async Task<IActionResult> Delete(string id)
+  {
+    var userId = _signInManager.UserManager.GetUserId(User);
+    if (userId is null)
+      return RedirectToIndex();
 
-        var command = new DeleteFormCommand { Id = id, UserId = userId };
-        await _mediator.Send(command);
+    var command = new DeleteFormCommand { Id = id, UserId = userId };
+    await _mediator.Send(command);
 
-        return RedirectToIndex();
-    }
-    protected IActionResult RedirectToIndex()
-    {
-        return RedirectToAction(nameof(Index));
-    }
+    return RedirectToIndex();
+  }
+  protected IActionResult RedirectToIndex()
+  {
+    return RedirectToAction(nameof(Index));
+  }
 }
