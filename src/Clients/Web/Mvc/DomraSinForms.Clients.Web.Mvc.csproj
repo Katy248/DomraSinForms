@@ -8,28 +8,13 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Compile Remove="Data\**" />
-    <Compile Remove="Views\FormAnswers\**" />
-    <Compile Remove="wwwroot\ts\**" />
-    <Content Remove="Data\**" />
-    <Content Remove="Views\FormAnswers\**" />
-    <Content Remove="wwwroot\ts\**" />
-    <EmbeddedResource Remove="Data\**" />
-    <EmbeddedResource Remove="Views\FormAnswers\**" />
-    <EmbeddedResource Remove="wwwroot\ts\**" />
-    <None Remove="Data\**" />
-    <None Remove="Views\FormAnswers\**" />
-    <None Remove="wwwroot\ts\**" />
-    <TypeScriptCompile Remove="Views\FormAnswers\**" />
-    <TypeScriptCompile Remove="wwwroot\ts\**" />
-  </ItemGroup>
-  <ItemGroup>
     <Content Include="Localization\**">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
   </ItemGroup>
   <ItemGroup>
-    <!-- <PackageReference Include="Microsoft.AspNetCore.Diagnostics.EntityFrameworkCore" Version="8.0.6" /> -->
+    <!-- <PackageReference Include="Microsoft.AspNetCore.Diagnostics.EntityFrameworkCore"
+    Version="8.0.6" /> -->
     <PackageReference Include="Microsoft.AspNetCore.Identity.EntityFrameworkCore" Version="8.0.6" />
     <PackageReference Include="Microsoft.AspNetCore.Identity.UI" Version="8.0.6" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="8.0.6" />
@@ -42,7 +27,8 @@
       <PrivateAssets>all</PrivateAssets>
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
     </PackageReference>
-    <!-- <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="8.0.6" /> -->
+    <!-- <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design"
+    Version="8.0.6" /> -->
     <PackageReference Include="OrchardCore.Localization.Core" Version="1.6.0" />
   </ItemGroup>
 
@@ -50,6 +36,7 @@
     <ProjectReference Include="..\..\..\Application\DomraSinForms.Application.csproj" />
     <ProjectReference Include="..\..\..\ChartsWrapper\DomraSinForms.ChartsWrapper.csproj" />
     <ProjectReference Include="..\..\..\Persistence\DomraSinForms.Persistence.csproj" />
+    <ProjectReference Include="../Auth/DomraSinForms.Clients.Web.Auth.csproj" />
   </ItemGroup>
 
   <ItemGroup>

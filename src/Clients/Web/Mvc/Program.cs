@@ -5,6 +5,7 @@ using Forms.Mvc.Localization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.Extensions.Caching.Distributed;
 using Microsoft.EntityFrameworkCore;
+using DomraSinForms.Clients.Web.Mvc.Localization;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -48,7 +49,7 @@ else
 }
 
 UseCaching(app);
-ConfigLocalization(app);
+app.UseLocalization();
 
 // UseHttps(app);
 app.UseStaticFiles();
@@ -63,16 +64,6 @@ app.MapControllerRoute(
 app.MapRazorPages();
 app.Run();
 
-void ConfigLocalization(WebApplication application)
-{
-  var supportedCultures = Localization.SupportedLanguages.Select(i => i.Key).ToArray();
-  var options = new RequestLocalizationOptions()
-      .AddSupportedCultures(supportedCultures)
-      .AddSupportedUICultures(supportedCultures)
-      .SetDefaultCulture(supportedCultures[0]);
-
-  application.UseRequestLocalization(options);
-}
 
 void AddCaching(WebApplicationBuilder builder)
 {
