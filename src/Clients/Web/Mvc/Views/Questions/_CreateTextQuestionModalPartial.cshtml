@@ -1,14 +1,15 @@
 ﻿@using DomraSinForms.Application.Questions.Commands.CreateTextQuestion;
-@using DomraSinForms.Domain.Models.Questions;
-@using Forms.Mvc.Helpers;
-@using Microsoft.AspNetCore.Mvc.Localization;
+@using DomraSinForms.Clients.Web.Blazor.Components
+@using DomraSinForms.Clients.Web.Blazor.Helpers
+@using Microsoft.AspNetCore.Mvc.TagHelpers
 @inject IViewLocalizer Localizer
 @model CreateTextQuestionCommand
 @{
     Model.FormId = ViewData["FormId"] as string ?? "";
     var modalId = ViewData["ModalId"] as string ?? "createTextQuestionModal";
 }
-<div class="modal" id="@modalId">
+<component type="typeof(TextQuestionCreate)" param-ModalId="@modalId" param-FormId="@Model.FormId" render-mode="ServerPrerendered"/>
+<div class="modal" id="@modalId-1">
     <div class="modal-dialog modal-dialog-centered">
         <div class="modal-content p-1">
 

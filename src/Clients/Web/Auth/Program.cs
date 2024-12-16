@@ -1,4 +1,4 @@
-using DomraSinForms.Clients.Web.Auth.Components;
+using DomraSinForms.Clients.Web.Blazor.Components;
 
 var builder = WebApplication.CreateBuilder(args);
 

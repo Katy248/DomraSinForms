@@ -36,12 +36,27 @@
     <ProjectReference Include="..\..\..\Application\DomraSinForms.Application.csproj" />
     <ProjectReference Include="..\..\..\ChartsWrapper\DomraSinForms.ChartsWrapper.csproj" />
     <ProjectReference Include="..\..\..\Persistence\DomraSinForms.Persistence.csproj" />
-    <ProjectReference Include="../Auth/DomraSinForms.Clients.Web.Auth.csproj" />
+    <ProjectReference Include="..\Auth\DomraSinForms.Clients.Web.Blazor.csproj" />
   </ItemGroup>
 
   <ItemGroup>
     <Folder Include="wwwroot\js\" />
     <Folder Include="wwwroot\lib\bootstrap\js\" />
     <Folder Include="wwwroot\lib\bootstrap-icons\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <EmbeddedResource Update="Localization\LocalizationData.ru.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>LocalizationData.ru.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+  </ItemGroup>
+
+  <ItemGroup>
+    <Compile Update="Localization\LocalizationData.ru.Designer.cs">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>LocalizationData.ru.resx</DependentUpon>
+    </Compile>
   </ItemGroup>
 </Project>

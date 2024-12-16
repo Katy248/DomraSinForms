@@ -16,6 +16,9 @@
     <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
     <link rel="stylesheet" href="~/Forms.Mvc.styles.css" asp-append-version="true" />
     <link rel="icon" href="~/favicon.ico">
+    <base href="~/" />
+    <component type="typeof(Microsoft.AspNetCore.Components.Web.HeadOutlet)"
+               render-mode="ServerPrerendered" />
 </head>
 <body class="d-flex flex-column min-vh-100" data-bs-theme="">
     <header class="flex-fill ">
@@ -67,6 +70,7 @@
     <script src="~/lib/jquery-3.6.4.slim.js"></script>
     <script src="~/lib/bootstrap/js/bootstrap.bundle.min.js"></script>
     <script src="~/js/site.js" asp-append-version="true"></script>
+    <script src="_framework/blazor.server.js"></script>
     @await RenderSectionAsync("Scripts", required: false)
 </body>
 </html>

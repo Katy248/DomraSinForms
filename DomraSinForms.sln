@@ -13,7 +13,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DomraSinForms.Persistence",
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DomraSinForms.ChartsWrapper", "src\ChartsWrapper\DomraSinForms.ChartsWrapper.csproj", "{6530CF9E-096C-4EEB-8F92-7B78246FFF11}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DomraSinForms.Clients.Web.Auth", "src\Clients\Web\Auth\DomraSinForms.Clients.Web.Auth.csproj", "{C2F3AB0F-1A94-4DC0-B478-2D8CC2E270E6}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DomraSinForms.Clients.Web.Blazor", "src\Clients\Web\Auth\DomraSinForms.Clients.Web.Blazor.csproj", "{C2F3AB0F-1A94-4DC0-B478-2D8CC2E270E6}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

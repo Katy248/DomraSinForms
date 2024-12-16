@@ -27,10 +27,15 @@ builder.Services
     .AddViewLocalization();
 
 builder.Services
-    .AddLocalization()
+    .AddLocalization(o =>
+    {
+        o.ResourcesPath = ".";
+    })
     .AddDataAnnotationsPortableObjectLocalization()
     .AddApplication()
     .AddPortableObjectLocalization(options => options.ResourcesPath = "Localization");
+
+builder.Services.AddServerSideBlazor();
 
 AddCaching(builder);
 builder.Logging.AddConsole();
@@ -62,6 +67,8 @@ app.MapControllerRoute(
     name: "default",
     pattern: "{controller=Home}/{action=Index}/{id?}");
 app.MapRazorPages();
+
+app.MapBlazorHub();
 app.Run();
 
 
