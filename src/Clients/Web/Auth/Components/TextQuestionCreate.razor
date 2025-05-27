@@ -3,10 +3,8 @@
 @using DomraSinForms.Clients.Web.Blazor.Helpers
 @using Microsoft.Extensions.Localization
 @inject IStringLocalizer<LocalizationData> Localizer
-<h3>TextQuestionEdit</h3>
 <div class="modal" id="@(ModalId)">
     <div class="modal-dialog modal-dialog-centered">
-        
         <div class="modal-content p-1">
             @if (Model is null)
             {
@@ -14,55 +12,53 @@
             }
             else
             {
-            <div class="modal-body justify-content-center">
-
-                <div class="h2 mb-5 text-center">@Localizer["Create text question"]</div>
-                <EditForm Model="Command">
-                    <div class="form-group mb-2">
-                    <InputText @bind-Value="Command.QuestionText" placeholder="Question text"/>
-                    </div>
-                </EditForm>
-                <form asp-controller="Questions" asp-action="UpdateTextQuestion" method="post">
-
-                    <input asp-for="Command.Id" value="@Model.Id" hidden/>
-
-                        <input class="form-control form-control-lg" type="text"  asp-for="Command.QuestionText"/>
-                        <span asp-validation-for="Command.QuestionText" class="text-danger"></span>
-
-                    <div class="form-check mb-2">
-                        <label class="form-check-label">["Required"]</label>
-                        <input class="form-check-input" type="checkbox" asp-for="Command.IsRequired"/>
-                    </div>
-
-                    <div class="form-group mb-2">
-                        <label class="form-label">["Index"]</label>
-                        <input class="form-control" type="number" asp-for="Command.Index"/>
-                    </div>
-
-                    <div class="form-group mb-2">
-                        <label class="form-label">["Question type"]</label>
-                        <select class="form-select" asp-for="Command.Type" asp-items="@(QuestionsHelper.TextQuestionTypesSelect())"></select>
-                    </div>
-
-                    <div class="form-group mb-2">
-                        <input class="form-control btn btn-primary" type="submit" value="Save"/>
-                    </div>
-
-                </form>
-
-            </div>
-
+                <div class="modal-body justify-content-center">
+                    <div class="h2 mb-5 text-center">@Localizer["New question"]</div>
+                    <EditForm Model="Command" OnSubmit="Submit">
+                        <DataAnnotationsValidator />
+                        <div class="form-group mb-2">
+                            <InputText class="form-control form-control-lg" @bind-Value="Command.QuestionText"
+                                placeholder="@Localizer["Question text"]" />
+                        </div>
+                        <div class="form-check mb-2">
+                            <label class="form-check-label">@Localizer["Required"]</label>
+                            <InputCheckbox class="form-check-input" @bind-Value="Command.IsRequired"
+                                ValueChanged="CommandRequiredChanged" />
+                        </div>
+                        <div class="form-group mb-2">
+                            <label class="form-label">@Localizer["Question type"]</label>
+                            <InputSelect class="form-select form-control-lg" @bind-Value="Command.Type">
+                                @foreach (var item in QuestionsHelper.TextQuestionTypes())
+                                {
+                                    <option checked="@(Command.Type == item.Key)">
+                                        @Localizer[item.Value]
+                                    </option>
+                                }
+                            </InputSelect>
+                        </div>
+                        <div class="form-group mb-2">
+                            <input class="form-control form-control-lg btn btn-primary" type="submit"
+                                value="@Localizer["Save"]" />
+                        </div>
+                    </EditForm>
+                </div>
             }
         </div>
     </div>
 </div>
-
 @code {
     public const string DefaultModalId = "create-text-question-modal";
     [Parameter] public string ModalId { get; set; } = DefaultModalId;
     [Parameter] public string FormId { get; set; }
     TextQuestion Model { get; set; } = new TextQuestion() { };
-
-    CreateTextQuestionCommand Command => new();
-
+    CreateTextQuestionCommand Command => new() { FormId = FormId, IsRequired = true };
+    public void CommandRequiredChanged(bool value)
+    {
+        Console.WriteLine($"Current value: {Command.IsRequired}, new value: {value}");
+        Command.IsRequired = value;
+    }
+    public async Task Submit()
+    {
+        Console.WriteLine("Submit {0}", Command.IsRequired);
+    }
 }

@@ -1,33 +1,31 @@
 using DomraSinForms.Application;
+using DomraSinForms.Clients.Web.Mvc.Localization;
 using DomraSinForms.Domain.Identity;
 using DomraSinForms.Persistence;
-using Forms.Mvc.Localization;
-using Microsoft.AspNetCore.Identity;
-using Microsoft.Extensions.Caching.Distributed;
 using Microsoft.EntityFrameworkCore;
-using DomraSinForms.Clients.Web.Mvc.Localization;
 
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
-var connectionString = builder.Configuration.GetConnectionString("Postgres") ?? throw new InvalidOperationException("Connection string 'Postgres' not found.");
+var connectionString =
+    builder.Configuration.GetConnectionString("Postgres")
+    ?? throw new InvalidOperationException("Connection string 'Postgres' not found.");
 builder.Services.AddPersistence(connectionString);
 
-builder.Services.AddDefaultIdentity<User>(options =>
-{
-  options.SignIn.RequireConfirmedAccount = false;
-  options.SignIn.RequireConfirmedEmail = false;
-  options.SignIn.RequireConfirmedPhoneNumber = false;
-  options.Lockout.MaxFailedAccessAttempts = 700;
-  options.Lockout.DefaultLockoutTimeSpan = TimeSpan.MinValue;
-})
+builder
+    .Services.AddDefaultIdentity<User>(options =>
+    {
+        options.SignIn.RequireConfirmedAccount = false;
+        options.SignIn.RequireConfirmedEmail = false;
+        options.SignIn.RequireConfirmedPhoneNumber = false;
+        options.Lockout.MaxFailedAccessAttempts = 700;
+        options.Lockout.DefaultLockoutTimeSpan = TimeSpan.MinValue;
+    })
     .AddEntityFrameworkStores<ApplicationDbContext>();
-builder.Services
-    .AddControllersWithViews()
-    .AddViewLocalization();
+builder.Services.AddControllersWithViews().AddViewLocalization();
 
-builder.Services
-    .AddLocalization(o =>
+builder
+    .Services.AddLocalization(o =>
     {
         o.ResourcesPath = ".";
     })
@@ -44,13 +42,13 @@ var app = builder.Build();
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())
 {
-  // app.UseMigrationsEndPoint();
+    // app.UseMigrationsEndPoint();
 }
 else
 {
-  app.UseExceptionHandler("/Home/Error");
-  // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
-  app.UseHsts();
+    app.UseExceptionHandler("/Home/Error");
+    // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
+    app.UseHsts();
 }
 
 UseCaching(app);
@@ -63,51 +61,49 @@ app.UseRouting();
 
 app.UseAuthorization();
 
-app.MapControllerRoute(
-    name: "default",
-    pattern: "{controller=Home}/{action=Index}/{id?}");
+app.MapControllerRoute(name: "default", pattern: "{controller=Home}/{action=Index}/{id?}");
 app.MapRazorPages();
 
 app.MapBlazorHub();
 app.Run();
 
-
 void AddCaching(WebApplicationBuilder builder)
 {
-  if (!builder.Configuration.GetValue<bool>("UseRedis")) return;
+    if (!builder.Configuration.GetValue<bool>("UseRedis"))
+        return;
 
-  builder.Services.AddStackExchangeRedisCache(options =>
-  {
-    options.Configuration = "localhost:6379";
-    options.ConfigurationOptions = new()
+    builder.Services.AddStackExchangeRedisCache(options =>
     {
-      AbortOnConnectFail = true,
-      EndPoints = { options.Configuration },
+        options.Configuration = "localhost:6379";
+        options.ConfigurationOptions = new()
+        {
+            AbortOnConnectFail = true,
+            EndPoints = { options.Configuration },
+        };
+    });
 
-    };
-  });
-
-  builder.Services.AddOutputCache(options =>
-  {
-    options.DefaultExpirationTimeSpan = TimeSpan.FromMinutes(5);
-  });
+    builder.Services.AddOutputCache(options =>
+    {
+        options.DefaultExpirationTimeSpan = TimeSpan.FromMinutes(5);
+    });
 }
 
 void UseCaching(WebApplication app)
 {
-  if (!builder.Configuration.GetValue<bool>("UseRedis")) return;
+    if (!builder.Configuration.GetValue<bool>("UseRedis"))
+        return;
 
-  app.UseOutputCache();
+    app.UseOutputCache();
 }
 
 void AddHttps(WebApplicationBuilder builder)
 {
-  builder.Services.AddHttpsRedirection(options =>
-  {
-    options.HttpsPort = 5028;
-  });
+    builder.Services.AddHttpsRedirection(options =>
+    {
+        options.HttpsPort = 5028;
+    });
 }
 void UseHttps(WebApplication app)
 {
-  app.UseHttpsRedirection();
+    app.UseHttpsRedirection();
 }
